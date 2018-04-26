@@ -1,0 +1,32 @@
+@import '../colors';
+@import 'package:angular_components/material_button/mixins';
+
+:host
+{
+    user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    -webkit-user-select:none;
+
+    .gray-color
+    {
+        color:$colorGray;
+    }
+
+    material-button
+    {
+        position:absolute;
+        bottom:0;
+        right:0;
+        z-index:2;
+        font-weight:bolder;
+    }
+
+    $raised: 'material-button[raised]';
+    $hover: 'material-button:hover';
+
+    @include button-background-color($raised + '.add_button', $colorBlue);
+    @include button-color($raised + '.add_button', $mat-white);
+    @include button-background-color($hover + '.add_button', $colorDarkBlue);
+
+}
