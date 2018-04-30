@@ -16,5 +16,4 @@ void main() {
 
 
    runApp(ng.AppComponentNgFactory);
-   print('dejan');
 }
