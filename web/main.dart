@@ -1,8 +1,8 @@
+
 import 'package:angular/angular.dart';
-import 'package:bokain_webshop/src/app_component.dart';
 import 'package:firebase/firebase.dart' as firebase;
 
-import 'main.template.dart' as ng;
+import 'package:bokain_webshop/src/app_component.template.dart' as ng;
 
 void main() {
   firebase.initializeApp
@@ -15,5 +15,5 @@ void main() {
   );
 
 
-  bootstrapStatic(AppComponent, [], ng.initReflector);
+   runApp(ng.AppComponentNgFactory);
 }
