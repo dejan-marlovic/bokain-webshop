@@ -10,11 +10,12 @@ import 'package:bokain_models/bokain_models.dart';
   directives: const [coreDirectives, materialDirectives],
 )
 class ProductBoxComponent implements OnDestroy {
-  ProductBoxComponent(this._dynamicPhraseService);
+  ProductBoxComponent();
 
   String getPhrase(String key) {
-    final data = _dynamicPhraseService.getPhrases('products', model?.id);
-    return (data == null) ? null : data[key];
+//    final data = _dynamicPhraseService.getPhrases('products', model?.id);
+  //  return (data == null) ? null : data[key];
+    return null;
   }
 
   @Input('model')
@@ -22,8 +23,7 @@ class ProductBoxComponent implements OnDestroy {
 
   @Output('addButtonClick')
   Stream<String> get addButtonClickOutput => addButtonClickController.stream;
-
-  final DynamicPhraseService _dynamicPhraseService;
+  
   final StreamController<String> addButtonClickController =
       new StreamController();
 

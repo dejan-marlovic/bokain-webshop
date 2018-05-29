@@ -8,17 +8,18 @@ import 'productbox_component/productbox_component.dart';
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
   directives: const [materialDirectives, ProductBoxComponent, coreDirectives],
-  providers: const [materialProviders, ProductService, UserService, DynamicPhraseService],
+  providers: const [materialProviders, ProductService, UserService],
 )
 class AppComponent
 {
-  AppComponent(this.productService, this.userService, this.dynamicPhraseService)
+  AppComponent(this.productService, this.userService)
   {
     userService.login('patrick.minogue@gmail.com', 'lok13rum').then((_) => productService.streamMany());
-    dynamicPhraseService.streamLanguage('sv');
+    //dynamicPhraseService.streamLanguage('sv');
   }
   ProductService productService;
   UserService userService;
-  DynamicPhraseService dynamicPhraseService;
+  int x = 0;
+  
   String selectedProductId;
 }
