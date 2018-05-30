@@ -19,7 +19,6 @@ class AppComponent
   }
   ProductService productService;
   UserService userService;
-  int x = 0;
   
   String selectedProductId;
 }

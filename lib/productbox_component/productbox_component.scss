@@ -1,5 +1,5 @@
 @import '../colors';
-//@import 'package:angular_components/material_button/mixins';
+@import 'package:angular_components/material_button/mixins';
 
 :host
 {
@@ -24,9 +24,8 @@
 
     $raised: 'material-button[raised]';
     $hover: 'material-button:hover';
-/*
+
     @include button-background-color($raised + '.add_button', $colorBlue);
     @include button-color($raised + '.add_button', $mat-white);
     @include button-background-color($hover + '.add_button', $colorDarkBlue);
-*/
 }
