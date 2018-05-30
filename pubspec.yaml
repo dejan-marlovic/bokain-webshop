@@ -13,6 +13,9 @@ dependencies:
   bokain_models:
     #git: https://github.com/afpatmin/bokain_models.git
     path: ../bokain_models
+  bokain_consultation:
+    #git: https://github.com/afpatmin/bokain_consultation.git
+    path: ../bokain_consultation
   sass: 1.3.2
   grid:
     git: https://github.com/afpatmin/grid.git
