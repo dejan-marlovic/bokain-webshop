@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="m4 s6 col" *ngFor="let product of productService.cachedModels.values">
+      <bo-productbox 
+              (addButtonClick)="selectedProductId = $event"
+              [model]="product">
+      </bo-productbox>        
+  </div>
+</div>
