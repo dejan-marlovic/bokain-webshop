@@ -111,7 +111,7 @@ class SkinConsultationComponent {
 
   ControlGroup form = new ControlGroup({
     'email': new Control(
-        '', Validators.compose([Validators.required, FoValidators.email])),
+        '', Validators.compose([FoValidators.required('enter_an_email'), FoValidators.email])),
     'phone': new Control('', Validators.compose([]))
   });
 

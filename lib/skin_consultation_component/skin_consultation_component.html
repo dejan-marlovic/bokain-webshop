@@ -1,13 +1,14 @@
 <material-expansionpanel-set>
-  <material-expansionpanel name="{{'details' | phrase}}"
-                           [disabled]="customer.id != null"
+  <material-expansionpanel *ngIf="customer.id == null"
+                           name="{{'details' | phrase}}"
                            [showSaveCancel]="false"
                            [expanded]="step == 0"
                            (open)="step = 0">
     <div class="row">
       <div class="col">
-        <bo-button-cloud-single-select label="sex"
-                                       [options]="['male', 'female']"
+        <bo-button-cloud-single-select label="sex" 
+                                       [options]="['female', 'male']"
+                                       [centerLabel]="true"
                                        [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
       </div>
     </div>
