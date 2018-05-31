@@ -1,5 +1,6 @@
 <material-expansionpanel-set>
   <material-expansionpanel name="{{'details' | phrase}}"
+                           [disabled]="customer.id != null"
                            [showSaveCancel]="false"
                            [expanded]="step == 0"
                            (open)="step = 0">
@@ -135,18 +136,18 @@
       </div>
       <div class="row collapse">
         <div class="col">
-          <material-checkbox label="{{'call_me' | phrase}}"                             
+          <material-checkbox label="{{'call_me' | phrase}}"
                              [checked]="consultation.call_me"
                              (checkedChange)="onCallMeChange($event)">
           </material-checkbox>
         </div>
       </div>
-      <div class="row" *ngIf="consultation.call_me">
+      <div class="row"
+           *ngIf="consultation.call_me">
         <div class="l1 m2 s4 col">
-          <fo-select
-              label="country_code"
-              [options]="countryCodeOptions"
-              [(selectedId)]="customer.phone_country">
+          <fo-select label="country_code"
+                     [options]="countryCodeOptions"
+                     [(selectedId)]="customer.phone_country">
           </fo-select>
         </div>
         <div class="m3 s8 col">
@@ -160,7 +161,7 @@
     <div class="row margin-top-medium">
       <div class="col text-center">
         <material-button clear-size
-                         [disabled]="!form.valid" 
+                         [disabled]="!form.valid"
                          (trigger)="step = 5">
           <material-icon icon="keyboard_arrow_down"
                          size="x-large"></material-icon>
