@@ -1,62 +1,171 @@
-<div *ngIf="customer.id == null">
-  <div class="row">
-    <div class="col">
-      <h1>{{'details' | phrase}}</h1>
-      <bo-button-cloud-single-select label="sex"
-                                     [options]="['male', 'female']"
-                                     [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
+<material-expansionpanel-set>
+  <material-expansionpanel name="{{'details' | phrase}}"
+                           [showSaveCancel]="false"
+                           [expanded]="step == 0"
+                           (open)="step = 0">
+    <div class="row">
+      <div class="col">
+        <bo-button-cloud-single-select label="sex"
+                                       [options]="['male', 'female']"
+                                       [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <material-datepicker [minDate]="minDate"
-                           [maxDate]="maxDate"
-                           [(date)]="birthdate">
-      </material-datepicker>
+    <div class="row">
+      <div class="m3 col"></div>
+      <div class="m6 col">
+        <div class="row">
+          <div class="col text-center">
+            <label>{{'birthdate' | phrase}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="l3 m0 col"></div>
+          <div class="l2 m4 s4 col">
+            <fo-select label="year"
+                       [sort]="false"
+                       [options]="yearOptions"
+                       [(selectedId)]="year">
+            </fo-select>
+          </div>
+          <div class="l2 m4 s4 col">
+            <fo-select label="month"
+                       [sort]="false"
+                       [options]="monthOptions"
+                       [(selectedId)]="month"></fo-select>
+          </div>
+          <div class="l2 m4 s4 col">
+            <fo-select label="day"
+                       [sort]="false"
+                       [options]="dayOptions"
+                       [(selectedId)]="day"></fo-select>
+          </div>
+          <div class="l3 m0 col"></div>
+        </div>
+      </div>
+      <div class="m3 col"></div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col text-center">
-      <p class="margin-bottom-small">{{'gdpr_terms' | phrase}}, {{'read_more' | phrase:false}}:
-        <a href="https://gdpr.dahlskincare.com"
-           target="_blank">https://gdpr.dahlskincare.com</a>.
-      </p>
-      <material-checkbox [(checked)]="termsAccepted"
-                         [label]="'gdpr_i_accept' | phrase"></material-checkbox>
+    <div class="row">
+      <div class="col text-center">
+        <p class="margin-bottom-small">{{'gdpr_terms' | phrase}}, {{'read_more' | phrase:false}}:
+          <a href="https://gdpr.dahlskincare.com"
+             target="_blank">https://gdpr.dahlskincare.com</a>.
+        </p>
+        <material-checkbox [(checked)]="termsAccepted"
+                           [label]="'gdpr_i_accept' | phrase"></material-checkbox>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col text-center">
-      <material-button clear-size
-                       raised
-                       [disabled]="customer.birthdate == null || customer.sex == null || !termsAccepted"
-                       (trigger)="onCreateCustomer()">
-        <material-icon icon="keyboard_arrow_down"
-                       size="x-large"></material-icon>
-      </material-button>
+    <div class="row">
+      <div class="col text-center">
+        <material-button clear-size
+                         [disabled]="customer.birthdate == null || customer.sex == null || !termsAccepted"
+                         (trigger)="onCreateCustomer()">
+          <material-icon icon="keyboard_arrow_down"
+                         size="x-large"></material-icon>
+        </material-button>
+      </div>
     </div>
-  </div>
-</div>
-
-<div *ngIf="customer.id != null">
-  <div class="row">
-    <div class="col">
-      <h1>{{'symptoms' | phrase}}</h1>
-      <bo-consultation-symptoms [model]="consultation"></bo-consultation-symptoms>
+  </material-expansionpanel>
+  <material-expansionpanel name="{{'problem_areas' | phrase}}"
+                           [showSaveCancel]="false"
+                           [disabled]="step < 1"
+                           [expanded]="step == 1"
+                           (open)="step = 1">
+    <bo-consultation-problem-areas [model]="consultation"
+                                   [customer]="customer"></bo-consultation-problem-areas>
+    <div class="row">
+      <div class="col text-center">
+        <material-button clear-size
+                         [disabled]="consultation.area_face == false && consultation.area_chest == false && consultation.area_back == false && consultation.area_other == false || (consultation.area_face == true && consultation.zones.isEmpty)"
+      
+                         (trigger)="step = 2">
+          <material-icon icon="keyboard_arrow_down"
+                         size="x-large"></material-icon>
+        </material-button>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h1>{{'problem_areas' | phrase}}</h1>
-      <bo-consultation-problem-areas [model]="consultation"
-                                     [customer]="customer"></bo-consultation-problem-areas>
+  </material-expansionpanel>
+  <material-expansionpanel name="{{'symptoms' | phrase}}"
+                           [showSaveCancel]="false"
+                           [disabled]="step < 2"
+                           [expanded]="step == 2"
+                           (open)="step = 2">
+    <bo-consultation-symptoms [model]="consultation"></bo-consultation-symptoms>
+    <div class="row margin-top-medium">
+      <div class="col text-center">
+        <material-button clear-size
+                         [disabled]="consultation.customer_symptoms.isEmpty"
+                         (trigger)="step = 3">
+          <material-icon icon="keyboard_arrow_down"
+                         size="x-large"></material-icon>
+        </material-button>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h1>{{'pictures' | phrase}}</h1>
-      <bo-consultation-pictures [model]="consultation"
-                                [customer]="customer"></bo-consultation-pictures>
+  </material-expansionpanel>
+  <material-expansionpanel name="{{'pictures' | phrase}}"
+                           [showSaveCancel]="false"
+                           [disabled]="step < 3"
+                           [expanded]="step == 3"
+                           (open)="step = 3">
+    <bo-consultation-pictures [model]="consultation"
+                              [customer]="customer"></bo-consultation-pictures>
+    <div class="row margin-top-medium">
+      <div class="col text-center">
+        <material-button clear-size
+                         [disabled]="consultation.current_skin_status == null || consultation.skin_tone_id == null"
+                         (trigger)="step = 4">
+          <material-icon icon="keyboard_arrow_down"
+                         size="x-large"></material-icon>
+        </material-button>
+      </div>
     </div>
-  </div>
-</div>
+  </material-expansionpanel>
+  <material-expansionpanel name="{{'contact' | phrase}}"
+                           [showSaveCancel]="false"
+                           [disabled]="step < 4"
+                           [expanded]="step == 4"
+                           (open)="step = 4">
+    <form [ngFormModel]="form">
+      <div class="row">
+        <div class="m4 col">
+          <material-input label="{{'email' | phrase}}*"
+                          floatingLabel
+                          [ngFormControl]="form.controls['email']"
+                          [(ngModel)]="customer.email"></material-input>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="col">
+          <material-checkbox label="{{'call_me' | phrase}}"                             
+                             [checked]="consultation.call_me"
+                             (checkedChange)="onCallMeChange($event)">
+          </material-checkbox>
+        </div>
+      </div>
+      <div class="row" *ngIf="consultation.call_me">
+        <div class="l1 m2 s4 col">
+          <fo-select
+              label="country_code"
+              [options]="countryCodeOptions"
+              [(selectedId)]="customer.phone_country">
+          </fo-select>
+        </div>
+        <div class="m3 s8 col">
+          <material-input label="{{'phone' | phrase}}*"
+                          floatingLabel
+                          [ngFormControl]="form.controls['phone']"
+                          [(ngModel)]="customer.phone"></material-input>
+        </div>
+      </div>
+    </form>
+    <div class="row margin-top-medium">
+      <div class="col text-center">
+        <material-button clear-size
+                         [disabled]="!form.valid" 
+                         (trigger)="step = 5">
+          <material-icon icon="keyboard_arrow_down"
+                         size="x-large"></material-icon>
+        </material-button>
+      </div>
+    </div>
+  </material-expansionpanel>
+</material-expansionpanel-set>
