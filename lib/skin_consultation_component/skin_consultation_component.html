@@ -1,4 +1,5 @@
-<material-expansionpanel-set>
+<h1>{{'skin_consultation' | phrase}}</h1>
+<material-expansionpanel-set *ngIf="step < 5">
   <material-expansionpanel *ngIf="customer.id == null"
                            name="{{'details' | phrase}}"
                            [showSaveCancel]="false"
@@ -6,7 +7,7 @@
                            (open)="step = 0">
     <div class="row">
       <div class="col">
-        <bo-button-cloud-single-select label="sex" 
+        <bo-button-cloud-single-select label="sex"
                                        [options]="['female', 'male']"
                                        [centerLabel]="true"
                                        [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
@@ -59,9 +60,13 @@
     <div class="row">
       <div class="col text-center">
         <material-button clear-size
-                         [disabled]="customer.birthdate == null || customer.sex == null || !termsAccepted"
+                         [disabled]="customerService.loading || customer.birthdate == null || customer.sex == null || !termsAccepted"
                          (trigger)="onCreateCustomer()">
-          <material-icon icon="keyboard_arrow_down"
+          <material-icon *ngIf="!customerService.loading"
+                         icon="keyboard_arrow_down"
+                         size="x-large"></material-icon>
+          <material-icon *ngIf="customerService.loading"
+                         icon="hourglass_empty"
                          size="x-large"></material-icon>
         </material-button>
       </div>
@@ -162,9 +167,13 @@
     <div class="row margin-top-medium">
       <div class="col text-center">
         <material-button clear-size
-                         [disabled]="!form.valid"
-                         (trigger)="step = 5">
-          <material-icon icon="keyboard_arrow_down"
+                         [disabled]="!form.valid || consultationService.loading"
+                         (trigger)="onCreateConsultation()">
+          <material-icon *ngIf="!consultationService.loading"
+                         icon="keyboard_arrow_down"
+                         size="x-large"></material-icon>
+          <material-icon *ngIf="consultationService.loading"
+                         icon="hourglass_empty"
                          size="x-large"></material-icon>
         </material-button>
       </div>

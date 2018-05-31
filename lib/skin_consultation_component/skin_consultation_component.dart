@@ -33,13 +33,19 @@ import 'package:fo_model/fo_model.dart';
       PhrasePipe
     ])
 class SkinConsultationComponent {
-  SkinConsultationComponent(CountryService countryService)
+  SkinConsultationComponent(CountryService countryService, this.consultationService, this.customerService)
       : countryCodeOptions = countryService.data.values
             .map((country) => new FoModel()..id = country.calling_code)
             .toList(growable: false);
 
+  Future onCreateConsultation() async {    
+    customer.consultation_id = await consultationService.push(consultation);
+    await customerService.set(customer);
+    step = 5;
+  }
+
   Future onCreateCustomer() async {
-    customer.id = 'hej';
+    customer.id = consultation.customer_id = await customerService.push(customer);
     step = 1;
   }
 
@@ -115,6 +121,8 @@ class SkinConsultationComponent {
     'phone': new Control('', Validators.compose([]))
   });
 
+  final ConsultationService consultationService;
+  final CustomerService customerService;
   Customer customer = new Customer()..phone_country = '+46';
   Consultation consultation = new Consultation();
   bool termsAccepted = false;
