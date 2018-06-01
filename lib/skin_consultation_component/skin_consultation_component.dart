@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
@@ -6,6 +7,7 @@ import 'package:bokain_consultation/bokain_consultation.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
+import 'package:intl/intl.dart' show DateFormat;
 
 @Component(
     selector: 'skin-consultation-component',
@@ -20,6 +22,7 @@ import 'package:fo_model/fo_model.dart';
       ConsultationSectionSymptomsComponent,
       coreDirectives,
       formDirectives,
+      FoModalComponent,
       FoSelectComponent,
       materialDirectives,
     ],
@@ -28,32 +31,94 @@ import 'package:fo_model/fo_model.dart';
       CountryService,
       CustomerService,
       FORM_PROVIDERS,
+      SettingsService,
     ],
     pipes: const [
       PhrasePipe
     ])
 class SkinConsultationComponent {
-  SkinConsultationComponent(CountryService countryService, this.consultationService, this.customerService)
+  SkinConsultationComponent(CountryService countryService,
+      this.consultationService, this.customerService, this.settingsService)
       : countryCodeOptions = countryService.data.values
             .map((country) => new FoModel()..id = country.calling_code)
             .toList(growable: false);
 
-  Future onCreateConsultation() async {    
+  Future onCreateConsultation() async {
+    if (customer.id == null) {
+      customer.id =
+          consultation.customer_id = await customerService.push(customer);
+    } else {
+      consultation.customer_id = customer.id;
+      await customerService.set(customer);
+    }
+
+    /// Upload images
+    for (var index = 0; index < pictures.imageSources.length; index++) {
+      if (pictures.imageSources[index].isEmpty) {
+        consultation.image_uris[index] = '';
+      } else {
+        consultation.image_uris[index] = await consultationService.uploadImage(
+            '${customer.id}_$index', pictures.imageSources[index]);
+      }      
+    }
     customer.consultation_id = await consultationService.push(consultation);
-    await customerService.set(customer);
+      await customerService
+          .patch(customer.id, {'consultation_id': customer.consultation_id});
+          
     step = 5;
   }
 
   Future onCreateCustomer() async {
-    customer.id = consultation.customer_id = await customerService.push(customer);
+    final settings = await settingsService.fetch('1');
+
+    /// Pick a random web consultant for the user
+    if (settings.web_consultant_ids.isNotEmpty) {
+      final index = new Random(new DateTime.now().millisecondsSinceEpoch)
+          .nextInt(settings.web_consultant_ids.length - 1);
+      customer.user_id = settings.web_consultant_ids[index];
+    }
+    customer.social_number ??= ssn.format(customer.birthdate);
     step = 1;
+  }
+
+  Future onEmailBlur() async {
+    customer
+      ..consultation_id = null
+      ..firstname = null
+      ..lastname = null
+      ..phone = null;
+
+    final customers = await customerService.fetchQuery(
+        customerService.collection.where('email', '==', customer.email));
+    if (customers.isNotEmpty) {
+      customer = customers.first;
+      if (customer.consultation_id != null) {
+        errorModalVisible = true;
+      }
+    }
   }
 
   void onCallMeChange(bool event) {
     consultation.call_me = event;
     form = new ControlGroup({
-      'email': new Control(customer.email,
-          Validators.compose([FoValidators.required('enter_an_email'), FoValidators.email])),
+      'firstname': new Control(
+          customer.firstname,
+          Validators.compose([
+            FoValidators.required('enter_a_firstname'),
+            FoValidators.alpha,
+            Validators.maxLength(64)
+          ])),
+      'lastname': new Control(
+          customer.lastname,
+          Validators.compose([
+            FoValidators.required('enter_a_lastname'),
+            FoValidators.alpha,
+            Validators.maxLength(64)
+          ])),
+      'email': new Control(
+          customer.email,
+          Validators.compose(
+              [FoValidators.required('enter_an_email'), FoValidators.email])),
       'phone': consultation.call_me
           ? new Control(
               customer.phone,
@@ -116,15 +181,37 @@ class SkinConsultationComponent {
   final List<FoModel> countryCodeOptions;
 
   ControlGroup form = new ControlGroup({
+    'firstname': new Control(
+        '',
+        Validators.compose([
+          FoValidators.required('enter_a_firstname'),
+          FoValidators.alpha,
+          Validators.maxLength(64)
+        ])),
+    'lastname': new Control(
+        '',
+        Validators.compose([
+          FoValidators.required('enter_a_lastname'),
+          FoValidators.alpha,
+          Validators.maxLength(64)
+        ])),
     'email': new Control(
-        '', Validators.compose([FoValidators.required('enter_an_email'), FoValidators.email])),
+        '',
+        Validators.compose(
+            [FoValidators.required('enter_an_email'), FoValidators.email])),
     'phone': new Control('', Validators.compose([]))
   });
 
   final ConsultationService consultationService;
   final CustomerService customerService;
+  final SettingsService settingsService;
+  final DateFormat ssn = new DateFormat("yyyyMMdd'0000'");
   Customer customer = new Customer()..phone_country = '+46';
   Consultation consultation = new Consultation();
   bool termsAccepted = false;
+  bool errorModalVisible = false;
   int step = 0;
+
+  @ViewChild('pictures')
+  ConsultationSectionPicturesComponent pictures;
 }

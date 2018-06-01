@@ -114,7 +114,8 @@
                            [expanded]="step == 3"
                            (open)="step = 3">
     <bo-consultation-pictures [model]="consultation"
-                              [customer]="customer"></bo-consultation-pictures>
+                              [customer]="customer"
+                              #pictures></bo-consultation-pictures>
     <div class="row margin-top-medium">
       <div class="col text-center">
         <material-button clear-size
@@ -136,13 +137,35 @@
         <div class="m4 col">
           <material-input label="{{'email' | phrase}}*"
                           floatingLabel
+                          [disabled]="customerService.loading || consultationService.loading"
+                          [maxCount]="128"
                           [ngFormControl]="form.controls['email']"
+                          (blur)="onEmailBlur()"
                           [(ngModel)]="customer.email"></material-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="m4 col">
+          <material-input label="{{'firstname' | phrase}}*"
+                          floatingLabel
+                          [disabled]="customerService.loading || consultationService.loading"
+                          [maxCount]="64"
+                          [ngFormControl]="form.controls['firstname']"
+                          [(ngModel)]="customer.firstname"></material-input>
+        </div>
+        <div class="m4 col">
+          <material-input label="{{'lastname' | phrase}}*"
+                          floatingLabel
+                          [disabled]="customerService.loading || consultationService.loading"
+                          [maxCount]="64"
+                          [ngFormControl]="form.controls['lastname']"
+                          [(ngModel)]="customer.lastname"></material-input>
         </div>
       </div>
       <div class="row collapse">
         <div class="col">
           <material-checkbox label="{{'call_me' | phrase}}"
+                             [disabled]="customerService.loading || consultationService.loading"
                              [checked]="consultation.call_me"
                              (checkedChange)="onCallMeChange($event)">
           </material-checkbox>
@@ -152,6 +175,7 @@
            *ngIf="consultation.call_me">
         <div class="l1 m2 s4 col">
           <fo-select label="country_code"
+                     [disabled]="customerService.loading || consultationService.loading"
                      [options]="countryCodeOptions"
                      [(selectedId)]="customer.phone_country">
           </fo-select>
@@ -159,6 +183,8 @@
         <div class="m3 s8 col">
           <material-input label="{{'phone' | phrase}}*"
                           floatingLabel
+                          [disabled]="customerService.loading || consultationService.loading"
+                          [maxCount]="64"
                           [ngFormControl]="form.controls['phone']"
                           [(ngModel)]="customer.phone"></material-input>
         </div>
@@ -167,12 +193,13 @@
     <div class="row margin-top-medium">
       <div class="col text-center">
         <material-button clear-size
-                         [disabled]="!form.valid || consultationService.loading"
+                         [disabled]="!form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"
+      
                          (trigger)="onCreateConsultation()">
-          <material-icon *ngIf="!consultationService.loading"
+          <material-icon *ngIf="!consultationService.loading && !customerService.loading"
                          icon="keyboard_arrow_down"
                          size="x-large"></material-icon>
-          <material-icon *ngIf="consultationService.loading"
+          <material-icon *ngIf="consultationService.loading || customerService.loading"
                          icon="hourglass_empty"
                          size="x-large"></material-icon>
         </material-button>
@@ -180,3 +207,12 @@
     </div>
   </material-expansionpanel>
 </material-expansionpanel-set>
+
+<fo-modal title="{{'error_occurred' | phrase}}"
+          [(visible)]="errorModalVisible"
+          [whiteHeader]="false"
+          [smallPadding]="false">
+          <p>
+            {{'error_customer_already_has_consultation' | phrase}}
+          </p>
+        </fo-modal>
