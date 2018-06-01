@@ -54,12 +54,10 @@ class SkinConsultationComponent {
 
     /// Upload images
     for (var index = 0; index < pictures.imageSources.length; index++) {
-      if (pictures.imageSources[index].isEmpty) {
-        consultation.image_uris[index] = '';
-      } else {
+      if (pictures.imageSources[index].isNotEmpty) {        
         consultation.image_uris[index] = await consultationService.uploadImage(
             '${customer.id}_$index', pictures.imageSources[index]);
-      }      
+      }
     }
     customer.consultation_id = await consultationService.push(consultation);
       await customerService
