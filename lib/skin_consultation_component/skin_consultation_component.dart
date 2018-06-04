@@ -20,6 +20,7 @@ import 'package:intl/intl.dart' show DateFormat;
       ConsultationSectionPicturesComponent,
       ConsultationSectionProblemAreasComponent,
       ConsultationSectionSymptomsComponent,
+      ConsultationSurveyComponent,
       coreDirectives,
       formDirectives,
       FoModalComponent,
@@ -172,9 +173,9 @@ class SkinConsultationComponent {
   final List<FoModel> yearOptions = new List.generate(
       100, (i) => new FoModel()..id = new Date.today().add(years: -i).year);
   final List<FoModel> monthOptions =
-      new List.generate(12, (i) => new FoModel()..id = i + 1);
+      new List.generate(12, (i) => new SimpleModel()..id = i + 1..label = (i < 9) ? '0${i+1}' : '${i+1}');
   final List<FoModel> dayOptions =
-      new List.generate(32, (i) => new FoModel()..id = i + 1);
+      new List.generate(32, (i) => new SimpleModel()..id = i + 1..label = (i < 9) ? '0${i+1}' : '${i+1}');
 
   final List<FoModel> countryCodeOptions;
 

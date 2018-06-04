@@ -193,14 +193,12 @@
     <div class="row margin-top-medium">
       <div class="col text-center">
         <material-button clear-size
-                         [disabled]="!form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"
-      
+                         [disabled]="!form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"      
                          (trigger)="onCreateConsultation()">
-          <material-icon *ngIf="!consultationService.loading && !customerService.loading"
-                         icon="keyboard_arrow_down"
-                         size="x-large"></material-icon>
+          <span *ngIf="!consultationService.loading && !customerService.loading">{{'submit' | phrase}}</span>
           <material-icon *ngIf="consultationService.loading || customerService.loading"
                          icon="hourglass_empty"
+                         baseline
                          size="x-large"></material-icon>
         </material-button>
       </div>
@@ -208,11 +206,29 @@
   </material-expansionpanel>
 </material-expansionpanel-set>
 
+<fo-modal
+    title="{{'thank_you' | phrase}}!"
+    [whiteHeader]="false"
+    [smallPadding]="false"
+    [visible]="step == 5"
+    (visibleChange)="step = 6">
+    <p innerHtml="{{'consultation_done_text' | phrase}}"></p>
+    <div class="text-right" footer>
+      <material-button raised (trigger)="step = 6">
+        OK
+      </material-button>
+    </div>
+</fo-modal>
+
+<div *ngIf="step == 6">
+  <bo-consultation-survey [model]="consultation" [customer]="customer"></bo-consultation-survey>
+</div>
+
 <fo-modal title="{{'error_occurred' | phrase}}"
           [(visible)]="errorModalVisible"
           [whiteHeader]="false"
           [smallPadding]="false">
-          <p>
-            {{'error_customer_already_has_consultation' | phrase}}
-          </p>
-        </fo-modal>
+  <p>
+    {{'error_customer_already_has_consultation' | phrase}}
+  </p>
+</fo-modal>
