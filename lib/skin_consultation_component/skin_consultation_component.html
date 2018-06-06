@@ -57,18 +57,18 @@
                            [label]="'gdpr_i_accept' | phrase"></material-checkbox>
       </div>
     </div>
-    <div class="row">
+    <div class="row margin-top-medium">
       <div class="col text-center">
-        <material-button clear-size
-                         [disabled]="customerService.loading || customer.birthdate == null || customer.sex == null || !termsAccepted"
-                         (trigger)="onCreateCustomer()">
+        <material-fab mini
+                      [disabled]="customerService.loading || customer.birthdate == null || customer.sex == null || !termsAccepted"
+                      (trigger)="onCreateCustomer()">
           <material-icon *ngIf="!customerService.loading"
                          icon="keyboard_arrow_down"
                          size="x-large"></material-icon>
           <material-icon *ngIf="customerService.loading"
                          icon="hourglass_empty"
                          size="x-large"></material-icon>
-        </material-button>
+        </material-fab>
       </div>
     </div>
   </material-expansionpanel>
@@ -99,12 +99,12 @@
     <bo-consultation-symptoms [model]="consultation"></bo-consultation-symptoms>
     <div class="row margin-top-medium">
       <div class="col text-center">
-        <material-button clear-size
-                         [disabled]="consultation.customer_symptoms.isEmpty"
-                         (trigger)="step = 3">
+        <material-fab mini
+                      [disabled]="consultation.customer_symptoms.isEmpty"
+                      (trigger)="step = 3">
           <material-icon icon="keyboard_arrow_down"
                          size="x-large"></material-icon>
-        </material-button>
+        </material-fab>
       </div>
     </div>
   </material-expansionpanel>
@@ -118,12 +118,12 @@
                               #pictures></bo-consultation-pictures>
     <div class="row margin-top-medium">
       <div class="col text-center">
-        <material-button clear-size
-                         [disabled]="consultation.current_skin_status == null || consultation.skin_tone_id == null"
-                         (trigger)="step = 4">
+        <material-fab mini
+                      [disabled]="consultation.current_skin_status == null || consultation.skin_tone_id == null"
+                      (trigger)="step = 4">
           <material-icon icon="keyboard_arrow_down"
                          size="x-large"></material-icon>
-        </material-button>
+        </material-fab>
       </div>
     </div>
   </material-expansionpanel>
@@ -212,7 +212,11 @@
           [smallPadding]="false"
           [visible]="step == 5"
           (visibleChange)="step = 6">
-  <p innerHtml="{{'consultation_done_text' | phrase}}"></p>
+  <div class="row">
+    <div class="col">
+      <p innerHtml="{{'consultation_done_text' | phrase}}"></p>
+    </div>
+  </div>
   <div class="text-right"
        footer>
     <material-button raised
@@ -237,9 +241,12 @@
 
 <fo-modal title="{{'error_occurred' | phrase}}"
           [(visible)]="errorModalVisible"
-          [whiteHeader]="false"
+          [whiteHeader]="true"
           [smallPadding]="false">
-  <p>
-    {{'error_customer_already_has_consultation' | phrase}}
-  </p>
+  <div class="row">
+    <div class="col">
+      <p innerHtml="{{'error_customer_already_has_consultation' | phrase}}">
+      </p>
+    </div>
+  </div>
 </fo-modal>

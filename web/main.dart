@@ -12,8 +12,6 @@ void main() {
       databaseURL: 'https://bokain-admin.firebaseio.com',
       storageBucket: 'bokain-admin.appspot.com',
       projectId: 'bokain-admin'
-  );
-
-
+  );  
    runApp(ng.AppComponentNgFactory);
 }
