@@ -193,7 +193,8 @@
     <div class="row margin-top-medium">
       <div class="col text-center">
         <material-button clear-size
-                         [disabled]="!form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"      
+                         [disabled]="!form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"
+      
                          (trigger)="onCreateConsultation()">
           <span *ngIf="!consultationService.loading && !customerService.loading">{{'submit' | phrase}}</span>
           <material-icon *ngIf="consultationService.loading || customerService.loading"
@@ -206,22 +207,32 @@
   </material-expansionpanel>
 </material-expansionpanel-set>
 
-<fo-modal
-    title="{{'thank_you' | phrase}}!"
-    [whiteHeader]="false"
-    [smallPadding]="false"
-    [visible]="step == 5"
-    (visibleChange)="step = 6">
-    <p innerHtml="{{'consultation_done_text' | phrase}}"></p>
-    <div class="text-right" footer>
-      <material-button raised (trigger)="step = 6">
-        OK
-      </material-button>
-    </div>
+<fo-modal title="{{'thank_you' | phrase}}!"
+          [whiteHeader]="true"
+          [smallPadding]="false"
+          [visible]="step == 5"
+          (visibleChange)="step = 6">
+  <p innerHtml="{{'consultation_done_text' | phrase}}"></p>
+  <div class="text-right"
+       footer>
+    <material-button raised
+                     (trigger)="step = 6">
+      OK
+    </material-button>
+  </div>
 </fo-modal>
 
 <div *ngIf="step == 6">
-  <bo-consultation-survey [model]="consultation" [customer]="customer"></bo-consultation-survey>
+  <bo-consultation-survey [model]="consultation"
+                          [customer]="customer"
+                          (done)="onSurveyDone($event)"></bo-consultation-survey>
+</div>
+
+<div class="row"
+     *ngIf="step > 6">
+  <div class="col">
+    <p innerHtml="{{'consultation_survey_done_text' | phrase}}"></p>
+  </div>
 </div>
 
 <fo-modal title="{{'error_occurred' | phrase}}"

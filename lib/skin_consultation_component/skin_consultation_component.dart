@@ -23,7 +23,7 @@ import 'package:intl/intl.dart' show DateFormat;
       ConsultationSurveyComponent,
       coreDirectives,
       formDirectives,
-      FoModalComponent,
+      FoModalComponent,      
       FoSelectComponent,
       materialDirectives,
     ],
@@ -129,6 +129,10 @@ class SkinConsultationComponent {
     });
   }
 
+  void onSurveyDone(bool event) {
+    step++;
+  }
+
   Date get birthdate =>
       customer.birthdate == null ? null : Date.fromTime(customer.birthdate);
 
@@ -208,7 +212,7 @@ class SkinConsultationComponent {
   Customer customer = new Customer()..phone_country = '+46';
   Consultation consultation = new Consultation();
   bool termsAccepted = false;
-  bool errorModalVisible = false;
+  bool errorModalVisible = false;  
   int step = 0;
 
   @ViewChild('pictures')
