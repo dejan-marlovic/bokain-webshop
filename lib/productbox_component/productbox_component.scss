@@ -1,27 +1,71 @@
+@import 'package:grid/grid';
 @import '../colors';
 @import 'package:angular_components/material_button/mixins';
+
+@include button-background-color('.add_button', $colorBlue);
+@include button-color('.add_button', $mat-white);
+@include button-background-color('material-button:hover.add_button', $colorDarkBlue);
+
 :host {
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
-    .flex-container {
+    border: 1px solid black;
+    display: block;
+
+    .upper {
+        cursor: pointer;
         display: flex;
-        align-items: baseline;
+        position: relative;
+        align-items: flex-end;
+        justify-content: center;
+        height: 18rem;
+        border: 1px solid black;
+        img {
+            max-height: 18rem;
+        }
+        material-button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        @media screen and (max-width: $medium-width-threshold - 1) {
+            height: auto;
+            img {
+                max-height: none;
+            }            
+        }
     }
-    .gray-color {
-        color: $colorGray;
+    .lower {
+        .nameContainer {
+            margin-top: 0.5rem;
+            h3 {
+                margin: 0;
+                overflow: hidden;      
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }            
+        }
+        .descContainer {  
+            display: flex;
+            flex-direction: row;
+            height: 5rem;
+            align-items: center;
+            overflow: hidden;
+            p {
+                flex: auto;
+                margin: 0;                
+                color: $colorGray;
+            }                              
+        }
+        .priceContainer {
+            margin-bottom: 0.5rem;
+            p {
+                margin: 0;
+            }
+        }
     }
-    material-button {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        z-index: 2;
-        font-weight: bolder;
-    }
-    $raised: 'material-button[raised]';
-    $hover: 'material-button:hover';
-    @include button-background-color($raised + '.add_button', $colorBlue);
-    @include button-color($raised + '.add_button', $mat-white);
-    @include button-background-color($hover + '.add_button', $colorDarkBlue);
 }

@@ -41,7 +41,6 @@ class AppComponent {
             loaded = true;
           });
         });
-    //dynamicPhraseService.streamLanguage('sv');
   }
   final PhrasesService phrasesService;
   final ProductService productService;

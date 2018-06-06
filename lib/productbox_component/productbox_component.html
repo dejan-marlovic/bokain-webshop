@@ -1,30 +1,21 @@
-<div class="flex-container">
-    <div class="row">
-        <div class="col text-center">
-            <material-button class="add_button" clear-size raised (trigger)="addButtonClickController.add(model.id)">
-                <material-icon icon="add"></material-icon>
-            </material-button>
-            <!--<img alt="{{model.name}}" src="{{model.imageURI}}">-->
-            <img alt="{{model.name}}" src="{{model.image_uri}}">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center">
-            {{getPhrase('name')}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col gray-color text-center">
-            {{getPhrase('description_short')}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center">
-            {{model.price_sek}}
-        </div>
-    </div>
+<div class="upper">
+    <img alt="{{model.name}}"
+         src="{{model.image_uri}}">
+    <material-button class="add_button"
+                     clear-size
+                     (trigger)="addButtonClickController.add(model.id)">
+        <material-icon icon="add"></material-icon>
+    </material-button>
 </div>
 
-
-
-
+<div class="lower text-center">
+    <div class="nameContainer">
+        <h3>{{phrasesModel?.name}}</h3>
+    </div>
+    <div class="descContainer">
+        <p>{{phrasesModel?.description_short}}</p>
+    </div>
+    <div class="priceContainer">
+        <p>{{model.price_sek}} kr</p>
+    </div>
+</div>
