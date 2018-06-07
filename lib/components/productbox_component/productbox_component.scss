@@ -1,6 +1,6 @@
 @import 'package:grid/grid';
-@import '../colors';
 @import 'package:angular_components/material_button/mixins';
+@import '../../colors';
 
 @include button-background-color('.add_button', $colorBlue);
 @include button-color('.add_button', $mat-white);
