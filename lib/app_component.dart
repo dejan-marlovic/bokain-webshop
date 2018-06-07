@@ -2,6 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
+import 'package:fo_components/fo_components.dart';
 import 'components/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
@@ -16,6 +17,7 @@ import 'route_paths.dart' as route_paths;
   providers: const [
     materialProviders,
     MessagesService,        
+    PhraseService,
     ProductService,
     UserService,
     routerProvidersHash

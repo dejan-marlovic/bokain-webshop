@@ -34,13 +34,14 @@ import 'package:intl/intl.dart' show DateFormat;
       FORM_PROVIDERS,
       SettingsService,
     ],
-    pipes: const [
-      PhrasePipe
-    ])
+    pipes: const [])
 class SkinConsultationComponent {
   SkinConsultationComponent(CountryService countryService,
-      this.consultationService, this.customerService, this.settingsService)
-      : countryCodeOptions = countryService.data.values
+      this.consultationService, this.customerService, this.settingsService, this.msg) : genderOptions = {
+        'male': msg.male(),
+        'female': msg.female()
+      },
+      countryCodeOptions = countryService.data.values
             .map((country) => new FoModel()..id = country.calling_code)
             .toList(growable: false);
 
@@ -207,6 +208,7 @@ class SkinConsultationComponent {
 
   final ConsultationService consultationService;
   final CustomerService customerService;
+  final MessagesService msg;
   final SettingsService settingsService;
   final DateFormat ssn = new DateFormat("yyyyMMdd'0000'");
   Customer customer = new Customer()..phone_country = '+46';
@@ -214,6 +216,8 @@ class SkinConsultationComponent {
   bool termsAccepted = false;
   bool errorModalVisible = false;  
   int step = 0;
+
+  final Map<String, String> genderOptions;
 
   @ViewChild('pictures')
   ConsultationSectionPicturesComponent pictures;

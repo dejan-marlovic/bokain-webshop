@@ -9,7 +9,7 @@ import 'package:fo_components/fo_components.dart';
     styleUrls: const ['productbox_component.css'],
     templateUrl: 'productbox_component.html',
     directives: const [coreDirectives, materialDirectives],
-    providers: const [LanguageService],
+    providers: const [LanguageService, PhraseService],
     pipes: const [AsyncPipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductBoxComponent implements OnInit, OnDestroy {
