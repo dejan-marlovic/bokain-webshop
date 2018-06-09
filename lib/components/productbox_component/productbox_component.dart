@@ -2,15 +2,14 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:bokain_models/bokain_models.dart';
-import 'package:fo_components/fo_components.dart';
 
 @Component(
     selector: 'bo-productbox',
     styleUrls: const ['productbox_component.css'],
     templateUrl: 'productbox_component.html',
     directives: const [coreDirectives, materialDirectives],
-    providers: const [LanguageService, PhraseService],
-    pipes: const [AsyncPipe],
+    providers: const [LanguageService],
+    pipes: const [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductBoxComponent implements OnInit, OnDestroy {
   ProductBoxComponent(this._phrasesService, this._languageService);
@@ -18,7 +17,7 @@ class ProductBoxComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     final langId = _languageService.data.keys.firstWhere(
-        (id) => _languageService.data[id].iso639_1 == PhraseService.language);
+        (id) => _languageService.data[id].iso639_1 == 'sv');
     if (model == null ||
         _phrasesService.customData['products'][model.id] == null) {
       phrasesModel = new ProductPhrases();

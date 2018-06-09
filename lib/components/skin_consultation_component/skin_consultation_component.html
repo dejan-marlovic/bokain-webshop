@@ -7,7 +7,7 @@
                            (open)="step = 0">
     <div class="row">
       <div class="col">
-        <bo-button-cloud-single-select label="sex"
+        <bo-button-cloud-single-select [label]="msg.gender()"
                                        [options]="genderOptions"
                                        [centerLabel]="true"
                                        [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
@@ -24,20 +24,20 @@
         <div class="row">
           <div class="l3 m0 col"></div>
           <div class="l2 m4 s4 col">
-            <fo-select label="year"
+            <fo-select [label]="msg.year()"
                        [sort]="false"
                        [options]="yearOptions"
                        [(selectedId)]="year">
             </fo-select>
           </div>
           <div class="l2 m4 s4 col">
-            <fo-select label="month"
+            <fo-select [label]="msg.month()"
                        [sort]="false"
                        [options]="monthOptions"
                        [(selectedId)]="month"></fo-select>
           </div>
           <div class="l2 m4 s4 col">
-            <fo-select label="day"
+            <fo-select [label]="msg.day()"
                        [sort]="false"
                        [options]="dayOptions"
                        [(selectedId)]="day"></fo-select>
@@ -174,7 +174,7 @@
       <div class="row"
            *ngIf="consultation.call_me">
         <div class="l1 m2 s4 col">
-          <fo-select label="country_code"
+          <fo-select [label]="msg.country_code()"
                      [disabled]="customerService.loading || consultationService.loading"
                      [options]="countryCodeOptions"
                      [(selectedId)]="customer.phone_country">

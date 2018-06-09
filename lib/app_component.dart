@@ -4,7 +4,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'components/frontpage_component/frontpage_component.template.dart'
-    as frontpage_comp;
+    as frontpage_comp; 
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
     as consultation_comp;
 import 'route_paths.dart' as route_paths;
@@ -16,11 +16,11 @@ import 'route_paths.dart' as route_paths;
   directives: const [materialDirectives, coreDirectives, routerDirectives],
   providers: const [
     materialProviders,
-    MessagesService,        
-    PhraseService,
+    MessagesService,    
     ProductService,
     UserService,
-    routerProvidersHash
+    routerProvidersHash,
+    foProviders
   ],
   pipes: const []
 )

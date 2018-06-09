@@ -41,6 +41,27 @@ class SkinConsultationComponent {
         'male': msg.male(),
         'female': msg.female()
       },
+      form = new ControlGroup({
+    'firstname': new Control(
+        '',
+        Validators.compose([
+          FoValidators.required(msg.enter_firstname()),
+          FoValidators.alpha,
+          Validators.maxLength(64)
+        ])),
+    'lastname': new Control(
+        '',
+        Validators.compose([
+          FoValidators.required(msg.enter_lastname()),
+          FoValidators.alpha,
+          Validators.maxLength(64)
+        ])),
+    'email': new Control(
+        '',
+        Validators.compose(
+            [FoValidators.required(msg.enter_email()), FoValidators.email])),
+    'phone': new Control('', Validators.compose([]))
+  }),
       countryCodeOptions = countryService.data.values
             .map((country) => new FoModel()..id = country.calling_code)
             .toList(growable: false);
@@ -104,26 +125,26 @@ class SkinConsultationComponent {
       'firstname': new Control(
           customer.firstname,
           Validators.compose([
-            FoValidators.required('enter_a_firstname'),
+            FoValidators.required(msg.enter_firstname()),
             FoValidators.alpha,
             Validators.maxLength(64)
           ])),
       'lastname': new Control(
           customer.lastname,
           Validators.compose([
-            FoValidators.required('enter_a_lastname'),
+            FoValidators.required(msg.enter_lastname()),
             FoValidators.alpha,
             Validators.maxLength(64)
           ])),
       'email': new Control(
           customer.email,
           Validators.compose(
-              [FoValidators.required('enter_an_email'), FoValidators.email])),
+              [FoValidators.required(msg.enter_email()), FoValidators.email])),
       'phone': consultation.call_me
           ? new Control(
               customer.phone,
               Validators.compose([
-                FoValidators.required('enter_a_phone'),
+                FoValidators.required(msg.enter_phone()),
                 FoValidators.phoneNumberWithoutCountryCode
               ]))
           : new Control('', Validators.compose([]))
@@ -184,27 +205,7 @@ class SkinConsultationComponent {
 
   final List<FoModel> countryCodeOptions;
 
-  ControlGroup form = new ControlGroup({
-    'firstname': new Control(
-        '',
-        Validators.compose([
-          FoValidators.required('enter_a_firstname'),
-          FoValidators.alpha,
-          Validators.maxLength(64)
-        ])),
-    'lastname': new Control(
-        '',
-        Validators.compose([
-          FoValidators.required('enter_a_lastname'),
-          FoValidators.alpha,
-          Validators.maxLength(64)
-        ])),
-    'email': new Control(
-        '',
-        Validators.compose(
-            [FoValidators.required('enter_an_email'), FoValidators.email])),
-    'phone': new Control('', Validators.compose([]))
-  });
+  ControlGroup form;
 
   final ConsultationService consultationService;
   final CustomerService customerService;
