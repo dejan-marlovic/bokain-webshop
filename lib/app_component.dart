@@ -6,6 +6,7 @@ import 'package:fo_components/fo_components.dart';
 import 'package:intl/intl.dart';
 import 'services/menu_selection_service.dart';
 
+import 'components/footer_large_component/footer_large_component.dart';
 import 'components/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp; 
 import 'components/nav_large_component/nav_large_component.dart';
@@ -17,8 +18,8 @@ import 'route_paths.dart' as route_paths;
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [MaterialInputComponent, NavLargeComponent, NgIf, routerDirectives],
-  providers: const [
+  directives: const [FooterLargeComponent, MaterialInputComponent, NavLargeComponent, NgIf, routerDirectives],
+  providers: const [    
     materialProviders,
     MenuSelectionService,
     MessagesService,
@@ -43,6 +44,8 @@ class AppComponent {
     _loaded = true;
   }
 
+  bool get loaded => _loaded;
+
   final ProductCategoryService productCategoryService;
   final ProductService productService;
   final UserService userService;
@@ -56,8 +59,6 @@ class AppComponent {
         routePath: route_paths.skinConsultation,
         component: consultation_comp.SkinConsultationComponentNgFactory)
   ];
-
-  bool get loaded => _loaded;
-
+  
   bool _loaded = false;
 }
