@@ -73,13 +73,13 @@ class SkinConsultationComponent {
     } else {
       consultation.customer_id = customer.id;
       await customerService.set(customer);
-    }
+    }   
 
     /// Upload images
-    for (var index = 0; index < pictures.imageSources.length; index++) {
-      if (pictures.imageSources[index].isNotEmpty) {        
+    for (var index = 0; index < pictures.model.image_uris.length; index++) {
+      if (pictures.model.image_uris[index].isNotEmpty) {        
         consultation.image_uris[index] = await consultationService.uploadImage(
-            '${customer.id}_$index', pictures.imageSources[index]);
+            '${customer.id}_$index', pictures.model.image_uris[index]);
       }
     }
     customer.consultation_id = await consultationService.push(consultation);
