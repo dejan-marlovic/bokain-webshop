@@ -3,8 +3,12 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
+import 'package:intl/intl.dart';
+import 'services/menu_selection_service.dart';
+
 import 'components/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp; 
+import 'components/nav_large_component/nav_large_component.dart';
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
     as consultation_comp;
 import 'route_paths.dart' as route_paths;
@@ -13,11 +17,15 @@ import 'route_paths.dart' as route_paths;
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [materialDirectives, coreDirectives, routerDirectives],
+  directives: const [MaterialInputComponent, NavLargeComponent, NgIf, routerDirectives],
   providers: const [
     materialProviders,
-    MessagesService,    
+    MenuSelectionService,
+    MessagesService,
+    SkinTypeService,    
+    ProductCategoryService,
     ProductService,
+    UserLogService,
     UserService,
     routerProvidersHash,
     foProviders
@@ -25,9 +33,17 @@ import 'route_paths.dart' as route_paths;
   pipes: const []
 )
 class AppComponent {
-  AppComponent(this.productService, this.userService, this.msg) {
-    userService.login('patrick.minogue@gmail.com', 'lok13rum').then((_) => loaded = true);    
-  }  
+  AppComponent(this.productCategoryService, this.productService, this.userService, this.msg) {
+    userService.login('patrick.minogue@gmail.com', 'lok13rum').then(_loadResources);    
+  }
+
+  void _loadResources(String token) async {    
+    await productCategoryService.fetchQuery(productCategoryService.collection);
+    await productService.fetchQuery(productService.collection);
+    _loaded = true;
+  }
+
+  final ProductCategoryService productCategoryService;
   final ProductService productService;
   final UserService userService;
   final MessagesService msg;
@@ -41,5 +57,7 @@ class AppComponent {
         component: consultation_comp.SkinConsultationComponentNgFactory)
   ];
 
-  bool loaded = false;
+  bool get loaded => _loaded;
+
+  bool _loaded = false;
 }
