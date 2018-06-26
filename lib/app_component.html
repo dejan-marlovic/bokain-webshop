@@ -1,10 +1,16 @@
-<div class="row" *ngIf="loaded">
-    <div class="col">
-        <router-outlet [routes]="routes"></router-outlet>
+<div *ngIf="loaded">
+    <!-- Large top nav -->
+    <div class="hide-for-medium hide-for-small">
+        <bo-nav-large></bo-nav-large>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <router-outlet [routes]="routes"></router-outlet>
+        </div>
+    </div>
+
+    <div class="hide-for-medium hide-for-small">
+        <bo-footer-large></bo-footer-large>
     </div>
 </div>
-
-<div class="row">
-    <div class="col">{{msg.cart()}}</div>
-</div> 
-<p>hej</p>
