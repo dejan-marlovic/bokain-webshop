@@ -1,0 +1,54 @@
+<!-- Upper Menu -->
+<div class="row collapse menuUpper">
+    <div class="col l1 clickable" (click)="onMenuSelection('login')">{{login}}</div>
+    <div class="col l1 clickable" (click)="onMenuSelection('customerSupport')">{{customerSupport}}</div>
+    <div class="col l1 clickable">{{language}}</div>
+    <div class="col l6 clickable"
+         (click)="onMenuSelection('frontpage', 'index.html')">
+        <img src="gfx/logotype.png"
+             alt="logotype">
+    </div>
+    <div class="col l2">
+        <material-input label="search">
+        </material-input>
+    </div>
+    <div class="col l1 clickable" (click)="onMenuSelection('cart')">{{cart}}</div>
+</div>
+
+<!-- Lower Menu -->
+<div class="row collapse menuLower">
+    <div class="col l3 clickable"
+         (click)="onMenuSelection('filterByProblemSkin')"
+         [class.selected]="menuSelection.selection == 'filterByProblemSkin'">{{filterByProblemSkin}}</div>
+    <div class="col l3 clickable"
+         (click)="onMenuSelection('filterByProductCategory')"
+         [class.selected]="menuSelection.selection == 'filterByProductCategory'">{{filterByProductCategory}}</div>
+    <div class="col l3 clickable"
+         (click)="onMenuSelection('skinConsultation', 'skin-consultation')"
+         [class.selected]="menuSelection.selection == 'skinConsultation'">{{skinConsultation}}</div>
+    <div class="col l3 clickable"
+         (click)="onMenuSelection('skinGuide')"
+         [class.selected]="menuSelection.selection == 'skinGuide'">{{skinGuide}}</div>
+</div>
+
+<!-- filterByProblemSkin -->
+<div *ngIf="menuSelection.selection == 'filterByProblemSkin'"
+     class="row collapse">
+    <div class="col">
+        <div class="menuLowerSub filterByProblemSkin">
+            <div class="button clickable"
+                 *ngFor="let skintype of skinTypeService.data.values">{{skintype}}</div>
+        </div>
+    </div>
+</div>
+
+<!-- filterByProductCategory -->
+<div *ngIf="menuSelection.selection == 'filterByProductCategory'"
+     class="row collapse">
+    <div class="col">
+        <div class="menuLowerSub filterByProductCategory">
+            <div class="button clickable"
+                 *ngFor="let productCategory of productCategories">{{productCategory}}</div>
+        </div>
+    </div>
+</div>
