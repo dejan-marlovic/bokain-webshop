@@ -1,16 +1,22 @@
-<div *ngIf="loaded">
-    <!-- Large top nav -->
-    <div class="hide-for-medium hide-for-small">
-        <bo-nav-large></bo-nav-large>
-    </div>
-    
-    <div class="row">
-        <div class="col">
-            <router-outlet [routes]="routes"></router-outlet>
+<div *ngIf="loaded" class="page">
+    <header>
+        <!-- Large top nav -->
+        <div class="hide-for-medium hide-for-small">
+            <bo-nav-large></bo-nav-large>
         </div>
-    </div>
+    </header>
+    
+    <main>
+        <div class="row">
+            <div class="col">
+                <router-outlet [routes]="routes"></router-outlet>
+            </div>
+        </div>
+    </main>
 
-    <div class="hide-for-medium hide-for-small">
-        <bo-footer-large></bo-footer-large>
-    </div>
+    <footer>
+        <div class="hide-for-medium hide-for-small">
+            <bo-footer-large></bo-footer-large>
+        </div>
+    </footer>
 </div>
