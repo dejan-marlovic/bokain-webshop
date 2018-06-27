@@ -1,26 +1,44 @@
+$upperMenuHeight: 70px;
+$lowerMenuHeight: 20px;
+
 :host {
+    div.menuItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        material-input {
+            text-align: left;
+        }
+    }
     div.menuUpper {
-        img.logotype {
-            display: inline-block;
-            width: 40%;
+        div.menuItem {
+            height: $upperMenuHeight;
+            img {
+                display: inline-block;
+                width: auto;
+                height: 100%;
+            }
+        }
+    }
+    div.menuLower {
+        div.menuItem {
+            height: $lowerMenuHeight;
         }
     }
     div.menuLowerSub {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        div.button {
-            //display: inline-flex;
-            //width: 100%;
-        }
     }
     div.menuLowerSub.filterByProblemSkin {
-        div.button {
+        div.menuItem {
             border: 1px solid red;
         }
     }
     div.menuLowerSub.filterByProductCategory {
-        div.button {
+        div.menuItem {
             border: 1px solid black;
         }
     }
