@@ -12,25 +12,19 @@ import '../../services/menu_selection_service.dart';
   directives: const [MaterialInputComponent, NgFor, NgIf, routerDirectives],
 )
 class NavLargeComponent {
-  NavLargeComponent(ProductService productService,
-      ProductCategoryService productCategoryService, this.menuSelection, this.skinTypeService, this._router)
-      : productCategories = productService.cachedModels.values
-            .map((p) => productCategoryService.get(p.product_category_id))
-            .toSet()
-            .where((category) => category != null)
-            .toList(growable: false);
+  NavLargeComponent(this.productCategoryService, this.menuSelection,
+      this.skinTypeService, this._router);
 
   void onMenuSelection(String value, [String route]) {
     menuSelection.selection = value;
-    
+
     if (route != null) _router.navigate(route);
   }
 
-  final List<ProductCategory> productCategories;
+  final ProductCategoryService productCategoryService;
   final MenuSelectionService menuSelection;
   final SkinTypeService skinTypeService;
   final Router _router;
-  
 
   final String cart = Intl.message('cart', name: 'cart', desc: 'shopping cart');
   final String customerSupport =

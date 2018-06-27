@@ -4,7 +4,6 @@ import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:intl/intl.dart';
-import 'services/menu_selection_service.dart';
 
 import 'components/footer_large_component/footer_large_component.dart';
 import 'components/frontpage_component/frontpage_component.template.dart'
@@ -13,6 +12,7 @@ import 'components/nav_large_component/nav_large_component.dart';
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
     as consultation_comp;
 import 'route_paths.dart' as route_paths;
+import 'services/menu_selection_service.dart';
 
 @Component(
   selector: 'my-app',
