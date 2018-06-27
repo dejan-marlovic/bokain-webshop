@@ -9,6 +9,8 @@ import 'components/footer_large_component/footer_large_component.dart';
 import 'components/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
 import 'components/nav_large_component/nav_large_component.dart';
+import 'components/product_category_filter_component/product_category_filter_component.template.dart'
+    as product_category_filter_comp;
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
     as consultation_comp;
 import 'components/skin_type_filter_component/skin_type_filter_component.template.dart'
@@ -72,7 +74,11 @@ class AppComponent {
         component: consultation_comp.SkinConsultationComponentNgFactory),
     new RouteDefinition(
         routePath: route_paths.skinTypeFilter,
-        component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory)
+        component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.productCategoryFilter,
+        component: product_category_filter_comp
+            .ProductCategoryFilterComponentNgFactory)
   ];
 
   bool _loaded = false;
