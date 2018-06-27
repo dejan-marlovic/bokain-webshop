@@ -39,8 +39,8 @@ class AppComponent {
   }
 
   void _loadResources(String token) async {    
-    await productCategoryService.fetchQuery(productCategoryService.collection);
-    await productService.fetchQuery(productService.collection);
+    await productCategoryService.fetchQuery(productCategoryService.collection.where('status', '==', 'active'));
+    await productService.fetchQuery(productService.collection.where('status', '==', 'active'));
     _loaded = true;
   }
 
