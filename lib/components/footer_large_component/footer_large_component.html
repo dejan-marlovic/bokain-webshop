@@ -1,51 +1,52 @@
 <div class="row">
-    <div class="m4 col">
-        <div class="clickable">
-            {{skinTest}}
+    <div class="menuUpper">
+        <div class="m4 col">
+            <div class="menuItem clickable">
+                {{skinTest}}
+            </div>
         </div>
-    </div>
-    <div class="m4 col">
-        <div class="clickable"
-             (click)="onMenuSelection('skinConsultation', 'skin-consultation')">
-            {{skinConsultation}}
+        <div class="m4 col">
+            <div class="menuItem clickable"
+                 (click)="onMenuSelection('skinConsultation', 'skin-consultation')">
+                {{skinConsultation}}
+            </div>
         </div>
-    </div>
-    <div class="m4 col">
-        <div class="clickable">
-            {{skinGuide}}
+        <div class="m4 col">
+            <div class="menuItem clickable">
+                {{skinGuide}}
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Lower Menu -->
 <div class="row collapse">
     <div class="col">
         <div class="menuLower">
-            <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'profile'"
                  (click)="onMenuSelection('profile')">{{myProfile}}</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'skinConsultation'"
                  (click)="onMenuSelection('skinConsultation', 'skin-consultation')">{{skinConsultation}}</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'skinGuide'"
                  (click)="onMenuSelection('skinGuide')">{{skinGuide}}</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'partners'"
                  (click)="onMenuSelection('partners')">{{partners}}</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'faq'"
                  (click)="onMenuSelection('faq')">{{faq}}</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'about'"
                  (click)="onMenuSelection('about')">{{aboutUs}}</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'terms'"
                  (click)="onMenuSelection('terms')">{{terms}} &amp; GDPR</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'customerSupport'"
                  (click)="onMenuSelection('customerSupport')">{{customerSupport}}</div>
-                 <div class="clickable button"
+            <div class="clickable menuItem"
                  [class.selected]="menuSelection.selection == 'call_me'"
                  (click)="onMenuSelection('call_me')">{{callMe}}</div>
         </div>
