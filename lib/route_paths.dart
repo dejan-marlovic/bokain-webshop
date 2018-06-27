@@ -7,3 +7,5 @@ final RoutePath frontpage = new RoutePath(
 );
 
 final RoutePath skinConsultation = new RoutePath(path: 'skin-consultation');
+
+final RoutePath skinTypeFilter = new RoutePath(path: 'skin-types');
