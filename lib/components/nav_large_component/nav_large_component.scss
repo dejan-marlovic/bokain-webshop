@@ -1,26 +1,27 @@
 :host {
+    div.menuUpper {
+        img.logotype {
+            display: inline-block;
+            width: 40%;
+        }
+    }
     div.menuLowerSub {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-                        
         div.button {
             //display: inline-flex;
             //width: 100%;
         }
     }
-
     div.menuLowerSub.filterByProblemSkin {
-        div.button {   
-            border: 1px solid red;      
-            
+        div.button {
+            border: 1px solid red;
         }
     }
-
     div.menuLowerSub.filterByProductCategory {
-        div.button {   
-            border: 1px solid black;      
-            
+        div.button {
+            border: 1px solid black;
         }
     }
 }

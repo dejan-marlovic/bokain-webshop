@@ -1,18 +1,22 @@
 <!-- Upper Menu -->
 <div class="row collapse menuUpper">
-    <div class="col l1 clickable" (click)="onMenuSelection('login')">{{login}}</div>
-    <div class="col l1 clickable" (click)="onMenuSelection('customerSupport')">{{customerSupport}}</div>
+    <div class="col l1 clickable"
+         (click)="onMenuSelection('login')">{{login}}</div>
+    <div class="col l1 clickable"
+         (click)="onMenuSelection('customerSupport')">{{customerSupport}}</div>
     <div class="col l1 clickable">{{language}}</div>
-    <div class="col l6 clickable"
+    <div class="col l6 clickable text-center"
          (click)="onMenuSelection('frontpage', 'index.html')">
-        <img src="gfx/logotype.png"
+        <img class="logotype"
+             src="gfx/logotype.png"
              alt="logotype">
     </div>
     <div class="col l2">
         <material-input label="search">
         </material-input>
     </div>
-    <div class="col l1 clickable" (click)="onMenuSelection('cart')">{{cart}}</div>
+    <div class="col l1 clickable"
+         (click)="onMenuSelection('cart')">{{cart}}</div>
 </div>
 
 <!-- Lower Menu -->
