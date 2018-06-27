@@ -5,4 +5,6 @@ class MenuSelectionService {
 
 
   String selection = 'frontpage';
+
+
 }
