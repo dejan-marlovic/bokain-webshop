@@ -46,14 +46,14 @@
 <div class="row collapse menuLower">
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('filterByProblemSkin')"
+             (click)="onMenuSelection('filterByProblemSkin', 'skin-types')"
              [class.selected]="menuSelection.selection == 'filterByProblemSkin'">
             {{filterByProblemSkin}}
         </div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('filterByProductCategory')"
+             (click)="onMenuSelection('filterByProductCategory', 'product-categories')"
              [class.selected]="menuSelection.selection == 'filterByProductCategory'">{{filterByProductCategory}}</div>
     </div>
     <div class="col l3">
