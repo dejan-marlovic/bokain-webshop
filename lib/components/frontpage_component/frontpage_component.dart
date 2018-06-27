@@ -9,8 +9,14 @@ import '../productbox_component/productbox_component.dart';
     directives: const [coreDirectives, ProductBoxComponent],
     providers: const [])
 class FrontpageComponent {
-  FrontpageComponent(this.productService);  
+  FrontpageComponent(this.productService)
+      : popularProducts =
+            new List<Product>.from(productService.cachedModels.values)
+              ..sort((p1, p2) => p1.score - p2.score)
+              ..take(4);
 
   String selectedProductId;
   final ProductService productService;
+
+  final List<Product> popularProducts;
 }
