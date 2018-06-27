@@ -12,7 +12,7 @@ class FrontpageComponent {
   FrontpageComponent(this.productService)
       : popularProducts =
             new List<Product>.from(productService.cachedModels.values)
-              ..sort((p1, p2) => p1.score - p2.score)
+              ..sort((p1, p2) => p2.score - p1.score)
               ..take(4);
 
   String selectedProductId;
