@@ -1,8 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:intl/intl.dart';
-import '../../services/menu_selection_service.dart';
+import 'package:bokain_models/bokain_models.dart';
 
 @Component(
   selector: 'bo-footer-large',
@@ -11,27 +10,28 @@ import '../../services/menu_selection_service.dart';
   directives: const [MaterialInputComponent, NgFor, NgIf, routerDirectives],
 )
 class FooterLargeComponent {
-  FooterLargeComponent(this.menuSelection, this._router);
+  FooterLargeComponent(this.msg) :
+  terms = msg.standard_terms(),
+  aboutUs = msg.about_us(),
+  faq = msg.faq(),
+  partners = msg.partner(2),
+  myProfile = msg.my_profile(),
+  customerSupport = msg.customer_support(),
+  skinConsultation = msg.skin_consultation(1),
+  skinGuide = msg.skin_guide(),
+  skinTest = msg.skin_test(1),
+  callMe = msg.call_me();
 
-  void onMenuSelection(String value, [String route]) {
-    menuSelection.selection = value;
-    
-    if (route != null) _router.navigate(route);
-  }
+  final MessagesService msg;
   
-  final MenuSelectionService menuSelection;
-  final Router _router;
-  
-  final String terms = Intl.message('terms', name: 'terms');
-  final String aboutUs = Intl.message('about us', name: 'about us');
-  final String faq = Intl.message('frequently asked questions', name: 'faq');
-  final String partners = Intl.plural(2, one: 'partner', other: 'partners', name: 'partner');
-  final String myProfile = Intl.message('my profile', name: 'my profile');
-  final String customerSupport =
-      Intl.message('customer support', name: 'customer support');  
-  final String skinConsultation =
-      Intl.message('skin consultation', name: 'skin consultation');
-  final String skinGuide = Intl.message('skin guide', name: 'skin guide');
-  final String skinTest = Intl.message('skin test', name: 'skin test');
-  final String callMe = Intl.message('call me', name: 'call me');
+  final String terms;
+  final String aboutUs;
+  final String faq;
+  final String partners;
+  final String myProfile;
+  final String customerSupport;  
+  final String skinConsultation;
+  final String skinGuide;
+  final String skinTest;
+  final String callMe;
 }

@@ -1,6 +1,10 @@
 $upperMenuHeight: 150px;
 $lowerMenuHeight: 20px;
 :host {
+    .active-route {
+        border: 1px solid red;
+        text-decoration: underline;
+    }
     div.menuItem {
         display: flex;
         align-items: center;
