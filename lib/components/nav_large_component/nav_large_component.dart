@@ -19,7 +19,8 @@ class NavLargeComponent {
         skinConsultation = msg.skin_consultation(1),
         skinGuide = msg.skin_guide(),
         login = msg.login(),
-        language = msg.language();
+        language = msg.language(),
+        myProfile = msg.my_profile();
 
   bool get skinTypesOpen =>
       router.current?.path?.startsWith(msg.skin_types_url()) == true;
@@ -42,4 +43,5 @@ class NavLargeComponent {
   final String skinGuide;
   final String login;
   final String language;
+  final String myProfile;
 }

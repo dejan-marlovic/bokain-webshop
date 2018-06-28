@@ -3,20 +3,34 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-//import 'package:intl/intl.dart';
 
+import 'components/about_us_component/about_us_component.template.dart'
+    as about_us_comp;
+import 'components/cart_component/cart_component.template.dart' as cart_comp;
+import 'components/customer_support_component/customer_support_component.template.dart'
+    as customer_support_comp;
+import 'components/faq_component/faq_component.template.dart' as faq_comp;
 import 'components/footer_large_component/footer_large_component.dart';
 import 'components/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
 import 'components/nav_large_component/nav_large_component.dart';
+import 'components/partners_component/partners_component.template.dart'
+    as partners_comp;
 import 'components/product_category_filter_component/product_category_filter_component.template.dart'
     as product_category_filter_comp;
+import 'components/profile_component/profile_component.template.dart'
+    as profile_comp;
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
     as consultation_comp;
+import 'components/skin_guide_component/skin_guide_component.template.dart'
+    as skin_guide_comp;
+import 'components/skin_test_component/skin_test_component.template.dart'
+    as skin_test_comp;
 import 'components/skin_type_filter_component/skin_type_filter_component.template.dart'
     as skin_type_filter_comp;
+import 'components/standard_terms_component/standard_terms_component.template.dart'
+    as standard_terms_comp;
 import 'route_paths.dart' as route_paths;
-import 'services/menu_selection_service.dart';
 
 @Component(
     selector: 'my-app',
@@ -31,7 +45,6 @@ import 'services/menu_selection_service.dart';
     ],
     providers: const [
       materialProviders,
-      MenuSelectionService,
       MessagesService,
       SkinTypeService,
       ProductCategoryService,
@@ -43,28 +56,13 @@ import 'services/menu_selection_service.dart';
     ],
     pipes: const [])
 class AppComponent {
-  AppComponent(this.productCategoryService, this.productService,
-      this.userService, this.msg) {
-    userService
-        .login('patrick.minogue@gmail.com', 'lok13rum')
-        .then(_loadResources);
-  }
-
-  void _loadResources(String token) async {
-    await productCategoryService.fetchQuery(
-        productCategoryService.collection.where('status', '==', 'active'));
-    await productService
-        .fetchQuery(productService.collection.where('status', '==', 'active').orderBy('score', 'desc'));
-    _loaded = true;
-  }
-
-  bool get loaded => _loaded;
-
   final ProductCategoryService productCategoryService;
-  final ProductService productService;
-  final UserService userService;
-  final MessagesService msg;
 
+  final ProductService productService;
+
+  final UserService userService;
+
+  final MessagesService msg;
   final List<RouteDefinition> routes = [
     new RouteDefinition(
         routePath: route_paths.frontpage,
@@ -74,16 +72,58 @@ class AppComponent {
         component: consultation_comp.SkinConsultationComponentNgFactory),
     new RouteDefinition(
         routePath: route_paths.skinTypeFilter,
-        component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),    
+        component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),
     new RouteDefinition(
         routePath: route_paths.productCategoryFilter,
         component: product_category_filter_comp
             .ProductCategoryFilterComponentNgFactory),
-    
+    new RouteDefinition(
+        routePath: route_paths.profile,
+        component: profile_comp.ProfileComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.aboutUs,
+        component: about_us_comp.AboutUsComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.cart,
+        component: cart_comp.CartComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.customerSupport,
+        component: customer_support_comp.CustomerSupportComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.faq, component: faq_comp.FaqComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.partners,
+        component: partners_comp.PartnersComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.skinGuide,
+        component: skin_guide_comp.SkinGuideComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.standardTerms,
+        component: standard_terms_comp.StandardTermsComponentNgFactory),
+    new RouteDefinition(
+        routePath: route_paths.skinTest,
+        component: skin_test_comp.SkinTestComponentNgFactory),
+
     // Redirect everything else to frontpage
     new RouteDefinition.redirect(
         path: '.+', redirectTo: route_paths.frontpage.toUrl()),
   ];
-
   bool _loaded = false;
+  AppComponent(this.productCategoryService, this.productService,
+      this.userService, this.msg) {
+    userService
+        .login('patrick.minogue@gmail.com', 'lok13rum')
+        .then(_loadResources);
+  }
+
+  bool get loaded => _loaded;
+
+  void _loadResources(String token) async {
+    await productCategoryService.fetchQuery(
+        productCategoryService.collection.where('status', '==', 'active'));
+    await productService.fetchQuery(productService.collection
+        .where('status', '==', 'active')
+        .orderBy('score', 'desc'));
+    _loaded = true;
+  }
 }
