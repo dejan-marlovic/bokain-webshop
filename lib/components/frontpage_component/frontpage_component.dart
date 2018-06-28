@@ -11,8 +11,7 @@ import '../productbox_component/productbox_component.dart';
 class FrontpageComponent {
   FrontpageComponent(this.productService)
       : popularProducts =
-            new List<Product>.from(productService.cachedModels.values)
-              ..sort((p1, p2) => p2.score - p1.score)
+            new List<Product>.from(productService.cachedModels.values)              
               ..take(4);
 
   String selectedProductId;
