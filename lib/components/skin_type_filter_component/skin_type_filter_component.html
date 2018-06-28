@@ -1,1 +1,9 @@
 <p>SKIN TYPE FILTER</p>
+<div class="row">
+  <div class="l3 m4 s12 col" *ngFor="let product of products">
+      <bo-productbox 
+              (addButtonClick)="selectedProductId = $event"
+              [model]="product">
+      </bo-productbox>        
+  </div>
+</div>

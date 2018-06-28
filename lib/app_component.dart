@@ -74,11 +74,15 @@ class AppComponent {
         component: consultation_comp.SkinConsultationComponentNgFactory),
     new RouteDefinition(
         routePath: route_paths.skinTypeFilter,
-        component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),
+        component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),    
     new RouteDefinition(
         routePath: route_paths.productCategoryFilter,
         component: product_category_filter_comp
-            .ProductCategoryFilterComponentNgFactory)
+            .ProductCategoryFilterComponentNgFactory),
+    
+    // Redirect everything else to frontpage
+    new RouteDefinition.redirect(
+        path: '.+', redirectTo: route_paths.frontpage.toUrl()),
   ];
 
   bool _loaded = false;

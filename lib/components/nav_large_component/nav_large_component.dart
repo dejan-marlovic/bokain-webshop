@@ -13,7 +13,7 @@ import '../../services/menu_selection_service.dart';
 )
 class NavLargeComponent {
   NavLargeComponent(this.productCategoryService, this.menuSelection,
-      this.skinTypeService, this._router);
+      this.skinTypeService, this._router, this.msg);
 
   void onMenuSelection(String value, [String route]) {
     menuSelection.selection = value;
@@ -24,6 +24,7 @@ class NavLargeComponent {
   final ProductCategoryService productCategoryService;
   final MenuSelectionService menuSelection;
   final SkinTypeService skinTypeService;
+  final MessagesService msg;
   final Router _router;
 
   final String cart = Intl.message('cart', name: 'cart', desc: 'shopping cart');

@@ -46,7 +46,7 @@
 <div class="row collapse menuLower">
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('filterByProblemSkin', 'skin-types/acne')"
+             (click)="onMenuSelection('filterByProblemSkin', 'skin-types/' + msg.symptom_acne())"
              [class.selected]="menuSelection.selection == 'filterByProblemSkin'">
             {{filterByProblemSkin}}
         </div>
@@ -74,7 +74,7 @@
     <div class="col">
         <div class="menuLowerSub filterByProblemSkin">
             <div class="menuItem clickable"
-                 (click)="onMenuSelection('filterByProblemSkin', 'skin-types/$skintype')"
+                 (click)="onMenuSelection('filterByProblemSkin', 'skin-types/' + skintype.url_name)"
                  *ngFor="let skintype of skinTypeService.data.values">{{skintype}}</div>
         </div>
     </div>
