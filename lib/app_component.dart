@@ -52,9 +52,9 @@ class AppComponent {
 
   void _loadResources(String token) async {
     await productCategoryService.fetchQuery(
-        productCategoryService.collection.where('status', '==', 'active').orderBy('score', 'desc'));
+        productCategoryService.collection.where('status', '==', 'active'));
     await productService
-        .fetchQuery(productService.collection.where('status', '==', 'active'));
+        .fetchQuery(productService.collection.where('status', '==', 'active').orderBy('score', 'desc'));
     _loaded = true;
   }
 
