@@ -27,6 +27,8 @@ class NavLargeComponent {
   final MessagesService msg;
   final Router _router;
 
+  final String locale = Intl.shortLocale(Intl.getCurrentLocale());
+
   final String cart = Intl.message('cart', name: 'cart', desc: 'shopping cart');
   final String customerSupport =
       Intl.message('customer support', name: 'customer support');

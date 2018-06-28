@@ -46,14 +46,14 @@
 <div class="row collapse menuLower">
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('filterByProblemSkin', 'skin-types/' + msg.symptom_acne())"
+             (click)="onMenuSelection('filterByProblemSkin', msg.skin_types_url() + '/' + msg.symptom_acne())"
              [class.selected]="menuSelection.selection == 'filterByProblemSkin'">
             {{filterByProblemSkin}}
         </div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('filterByProductCategory', 'product-categories')"
+             (click)="onMenuSelection('filterByProductCategory', msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[locale].url_name)"
              [class.selected]="menuSelection.selection == 'filterByProductCategory'">{{filterByProductCategory}}</div>
     </div>
     <div class="col l3">
@@ -74,7 +74,7 @@
     <div class="col">
         <div class="menuLowerSub filterByProblemSkin">
             <div class="menuItem clickable"
-                 (click)="onMenuSelection('filterByProblemSkin', 'skin-types/' + skintype.url_name)"
+                 (click)="onMenuSelection('filterByProblemSkin', msg.skin_types_url() + '/' + skintype.url_name)"
                  *ngFor="let skintype of skinTypeService.data.values">{{skintype}}</div>
         </div>
     </div>
