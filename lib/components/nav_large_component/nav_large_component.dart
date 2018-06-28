@@ -3,8 +3,6 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:intl/intl.dart';
-import '../../services/menu_selection_service.dart';
-
 @Component(
   selector: 'bo-nav-large',
   styleUrls: const ['nav_large_component.css'],
@@ -12,34 +10,36 @@ import '../../services/menu_selection_service.dart';
   directives: const [MaterialInputComponent, NgFor, NgIf, routerDirectives],
 )
 class NavLargeComponent {
-  NavLargeComponent(this.productCategoryService, this.menuSelection,
-      this.skinTypeService, this._router, this.msg);
+  NavLargeComponent(this.productCategoryService,
+      this.skinTypeService, this.router, this.msg)
+      : cart = msg.cart(),
+        customerSupport = msg.customer_support(),
+        filterBySkinType = msg.filter_by_skin_type(),
+        filterByProductCategory = msg.filter_by_product_category(),
+        skinConsultation = msg.skin_consultation(1),
+        skinGuide = msg.skin_guide(),
+        login = msg.login(),
+        language = msg.language();
 
-  void onMenuSelection(String value, [String route]) {
-    menuSelection.selection = value;
+  bool get skinTypesOpen =>
+      router.current?.path?.startsWith(msg.skin_types_url()) == true;
 
-    if (route != null) _router.navigate(route);
-  }
+  bool get productCategoriesOpen =>
+      router.current?.path?.startsWith(msg.product_categories_url()) == true;
 
   final ProductCategoryService productCategoryService;
-  final MenuSelectionService menuSelection;
   final SkinTypeService skinTypeService;
   final MessagesService msg;
-  final Router _router;
+  final Router router;
 
   final String locale = Intl.shortLocale(Intl.getCurrentLocale());
 
-  final String cart = Intl.message('cart', name: 'cart', desc: 'shopping cart');
-  final String customerSupport =
-      Intl.message('customer support', name: 'customer support');
-  final String filterByProblemSkin =
-      Intl.message('filter by problem skin', name: 'filter by problem skin');
-  final String filterByProductCategory = Intl.message(
-      'filter by product category',
-      name: 'filter by product category');
-  final String skinConsultation =
-      Intl.message('skin consultation', name: 'skin consultation');
-  final String skinGuide = Intl.message('skin guide', name: 'skin guide');
-  final String login = Intl.message('login', name: 'login');
-  final String language = Intl.message('language', name: 'language');
+  final String cart;
+  final String customerSupport;
+  final String filterBySkinType;
+  final String filterByProductCategory;
+  final String skinConsultation;
+  final String skinGuide;
+  final String login;
+  final String language;
 }

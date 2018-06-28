@@ -2,13 +2,15 @@
 <div class="row collapse menuUpper">
     <div class="col l1">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('login')">
+             [routerLink]="msg.login_url()"
+             routerLinkActive="active-route">
             {{login}}
         </div>
     </div>
     <div class="col l1">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('customerSupport')">
+             [routerLink]="msg.customer_support_url()"
+             routerLinkActive="active-route">
             {{customerSupport}}
         </div>
     </div>
@@ -20,9 +22,10 @@
     <div class="col l6">
         <div class="menuItem">
             <img class="clickable"
+                 routerLink="index.html"
+                 routerLinkActive="active-route"
                  src="gfx/logotype.png"
-                 alt="logotype"
-                 (click)="onMenuSelection('frontpage', 'index.html')">
+                 alt="logotype">
         </div>
     </div>
     <div class="col l2">
@@ -36,7 +39,8 @@
     </div>
     <div class="col l1">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('cart')">
+            [routerLink]="msg.cart_url()"
+            routerLinkActive="active-route">
             {{cart}}
         </div>
     </div>
@@ -46,47 +50,50 @@
 <div class="row collapse menuLower">
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('filterByProblemSkin', msg.skin_types_url() + '/' + msg.symptom_acne())"
-             [class.selected]="menuSelection.selection == 'filterByProblemSkin'">
-            {{filterByProblemSkin}}
+             [routerLink]="msg.skin_types_url() + '/' + msg.symptom_acne()"
+             routerLinkActive="active-route">
+            {{filterBySkinType}}
         </div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('filterByProductCategory', msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[locale].url_name)"
-             [class.selected]="menuSelection.selection == 'filterByProductCategory'">{{filterByProductCategory}}</div>
+             *ngIf="productCategoryService.cachedModels.isNotEmpty"
+             [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[locale].url_name"    
+             routerLinkActive="active-route">{{filterByProductCategory}}</div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('skinConsultation', 'skin-consultation')"
-             [class.selected]="menuSelection.selection == 'skinConsultation'">{{skinConsultation}}</div>
+             [routerLink]="msg.skin_consultation_url()"
+             routerLinkActive="active-route">{{skinConsultation}}</div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
-             (click)="onMenuSelection('skinGuide')"
-             [class.selected]="menuSelection.selection == 'skinGuide'">{{skinGuide}}</div>
+             [routerLink]="msg.skin_guide_url()"
+             routerLinkActive="active-route">{{skinGuide}}</div>
     </div>
 </div>
 
 <!-- filterByProblemSkin -->
-<div *ngIf="menuSelection.selection == 'filterByProblemSkin'"
+<div *ngIf="skinTypesOpen"
      class="row collapse">
     <div class="col">
-        <div class="menuLowerSub filterByProblemSkin">
+        <div class="menuLowerSub filterBySkinType">
             <div class="menuItem clickable"
-                 (click)="onMenuSelection('filterByProblemSkin', msg.skin_types_url() + '/' + skintype.url_name)"
+                 [routerLink]="msg.skin_types_url() + '/' + skintype.url_name"
+                 routerLinkActive="active-route"
                  *ngFor="let skintype of skinTypeService.data.values">{{skintype}}</div>
         </div>
     </div>
 </div>
 
 <!-- filterByProductCategory -->
-<div *ngIf="menuSelection.selection=='filterByProductCategory'"
+<div *ngIf="productCategoriesOpen"
      class="row collapse">
     <div class="col">
         <div class="menuLowerSub filterByProductCategory">
             <div class="menuItem clickable"
-                (click)="onMenuSelection('filterByProductCategory', msg.product_categories_url() + '/' + productCategory.phrases[locale].url_name)"
+                 [routerLink]="msg.product_categories_url() + '/' + productCategory.phrases[locale].url_name"
+                 routerLinkActive="active-route"
                  *ngFor="let productCategory of productCategoryService.cachedModels.values">{{productCategory}}</div>
         </div>
     </div>

@@ -2,6 +2,9 @@ $upperMenuHeight: 70px;
 $lowerMenuHeight: 20px;
 
 :host {
+    .active-route {
+        border: 1px solid red;
+    }
     div.menuItem {
         display: flex;
         align-items: center;
@@ -32,7 +35,7 @@ $lowerMenuHeight: 20px;
         align-items: center;
         justify-content: space-evenly;
     }
-    div.menuLowerSub.filterByProblemSkin {
+    div.menuLowerSub.filterBySkinType {
         div.menuItem {
             border: 1px solid red;
         }
