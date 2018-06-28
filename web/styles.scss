@@ -3,6 +3,10 @@
 @import 'package:grid/grid';
 
 
+html {
+  overflow-y: scroll;
+}
+
 * {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
