@@ -2,12 +2,13 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:intl/intl.dart';
+import '../productbox_component/productbox_component.dart';
 
 @Component(
     selector: 'bo-product-category-filter',
     templateUrl: 'product_category_filter_component.html',
     styleUrls: const ['product_category_filter_component.css'],
-    directives: const [NgFor],
+    directives: const [NgFor, ProductBoxComponent],
     providers: const [])
 class ProductCategoryFilterComponent implements OnActivate {
   ProductCategoryFilterComponent(
@@ -15,8 +16,8 @@ class ProductCategoryFilterComponent implements OnActivate {
 
   @override
   void onActivate(RouterState previous, RouterState current) {
-    if (current.parameters['id'] != null) {
-      final lang = Intl.shortLocale(Intl.getCurrentLocale());
+    if (current.parameters['id'] != null) {      
+      final lang = Intl.shortLocale(Intl.getCurrentLocale());      
       final category = _productCategoryService.cachedModels.values.firstWhere(
           (category) =>
               category.phrases[lang].url_name == current.parameters['id'],
@@ -24,7 +25,7 @@ class ProductCategoryFilterComponent implements OnActivate {
 
       if (category != null) {
         products = _productService.cachedModels.values
-            .where((product) => product.product_category_id == product.id)
+            .where((product) => product.product_category_id == category.id)
             .toList(growable: false);
       }
     }
