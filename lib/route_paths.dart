@@ -6,23 +6,12 @@ import 'package:intl/intl.dart';
 final RoutePath frontpage =
     new RoutePath(path: 'index.html', useAsDefault: true);
 
-final RoutePath productCategoryFilter = new RoutePath(
-    // ignore: prefer_interpolation_to_compose_strings    
-    path: url(Intl.plural(2,
-        one: 'product category',
-        other: 'product categories',
-        name: 'product category')) + '/:id');
+final RoutePath productCategoryFilter = new RoutePath(    
+    path: "${Intl.message('product-categories', name: 'product_categories_url')}/:id");
 
 final RoutePath skinConsultation = new RoutePath(
-    path: url(Intl.plural(1,
-        one: 'skin consultation',
-        other: 'skin consultations',
-        name: 'skin consultation')));
+    path:
+        "${Intl.message('skin-consultation', name: 'skin_consultation_url')}");
 
 final RoutePath skinTypeFilter = new RoutePath(
-    // ignore: prefer_interpolation_to_compose_strings
-    path: url(Intl.plural(2,
-            one: 'skin type', other: 'skin types', name: 'skin type')) +
-        '/:id');
-
-String url(String value) => Uri.encodeFull(value.replaceAll(' ', '-'));
+    path: "${Intl.message('skin-types', name: 'skin_types_url')}/:id");
