@@ -1,8 +1,10 @@
+import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
+import 'package:intl/intl.dart';
 
 import 'components/about_us_component/about_us_component.template.dart'
     as about_us_comp;
@@ -44,6 +46,7 @@ import 'route_paths.dart' as route_paths;
       routerDirectives
     ],
     providers: const [
+      LanguageService,
       materialProviders,
       MessagesService,
       SkinTypeService,
@@ -61,7 +64,6 @@ class AppComponent {
   final ProductService productService;
 
   final UserService userService;
-
   final MessagesService msg;
   final List<RouteDefinition> routes = [
     new RouteDefinition(

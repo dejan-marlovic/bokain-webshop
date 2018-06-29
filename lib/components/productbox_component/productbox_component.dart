@@ -8,16 +8,9 @@ import 'package:intl/intl.dart';
     selector: 'bo-productbox',
     styleUrls: const ['productbox_component.css'],
     templateUrl: 'productbox_component.html',
-    directives: const [materialDirectives],
-    providers: const [],
-    pipes: const [],
-    changeDetection: ChangeDetectionStrategy.OnPush)
-class ProductBoxComponent implements OnInit, OnDestroy {
+    directives: const [materialDirectives])
+class ProductBoxComponent implements OnDestroy {
   ProductBoxComponent();
-
-  @override
-  void ngOnInit() {        
-  }
 
   @override
   void ngOnDestroy() {

@@ -4,21 +4,21 @@
             <div class="menuItem clickable"
                  [routerLink]="msg.skin_test_url()"
                  routerLinkActive="active-route">
-                {{skinTest}}
+                {{msg.skin_test(1)}}
             </div>
         </div>
         <div class="m4 col">
             <div class="menuItem clickable"
                  [routerLink]="msg.skin_consultation_url()"
                  routerLinkActive="active-route">
-                {{skinConsultation}}
+                {{msg.skin_consultation(1)}}
             </div>
         </div>
         <div class="m4 col">
             <div class="menuItem clickable"
                  [routerLink]="msg.skin_guide_url()"
                  routerLinkActive="active-route">
-                {{skinGuide}}
+                {{msg.skin_guide()}}
             </div>
         </div>
     </div>
@@ -29,29 +29,29 @@
         <div class="menuLower">
             <div class="clickable menuItem"
                  [routerLink]="msg.my_profile_url()"
-                 routerLinkActive="active-route">{{myProfile}}</div>
+                 routerLinkActive="active-route">{{msg.my_profile()}}</div>
             <div class="clickable menuItem"
             [routerLink]="msg.skin_consultation_url()"
-                 routerLinkActive="active-route">{{skinConsultation}}</div>
+                 routerLinkActive="active-route">{{msg.skin_consultation(1)}}</div>
             <div class="clickable menuItem"
             [routerLink]="msg.skin_guide_url()"
-            routerLinkActive="active-route">{{skinGuide}}</div>
+            routerLinkActive="active-route">{{msg.skin_guide()}}</div>
             <div class="clickable menuItem"
             [routerLink]="msg.partners_url()"
-            routerLinkActive="active-route">{{partners}}</div>
+            routerLinkActive="active-route">{{msg.partner(2)}}</div>
             <div class="clickable menuItem"
             [routerLink]="msg.faq_url()"
-            routerLinkActive="active-route">{{faq}}</div>
+            routerLinkActive="active-route">{{msg.faq()}}</div>
             <div class="clickable menuItem"
             [routerLink]="msg.about_us_url()"
-            routerLinkActive="active-route">{{aboutUs}}</div>
+            routerLinkActive="active-route">{{msg.about_us()}}</div> 
             <div class="clickable menuItem"
             [routerLink]="msg.standard_terms_url()"
-            routerLinkActive="active-route">{{terms}} &amp; GDPR</div>
+            routerLinkActive="active-route">{{msg.standard_terms()}} &amp; GDPR</div>
             <div class="clickable menuItem"
             [routerLink]="msg.customer_support_url()"
-            routerLinkActive="active-route">{{customerSupport}}</div>
-            <div class="clickable menuItem">{{callMe}}</div>
+            routerLinkActive="active-route">{{msg.customer_support()}}</div>
+            <div class="clickable menuItem">{{msg.call_me()}}</div>
         </div>
     </div>
 </div>

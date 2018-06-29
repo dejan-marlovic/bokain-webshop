@@ -4,19 +4,20 @@
         <div class="menuItem clickable"
              [routerLink]="msg.my_profile_url()"
              routerLinkActive="active-route">
-            {{myProfile}}
+            {{msg.my_profile()}}
         </div>
     </div>
     <div class="col l1">
         <div class="menuItem clickable"
              [routerLink]="msg.customer_support_url()"
              routerLinkActive="active-route">
-            {{customerSupport}}
+            {{msg.customer_support()}}
         </div>
     </div>
     <div class="col l1">
         <div class="menuItem clickable">
-            {{language}}
+            <material-menu [menu]="languageMenuModel" [buttonText]="msg.language()">                
+            </material-menu>
         </div>
     </div>
     <div class="col l6">
@@ -39,9 +40,9 @@
     </div>
     <div class="col l1">
         <div class="menuItem clickable"
-            [routerLink]="msg.cart_url()"
-            routerLinkActive="active-route">
-            {{cart}}
+             [routerLink]="msg.cart_url()"
+             routerLinkActive="active-route">
+            {{msg.cart()}}
         </div>
     </div>
 </div>
@@ -50,26 +51,24 @@
 <div class="row collapse menuLower">
     <div class="col l3">
         <div class="menuItem clickable"
-             [routerLink]="msg.skin_types_url() + '/' + msg.symptom_acne()"
-             routerLinkActive="active-route">
-            {{filterBySkinType}}
+             [routerLink]="msg.skin_types_url() + '/' + msg.symptom_acne()">
+            {{msg.filter_by_skin_type()}}
         </div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
              *ngIf="productCategoryService.cachedModels.isNotEmpty"
-             [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[locale].url_name"    
-             routerLinkActive="active-route">{{filterByProductCategory}}</div>
+             [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[locale].url_name">{{msg.filter_by_product_category()}}</div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
              [routerLink]="msg.skin_consultation_url()"
-             routerLinkActive="active-route">{{skinConsultation}}</div>
+             routerLinkActive="active-route">{{msg.skin_consultation(1)}}</div>
     </div>
     <div class="col l3">
         <div class="menuItem clickable"
              [routerLink]="msg.skin_guide_url()"
-             routerLinkActive="active-route">{{skinGuide}}</div>
+             routerLinkActive="active-route">{{msg.skin_guide()}}</div>
     </div>
 </div>
 
@@ -94,7 +93,7 @@
             <div class="menuItem clickable"
                  [routerLink]="msg.product_categories_url() + '/' + productCategory.phrases[locale].url_name"
                  routerLinkActive="active-route"
-                 *ngFor="let productCategory of productCategoryService.cachedModels.values">{{productCategory}}</div>
+                 *ngFor="let productCategory of productCategoryService.cachedModels.values">{{productCategory.phrases[locale].name}}</div>
         </div>
     </div>
 </div>
