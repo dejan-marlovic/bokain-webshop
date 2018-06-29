@@ -29,6 +29,7 @@ class NavLargeComponent {
         
   static void _setLocale(String iso) async {    
     Intl.defaultLocale = iso;
+    await initializeMessages(iso);
     await initializeDateFormatting(iso);
   }
 
