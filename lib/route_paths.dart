@@ -6,36 +6,36 @@ library route_paths;
 import 'package:angular_router/angular_router.dart';
 import 'package:intl/intl.dart';
 
-final RoutePath frontpage =
-    new RoutePath(path: 'index.html', useAsDefault: true);
+RoutePath get frontpage =>
+    RoutePath(path: 'index.html', useAsDefault: true);
 
-final RoutePath productCategoryFilter = new RoutePath(
+RoutePath get productCategoryFilter => RoutePath(
     path:
         "${Intl.message('product-categories', name: 'product_categories_url')}/:id");
 
-final RoutePath skinConsultation = new RoutePath(
+RoutePath get skinConsultation => RoutePath(
     path:
         "${Intl.message('skin-consultation', name: 'skin_consultation_url')}");
 
-final RoutePath skinTypeFilter = new RoutePath(
+RoutePath get skinTypeFilter => RoutePath(
     path: "${Intl.message('skin-types', name: 'skin_types_url')}/:id");
 
-final RoutePath profile =
-    new RoutePath(path: Intl.message('profile', name: 'my_profile_url'));
+RoutePath get profile =>
+    RoutePath(path: Intl.message('profile', name: 'my_profile_url'));
 
-final RoutePath aboutUs =
-    new RoutePath(path: Intl.message('about-us', name: 'about_us_url'));
+RoutePath get aboutUs =>
+    RoutePath(path: Intl.message('about-us', name: 'about_us_url'));
 
-final RoutePath cart = new RoutePath(path: Intl.message('cart', name: 'cart_url'));
+RoutePath get cart => RoutePath(path: Intl.message('cart', name: 'cart_url'));
 
-final RoutePath customerSupport = new RoutePath(path: Intl.message('customer-support', name: 'customer_support_url'));
+RoutePath get customerSupport => RoutePath(path: Intl.message('customer-support', name: 'customer_support_url'));
 
-final RoutePath faq = new RoutePath(path: Intl.message('faq', name: 'faq_url'));
+RoutePath get faq => RoutePath(path: Intl.message('faq', name: 'faq_url'));
 
-final RoutePath partners = new RoutePath(path: Intl.message('partners', name: 'partners_url'));
+RoutePath get partners => RoutePath(path: Intl.message('partners', name: 'partners_url'));
 
-final RoutePath skinGuide = new RoutePath(path: Intl.message('skin-guide', name: 'skin_guide_url'));
+RoutePath get skinGuide => RoutePath(path: Intl.message('skin-guide', name: 'skin_guide_url'));
 
-final RoutePath skinTest = new RoutePath(path: Intl.message('skin-test', name: 'skin_test_url'));
+RoutePath get skinTest => RoutePath(path: Intl.message('skin-test', name: 'skin_test_url'));
 
-final RoutePath standardTerms = new RoutePath(path: Intl.message('standard-terms', name: 'standard_terms_url'));
+RoutePath get standardTerms => RoutePath(path: Intl.message('standard-terms', name: 'standard_terms_url'));

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/model/menu/menu.dart';
@@ -18,19 +19,36 @@ import 'package:intl/date_symbol_data_local.dart';
     routerDirectives
   ],
 )
-class NavLargeComponent {
+class NavLargeComponent implements OnDestroy {
   NavLargeComponent(this.languageService, this.productCategoryService,
-      this.skinTypeService, this.router, this.msg)
-      : languageMenuModel = new MenuModel([
-          new MenuItemGroup(languageService.data.values
-              .map((lang) => new MenuItem(lang.name, action: () => _setLocale(lang.id)))
-              .toList(growable: false))
-        ], tooltipText: msg.language());
-        
-  static void _setLocale(String iso) async {    
+      this.skinTypeService, this.router, this.msg) {
+    languageMenuModel = new MenuModel([
+      new MenuItemGroup(languageService.data.values
+          .map((lang) =>
+              new MenuItem(lang.name, action: () => _setLocale(lang.id)))
+          .toList(growable: false))
+    ], tooltipText: msg.language());
+  }
+
+  @override
+  void ngOnDestroy() {
+    _localeChangeController.close();
+  }
+
+  void _setLocale(String iso) async {
     Intl.defaultLocale = iso;
     await initializeMessages(iso);
     await initializeDateFormatting(iso);
+    languageService.reset();
+    languageMenuModel = new MenuModel([
+      new MenuItemGroup(languageService.data.values
+          .map((lang) =>
+              new MenuItem(lang.name, action: () => _setLocale(lang.id)))
+          .toList(growable: false))
+    ], tooltipText: msg.language());
+
+    skinTypeService.reset();
+    _localeChangeController.add(iso);
   }
 
   bool get skinTypesOpen =>
@@ -39,12 +57,19 @@ class NavLargeComponent {
   bool get productCategoriesOpen =>
       router.current?.path?.startsWith(msg.product_categories_url()) == true;
 
+  String get locale => Intl.shortLocale(Intl.getCurrentLocale());
+
   final LanguageService languageService;
   final ProductCategoryService productCategoryService;
   final SkinTypeService skinTypeService;
   final MessagesService msg;
   final Router router;
 
-  final MenuModel<MenuItem> languageMenuModel;
-  String get locale => Intl.shortLocale(Intl.getCurrentLocale());
+  final StreamController<String> _localeChangeController =
+      new StreamController();
+
+  MenuModel<MenuItem> languageMenuModel;
+
+  @Output('localeChange')
+  Stream<String> get onLocaleChange => _localeChangeController.stream;
 }

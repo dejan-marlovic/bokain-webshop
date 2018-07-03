@@ -59,58 +59,6 @@ import 'route_paths.dart' as route_paths;
     ],
     pipes: const [])
 class AppComponent {
-  final ProductCategoryService productCategoryService;
-
-  final ProductService productService;
-
-  final UserService userService;
-  final MessagesService msg;
-  final List<RouteDefinition> routes = [
-    new RouteDefinition(
-        routePath: route_paths.frontpage,
-        component: frontpage_comp.FrontpageComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.skinConsultation,
-        component: consultation_comp.SkinConsultationComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.skinTypeFilter,
-        component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.productCategoryFilter,
-        component: product_category_filter_comp
-            .ProductCategoryFilterComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.profile,
-        component: profile_comp.ProfileComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.aboutUs,
-        component: about_us_comp.AboutUsComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.cart,
-        component: cart_comp.CartComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.customerSupport,
-        component: customer_support_comp.CustomerSupportComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.faq, component: faq_comp.FaqComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.partners,
-        component: partners_comp.PartnersComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.skinGuide,
-        component: skin_guide_comp.SkinGuideComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.standardTerms,
-        component: standard_terms_comp.StandardTermsComponentNgFactory),
-    new RouteDefinition(
-        routePath: route_paths.skinTest,
-        component: skin_test_comp.SkinTestComponentNgFactory),
-
-    // Redirect everything else to frontpage
-    new RouteDefinition.redirect(
-        path: '.+', redirectTo: route_paths.frontpage.toUrl()),
-  ];
-  bool _loaded = false;
   AppComponent(this.productCategoryService, this.productService,
       this.userService, this.msg) {
     userService
@@ -118,7 +66,57 @@ class AppComponent {
         .then(_loadResources);
   }
 
-  bool get loaded => _loaded;
+  void onLocaleChange(String locale) {
+    routes = _setupRoutes();
+    print('routes');
+  }
+
+  List<RouteDefinition> _setupRoutes() => [
+        RouteDefinition(
+            routePath: route_paths.frontpage,
+            component: frontpage_comp.FrontpageComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.skinConsultation,
+            component: consultation_comp.SkinConsultationComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.skinTypeFilter,
+            component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.productCategoryFilter,
+            component: product_category_filter_comp
+                .ProductCategoryFilterComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.profile,
+            component: profile_comp.ProfileComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.aboutUs,
+            component: about_us_comp.AboutUsComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.cart,
+            component: cart_comp.CartComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.customerSupport,
+            component: customer_support_comp.CustomerSupportComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.faq,
+            component: faq_comp.FaqComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.partners,
+            component: partners_comp.PartnersComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.skinGuide,
+            component: skin_guide_comp.SkinGuideComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.standardTerms,
+            component: standard_terms_comp.StandardTermsComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.skinTest,
+            component: skin_test_comp.SkinTestComponentNgFactory),
+
+        // Redirect everything else to frontpage
+        RouteDefinition.redirect(
+            path: '.+', redirectTo: route_paths.frontpage.toUrl())
+      ];
 
   void _loadResources(String token) async {
     await productCategoryService.fetchQuery(
@@ -126,6 +124,18 @@ class AppComponent {
     await productService.fetchQuery(productService.collection
         .where('status', '==', 'active')
         .orderBy('score', 'desc'));
+
+    routes = _setupRoutes();
     _loaded = true;
   }
+
+  bool get loaded => _loaded;
+
+  final ProductCategoryService productCategoryService;
+  final ProductService productService;
+  final UserService userService;
+  final MessagesService msg;
+
+  List<RouteDefinition> routes;
+  bool _loaded = false;
 }
