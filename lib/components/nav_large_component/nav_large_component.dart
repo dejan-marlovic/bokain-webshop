@@ -27,7 +27,7 @@ class NavLargeComponent implements OnDestroy {
           .map((lang) =>
               new MenuItem(lang.name, action: () => _setLocale(lang.id)))
           .toList(growable: false))
-    ], tooltipText: msg.language());
+    ]);
   }
 
   @override
