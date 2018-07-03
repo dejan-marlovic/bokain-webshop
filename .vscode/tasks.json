@@ -4,23 +4,11 @@
         {
             "label": "webdev serve",
             "type": "shell",
-            "command": "pub run build_runner serve",
+            "command": "webdev serve",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
-            "label": "pub get",
-            "type": "shell",
-            "command": "pub get",
-            "problemMatcher": []
-        },
-        {
-            "label": "pub upgrade",
-            "type": "shell",
-            "command": "pub upgrade",
-            "problemMatcher": []
-        }
+        }        
     ]
 }
