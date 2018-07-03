@@ -10,7 +10,8 @@ import 'package:fo_components/fo_components.dart';
     templateUrl: 'login_component.html',
     styleUrls: const ['login_component.css'],
     directives: const [FoModalComponent, formDirectives, materialDirectives],
-    providers: const [FORM_PROVIDERS])
+    providers: const [FORM_PROVIDERS],
+    pipes: const [NamePipe])
 class LoginComponent {
   LoginComponent(this.customerService, this.msg);
 
@@ -18,6 +19,7 @@ class LoginComponent {
     print(email);
     try {
       await customerService.login(email, password);
+      // ignore: avoid_catches_without_on_clauses
     } catch (e) {
       errorMessage = e.toString();
     }

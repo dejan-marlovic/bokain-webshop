@@ -1,4 +1,4 @@
-<fo-modal [title]="msg.login()"
+<fo-modal [title]="msg.login() | name"
           [showCloseButton]="false"
           [smallPadding]="false"
           [visible]="true"
@@ -13,7 +13,8 @@
     </div>
     <div class="row">
         <div class="col">
-            <material-input [label]="msg.password()"
+            <material-input type="password"
+                            [label]="msg.password()"
                             floatingLabel
                             [maxCount]="64"
                             [(ngModel)]="password"></material-input>
