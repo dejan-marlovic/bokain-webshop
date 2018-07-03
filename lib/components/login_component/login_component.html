@@ -1,0 +1,32 @@
+<fo-modal [title]="msg.login()"
+          [showCloseButton]="false"
+          [smallPadding]="false"
+          [visible]="true"
+          [error]="errorMessage">
+    <div class="row">
+        <div class="col">
+            <material-input [label]="msg.email()"
+                            floatingLabel
+                            [maxCount]="128"
+                            [(ngModel)]="email"></material-input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <material-input [label]="msg.password()"
+                            floatingLabel
+                            [maxCount]="64"
+                            [(ngModel)]="password"></material-input>
+        </div>
+    </div>
+    <div footer>
+        <div class="row">
+            <div class="col text-right">
+                <material-button raised
+                                 (trigger)="onLogin()">
+                    {{msg.login()}}
+                </material-button>
+            </div>
+        </div>
+    </div>
+</fo-modal>

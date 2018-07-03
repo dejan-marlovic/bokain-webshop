@@ -1,40 +1,42 @@
+<bo-login *ngIf="!loggedIn">
+</bo-login>
+
 <div *ngIf="loggedIn">
     <div class="row">
         <div class="col">
             <fo-tab-panel>
-                <fo-tab
-                        [label]="msg.details()">
-                        <div class="row">
-                            <div class="col">
-                                mama
-                            </div>
+                <fo-tab [label]="msg.details()">
+                    <div class="row">
+                        <div class="col">
+                            UPPGIFTER HÄR
                         </div>
+                    </div>
                 </fo-tab>
                 <fo-tab [label]="msg.chat()">
                     <div class="row">
                         <div class="col">
-                            papa
+                            KUNDENS CHATT HÄR
                         </div>
                     </div>
                 </fo-tab>
                 <fo-tab [label]="msg.product(2)">
                     <div class="row">
                         <div class="col">
-
+                            FAVORITPRODUKTER HÄR
                         </div>
                     </div>
                 </fo-tab>
                 <fo-tab [label]="msg.service(2)">
                     <div class="row">
                         <div class="col">
-
+                            REKOMMENDERADE TJÄNSTER HÄR
                         </div>
                     </div>
                 </fo-tab>
                 <fo-tab [label]="msg.product_routine(2)">
                     <div class="row">
                         <div class="col">
-
+                            PRODUKTRUTINER HÄR
                         </div>
                     </div>
                 </fo-tab>

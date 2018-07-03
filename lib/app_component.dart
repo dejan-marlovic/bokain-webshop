@@ -1,10 +1,8 @@
-import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import 'package:intl/intl.dart';
 
 import 'components/about_us_component/about_us_component.template.dart'
     as about_us_comp;
@@ -46,29 +44,29 @@ import 'route_paths.dart' as route_paths;
       routerDirectives
     ],
     providers: const [
+      CustomerLogService,
       LanguageService,
       materialProviders,
       MessagesService,
       SkinTypeService,
       ProductCategoryService,
-      ProductService,
-      UserLogService,
-      UserService,
+      ProductService,      
+      CustomerService,
       routerProvidersHash,
       foProviders
     ],
     pipes: const [])
 class AppComponent {
   AppComponent(this.productCategoryService, this.productService,
-      this.userService, this.msg) {
-    userService
-        .login('patrick.minogue@gmail.com', 'lok13rum')
+      this.customerService, this.router, this.msg) {
+    
+    customerService
+        .login('patrick.minogue@minoch.com', 'lok13rum')
         .then(_loadResources);
   }
 
-  void onLocaleChange(String locale) {
-    routes = _setupRoutes();
-    print('routes');
+  void onLocaleChange(String locale) {    
+    routes = _setupRoutes();        
   }
 
   List<RouteDefinition> _setupRoutes() => [
@@ -119,6 +117,8 @@ class AppComponent {
       ];
 
   void _loadResources(String token) async {
+
+
     await productCategoryService.fetchQuery(
         productCategoryService.collection.where('status', '==', 'active'));
     await productService.fetchQuery(productService.collection
@@ -133,7 +133,8 @@ class AppComponent {
 
   final ProductCategoryService productCategoryService;
   final ProductService productService;
-  final UserService userService;
+  final CustomerService customerService;
+  final Router router;
   final MessagesService msg;
 
   List<RouteDefinition> routes;
