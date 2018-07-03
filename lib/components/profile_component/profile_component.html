@@ -1,4 +1,44 @@
 <div *ngIf="loggedIn">
-    <p>PROFILE COMPONENT</p>
+    <div class="row">
+        <div class="col">
+            <fo-tab-panel>
+                <fo-tab
+                        [label]="msg.details()">
+                        <div class="row">
+                            <div class="col">
+                                mama
+                            </div>
+                        </div>
+                </fo-tab>
+                <fo-tab [label]="msg.chat()">
+                    <div class="row">
+                        <div class="col">
+                            papa
+                        </div>
+                    </div>
+                </fo-tab>
+                <fo-tab [label]="msg.product(2)">
+                    <div class="row">
+                        <div class="col">
 
+                        </div>
+                    </div>
+                </fo-tab>
+                <fo-tab [label]="msg.service(2)">
+                    <div class="row">
+                        <div class="col">
+
+                        </div>
+                    </div>
+                </fo-tab>
+                <fo-tab [label]="msg.product_routine(2)">
+                    <div class="row">
+                        <div class="col">
+
+                        </div>
+                    </div>
+                </fo-tab>
+            </fo-tab-panel>
+        </div>
+    </div>
 </div>
