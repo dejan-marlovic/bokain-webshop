@@ -2,10 +2,10 @@ $upperMenuHeight: 150px;
 $lowerMenuHeight: 20px;
 :host {
     .active-route {
-        //border: 1px solid red;
-        text-decoration: underline;
+        color: red;        
     }
     div.menuItem {
+        border: 1px solid black;
         display: flex;
         align-items: center;
         justify-content: center;
