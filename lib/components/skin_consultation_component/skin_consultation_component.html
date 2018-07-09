@@ -24,20 +24,20 @@
         <div class="row">
           <div class="l3 m0 col"></div>
           <div class="l2 m4 s4 col">
-            <fo-select [label]="msg.year()"
+            <fo-select [label]="msg.year(1)"
                        [sort]="false"
                        [options]="yearOptions"
                        [(selectedId)]="year">
             </fo-select>
           </div>
           <div class="l2 m4 s4 col">
-            <fo-select [label]="msg.month()"
+            <fo-select [label]="msg.month(1)"
                        [sort]="false"
                        [options]="monthOptions"
                        [(selectedId)]="month"></fo-select>
           </div>
           <div class="l2 m4 s4 col">
-            <fo-select [label]="msg.day()"
+            <fo-select [label]="msg.day(1)"
                        [sort]="false"
                        [options]="dayOptions"
                        [(selectedId)]="day"></fo-select>
