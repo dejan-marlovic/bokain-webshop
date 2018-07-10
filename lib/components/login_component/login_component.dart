@@ -8,10 +8,21 @@ import 'package:fo_components/fo_components.dart';
 @Component(
     selector: 'bo-login',
     templateUrl: 'login_component.html',
-    styleUrls: const ['login_component.css'],
-    directives: const [FoModalComponent, formDirectives, materialDirectives],
-    providers: const [FORM_PROVIDERS],
-    pipes: const [NamePipe])
+    styleUrls: const [
+      'login_component.css'
+    ],
+    directives: const [
+      FoModalComponent,
+      formDirectives,
+      MaterialButtonComponent,
+      materialInputDirectives,
+    ],
+    providers: const [
+      FORM_PROVIDERS
+    ],
+    pipes: const [
+      NamePipe
+    ])
 class LoginComponent {
   LoginComponent(this.customerService, this.msg);
 

@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
     selector: 'bo-productbox',
     styleUrls: const ['productbox_component.css'],
     templateUrl: 'productbox_component.html',
-    directives: const [materialDirectives])
+    directives: const [MaterialButtonComponent, MaterialIconComponent])
 class ProductBoxComponent implements OnDestroy {
   ProductBoxComponent();
 

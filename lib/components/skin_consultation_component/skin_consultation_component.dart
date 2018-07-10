@@ -22,10 +22,17 @@ import 'package:intl/intl.dart' show DateFormat;
       ConsultationSectionSymptomsComponent,
       ConsultationSurveyComponent,
       coreDirectives,
+      FoModalComponent,
       formDirectives,
-      FoModalComponent,      
       FoSelectComponent,
-      materialDirectives,
+      FoSocialNumberInputComponent,
+      MaterialButtonComponent,
+      MaterialCheckboxComponent,
+      MaterialExpansionPanel,
+      MaterialExpansionPanelSet,
+      MaterialFabComponent,
+      MaterialIconComponent,
+      materialInputDirectives,
     ],
     providers: const [
       ConsultationService,
@@ -36,33 +43,37 @@ import 'package:intl/intl.dart' show DateFormat;
     ],
     pipes: const [])
 class SkinConsultationComponent {
-  SkinConsultationComponent(CountryService countryService,
-      this.consultationService, this.customerService, this.settingsService, this.msg) : genderOptions = {
-        'male': msg.male(),
-        'female': msg.female()
-      },
-      form = new ControlGroup({
-    'firstname': new Control(
-        '',
-        Validators.compose([
-          FoValidators.required(msg.enter_firstname()),
-          FoValidators.alpha,
-          Validators.maxLength(64)
-        ])),
-    'lastname': new Control(
-        '',
-        Validators.compose([
-          FoValidators.required(msg.enter_lastname()),
-          FoValidators.alpha,
-          Validators.maxLength(64)
-        ])),
-    'email': new Control(
-        '',
-        Validators.compose(
-            [FoValidators.required(msg.enter_email()), FoValidators.email])),
-    'phone': new Control('', Validators.compose([]))
-  }),
-      countryCodeOptions = countryService.data.values
+  SkinConsultationComponent(
+      CountryService countryService,
+      this.consultationService,
+      this.customerService,
+      this.settingsService,
+      this.msg)
+      : genderOptions = {'male': msg.male(), 'female': msg.female()},
+        form = new ControlGroup({
+          'firstname': new Control(
+              '',
+              Validators.compose([
+                FoValidators.required(msg.enter_firstname()),
+                FoValidators.alpha,
+                Validators.maxLength(64)
+              ])),
+          'lastname': new Control(
+              '',
+              Validators.compose([
+                FoValidators.required(msg.enter_lastname()),
+                FoValidators.alpha,
+                Validators.maxLength(64)
+              ])),
+          'email': new Control(
+              '',
+              Validators.compose([
+                FoValidators.required(msg.enter_email()),
+                FoValidators.email
+              ])),
+          'phone': new Control('', Validators.compose([]))
+        }),
+        countryCodeOptions = countryService.data.values
             .map((country) => new FoModel()..id = country.calling_code)
             .toList(growable: false);
 
@@ -73,19 +84,19 @@ class SkinConsultationComponent {
     } else {
       consultation.customer_id = customer.id;
       await customerService.set(customer);
-    }   
+    }
 
     /// Upload images
     for (var index = 0; index < pictures.model.image_uris.length; index++) {
-      if (pictures.model.image_uris[index].isNotEmpty) {        
+      if (pictures.model.image_uris[index].isNotEmpty) {
         consultation.image_uris[index] = await consultationService.uploadImage(
             '${customer.id}_$index', pictures.model.image_uris[index]);
       }
     }
     customer.consultation_id = await consultationService.push(consultation);
-      await customerService
-          .patch(customer.id, {'consultation_id': customer.consultation_id});
-          
+    await customerService
+        .patch(customer.id, {'consultation_id': customer.consultation_id});
+
     step = 5;
   }
 
@@ -98,7 +109,6 @@ class SkinConsultationComponent {
           .nextInt(settings.web_consultant_ids.length - 1);
       customer.user_id = settings.web_consultant_ids[index];
     }
-    customer.social_number ??= ssn.format(customer.birthdate);
     step = 1;
   }
 
@@ -155,6 +165,7 @@ class SkinConsultationComponent {
     step++;
   }
 
+/*
   Date get birthdate =>
       customer.birthdate == null ? null : Date.fromTime(customer.birthdate);
 
@@ -202,7 +213,7 @@ class SkinConsultationComponent {
       new List.generate(12, (i) => new SimpleModel()..id = i + 1..label = (i < 9) ? '0${i+1}' : '${i+1}');
   final List<FoModel> dayOptions =
       new List.generate(32, (i) => new SimpleModel()..id = i + 1..label = (i < 9) ? '0${i+1}' : '${i+1}');
-
+*/
   final List<FoModel> countryCodeOptions;
 
   ControlGroup form;
@@ -215,7 +226,7 @@ class SkinConsultationComponent {
   Customer customer = new Customer()..phone_country = '+46';
   Consultation consultation = new Consultation();
   bool termsAccepted = false;
-  bool errorModalVisible = false;  
+  bool errorModalVisible = false;
   int step = 0;
 
   final Map<String, String> genderOptions;
