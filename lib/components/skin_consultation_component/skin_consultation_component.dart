@@ -41,7 +41,9 @@ import 'package:intl/intl.dart' show DateFormat;
       FORM_PROVIDERS,
       SettingsService,
     ],
-    pipes: const [])
+    pipes: const [
+      NamePipe
+    ])
 class SkinConsultationComponent {
   SkinConsultationComponent(
       CountryService countryService,
@@ -71,20 +73,94 @@ class SkinConsultationComponent {
                 FoValidators.required(msg.enter_email()),
                 FoValidators.email
               ])),
-          'phone': new Control('', Validators.compose([]))
+          'password': new Control(
+              '',
+              Validators.compose([
+                FoValidators.required(msg.enter_password()),
+                Validators.minLength(6),
+                Validators.maxLength(64)
+              ])),
+          'phone': new Control('', Validators.compose([])),
         }),
         countryCodeOptions = countryService.data.values
             .map((country) => new FoModel()..id = country.calling_code)
-            .toList(growable: false);
+            .toList(growable: false) {
+    errorTitle = msg.error_occured();
+    _evaluatedLoginState();
+  }
 
-  Future onCreateConsultation() async {
+  Future<void> _evaluatedLoginState() async {
+    if (FirestoreService.currentFirebaseUser.uid !=
+        FirestoreService.defaultCustomerId) {
+      // Customer is logged in
+      customer = await customerService.fetch(FirestoreService.currentUserId);
+      if (customer.consultation_id == null) {
+        consultation = new Consultation();
+      } else {        
+        consultation =
+            await consultationService.fetch(customer.consultation_id);
+        step = consultation.surveyCompleted ? 7 : 6;
+      }
+    } else {
+      customer = new Customer()
+        ..phone_country = '+46'
+        ..sex = 'male'
+        ..social_number = '198303247491'
+        ..firstname = 'patrick'
+        ..lastname = 'minogue'
+        ..email = 'test@minoch.com';
+      consultation = new Consultation()
+        ..area_back = true
+        ..customer_symptoms = ['dry']
+        ..skin_tone_id = 'neither'
+        ..current_skin_status = 'same_as_usual';
+    }
+  }
+
+  Future<String> _pickRandomWebConsultant() async {
+    /// Pick a random web consultant for the user
+    final settings = await settingsService.fetch('1');
+    if (settings.web_consultant_ids.isNotEmpty) {
+      final index = new Random(new DateTime.now().millisecondsSinceEpoch)
+          .nextInt(settings.web_consultant_ids.length);
+      return settings.web_consultant_ids[index];
+    } else
+      return null;
+  }
+
+  // Attempts to register a new account, or attempts to login using specified details if an account already exists.
+  // Returns the customer id on success, null otherwise
+  Future<String> _registerOrLogin() async {
+    try {
+      await customerService.register(customer, password);
+      return await customerService.login(customer.email, password, requireEmailVerified: false);
+    } on EmailAlreadyRegisteredException {
+      // Customer exists already, attempt to login with specified details
+      return await customerService.login(customer.email, password, requireEmailVerified: true);
+    }
+  }
+
+  Future<void> onCreateConsultation() async {
+    errorText = null;
     if (customer.id == null) {
-      customer.id =
-          consultation.customer_id = await customerService.push(customer);
+      try {
+        consultation.customer_id = await _registerOrLogin();        
+        customer = await customerService.fetch(consultation.customer_id);        
+      } on InvalidPasswordException {
+        errorText = msg.invalid_password();
+        showResetPasswordButton = true;
+        return;
+      }
+      // ignore: avoid_catches_without_on_clauses
+      catch (e) {
+        errorText = e.toString();
+        return;
+      }
     } else {
       consultation.customer_id = customer.id;
-      await customerService.set(customer);
     }
+
+    customer.user_id ??= await _pickRandomWebConsultant();
 
     /// Upload images
     for (var index = 0; index < pictures.model.image_uris.length; index++) {
@@ -93,40 +169,23 @@ class SkinConsultationComponent {
             '${customer.id}_$index', pictures.model.image_uris[index]);
       }
     }
+    print('creating cuonsultation');
+    print('customer_id: ${consultation.customer_id}');
     customer.consultation_id = await consultationService.push(consultation);
+    print('created consultation');
+    print('patching customer');
     await customerService
         .patch(customer.id, {'consultation_id': customer.consultation_id});
+    print('patched customer');
 
     step = 5;
   }
 
-  Future onCreateCustomer() async {
-    final settings = await settingsService.fetch('1');
-
-    /// Pick a random web consultant for the user
-    if (settings.web_consultant_ids.isNotEmpty) {
-      final index = new Random(new DateTime.now().millisecondsSinceEpoch)
-          .nextInt(settings.web_consultant_ids.length - 1);
-      customer.user_id = settings.web_consultant_ids[index];
-    }
-    step = 1;
-  }
-
-  Future onEmailBlur() async {
-    customer
-      ..consultation_id = null
-      ..firstname = null
-      ..lastname = null
-      ..phone = null;
-
-    final customers = await customerService.fetchQuery(
-        customerService.collection.where('email', '==', customer.email));
-    if (customers.isNotEmpty) {
-      customer = customers.first;
-      if (customer.consultation_id != null) {
-        errorModalVisible = true;
-      }
-    }
+  Future<void> onResetPassword() async {
+    await customerService.sendPasswordResetEmail(customer.email);
+    errorText = msg.we_have_sent_password_reset_instructions(customer.email);
+    errorTitle = msg.reset_password();
+    showResetPasswordButton = false;
   }
 
   void onCallMeChange(bool event) {
@@ -150,6 +209,13 @@ class SkinConsultationComponent {
           customer.email,
           Validators.compose(
               [FoValidators.required(msg.enter_email()), FoValidators.email])),
+      'password': new Control(
+          password,
+          Validators.compose([
+            FoValidators.required(msg.enter_password()),
+            Validators.minLength(6),
+            Validators.maxLength(64)
+          ])),
       'phone': consultation.call_me
           ? new Control(
               customer.phone,
@@ -165,55 +231,6 @@ class SkinConsultationComponent {
     step++;
   }
 
-/*
-  Date get birthdate =>
-      customer.birthdate == null ? null : Date.fromTime(customer.birthdate);
-
-  set birthdate(Date date) {
-    customer.birthdate =
-        date == null ? null : new DateTime(date.year, date.month, date.day);
-  }
-
-  int get year => customer.birthdate?.year;
-  int get month => customer.birthdate?.month;
-  int get day => customer.birthdate?.day;
-
-  set year(int value) {
-    if (customer.birthdate == null) {
-      customer.birthdate = new DateTime(value);
-    } else {
-      customer.birthdate =
-          new DateTime(value, customer.birthdate.month, customer.birthdate.day);
-    }
-  }
-
-  set month(int value) {
-    if (customer.birthdate == null) {
-      customer.birthdate =
-          new DateTime(new Date.today().add(years: -20).year, value, 1);
-    } else {
-      customer.birthdate =
-          new DateTime(customer.birthdate.year, value, customer.birthdate.day);
-    }
-  }
-
-  set day(int value) {
-    if (customer.birthdate == null) {
-      customer.birthdate =
-          new DateTime(new Date.today().add(years: -20).year, 1, value);
-    } else {
-      customer.birthdate = new DateTime(
-          customer.birthdate.year, customer.birthdate.month, value);
-    }
-  }
-
-  final List<FoModel> yearOptions = new List.generate(
-      100, (i) => new FoModel()..id = new Date.today().add(years: -i).year);
-  final List<FoModel> monthOptions =
-      new List.generate(12, (i) => new SimpleModel()..id = i + 1..label = (i < 9) ? '0${i+1}' : '${i+1}');
-  final List<FoModel> dayOptions =
-      new List.generate(32, (i) => new SimpleModel()..id = i + 1..label = (i < 9) ? '0${i+1}' : '${i+1}');
-*/
   final List<FoModel> countryCodeOptions;
 
   ControlGroup form;
@@ -223,10 +240,14 @@ class SkinConsultationComponent {
   final MessagesService msg;
   final SettingsService settingsService;
   final DateFormat ssn = new DateFormat("yyyyMMdd'0000'");
-  Customer customer = new Customer()..phone_country = '+46';
-  Consultation consultation = new Consultation();
-  bool termsAccepted = false;
-  bool errorModalVisible = false;
+  Customer customer;
+  Consultation consultation;
+  bool termsAccepted = true;
+  String errorText;
+  String errorTitle;
+
+  String password = '111111';
+  bool showResetPasswordButton = false;
   int step = 0;
 
   final Map<String, String> genderOptions;
