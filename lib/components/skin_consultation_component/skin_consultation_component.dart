@@ -161,6 +161,7 @@ class SkinConsultationComponent {
     }
 
     customer.user_id ??= await _pickRandomWebConsultant();
+    consultation.user_id = customer.user_id;
 
     /// Upload images
     for (var index = 0; index < pictures.model.image_uris.length; index++) {
