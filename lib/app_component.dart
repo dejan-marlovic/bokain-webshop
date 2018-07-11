@@ -45,15 +45,15 @@ import 'route_paths.dart' as route_paths;
     ],
     providers: const [
       CustomerLogService,
+      CustomerService,
+      foProviders,
       LanguageService,
       materialProviders,
       MessagesService,
-      SkinTypeService,
       ProductCategoryService,
       ProductService,      
-      CustomerService,
       routerProvidersHash,
-      foProviders
+      SkinTypeService,
     ],
     pipes: const [])
 class AppComponent {
