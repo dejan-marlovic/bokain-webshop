@@ -33,6 +33,7 @@ import 'package:intl/intl.dart' show DateFormat;
       MaterialFabComponent,
       MaterialIconComponent,
       materialInputDirectives,
+      MaterialSpinnerComponent
     ],
     providers: const [
       ConsultationService,
@@ -90,13 +91,14 @@ class SkinConsultationComponent {
   }
 
   Future<void> _evaluatedLoginState() async {
+    loading = true;
     if (FirestoreService.currentFirebaseUser.uid !=
         FirestoreService.defaultCustomerId) {
       // Customer is logged in
       customer = await customerService.fetch(FirestoreService.currentUserId);
       if (customer.consultation_id == null) {
         consultation = new Consultation();
-      } else {        
+      } else {
         consultation =
             await consultationService.fetch(customer.consultation_id);
         step = consultation.surveyCompleted ? 7 : 6;
@@ -115,6 +117,7 @@ class SkinConsultationComponent {
         ..skin_tone_id = 'neither'
         ..current_skin_status = 'same_as_usual';
     }
+    loading = false;
   }
 
   Future<String> _pickRandomWebConsultant() async {
@@ -133,10 +136,12 @@ class SkinConsultationComponent {
   Future<String> _registerOrLogin() async {
     try {
       await customerService.register(customer, password);
-      return await customerService.login(customer.email, password, requireEmailVerified: false);
+      return await customerService.login(customer.email, password,
+          requireEmailVerified: false);
     } on EmailAlreadyRegisteredException {
       // Customer exists already, attempt to login with specified details
-      return await customerService.login(customer.email, password, requireEmailVerified: true);
+      return await customerService.login(customer.email, password,
+          requireEmailVerified: true);
     }
   }
 
@@ -144,8 +149,18 @@ class SkinConsultationComponent {
     errorText = null;
     if (customer.id == null) {
       try {
-        consultation.customer_id = await _registerOrLogin();        
-        customer = await customerService.fetch(consultation.customer_id);        
+        consultation.customer_id = await _registerOrLogin();
+        customer = await customerService.fetch(consultation.customer_id);
+        
+        if (customer.consultation_id != null) {          
+          consultation =
+              await consultationService.fetch(customer.consultation_id);
+          if (consultation != null) {
+            // A consultation already exists for this customer
+            step = consultation.surveyCompleted ? 7 : 6;
+            throw new Exception(msg.error_customer_already_has_consultation());            
+          }
+        }
       } on InvalidPasswordException {
         errorText = msg.invalid_password();
         showResetPasswordButton = true;
@@ -169,10 +184,12 @@ class SkinConsultationComponent {
         consultation.image_uris[index] = await consultationService.uploadImage(
             '${customer.id}_$index', pictures.model.image_uris[index]);
       }
-    }    
-    customer.consultation_id = await consultationService.push(consultation);    
-    await customerService
-        .patch(customer.id, {'consultation_id': customer.consultation_id, 'user_id': customer.user_id});    
+    }
+    customer.consultation_id = await consultationService.push(consultation);
+    await customerService.patch(customer.id, {
+      'consultation_id': customer.consultation_id,
+      'user_id': customer.user_id
+    });
 
     step = 5;
   }
@@ -244,6 +261,7 @@ class SkinConsultationComponent {
 
   String password = '111111';
   bool showResetPasswordButton = false;
+  bool loading;
   int step = 0;
 
   final Map<String, String> genderOptions;

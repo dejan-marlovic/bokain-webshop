@@ -1,3 +1,8 @@
+<div class="row margin-top-x-large" *ngIf="loading">
+  <div class="col text-center">
+    <material-spinner></material-spinner>
+  </div>
+</div>
 <div *ngIf="customer != null && consultation != null">
 
   <!-- Regular consultation, show unless the customer has done consultation already -->
@@ -212,17 +217,18 @@
                             (done)="onSurveyDone($event)"></bo-consultation-survey>
   </div>
 
-  <div class="row"
+  <div class="row margin-top-x-large"
        *ngIf="step > 6 && customer != null">
-    <div class="col">
-      <p innerHtml="{{msg.consultation_survey_done_text()}}"></p>
+    <div class="col text-center">
+      <h1 class="margin-top-none">{{msg.thank_you() | name}}!</h1>
+      <p>{{msg.consultation_survey_done_text()}}</p>
     </div>
   </div>
 
-  <fo-modal title="{{msg.thank_you()}}!"
+  <fo-modal title="{{msg.thank_you() | name}}!"
             [whiteHeader]="true"
             [smallPadding]="false"
-            [visible]="step == 5"
+            [visible]="step == 5" 
             (visibleChange)="step = 6">
     <div class="row">
       <div class="col">
