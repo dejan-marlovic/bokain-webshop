@@ -169,15 +169,10 @@ class SkinConsultationComponent {
         consultation.image_uris[index] = await consultationService.uploadImage(
             '${customer.id}_$index', pictures.model.image_uris[index]);
       }
-    }
-    print('creating cuonsultation');
-    print('customer_id: ${consultation.customer_id}');
-    customer.consultation_id = await consultationService.push(consultation);
-    print('created consultation');
-    print('patching customer');
+    }    
+    customer.consultation_id = await consultationService.push(consultation);    
     await customerService
-        .patch(customer.id, {'consultation_id': customer.consultation_id});
-    print('patched customer');
+        .patch(customer.id, {'consultation_id': customer.consultation_id, 'user_id': customer.user_id});    
 
     step = 5;
   }
