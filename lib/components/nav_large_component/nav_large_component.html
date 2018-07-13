@@ -42,7 +42,7 @@
         <div class="menuItem clickable"
              [routerLink]="msg.cart_url()"
              routerLinkActive="active-route">
-            {{msg.cart()}}
+            {{msg.cart()}}<span *ngIf="cartService.productCount > 0">({{cartService.productCount}})</span>
         </div>
     </div>
 </div>

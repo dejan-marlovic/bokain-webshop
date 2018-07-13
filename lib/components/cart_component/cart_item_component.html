@@ -1,0 +1,16 @@
+<p>
+    {{product.phrases[lang].name}}
+    <material-button class="float-right"
+                     clear-size
+                     (trigger)="remove()">
+        <material-icon raised
+                       size="small"
+                       icon="remove"></material-icon>
+    </material-button>
+</p>
+<fo-number-input [min]="1"
+                 [max]="10"
+                 [label]="msg.quantity()"
+                 [ngModel]="count"
+                 (ngModelChange)="countChangeController.add($event)"></fo-number-input>
+<hr />

@@ -93,7 +93,7 @@ class SkinConsultationComponent {
   Future<void> _evaluatedLoginState() async {
     loading = true;
     if (FirestoreService.currentFirebaseUser.uid !=
-        FirestoreService.defaultCustomerId) {
+        FirestoreService.defaultCustomerAuthId) {
       // Customer is logged in
       customer = await customerService.fetch(FirestoreService.currentUserId);
       if (customer.consultation_id == null) {

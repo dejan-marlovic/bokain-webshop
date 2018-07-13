@@ -1,1 +1,32 @@
-<p>CART COMPONENT</p>
+<div class="row">    
+    <div class="m6 col">
+        <!-- Products -->
+        <div class="row"
+             *ngFor="let productId of cartService.productRegistry.keys">
+            <div class="col">
+                <bo-cart-item [product]="productService.get(productId)" [(count)]="cartService.productRegistry[productId]">
+                </bo-cart-item>
+            </div>
+        </div>
+
+        <!-- Discount code -->
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+
+        <!-- Subtotal -->
+        <div class="row">
+            <div class="col">
+                <p>{{msg.subtotal() | name}}: {{subtotal}}</p>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Checkout -->
+    <div class="m6 col">
+
+    </div>
+</div>

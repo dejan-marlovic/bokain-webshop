@@ -11,11 +11,20 @@
                             UPPGIFTER HÄR
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <material-button
+                                    raised
+                                    (trigger)="onLogout()">
+                                    {{msg.logout()}}
+                            </material-button>
+                        </div>
+                    </div>
                 </fo-tab>
                 <fo-tab [label]="msg.chat(1)">
                     <div class="row">
                         <div class="col">
-                            <bo-chat [customerId]="currentUserId" [customerPerspective]="true"></bo-chat>
+                            <bo-customer-chat [customerId]="currentUserId" [customerPerspective]="true"></bo-customer-chat>
                         </div>
                     </div>
                 </fo-tab>

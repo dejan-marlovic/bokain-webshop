@@ -6,6 +6,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../../services/cart_service.dart';
 
 @Component(
   selector: 'bo-nav-large',
@@ -20,8 +21,13 @@ import 'package:intl/date_symbol_data_local.dart';
   ],
 )
 class NavLargeComponent implements OnDestroy {
-  NavLargeComponent(this.languageService, this.productCategoryService,
-      this.skinTypeService, this.router, this.msg) {
+  NavLargeComponent(
+      this.languageService,
+      this.cartService,
+      this.productCategoryService,
+      this.skinTypeService,
+      this.router,
+      this.msg) {
     languageMenuModel = new MenuModel([
       new MenuItemGroup(languageService.data.values
           .map((lang) =>
@@ -59,6 +65,7 @@ class NavLargeComponent implements OnDestroy {
 
   String get locale => Intl.shortLocale(Intl.getCurrentLocale());
 
+  final CartService cartService;
   final LanguageService languageService;
   final ProductCategoryService productCategoryService;
   final SkinTypeService skinTypeService;

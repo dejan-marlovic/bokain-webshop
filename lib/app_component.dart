@@ -31,6 +31,7 @@ import 'components/skin_type_filter_component/skin_type_filter_component.templat
 import 'components/standard_terms_component/standard_terms_component.template.dart'
     as standard_terms_comp;
 import 'route_paths.dart' as route_paths;
+import 'services/cart_service.dart';
 
 @Component(
     selector: 'my-app',
@@ -44,6 +45,7 @@ import 'route_paths.dart' as route_paths;
       routerDirectives
     ],
     providers: const [
+      CartService,
       CustomerLogService,
       CustomerService,
       foProviders,
