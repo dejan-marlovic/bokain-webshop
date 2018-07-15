@@ -1,10 +1,11 @@
-<div class="row">    
+<div class="row">
     <div class="m6 col">
         <!-- Products -->
         <div class="row"
              *ngFor="let productId of cartService.productRegistry.keys">
             <div class="col">
-                <bo-cart-item [product]="productService.get(productId)" [(count)]="cartService.productRegistry[productId]">
+                <bo-cart-item [product]="productService.get(productId)"
+                              [(count)]="cartService.productRegistry[productId]">
                 </bo-cart-item>
             </div>
         </div>
@@ -12,7 +13,9 @@
         <!-- Discount code -->
         <div class="row">
             <div class="col">
-
+                <material-input [label]="msg.discount_code()"
+                                floatingLabel
+                                [(ngModel)]="discountCode"></material-input>
             </div>
         </div>
 
