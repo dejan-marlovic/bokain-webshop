@@ -11,7 +11,7 @@ import '../../services/cart_service.dart';
     templateUrl: 'productbox_component.html',
     directives: const [MaterialButtonComponent, MaterialIconComponent])
 class ProductBoxComponent implements OnDestroy {
-  ProductBoxComponent(this._cartService);
+  ProductBoxComponent(this.cartService);
 
   @override
   void ngOnDestroy() {
@@ -19,7 +19,7 @@ class ProductBoxComponent implements OnDestroy {
   }
 
   void addToCart() {
-    _cartService.add(model.id);
+    cartService.add(model.id);
     addButtonClickController.add(model.id);
   }
 
@@ -34,6 +34,6 @@ class ProductBoxComponent implements OnDestroy {
   final StreamController<String> addButtonClickController =
       new StreamController();
 
-  final CartService _cartService;
+  final CartService cartService;
   
 }
