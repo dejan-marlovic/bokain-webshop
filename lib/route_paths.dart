@@ -9,13 +9,16 @@ import 'package:intl/intl.dart';
 RoutePath get frontpage =>
     RoutePath(path: 'index.html', useAsDefault: true);
 
+RoutePath get confirmation =>
+    RoutePath(path: Intl.message('confirmation', name: 'confirmation'));
+
 RoutePath get productCategoryFilter => RoutePath(
     path:
         "${Intl.message('product-categories', name: 'product_categories_url')}/:id");
 
 RoutePath get skinConsultation => RoutePath(
     path:
-        "${Intl.message('skin-consultation', name: 'skin_consultation_url')}");
+        Intl.message('skin-consultation', name: 'skin_consultation_url'));
 
 RoutePath get skinTypeFilter => RoutePath(
     path: "${Intl.message('skin-types', name: 'skin_types_url')}/:id");
