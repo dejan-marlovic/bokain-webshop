@@ -11,9 +11,12 @@ import 'cart_item_component.dart';
     templateUrl: 'cart_component.html',
     styleUrls: const ['cart_component.css'],
     directives: const [CartItemComponent, formDirectives, materialInputDirectives, NgFor],
+    providers: const [KlarnaCheckoutService],
     pipes: const [NamePipe])
 class CartComponent {
-  CartComponent(this.cartService, this.productService, this.msg);
+  CartComponent(this.cartService, this._checkoutService, this.productService, this.msg) {
+   // _checkoutService.createCheckoutOrder(new CheckoutOrder());
+  }
 
   double get subtotal {
     var output = 0.0;
@@ -29,6 +32,7 @@ class CartComponent {
   String discountCode;
 
   final CartService cartService;
+  final KlarnaCheckoutService _checkoutService;
   final ProductService productService;
   final MessagesService msg;
 }
