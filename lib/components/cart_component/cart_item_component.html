@@ -2,10 +2,12 @@
     {{product.phrases[lang].name}}
     <material-button class="float-right"
                      clear-size
+                     dense
+                     raised
                      (trigger)="remove()">
-        <material-icon raised
-                       size="small"
-                       icon="remove"></material-icon>
+        <material-icon class="color-red"
+                       size="medium"
+                       icon="cancel"></material-icon>
     </material-button>
 </p>
 <fo-number-input [min]="1"
@@ -13,4 +15,6 @@
                  [label]="msg.quantity()"
                  [ngModel]="count"
                  (ngModelChange)="countChangeController.add($event)"></fo-number-input>
-<hr />
+<p class="text-right">
+    {{msg.price() | name}}: {{product.price[cartService.currency]*count}} {{cartService.currency}}
+</p>

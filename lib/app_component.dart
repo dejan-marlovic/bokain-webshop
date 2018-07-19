@@ -55,12 +55,13 @@ import 'services/cart_service.dart';
       ProductCategoryService,
       ProductService,      
       routerProvidersHash,
+      SettingsService,
       SkinTypeService,
     ],
     pipes: const [])
 class AppComponent {
   AppComponent(this.productCategoryService, this.productService,
-      this.customerService, this.router, this.msg) {
+      this.customerService, this._settingsService, this.router, this.msg) {
     
     customerService
         .login('patrick.minogue@minoch.com', 'lok13rum')
@@ -120,6 +121,7 @@ class AppComponent {
 
   void _loadResources(String token) async {
 
+    await _settingsService.fetch('1');
 
     await productCategoryService.fetchQuery(
         productCategoryService.collection.where('status', '==', 'active'));
@@ -136,6 +138,7 @@ class AppComponent {
   final ProductCategoryService productCategoryService;
   final ProductService productService;
   final CustomerService customerService;
+  final SettingsService _settingsService;
   final Router router;
   final MessagesService msg;
 

@@ -11,11 +11,10 @@ html {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-material-input {
-  width: 100% !important;
+material-input {  
+  display: block !important;
 }
 
-/*
-div.col {
-  border: 1px solid black;
-}*/
+.color-red {
+  color: red;
+}

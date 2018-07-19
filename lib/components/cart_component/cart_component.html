@@ -15,14 +15,17 @@
             <div class="col">
                 <material-input [label]="msg.discount_code()"
                                 floatingLabel
-                                [(ngModel)]="discountCode"></material-input>
+                                [(ngModel)]="discountCode"
+                                [displayBottomPanel]="false"></material-input>                                            
+                <material-button raised dense>OK</material-button>
             </div>
         </div>
 
         <!-- Subtotal -->
         <div class="row">
-            <div class="col">
-                <p>{{msg.subtotal() | name}}: {{subtotal}}</p>
+            <div class="col text-right">
+                <p>{{msg.shipping() | name}}: {{settingsService.get('1').shipping[cartService.currency]}} {{cartService.currency}}</p>
+                <p>{{msg.subtotal() | name}}: {{subtotal}} {{cartService.currency}}</p>
             </div>
         </div>
 

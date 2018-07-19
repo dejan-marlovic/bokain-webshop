@@ -20,21 +20,23 @@ import '../../services/cart_service.dart';
   pipes: const [NamePipe],
 )
 class CartItemComponent implements OnDestroy {
-  CartItemComponent(this.cartService, this.msg);
+  CartItemComponent(this.cartService, this.settingsService, this.msg);
 
   void ngOnDestroy() {
     countChangeController.close();
+    
   }
 
   void remove() {
     cartService.productRegistry.remove(product.id);
   }
 
-  String get lang => Intl.shortLocale(Intl.getCurrentLocale());
+  String get lang => Intl.shortLocale(Intl.getCurrentLocale());  
 
   final StreamController<int> countChangeController = new StreamController();
   final CartService cartService;
-  final MessagesService msg;
+  final SettingsService settingsService;
+  final MessagesService msg;  
 
   @Input()
   Product product;

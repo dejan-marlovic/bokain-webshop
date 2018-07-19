@@ -9,13 +9,27 @@ import 'cart_item_component.dart';
 @Component(
     selector: 'bo-cart',
     templateUrl: 'cart_component.html',
-    styleUrls: const ['cart_component.css'],
-    directives: const [CartItemComponent, formDirectives, materialInputDirectives, NgFor],
-    providers: const [KlarnaCheckoutService],
-    pipes: const [NamePipe])
+    styleUrls: const [
+      'cart_component.css'
+    ],
+    directives: const [
+      CartItemComponent,
+      formDirectives,
+      MaterialButtonComponent,
+      MaterialIconComponent,      
+      materialInputDirectives,
+      NgFor
+    ],
+    providers: const [
+      KlarnaCheckoutService
+    ],
+    pipes: const [
+      NamePipe
+    ])
 class CartComponent {
-  CartComponent(this.cartService, this._checkoutService, this.productService, this.msg) {
-   // _checkoutService.createCheckoutOrder(new CheckoutOrder());
+  CartComponent(
+      this.cartService, this._checkoutService, this.productService, this.settingsService, this.msg) {
+    // _checkoutService.createCheckoutOrder(new CheckoutOrder());
   }
 
   double get subtotal {
@@ -25,6 +39,7 @@ class CartComponent {
       final product = productService.get(productId);
       output += product.price[cartService.currency] * count;
     }
+    output += settingsService.get('1').shipping[cartService.currency];
 
     return output;
   }
@@ -34,5 +49,6 @@ class CartComponent {
   final CartService cartService;
   final KlarnaCheckoutService _checkoutService;
   final ProductService productService;
+  final SettingsService settingsService;
   final MessagesService msg;
 }
