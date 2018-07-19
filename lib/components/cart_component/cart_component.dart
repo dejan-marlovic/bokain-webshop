@@ -62,9 +62,9 @@ class CartComponent implements OnActivate, OnDeactivate {
       ..purchase_country = 'SV'
       ..locale = 'sv-SE'
       ..order_amount = (orderAmount * 100).round()
-      ..order_tax_amount = (orderAmount * 20).round()
+      ..order_tax_amount = (orderAmount * 20).round()      
       ..shipping_options = [
-        new ShippingOption()
+        
       ];
     await _checkoutService.createCheckoutOrder(order);
   }
