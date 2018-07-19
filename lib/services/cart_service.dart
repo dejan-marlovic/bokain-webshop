@@ -1,5 +1,5 @@
 import 'package:angular/di.dart';
-import 'package:bokain_models/bokain_models.dart';
+//import 'package:bokain_models/bokain_models.dart';
 
 @Injectable()
 class CartService {

@@ -1,6 +1,7 @@
 <div class="upper">
     <img alt="{{model.name}}"
-         src="{{model.image_uri}}">
+         src="{{model.image_uri}}"
+         (click)="openProduct()">
     <material-button class="add_button"
                      clear-size
                      (trigger)="addToCart()">

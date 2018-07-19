@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
@@ -18,6 +19,8 @@ import 'components/partners_component/partners_component.template.dart'
     as partners_comp;
 import 'components/product_category_filter_component/product_category_filter_component.template.dart'
     as product_category_filter_comp;
+import 'components/product_component/product_component.template.dart'
+    as product_comp;
 import 'components/profile_component/profile_component.template.dart'
     as profile_comp;
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
@@ -49,11 +52,12 @@ import 'services/cart_service.dart';
       CustomerLogService,
       CustomerService,
       foProviders,
+      IngredientService,
       LanguageService,
       materialProviders,
       MessagesService,
       ProductCategoryService,
-      ProductService,      
+      ProductService,
       routerProvidersHash,
       SettingsService,
       SkinTypeService,
@@ -61,14 +65,13 @@ import 'services/cart_service.dart';
     pipes: const [])
 class AppComponent {
   AppComponent(this.productCategoryService, this.productService,
-      this.customerService, this._settingsService, this.router, this.msg) {
-    
+      this.customerService, this._languageService, this._settingsService, this.router, this.msg) {
     customerService
         .login('patrick.minogue@minoch.com', 'lok13rum')
-        .then(_loadResources);
+        .then(_loadResources);  
   }
 
-  void onLocaleChange(String locale) {    
+  void _onLocaleChange(String locale) {
     routes = _setupRoutes();        
   }
 
@@ -113,13 +116,18 @@ class AppComponent {
         RouteDefinition(
             routePath: route_paths.skinTest,
             component: skin_test_comp.SkinTestComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.products,
+            component: product_comp.ProductComponentNgFactory),
 
         // Redirect everything else to frontpage
         RouteDefinition.redirect(
             path: '.+', redirectTo: route_paths.frontpage.toUrl())
       ];
 
-  void _loadResources(String token) async {
+  Future<void> _loadResources(String token) async {    
+
+    await _languageService.setLocale('sv');
 
     await _settingsService.fetch('1');
 
@@ -130,6 +138,8 @@ class AppComponent {
         .orderBy('score', 'desc'));
 
     routes = _setupRoutes();
+    _languageService.localeChanges.listen(_onLocaleChange);
+    
     _loaded = true;
   }
 
@@ -138,6 +148,7 @@ class AppComponent {
   final ProductCategoryService productCategoryService;
   final ProductService productService;
   final CustomerService customerService;
+  final LanguageService _languageService;
   final SettingsService _settingsService;
   final Router router;
   final MessagesService msg;

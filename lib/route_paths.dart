@@ -42,3 +42,5 @@ RoutePath get skinGuide => RoutePath(path: Intl.message('skin-guide', name: 'ski
 RoutePath get skinTest => RoutePath(path: Intl.message('skin-test', name: 'skin_test_url'));
 
 RoutePath get standardTerms => RoutePath(path: Intl.message('standard-terms', name: 'standard_terms_url'));
+
+RoutePath get products => RoutePath(path: "${Intl.message('products', name: 'products_url')}/:url_name");
