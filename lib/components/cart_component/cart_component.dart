@@ -91,10 +91,10 @@ class CartComponent implements OnActivate, OnDeactivate {
         ..family_name = customer.lastname
         ..email = customer.email
         ..phone = customer.phone
-        ..street_address = customer.street
-        ..postal_code = customer.postal_code
-        ..city = customer.city
-        ..country = customer.country;
+        ..street_address = customer.address.street
+        ..postal_code = customer.address.zip
+        ..city = customer.address.city
+        ..country = customer.address.country;
     }
 
     var totalAmount =
