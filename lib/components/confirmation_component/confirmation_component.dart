@@ -23,8 +23,6 @@ class ConfirmationComponent {
     checkoutOrder = await _klarnaCheckoutService.getCheckoutOrder(orderId);
 
     final address = new Address()
-      ..name =
-          '${checkoutOrder.billing_address.given_name} ${checkoutOrder.billing_address.family_name}'
       ..street = checkoutOrder.billing_address.street_address
       ..zip = checkoutOrder.billing_address.postal_code
       ..city = checkoutOrder.billing_address.city
@@ -45,17 +43,14 @@ class ConfirmationComponent {
       ..currency = 'SEK'
       ..subtotal = checkoutOrder.order_amount.toDouble()
       ..state = checkoutOrder.status; // should be 'CHECKOUT_INCOMPLETE'
-
+    
     final customer = new Customer()
       ..email = checkoutOrder.billing_address.email
       ..phone = checkoutOrder.billing_address.phone
       ..phone_country = '+46'
       ..firstname = checkoutOrder.billing_address.given_name
       ..lastname = checkoutOrder.billing_address.family_name
-      ..street = checkoutOrder.billing_address.street_address
-      ..postal_code = checkoutOrder.billing_address.postal_code
-      ..city = checkoutOrder.billing_address.city
-      ..country = checkoutOrder.billing_address.country
+      ..address = address
       ..language = 'sv';
 
     if (checkoutOrder.customer.date_of_birth != null) {
@@ -65,7 +60,7 @@ class ConfirmationComponent {
 
     try {
       order.customer_id = await _customerService.register(customer);
-    } on EmailAlreadyRegisteredException catch (e) {
+    } on EmailAlreadyRegisteredException {
       order.customer_id = checkoutOrder.billing_address.email;
     }
 

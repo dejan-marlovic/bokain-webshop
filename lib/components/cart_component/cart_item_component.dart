@@ -4,7 +4,6 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import 'package:intl/intl.dart';
 import '../../services/cart_service.dart';
 
 @Component(
