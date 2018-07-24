@@ -13,14 +13,14 @@ import 'package:bokain_models/bokain_models.dart';
 class ConfirmationComponent {
   ConfirmationComponent(this._klarnaCheckoutService, this._customerService,
       this._orderservice, this._sanitizationService) {
-    orderId = Uri.base.queryParameters['sid'];
-    if (orderId != null) {
+    klarnaOrderId = Uri.base.queryParameters['sid'];
+    if (klarnaOrderId != null) {
       _registerOrderAndCustomer();
     }
   }
 
   Future<void> _registerOrderAndCustomer() async {
-    checkoutOrder = await _klarnaCheckoutService.getCheckoutOrder(orderId);
+    checkoutOrder = await _klarnaCheckoutService.getCheckoutOrder(klarnaOrderId);
 
     final address = new Address()
       ..street = checkoutOrder.billing_address.street_address
@@ -74,7 +74,7 @@ class ConfirmationComponent {
     klarnaHtml = _sanitizationService.bypassSecurityTrustResourceUrl(snippet);
   }
 
-  String orderId;
+  String klarnaOrderId;
   CheckoutOrder checkoutOrder;
 
   final DomSanitizationService _sanitizationService;
