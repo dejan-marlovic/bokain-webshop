@@ -8,6 +8,7 @@ import 'package:fo_components/fo_components.dart';
 import 'components/about_us_component/about_us_component.template.dart'
     as about_us_comp;
 import 'components/cart_component/cart_component.template.dart' as cart_comp;
+import 'components/confirmation_component/confirmation_component.template.dart' as confirmation_comp;
 import 'components/customer_support_component/customer_support_component.template.dart'
     as customer_support_comp;
 import 'components/faq_component/faq_component.template.dart' as faq_comp;
@@ -32,7 +33,7 @@ import 'components/skin_test_component/skin_test_component.template.dart'
 import 'components/skin_type_filter_component/skin_type_filter_component.template.dart'
     as skin_type_filter_comp;
 import 'components/standard_terms_component/standard_terms_component.template.dart'
-    as standard_terms_comp;
+    as standard_terms_comp; 
 import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
 
@@ -56,23 +57,29 @@ import 'services/cart_service.dart';
       LanguageService,
       materialProviders,
       MessagesService,
+      OrderService,
       ProductCategoryService,
-      ProductService,
-      routerProvidersHash,
+      ProductService,      
       SettingsService,
       SkinTypeService,
     ],
     pipes: const [])
 class AppComponent {
-  AppComponent(this.productCategoryService, this.productService,
-      this.customerService, this._languageService, this._settingsService, this.router, this.msg) {
+  AppComponent(
+      this.productCategoryService,
+      this.productService,
+      this.customerService,
+      this._languageService,
+      this._settingsService,
+      this.router,
+      this.msg) {
     customerService
         .login('patrick.minogue@minoch.com', 'lok13rum')
-        .then(_loadResources);  
+        .then(_loadResources);
   }
 
   void _onLocaleChange(String locale) {
-    routes = _setupRoutes();        
+    routes = _setupRoutes();
   }
 
   List<RouteDefinition> _setupRoutes() => [
@@ -98,6 +105,9 @@ class AppComponent {
         RouteDefinition(
             routePath: route_paths.cart,
             component: cart_comp.CartComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.confirmation,
+            component: confirmation_comp.ConfirmationComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.customerSupport,
             component: customer_support_comp.CustomerSupportComponentNgFactory),
@@ -125,8 +135,7 @@ class AppComponent {
             path: '.+', redirectTo: route_paths.frontpage.toUrl())
       ];
 
-  Future<void> _loadResources(String token) async {    
-
+  Future<void> _loadResources(String token) async {
     await _languageService.setLocale('sv');
 
     await _settingsService.fetch('1');
@@ -139,7 +148,7 @@ class AppComponent {
 
     routes = _setupRoutes();
     _languageService.localeChanges.listen(_onLocaleChange);
-    
+
     _loaded = true;
   }
 

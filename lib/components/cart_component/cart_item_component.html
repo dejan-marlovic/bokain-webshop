@@ -1,5 +1,5 @@
 <p>
-    {{product.phrases[lang].name}}
+    {{product.phrases[languageService.currentShortLocale].name}}
     <material-button class="float-right"
                      clear-size
                      dense
@@ -13,8 +13,8 @@
 <fo-number-input [min]="1"
                  [max]="10"
                  [label]="msg.quantity()"
-                 [ngModel]="count"
-                 (ngModelChange)="countChangeController.add($event)"></fo-number-input>
+                 [ngModel]="cartService.productRegistry[product.id]"
+                 (ngModelChange)="onCountChange($event)"></fo-number-input>
 <p class="text-right">
-    {{msg.price() | name}}: {{product.price[cartService.currency]*count}} {{cartService.currency}}
+    {{msg.price() | name}}: {{product.price[cartService.currency]*cartService.productRegistry[product.id]}} {{cartService.currency}}
 </p>

@@ -25,6 +25,8 @@ class CartService {
   // Key: Product id Value: number of products
   final Map<String, int> productRegistry = {};
 
+  bool shipping = true;
+
   final String currency = 'sek';
 }
 

@@ -1,7 +1,12 @@
 import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:firebase/firebase.dart' as fb;
 
 import 'package:bokain_webshop/app_component.template.dart' as ng;
+import 'main.template.dart' as self;
+
+@GenerateInjector(routerProviders)
+final InjectorFactory injector = self.injector$Injector;
 
 void main() {
   fb.initializeApp(
@@ -10,5 +15,7 @@ void main() {
       databaseURL: 'https://bokain-admin.firebaseio.com',
       storageBucket: 'bokain-admin.appspot.com',
       projectId: 'bokain-admin');
-  runApp(ng.AppComponentNgFactory);
+
+      
+  runApp(ng.AppComponentNgFactory, createInjector: injector);
 }
