@@ -24,6 +24,9 @@ class ConfirmationComponent {
 
     final address = new Address()
       ..street = checkoutOrder.billing_address.street_address
+      ..street2 = checkoutOrder.billing_address.street_address2 == null
+          ? ''
+          : checkoutOrder.billing_address.street_address2
       ..zip = checkoutOrder.billing_address.postal_code
       ..city = checkoutOrder.billing_address.city
       ..country = checkoutOrder.billing_address.country;
@@ -43,7 +46,7 @@ class ConfirmationComponent {
       ..currency = 'SEK'
       ..subtotal = checkoutOrder.order_amount.toDouble()
       ..state = checkoutOrder.status; // should be 'CHECKOUT_INCOMPLETE'
-    
+
     final customer = new Customer()
       ..email = checkoutOrder.billing_address.email
       ..phone = checkoutOrder.billing_address.phone
