@@ -40,7 +40,7 @@ class ConfirmationComponent {
     }
 
     final order = new Order()
-      ..id = checkoutOrder.order_id
+      ..klarna_reference = checkoutOrder.order_id
       ..address = address
       ..product_ids = productIds
       ..currency = 'SEK'
@@ -67,7 +67,7 @@ class ConfirmationComponent {
       order.customer_id = checkoutOrder.billing_address.email;
     }
 
-    await _orderservice.set(order);
+    await _orderservice.push(order);
 
     final snippet =
         'data:text/html;charset=utf-8,${Uri.encodeFull(checkoutOrder.html_snippet)}';
