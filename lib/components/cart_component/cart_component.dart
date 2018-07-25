@@ -184,7 +184,7 @@ class CartComponent implements OnActivate, OnDeactivate {
     order.merchant_urls
       ..checkout = '$webshopUrl/${msg.cart_url()}?sid=${order.order_id}'
       ..confirmation = '$webshopUrl/confirmation?sid=${order.order_id}'
-      ..push = '$functionsUrl/finalizeKlarnaCheckoutOrder?sid=${order.order_id}'
+      ..push = '$functionsUrl/finalizeKlarnaCheckoutOrder?sid=${order.order_id}&push=1'
       ..terms = '$webshopUrl/${msg.standard_terms_url()}';
     order = await _checkoutService.updateCheckoutOrder(order);
 

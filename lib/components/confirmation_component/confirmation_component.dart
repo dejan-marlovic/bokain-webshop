@@ -23,7 +23,8 @@ class ConfirmationComponent {
     checkoutOrder =
         await _klarnaCheckoutService.getCheckoutOrder(klarnaOrderId);
     
-    await _klarnaCheckoutService.finalizeCheckoutOrder(klarnaOrderId);
+    final data = await _klarnaCheckoutService.finalizeCheckoutOrder(klarnaOrderId);
+    print(data);
 
     final snippet =
         'data:text/html;charset=utf-8,${Uri.encodeFull(checkoutOrder.html_snippet)}';
