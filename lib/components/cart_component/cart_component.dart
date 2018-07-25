@@ -62,7 +62,9 @@ class CartComponent implements OnActivate, OnDeactivate {
   Future<void> updateKlarnaCheckout() async {
     klarnaHtml = null;
     
-    final url = settingsService.get('1').webshop_url;
+    final webshopUrl = settingsService.get('1').webshop_url;
+    final functionsUrl = settingsService.get('1').functions_url;
+    
 
     KlarnaAddress billingAddress;
     Customer customer;
@@ -117,7 +119,7 @@ class CartComponent implements OnActivate, OnDeactivate {
         ..tax_rate = 2000
         ..total_discount_amount = 0
         ..product_url =
-            '$url/products${product.phrases[languageService.currentShortLocale].url_name}'
+            '$webshopUrl/products${product.phrases[languageService.currentShortLocale].url_name}'
         ..image_url = product.image_uri;
 
       orderLine
@@ -131,13 +133,11 @@ class CartComponent implements OnActivate, OnDeactivate {
       orderLines.add(orderLine);
     }
 
-    // TODO: set proper urls
-
     final merchantUrls = new MerchantUrls()
-      ..checkout = '$url/${msg.cart_url()}'
-      ..confirmation = '$url/confirmation'
-      ..push = '$url/push'
-      ..terms = '$url/${msg.standard_terms_url()}';
+      ..checkout = '$webshopUrl/${msg.cart_url()}'
+      ..confirmation = '$webshopUrl/confirmation'
+      ..push = '$functionsUrl/finalizeKlarnaCheckoutOrder'
+      ..terms = '$webshopUrl/${msg.standard_terms_url()}';
 
     final checkboxOptions = new CheckboxOptions()
       ..checked = false
@@ -182,10 +182,10 @@ class CartComponent implements OnActivate, OnDeactivate {
       order = await _checkoutService.createCheckoutOrder(order);
     }
     order.merchant_urls
-      ..checkout = '$url/${msg.cart_url()}?sid=${order.order_id}'
-      ..confirmation = '$url/confirmation?sid=${order.order_id}'
-      ..push = '$url/push?checkout_uri=${order.order_id}'
-      ..terms = '$url/${msg.standard_terms_url()}';
+      ..checkout = '$webshopUrl/${msg.cart_url()}?sid=${order.order_id}'
+      ..confirmation = '$webshopUrl/confirmation?sid=${order.order_id}'
+      ..push = '$functionsUrl/finalizeKlarnaCheckoutOrder?sid=${order.order_id}'
+      ..terms = '$webshopUrl/${msg.standard_terms_url()}';
     order = await _checkoutService.updateCheckoutOrder(order);
 
     final snippet =
