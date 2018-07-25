@@ -61,7 +61,8 @@ class CartComponent implements OnActivate, OnDeactivate {
 
   Future<void> updateKlarnaCheckout() async {
     klarnaHtml = null;
-    final url = 'https://bokain-webshop-e5b4f.firebaseapp.com';
+    
+    final url = settingsService.get('1').webshop_url;
 
     KlarnaAddress billingAddress;
     Customer customer;
