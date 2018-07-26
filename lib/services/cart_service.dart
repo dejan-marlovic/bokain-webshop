@@ -1,5 +1,5 @@
 import 'package:angular/di.dart';
-//import 'package:bokain_models/bokain_models.dart';
+import 'package:bokain_models/bokain_models.dart';
 
 @Injectable()
 class CartService {
@@ -26,7 +26,7 @@ class CartService {
   final Map<String, int> productRegistry = {};
 
   bool shipping = true;
-
-  final String currency = 'sek';
+  CheckoutOrder klarnaOrder;
+  final String currency = 'SEK';
 }
 

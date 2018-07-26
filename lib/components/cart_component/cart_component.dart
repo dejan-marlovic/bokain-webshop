@@ -52,7 +52,7 @@ class CartComponent implements OnActivate, OnDeactivate {
 
   /// Evaluates which (if any) checkout to display, Klarna or Braintree
   Future<void> _evaluateCheckout(String locale) async {
-    if (locale == 'sv') {
+    if (locale == 'SV') {
       await updateKlarnaCheckout();
     }
 
@@ -61,10 +61,9 @@ class CartComponent implements OnActivate, OnDeactivate {
 
   Future<void> updateKlarnaCheckout() async {
     klarnaHtml = null;
-    
+
     final webshopUrl = settingsService.get('1').webshop_url;
     final functionsUrl = settingsService.get('1').functions_url;
-    
 
     KlarnaAddress billingAddress;
     Customer customer;
@@ -86,6 +85,7 @@ class CartComponent implements OnActivate, OnDeactivate {
         ..street_address = 'Stårgatan 1'
         ..postal_code = '12345'
         ..city = 'Ankeborg'
+        ..country = 'SE'
         ..phone = '+46765260000'
         ..email = 'test@minoch.com';
     } else {
@@ -159,44 +159,45 @@ class CartComponent implements OnActivate, OnDeactivate {
       shipping = new ShippingOption.free();
     }
 
-    order = new CheckoutOrder()
-      ..order_id = order?.order_id
-      ..purchase_currency = 'sek'
-      ..purchase_country = 'SV'
-      ..locale = 'sv-SE'
-      ..billing_address = billingAddress
-      ..order_amount = totalAmount.round()
-      ..order_tax_amount = totalTaxAmount.round()
-      ..order_lines = orderLines
-      ..customer = new KlarnaCustomer()
-      ..merchant_urls = merchantUrls
-      ..merchant_reference1 = ''
-      ..merchant_reference2 = ''
-      ..merchant_data = ''
-      ..shipping_countries = ['sv']
-      ..options = checkoutOptions
-      ..shipping_options = [shipping]
-      ..gui = new Gui();
+    cartService.klarnaOrder ??=
+        await _checkoutService.createCheckoutOrder(new CheckoutOrder()
+          ..order_id = null
+          ..purchase_currency = 'SEK'
+          ..purchase_country = 'SE'
+          ..locale = 'sv-SE'
+          ..billing_address = billingAddress
+          ..order_amount = totalAmount.round()
+          ..order_tax_amount = totalTaxAmount.round()
+          ..order_lines = orderLines
+          ..customer = new KlarnaCustomer()
+          ..merchant_urls = merchantUrls
+          ..merchant_reference1 = ''
+          ..merchant_reference2 = ''
+          ..merchant_data = ''
+          ..shipping_countries = ['SE']
+          ..options = checkoutOptions
+          ..shipping_options = [shipping]
+          ..gui = new Gui());
 
-    if (order.order_id == null) {
-      order = await _checkoutService.createCheckoutOrder(order);
-    }
-    order.merchant_urls
-      ..checkout = '$webshopUrl/${msg.cart_url()}?sid=${order.order_id}'
-      ..confirmation = '$webshopUrl/confirmation?sid=${order.order_id}'
-      ..push = '$functionsUrl/finalizeKlarnaCheckoutOrder?sid=${order.order_id}&push=1'
+    cartService.klarnaOrder.merchant_urls
+      ..checkout =
+          '$webshopUrl/${msg.cart_url()}?sid=${cartService.klarnaOrder.order_id}'
+      ..confirmation =
+          '$webshopUrl/confirmation?sid=${cartService.klarnaOrder.order_id}'
+      ..push =
+          '$functionsUrl/finalizeKlarnaCheckoutOrder?sid=${cartService.klarnaOrder.order_id}&push=1'
       ..terms = '$webshopUrl/${msg.standard_terms_url()}';
-    order = await _checkoutService.updateCheckoutOrder(order);
+    cartService.klarnaOrder =
+        await _checkoutService.updateCheckoutOrder(cartService.klarnaOrder);
 
     final snippet =
-        'data:text/html;charset=utf-8,${Uri.encodeFull(order.html_snippet)}';
+        'data:text/html;charset=utf-8,${Uri.encodeFull(cartService.klarnaOrder.html_snippet)}';
 
     klarnaHtml = _sanitizationService.bypassSecurityTrustResourceUrl(snippet);
     changeDetectorRef.markForCheck();
   }
 
   SafeResourceUrl klarnaHtml;
-  CheckoutOrder order;
   String discountCode;
   StreamSubscription<String> localeChangeSubscription;
   final DomSanitizationService _sanitizationService;

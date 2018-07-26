@@ -66,6 +66,7 @@ import 'services/cart_service.dart';
     pipes: const [])
 class AppComponent {
   AppComponent(
+      this._cartService,
       this.productCategoryService,
       this.productService,
       this.customerService,
@@ -79,7 +80,8 @@ class AppComponent {
   }
 
   void _onLocaleChange(String locale) {
-    routes = _setupRoutes();
+    _cartService.klarnaOrder = null; 
+    routes = _setupRoutes();    
   }
 
   List<RouteDefinition> _setupRoutes() => [
@@ -136,7 +138,7 @@ class AppComponent {
       ];
 
   Future<void> _loadResources(String token) async {
-    await _languageService.setLocale('sv');
+    await _languageService.setLocale('SV');
 
     await _settingsService.fetch('1');
 
@@ -154,6 +156,7 @@ class AppComponent {
 
   bool get loaded => _loaded;
 
+  final CartService _cartService;
   final ProductCategoryService productCategoryService;
   final ProductService productService;
   final CustomerService customerService;
