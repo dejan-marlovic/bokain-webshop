@@ -1,37 +1,56 @@
-$upperMenuHeight: 70px;
-$lowerMenuHeight: 20px;
+@import 'package:angular_components/material_input/mixins';
+@import 'package:angular_components/material_menu/mixins';
 
+@import '../../colors';
+$upperMenuHeight: 50px;
+$lowerMenuHeight: 100px;
 :host {
-    .active-route {
-        //text-decoration: underline;
-        color: red;
+    @include dropdown-menu-nounderline;
+    @include material-input-theme(white);
+    @include input-label-color(white);
+
+    .col {
+        padding-top: 0;
+        padding-bottom: 0;
     }
-    div.menuItem {
+    .active-route {
+        //color: red;
+    }
+    div.flexAligner {        
         display: flex;
         align-items: center;
-        justify-content: center;
-        text-align: center;
-        border: 1px solid black;
-
-        material-input {
-            text-align: left;
-        }
+        justify-content: space-evenly;
     }
     div.menuUpper {
-        div.menuItem {
+        background-color: $colorBlue;        
+        .flexAligner {
             height: $upperMenuHeight;
+        }
+        div.menuItem {
+            color: white;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             img {
                 display: inline-block;
                 width: auto;
-                height: 100%;
-            }
+                margin-top: 5px;
+                height: 20px;
+            } 
         }
     }
     div.menuLower {
-        div.menuItem {
+        background-color: $colorGrayXLight;
+        color: $colorGrayXDark;
+        .flexAligner {
             height: $lowerMenuHeight;
-        }
+            justify-content: center;        
+            .menuItem {
+                margin: 0 1rem;
+            }
+        }        
     }
+    /*
     div.menuLowerSub {
         padding: 0.3rem 0;
         border-top: 1px solid black;
@@ -39,15 +58,5 @@ $lowerMenuHeight: 20px;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-    }
-    div.menuLowerSub.filterBySkinType {
-        div.menuItem {
-            
-        }
-    }
-    div.menuLowerSub.filterByProductCategory {
-        div.menuItem {
-            
-        }
-    }
+    }*/
 }

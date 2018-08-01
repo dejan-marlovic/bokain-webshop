@@ -5,6 +5,11 @@
 
 html {
   overflow-y: scroll;
+  margin: 0;
+
+  body {
+      margin: 0;
+  }
 }
 
 * {

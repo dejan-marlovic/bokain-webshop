@@ -50,6 +50,7 @@ import 'services/cart_service.dart';
     ],
     providers: const [
       CartService,
+      CountryService,
       CustomerLogService,
       CustomerService,
       foProviders,

@@ -1,3 +1,8 @@
 $colorDarkBlue:#007095;
 $colorBlue:#348bc0;
-$colorGray:#999;
+
+$colorGray:#888;
+$colorGrayXDark: darken($colorGray, 44%);
+$colorGrayDark: darken($colorGray, 22%);
+$colorGrayLight: lighten($colorGray, 22%);
+$colorGrayXLight: lighten($colorGray, 44%); 
