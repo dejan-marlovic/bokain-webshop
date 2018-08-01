@@ -17,7 +17,7 @@ class ProductCategoryFilterComponent implements OnActivate {
   @override
   void onActivate(RouterState previous, RouterState current) {
     if (current.parameters['id'] != null) {      
-      final lang = Intl.shortLocale(Intl.getCurrentLocale());      
+      final lang = Intl.shortLocale(Intl.getCurrentLocale()).toUpperCase();      
       final category = _productCategoryService.cachedModels.values.firstWhere(
           (category) =>
               category.phrases[lang].url_name == current.parameters['id'],

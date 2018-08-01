@@ -40,7 +40,7 @@ class ProductComponent implements OnActivate {
 
   bool _match(Product product, String url_name) {
     for (final lang in languageService.data.keys) {
-      if (product?.phrases[lang]?.url_name == url_name) return true;
+      if (product?.phrases[lang.toUpperCase()]?.url_name == url_name) return true;
     }
     return false;
   }

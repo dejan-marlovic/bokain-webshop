@@ -44,7 +44,7 @@ class NavLargeComponent {
           .map((lang) =>
               new MenuItem(lang.name, action: () => _setLocale(lang.id)))
           .toList(growable: false))
-    ], tooltipText: msg.language());
+    ], tooltipText: msg.language());    
   }
 
   bool get skinTypesOpen =>
@@ -53,7 +53,7 @@ class NavLargeComponent {
   bool get productCategoriesOpen =>
       router.current?.path?.startsWith(msg.product_categories_url()) == true;
 
-  String get locale => Intl.shortLocale(Intl.getCurrentLocale());
+//  String get locale => Intl.shortLocale(Intl.getCurrentLocale()).toUpperCase();
 
   final CartService cartService;
   final LanguageService languageService;

@@ -28,7 +28,7 @@ class ProductBoxComponent implements OnDestroy {
     router.navigate('products/${model.phrases[lang].url_name}');
   }
 
-  String get lang => Intl.shortLocale(Intl.getCurrentLocale());
+  String get lang => Intl.shortLocale(Intl.getCurrentLocale()).toUpperCase();
 
   @Input('model')
   Product model;

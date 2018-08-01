@@ -22,7 +22,7 @@ class CartItemComponent implements OnDestroy {
   CartItemComponent(this.cartService, this.languageService, this.settingsService, this.msg);
 
   void ngOnDestroy() {
-    _changeController.close();    
+    _changeController.close();        
   }
 
   void remove() {

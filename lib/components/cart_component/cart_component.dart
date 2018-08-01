@@ -62,8 +62,10 @@ class CartComponent implements OnActivate, OnDeactivate {
   Future<void> updateKlarnaCheckout() async {
     klarnaHtml = null;
 
-    final webshopUrl = settingsService.get('1').webshop_url;
-    final functionsUrl = settingsService.get('1').functions_url;
+    final settings = settingsService.get('1');
+
+    final webshopUrl = settings.webshop_url;
+    final functionsUrl = settings.functions_url;
 
     KlarnaAddress billingAddress;
     Customer customer;
@@ -115,7 +117,7 @@ class CartComponent implements OnActivate, OnDeactivate {
         ..name = product.phrases[languageService.currentShortLocale].name
         ..quantity = cartService.productRegistry[productId]
         ..quantity_unit = msg.pcs()
-        ..unit_price = (product.price['sek'] * 100).round()
+        ..unit_price = (product.price[cartService.currency] * 100).round()
         ..tax_rate = 2000
         ..total_discount_amount = 0
         ..product_url =
@@ -148,47 +150,65 @@ class CartComponent implements OnActivate, OnDeactivate {
 
     ShippingOption shipping;
     if (cartService.shipping) {
-      shipping = new ShippingOption.standard()
-        ..price = settingsService.get('1').shipping[cartService.currency] * 100;
+      shipping = new ShippingOption()
+        ..id = 'standard'
+        ..name = msg.standard()
+        ..description = msg.shipping_description()
+        ..preselected = true
+        ..price = settings.shipping[cartService.currency] * 100;
 
       shipping.tax_amount = shipping.price -
-          shipping.price *
-              10000 ~/
-              (10000 + shipping.tax_rate); // for 25% tax rate
+          shipping.price * 10000 ~/ (10000 + shipping.tax_rate);
     } else {
-      shipping = new ShippingOption.free();
+      shipping = new ShippingOption()
+        ..id = 'free'
+        ..name = msg.free()
+        ..description = msg.shipping_description()
+        ..preselected = true
+        ..price = 0
+        ..tax_amount = 0;
     }
 
-    cartService.klarnaOrder ??=
-        await _checkoutService.createCheckoutOrder(new CheckoutOrder()
-          ..order_id = null
-          ..purchase_currency = 'SEK'
-          ..purchase_country = 'SE'
-          ..locale = 'sv-SE'
-          ..billing_address = billingAddress
-          ..order_amount = totalAmount.round()
-          ..order_tax_amount = totalTaxAmount.round()
-          ..order_lines = orderLines
-          ..customer = new KlarnaCustomer()
-          ..merchant_urls = merchantUrls
-          ..merchant_reference1 = ''
-          ..merchant_reference2 = ''
-          ..merchant_data = ''
-          ..shipping_countries = ['SE']
-          ..options = checkoutOptions
-          ..shipping_options = [shipping]
-          ..gui = new Gui());
+    if (cartService.klarnaOrder == null) {
+      cartService.klarnaOrder ??=
+          await _checkoutService.createCheckoutOrder(new CheckoutOrder()
+            ..order_id = null
+            ..purchase_currency = 'SEK'
+            ..purchase_country = 'SE'
+            ..locale = 'sv-SE'
+            ..billing_address = billingAddress
+            ..order_amount = totalAmount.round()
+            ..order_tax_amount = totalTaxAmount.round()
+            ..order_lines = orderLines
+            ..customer = new KlarnaCustomer()
+            ..merchant_urls = merchantUrls
+            ..merchant_reference1 = ''
+            ..merchant_reference2 = ''
+            ..merchant_data = ''
+            ..shipping_countries = ['SE']
+            ..options = checkoutOptions
+            ..shipping_options = [shipping]
+            ..gui = new Gui());
 
-    cartService.klarnaOrder.merchant_urls
-      ..checkout =
-          '$webshopUrl/${msg.cart_url()}?sid=${cartService.klarnaOrder.order_id}'
-      ..confirmation =
-          '$webshopUrl/confirmation?sid=${cartService.klarnaOrder.order_id}'
-      ..push =
-          '$functionsUrl/finalizeKlarnaCheckoutOrder?sid=${cartService.klarnaOrder.order_id}&push=1'
-      ..terms = '$webshopUrl/${msg.standard_terms_url()}';
-    cartService.klarnaOrder =
-        await _checkoutService.updateCheckoutOrder(cartService.klarnaOrder);
+      cartService.klarnaOrder.merchant_urls
+        ..checkout =
+            '$webshopUrl/${msg.cart_url()}?sid=${cartService.klarnaOrder.order_id}'
+        ..confirmation =
+            '$webshopUrl/confirmation?sid=${cartService.klarnaOrder.order_id}'
+        ..push =
+            '$functionsUrl/finalizeKlarnaCheckoutOrder?sid=${cartService.klarnaOrder.order_id}&push=1'
+        ..terms = '$webshopUrl/${msg.standard_terms_url()}';
+      cartService.klarnaOrder =
+          await _checkoutService.updateCheckoutOrder(cartService.klarnaOrder);
+    } else {
+      cartService.klarnaOrder
+        ..order_amount = totalAmount.round()
+        ..order_tax_amount = totalTaxAmount.round()
+        ..order_lines = orderLines
+        ..shipping_options = [shipping];
+      cartService.klarnaOrder =
+          await _checkoutService.updateCheckoutOrder(cartService.klarnaOrder);
+    }
 
     final snippet =
         'data:text/html;charset=utf-8,${Uri.encodeFull(cartService.klarnaOrder.html_snippet)}';
