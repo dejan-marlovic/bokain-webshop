@@ -4,7 +4,7 @@
 
 @include button-background-color('.add_button', $colorBlue);
 @include button-color('.add_button', $mat-white);
-@include button-background-color('material-button:hover.add_button', $colorDarkBlue);
+@include button-background-color('material-button:hover.add_button', $colorBlueDark);
 
 :host {
     user-select: none;

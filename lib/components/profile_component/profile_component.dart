@@ -37,5 +37,5 @@ class ProfileComponent {
 
   
   final CustomerService customerService;
-  final MessagesService msg;
+  final WebshopMessagesService msg;
 }

@@ -1,5 +1,5 @@
 /// RoutePaths for bokain webshop
-/// make sure the names of messages are consistent with messages defined in MessagesService
+/// make sure the names of messages are consistent with messages defined in WebshopMessagesService
 
 library route_paths;
 

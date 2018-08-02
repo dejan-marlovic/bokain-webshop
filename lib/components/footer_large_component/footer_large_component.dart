@@ -12,6 +12,7 @@ import 'package:bokain_models/bokain_models.dart';
 class FooterLargeComponent {
   FooterLargeComponent(this.msg);
 
-  final MessagesService msg;
+
+  final WebshopMessagesService msg;  
 
 }

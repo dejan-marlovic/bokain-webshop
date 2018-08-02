@@ -2,8 +2,7 @@ analyzer:
   errors:
     uri_has_not_been_generated: ignore
   plugins:
-    angular:
-      enabled: true
+    - angular_analyzer_plugin      
 
 linter:
   rules:

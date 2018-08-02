@@ -56,7 +56,11 @@ class CartComponent implements OnActivate, OnDeactivate {
       await updateKlarnaCheckout();
     }
 
-    changeDetectorRef?.detectChanges();
+    try {
+      changeDetectorRef?.detectChanges();
+    } on StateError catch (e) {
+      print(e);
+    }
   }
 
   Future<void> updateKlarnaCheckout() async {
@@ -228,5 +232,5 @@ class CartComponent implements OnActivate, OnDeactivate {
   final ProductService productService;
   final SettingsService settingsService;
   final ChangeDetectorRef changeDetectorRef;
-  final MessagesService msg;
+  final WebshopMessagesService msg;
 }

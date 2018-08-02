@@ -5,7 +5,6 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../services/cart_service.dart';
-
 @Component(
   selector: 'bo-cart-item',
   templateUrl: 'cart_item_component.html',
@@ -40,7 +39,7 @@ class CartItemComponent implements OnDestroy {
   final LanguageService languageService;
   final CartService cartService;
   final SettingsService settingsService;
-  final MessagesService msg;  
+  final WebshopMessagesService msg;  
 
   @Input()
   Product product;

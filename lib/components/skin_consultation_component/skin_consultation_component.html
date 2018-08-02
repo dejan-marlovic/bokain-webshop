@@ -7,7 +7,7 @@
 
   <!-- Regular consultation, show unless the customer has done consultation already -->
   <material-expansionpanel-set *ngIf="step < 5 && customer.consultation_id == null">
-    <material-expansionpanel [name]="msg.details()"
+    <material-expansionpanel [name]="msg.detail(2)"
                              [showSaveCancel]="false"
                              [expanded]="step == 0"
                              (open)="step = 0">
@@ -61,7 +61,7 @@
         </div>
       </div>
     </material-expansionpanel>
-    <material-expansionpanel name="{{msg.symptoms()}}"
+    <material-expansionpanel name="{{msg.symptom(2)}}"
                              [showSaveCancel]="false"
                              [disabled]="step < 2"
                              [expanded]="step == 2"

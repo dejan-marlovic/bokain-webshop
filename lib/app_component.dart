@@ -49,20 +49,22 @@ import 'services/cart_service.dart';
       routerDirectives
     ],
     providers: const [
-      CartService,
+      CartService,      
       CountryService,
+      ConsultationMessagesService,
+      CoreMessagesService,
       CustomerLogService,
       CustomerService,
       foProviders,
       IngredientService,
       LanguageService,
       materialProviders,
-      MessagesService,
       OrderService,
       ProductCategoryService,
       ProductService,      
       SettingsService,
       SkinTypeService,
+      WebshopMessagesService
     ],
     pipes: const [])
 class AppComponent {
@@ -164,7 +166,7 @@ class AppComponent {
   final LanguageService _languageService;
   final SettingsService _settingsService;
   final Router router;
-  final MessagesService msg;
+  final WebshopMessagesService msg;
 
   List<RouteDefinition> routes;
   bool _loaded = false;

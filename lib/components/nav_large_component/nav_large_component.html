@@ -8,7 +8,7 @@
                         <img class="clickable"
                              routerLink="index.html"
                              routerLinkActive="active-route"
-                             src="gfx/logotype.png"
+                             src="gfx/logotype_white.png"
                              alt="logotype">
                     </div>
                     <div class="menuItem clickable"
@@ -36,7 +36,7 @@
             <div class="col l4">
                 <div class="flexAligner">
                     <div class="menuItem">
-                        <material-input label="search"
+                        <material-input [label]="msg.search() | name"
                                         leadingGlyph="search"
                                         [displayBottomPanel]="false">
                         </material-input>
@@ -44,8 +44,8 @@
                     <div class="menuItem clickable"
                          [routerLink]="msg.cart_url()"
                          routerLinkActive="active-route">
-                        {{msg.cart()}}
-                        <span *ngIf="cartService.productCount > 0">({{cartService.productCount}})</span>
+                        {{msg.cart() | name}}
+                        <span class="productCount" [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
                     </div>
                 </div>
             </div>
@@ -62,52 +62,38 @@
                 <div class="flexAligner">
                     <div class="menuItem clickable"
                          [routerLink]="msg.skin_types_url() + '/' + msg.symptom_acne()">
-                        {{msg.skin_type(1)}}
+                         <div class="text-center">
+                             <bo-icon icon="skin-type" size="2.5rem"></bo-icon>
+                         </div>
+                        {{msg.skin_type(1) | name}}
                     </div>
 
                     <div class="menuItem clickable"
                          *ngIf="productCategoryService.cachedModels.isNotEmpty"
                          [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name">
-                         {{msg.product_category(1)}}
+                         <div class="text-center">
+                             <bo-icon icon="product-category" size="2.5rem"></bo-icon>
+                         </div>
+                         {{msg.product_category(1) | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.skin_consultation_url()"
                          routerLinkActive="active-route">
-                         {{msg.skin_consultation(1)}}
+                         <div class="text-center">
+                             <bo-icon icon="skin-consultation" size="2.5rem"></bo-icon>
+                         </div>
+                         {{msg.consultation(1) | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.skin_guide_url()"
-                         routerLinkActive="active-route">{{msg.skin_guide()}}
+                         routerLinkActive="active-route">
+                         <div class="text-center">
+                             <bo-icon icon="skin-guide" size="2.5rem"></bo-icon>
+                         </div>
+                         {{msg.skin_guide() | name}}                         
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- filterByProblemSkin
-<div *ngIf="skinTypesOpen"
-     class="row collapse">
-    <div class="col">
-        <div class="menuLowerSub filterBySkinType">
-            <div class="menuItem clickable"
-                 [routerLink]="msg.skin_types_url() + '/' + skintype.url_name"
-                 routerLinkActive="active-route"
-                 *ngFor="let skintype of skinTypeService.data.values">{{skintype}}</div>
-        </div>
-    </div>
-</div>
-
-<div *ngIf="productCategoriesOpen"
-     class="row collapse">
-    <div class="col">
-        <div class="menuLowerSub filterByProductCategory">
-            <div class="menuItem clickable"
-                 [routerLink]="msg.product_categories_url() + '/' + productCategory.phrases[languageService.currentShortLocale].url_name"
-        
-                 routerLinkActive="active-route"
-                 *ngFor="let productCategory of productCategoryService.cachedModels.values">{{productCategory.phrases[languageService.currentShortLocale].name}}</div>
-        </div>
-    </div>
-</div>
--->

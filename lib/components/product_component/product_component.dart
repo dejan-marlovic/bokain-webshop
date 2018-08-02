@@ -51,5 +51,5 @@ class ProductComponent implements OnActivate {
   final IngredientService ingredientService;
   final LanguageService languageService;
   final ProductService productService;
-  final MessagesService msg;
+  final WebshopMessagesService msg;
 }

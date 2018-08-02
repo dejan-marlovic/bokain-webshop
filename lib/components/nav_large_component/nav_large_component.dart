@@ -6,6 +6,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../services/cart_service.dart';
+import '../icon_component/icon_component.dart';
 
 @Component(
   selector: 'bo-nav-large',
@@ -13,6 +14,7 @@ import '../../services/cart_service.dart';
   templateUrl: 'nav_large_component.html',
   directives: const [
     DropdownMenuComponent,
+    IconComponent,
     MaterialInputComponent,
     NgFor,
     NgIf,
@@ -62,7 +64,7 @@ class NavLargeComponent {
   final CountryService countryService;
   final ProductCategoryService productCategoryService;
   final SkinTypeService skinTypeService;
-  final MessagesService msg;
+  final WebshopMessagesService msg;
   final Router router;
 
   MenuModel<MenuItem> languageMenuModel;

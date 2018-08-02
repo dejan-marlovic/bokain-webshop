@@ -2,20 +2,18 @@
 @import 'package:angular_components/material_menu/mixins';
 
 @import '../../colors';
-$upperMenuHeight: 50px;
+$upperMenuHeight: 40px;
 $lowerMenuHeight: 100px;
 :host {
     @include dropdown-menu-nounderline;
     @include material-input-theme(white);
+    @include material-input-no-underline();
     @include input-label-color(white);
 
     .col {
         padding-top: 0;
         padding-bottom: 0;
-    }
-    .active-route {
-        //color: red;
-    }
+    }    
     div.flexAligner {        
         display: flex;
         align-items: center;
@@ -27,36 +25,46 @@ $lowerMenuHeight: 100px;
             height: $upperMenuHeight;
         }
         div.menuItem {
-            color: white;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            color: white;            
+            font-size: 0.9em;
+            line-height: 0.9em;
             img {
                 display: inline-block;
-                width: auto;
-                margin-top: 5px;
+                width: auto;                
                 height: 20px;
-            } 
+            }
+            span.productCount {
+                visibility: hidden;                
+                font-size: 0.8em;
+                background-color: $colorRedLight;
+                border-radius: 50%;                
+                display: inline-block;
+                padding: 0.2em 0.5em;
+
+                transform: translate(-0.4em, -0.2em);
+                -webkit-transform: translate(-0.4em, -0.2em);
+                -moz-transform: translate(-0.4em, -0.2em);
+                -ms-transform: translate(-0.4em, -0.2em);
+                -o-transform: translate(-0.4em, -0.2em);
+            }
+            span.productCount.visible {
+                visibility: visible;
+            }
         }
     }
     div.menuLower {
-        background-color: $colorGrayXLight;
-        color: $colorGrayXDark;
+        background-color: $colorGrayXLight;        
         .flexAligner {
             height: $lowerMenuHeight;
-            justify-content: center;        
+            justify-content: center;
             .menuItem {
-                margin: 0 1rem;
+                color: $colorGrayDark;
+                margin: 0 0.5rem;
+                //width: 10rem;
+            }
+            .menuItem.active-route {
+                color: $colorBlue;
             }
         }        
     }
-    /*
-    div.menuLowerSub {
-        padding: 0.3rem 0;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-    }*/
 }

@@ -42,5 +42,5 @@ class LoginComponent {
   String errorMessage;
 
   final CustomerService customerService;
-  final MessagesService msg;
+  final WebshopMessagesService msg;
 }

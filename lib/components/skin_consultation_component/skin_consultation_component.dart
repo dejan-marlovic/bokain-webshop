@@ -57,27 +57,27 @@ class SkinConsultationComponent {
           'firstname': new Control(
               '',
               Validators.compose([
-                FoValidators.required(msg.enter_firstname()),
+                Validators.required,
                 FoValidators.alpha,
                 Validators.maxLength(64)
               ])),
           'lastname': new Control(
               '',
               Validators.compose([
-                FoValidators.required(msg.enter_lastname()),
+                Validators.required,
                 FoValidators.alpha,
                 Validators.maxLength(64)
               ])),
           'email': new Control(
               '',
               Validators.compose([
-                FoValidators.required(msg.enter_email()),
+                Validators.required,
                 FoValidators.email
               ])),
           'password': new Control(
               '',
               Validators.compose([
-                FoValidators.required(msg.enter_password()),
+                Validators.required,
                 Validators.minLength(6),
                 Validators.maxLength(64)
               ])),
@@ -207,25 +207,25 @@ class SkinConsultationComponent {
       'firstname': new Control(
           customer.firstname,
           Validators.compose([
-            FoValidators.required(msg.enter_firstname()),
+            Validators.required,
             FoValidators.alpha,
             Validators.maxLength(64)
           ])),
       'lastname': new Control(
           customer.lastname,
           Validators.compose([
-            FoValidators.required(msg.enter_lastname()),
+            Validators.required,
             FoValidators.alpha,
             Validators.maxLength(64)
           ])),
       'email': new Control(
           customer.email,
           Validators.compose(
-              [FoValidators.required(msg.enter_email()), FoValidators.email])),
+              [Validators.required, FoValidators.email])),
       'password': new Control(
           password,
           Validators.compose([
-            FoValidators.required(msg.enter_password()),
+            Validators.required,
             Validators.minLength(6),
             Validators.maxLength(64)
           ])),
@@ -233,7 +233,7 @@ class SkinConsultationComponent {
           ? new Control(
               customer.phone,
               Validators.compose([
-                FoValidators.required(msg.enter_phone()),
+                Validators.required,
                 FoValidators.phoneNumberWithoutCountryCode
               ]))
           : new Control('', Validators.compose([]))
@@ -250,7 +250,7 @@ class SkinConsultationComponent {
 
   final ConsultationService consultationService;
   final CustomerService customerService;
-  final MessagesService msg;
+  final WebshopMessagesService msg;
   final SettingsService settingsService;
   final DateFormat ssn = new DateFormat("yyyyMMdd'0000'");
   Customer customer;
