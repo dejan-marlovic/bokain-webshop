@@ -8,7 +8,8 @@ import 'package:fo_components/fo_components.dart';
 import 'components/about_us_component/about_us_component.template.dart'
     as about_us_comp;
 import 'components/cart_component/cart_component.template.dart' as cart_comp;
-import 'components/confirmation_component/confirmation_component.template.dart' as confirmation_comp;
+import 'components/confirmation_component/confirmation_component.template.dart'
+    as confirmation_comp;
 import 'components/customer_support_component/customer_support_component.template.dart'
     as customer_support_comp;
 import 'components/faq_component/faq_component.template.dart' as faq_comp;
@@ -24,6 +25,8 @@ import 'components/product_component/product_component.template.dart'
     as product_comp;
 import 'components/profile_component/profile_component.template.dart'
     as profile_comp;
+import 'components/results_component/results_component.template.dart'
+    as results_comp;
 import 'components/skin_consultation_component/skin_consultation_component.template.dart'
     as consultation_comp;
 import 'components/skin_guide_component/skin_guide_component.template.dart'
@@ -33,7 +36,7 @@ import 'components/skin_test_component/skin_test_component.template.dart'
 import 'components/skin_type_filter_component/skin_type_filter_component.template.dart'
     as skin_type_filter_comp;
 import 'components/standard_terms_component/standard_terms_component.template.dart'
-    as standard_terms_comp; 
+    as standard_terms_comp;
 import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
 
@@ -49,7 +52,7 @@ import 'services/cart_service.dart';
       routerDirectives
     ],
     providers: const [
-      CartService,      
+      CartService,
       CountryService,
       ConsultationMessagesService,
       CoreMessagesService,
@@ -61,7 +64,7 @@ import 'services/cart_service.dart';
       materialProviders,
       OrderService,
       ProductCategoryService,
-      ProductService,      
+      ProductService,
       SettingsService,
       SkinTypeService,
       WebshopMessagesService
@@ -83,8 +86,8 @@ class AppComponent {
   }
 
   void _onLocaleChange(String locale) {
-    _cartService.klarnaOrder = null; 
-    routes = _setupRoutes();    
+    _cartService.klarnaOrder = null;
+    routes = _setupRoutes();
   }
 
   List<RouteDefinition> _setupRoutes() => [
@@ -123,6 +126,9 @@ class AppComponent {
             routePath: route_paths.partners,
             component: partners_comp.PartnersComponentNgFactory),
         RouteDefinition(
+            routePath: route_paths.results,
+            component: results_comp.ResultsComponentNgFactory),
+        RouteDefinition(
             routePath: route_paths.skinGuide,
             component: skin_guide_comp.SkinGuideComponentNgFactory),
         RouteDefinition(
@@ -151,7 +157,7 @@ class AppComponent {
         .orderBy('score', 'desc'));
 
     routes = _setupRoutes();
-    
+
     _languageService.localeChanges.listen(_onLocaleChange);
 
     _loaded = true;

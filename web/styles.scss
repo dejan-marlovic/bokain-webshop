@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Poppins);
 @import url(https://fonts.googleapis.com/css?family=Material+Icons);
 @import 'package:grid/grid';
 
@@ -8,6 +8,7 @@
     src: url('fonts/icomoon.eot?xf6dd5#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?xf6dd5') format('truetype'), url('fonts/icomoon.woff?xf6dd5') format('woff'), url('fonts/icomoon.svg?xf6dd5#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: block; // Make icons take up space even if they haven't loaded
 }
 
 html {
@@ -20,7 +21,8 @@ html {
 }
 
 * {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif;
+  font-weight: lighter;
 }
 
 material-input {  

@@ -10,18 +10,16 @@
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    -webkit-user-select: none;
-    border: 1px solid black;
+    -webkit-user-select: none;    
     display: block;
 
-    .upper {
+    .upper {        
         cursor: pointer;
         display: flex;
         position: relative;
         align-items: flex-end;
         justify-content: center;
-        height: 18rem;
-        border: 1px solid black;
+        height: 18rem;        
         img {
             max-height: 18rem;
         }
@@ -52,7 +50,7 @@
         .descContainer {  
             display: flex;
             flex-direction: row;
-            height: 5rem;
+            height: 3rem;
             align-items: center;
             overflow: hidden;
             p {

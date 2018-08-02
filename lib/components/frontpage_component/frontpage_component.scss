@@ -1,0 +1,32 @@
+@import 'package:grid/grid';
+@import '../../colors.scss';
+:host {
+    h1 {
+        font-size: 3em;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    div.card {
+        padding: $large $medium;
+        background-color: $colorBlue;
+        color: white;
+        margin: 0 $x-small;
+    }    
+    div.card>p {
+        margin-bottom: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    div.resultBox {          
+        color: white;
+        background-image: url('gfx/faces.jpg');
+        div.overlay {
+            padding: $x-large $medium;
+            background-color: rgba(0,0,0,0.6);
+
+        }
+    }
+}
