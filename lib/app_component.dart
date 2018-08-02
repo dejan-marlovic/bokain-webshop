@@ -142,7 +142,6 @@ class AppComponent {
 
   Future<void> _loadResources(String token) async {
     await _languageService.setLocale('SV');
-
     await _settingsService.fetch('1');
 
     await productCategoryService.fetchQuery(
@@ -152,6 +151,7 @@ class AppComponent {
         .orderBy('score', 'desc'));
 
     routes = _setupRoutes();
+    
     _languageService.localeChanges.listen(_onLocaleChange);
 
     _loaded = true;

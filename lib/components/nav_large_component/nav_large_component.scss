@@ -57,12 +57,11 @@ $lowerMenuHeight: 100px;
         .flexAligner {
             height: $lowerMenuHeight;
             justify-content: center;
-            .menuItem {
+            .menuItem {                
                 color: $colorGrayDark;
                 margin: 0 0.5rem;
-                //width: 10rem;
             }
-            .menuItem.active-route {
+            .menuItem.activeRoute {
                 color: $colorBlue;
             }
         }        

@@ -1,57 +1,98 @@
-<div class="row">
-    <div class="menuUpper">
-        <div class="m4 col">
-            <div class="menuItem clickable"
-                 [routerLink]="msg.skin_test_url()"
-                 routerLinkActive="active-route">
-                {{msg.skin_test(1)}}
-            </div>
-        </div>
-        <div class="m4 col">
-            <div class="menuItem clickable"
-                 [routerLink]="msg.skin_consultation_url()"
-                 routerLinkActive="active-route">
-                {{msg.skin_consultation(1)}}
-            </div>
-        </div>
-        <div class="m4 col">
-            <div class="menuItem clickable"
-                 [routerLink]="msg.skin_guide_url()"
-                 routerLinkActive="active-route">
-                {{msg.skin_guide()}}
+<div class="row expand menuUpper">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <div class="flexAligner">
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.my_profile_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="my-profile"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.my_profile()}}
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.skin_consultation_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="skin-consultation"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.consultation(1)}}
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.skin_guide_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="skin-guide"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.skin_guide()}}
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.results_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="skin-results"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.result()}}
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.faq_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="faq"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.faq()}}
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.about_us_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="about-us"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.about_us()}}
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.standard_terms_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="terms"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.standard_terms()}}
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.customer_support_url()"
+                         routerLinkActive="activeRoute">
+                        <div>
+                            <bo-icon icon="customer-support"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.customer_support()}}
+                    </div>
+                    <div class="menuItem clickable">
+                        <div>
+                            <bo-icon icon="phone"
+                                     [size]="iconSize"></bo-icon>
+                        </div>
+                        {{msg.call_me()}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row collapse">
+<div class="row expand collapse menuLower">
     <div class="col">
-        <div class="menuLower">
-            <div class="clickable menuItem"
-                 [routerLink]="msg.my_profile_url()"
-                 routerLinkActive="active-route">{{msg.my_profile()}}</div>
-            <div class="clickable menuItem"
-            [routerLink]="msg.skin_consultation_url()"
-                 routerLinkActive="active-route">{{msg.skin_consultation(1)}}</div>
-            <div class="clickable menuItem"
-            [routerLink]="msg.skin_guide_url()"
-            routerLinkActive="active-route">{{msg.skin_guide()}}</div>
-            <div class="clickable menuItem"
-            [routerLink]="msg.partners_url()"
-            routerLinkActive="active-route">{{msg.partner(2)}}</div>
-            <div class="clickable menuItem"
-            [routerLink]="msg.faq_url()"
-            routerLinkActive="active-route">{{msg.faq()}}</div>
-            <div class="clickable menuItem"
-            [routerLink]="msg.about_us_url()"
-            routerLinkActive="active-route">{{msg.about_us()}}</div> 
-            <div class="clickable menuItem"
-            [routerLink]="msg.standard_terms_url()"
-            routerLinkActive="active-route">{{msg.standard_terms()}} &amp; GDPR</div>
-            <div class="clickable menuItem"
-            [routerLink]="msg.customer_support_url()"
-            routerLinkActive="active-route">{{msg.customer_support()}}</div>
-            <div class="clickable menuItem">{{msg.call_me()}}</div>
+        <div class="flexAligner">
+            <img src="gfx/logotype_white.png"
+                 alt="logo">
         </div>
     </div>
 </div>

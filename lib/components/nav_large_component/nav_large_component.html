@@ -7,18 +7,18 @@
                     <div class="menuItem">
                         <img class="clickable"
                              routerLink="index.html"
-                             routerLinkActive="active-route"
+                             routerLinkActive="activeRoute"
                              src="gfx/logotype_white.png"
                              alt="logotype">
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.my_profile_url()"
-                         routerLinkActive="active-route">
+                         routerLinkActive="activeRoute">
                         {{msg.login() | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.customer_support_url()"
-                         routerLinkActive="active-route">
+                         routerLinkActive="activeRoute">
                         {{msg.customer_support() | name}}
                     </div>
                     <div class="menuItem clickable">
@@ -43,7 +43,7 @@
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.cart_url()"
-                         routerLinkActive="active-route">
+                         routerLinkActive="activeRoute">
                         {{msg.cart() | name}}
                         <span class="productCount" [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
                     </div>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.skin_consultation_url()"
-                         routerLinkActive="active-route">
+                         routerLinkActive="activeRoute">
                          <div class="text-center">
                              <bo-icon icon="skin-consultation" size="2.5rem"></bo-icon>
                          </div>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.skin_guide_url()"
-                         routerLinkActive="active-route">
+                         routerLinkActive="activeRoute">
                          <div class="text-center">
                              <bo-icon icon="skin-guide" size="2.5rem"></bo-icon>
                          </div>
