@@ -1,0 +1,17 @@
+@import 'package:grid/grid';
+@import '../../colors';
+
+:host {
+    div.flexAligner {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        div.menuItem {
+            color: $colorGrayDark;
+            margin: 0 $small;
+        }
+        div.menuItem.activeRoute {
+            color: $colorBlue;
+        }
+    }
+}

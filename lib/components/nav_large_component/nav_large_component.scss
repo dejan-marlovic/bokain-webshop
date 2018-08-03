@@ -5,6 +5,7 @@
 $upperMenuHeight: 40px;
 $lowerMenuHeight: 100px;
 :host {
+    @import 'package:grid/grid';
     @include dropdown-menu-nounderline;
     @include material-input-theme(white);
     @include material-input-no-underline();
@@ -63,7 +64,7 @@ $lowerMenuHeight: 100px;
             justify-content: center;
             .menuItem {                
                 color: $colorGrayDark;
-                margin: 0 0.5rem;
+                margin: 0 $small;
             }
             .menuItem.activeRoute {
                 color: $colorBlue;

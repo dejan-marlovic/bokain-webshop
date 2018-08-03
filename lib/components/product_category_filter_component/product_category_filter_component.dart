@@ -1,18 +1,21 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
+import 'package:fo_components/fo_components.dart';
 import 'package:intl/intl.dart';
+import '../icon_component/icon_component.dart';
 import '../productbox_component/productbox_component.dart';
 
 @Component(
     selector: 'bo-product-category-filter',
     templateUrl: 'product_category_filter_component.html',
     styleUrls: const ['product_category_filter_component.css'],
-    directives: const [NgFor, ProductBoxComponent],
-    providers: const [])
+    directives: const [IconComponent, NgFor, ProductBoxComponent, routerDirectives],
+    providers: const [],
+    pipes: const [NamePipe])
 class ProductCategoryFilterComponent implements OnActivate {
   ProductCategoryFilterComponent(
-      this._productCategoryService, this._productService);
+      this._productCategoryService, this._productService, this.msg);
 
   @override
   void onActivate(RouterState previous, RouterState current) {
@@ -31,8 +34,10 @@ class ProductCategoryFilterComponent implements OnActivate {
     }
   }
 
+  String iconSize = '2.5rem';
   List<Product> products = [];
   String selectedProductId;
   final ProductCategoryService _productCategoryService;
   final ProductService _productService;
+  final WebshopMessagesService msg;
 }

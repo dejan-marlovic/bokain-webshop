@@ -1,13 +1,28 @@
 <div class="row">
-    <div class="col">
-        
+    <div class="col text-center">
+        <div class="flexAligner">
+            <div class="menuItem clickable"
+                 [routerLink]="msg.product_categories_url() + '/' + msg.bundle(1)"
+                 routerLinkActive="activeRoute">
+                <div>
+                    <bo-icon icon="category-bundle"
+                             [size]="iconSize"></bo-icon>
+                </div>
+                {{msg.bundle(2) | name}}
+            </div>
+
+
+            <!--<bo-icon icon="category-cleansing"></bo-icon>-->
+
+        </div>
+
     </div>
 </div>
 <div class="row">
-  <div class="l3 m4 s12 col" *ngFor="let product of products">
-      <bo-productbox 
-              (addButtonClick)="selectedProductId = $event"
-              [model]="product">
-      </bo-productbox>        
-  </div>
+    <div class="l3 m4 s12 col"
+         *ngFor="let product of products">
+        <bo-productbox (addButtonClick)="selectedProductId = $event"
+                       [model]="product">
+        </bo-productbox>
+    </div>
 </div>
