@@ -1,13 +1,13 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
-import '../productbox_component/productbox_component.dart';
+import '../product_list_component/product_list_component.dart';
 
 @Component(
     selector: 'bo-skin-type-filter',
     templateUrl: 'skin_type_filter_component.html',
     styleUrls: const ['skin_type_filter_component.css'],
-    directives: const [NgFor, ProductBoxComponent])
+    directives: const [NgFor, ProductListComponent])
 class SkinTypeFilterComponent implements OnActivate {
   SkinTypeFilterComponent(this._productService, this._skinTypeService);
 
@@ -28,7 +28,6 @@ class SkinTypeFilterComponent implements OnActivate {
   }
 
   List<Product> products = [];
-  String selectedProductId;
   final ProductService _productService;
   final SkinTypeService _skinTypeService;
 }

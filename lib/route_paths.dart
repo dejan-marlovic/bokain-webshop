@@ -51,3 +51,7 @@ RoutePath get skinTypeFilter => RoutePath(
 
 RoutePath get standardTerms =>
     RoutePath(path: Intl.message('standard-terms', name: 'standard_terms_url'));
+
+RoutePath get bundleSkinTypeList => RoutePath(
+    path: Intl.message(
+        "${Intl.message('product-categories', name: 'product_categories_url')}/:id/:skinType"));

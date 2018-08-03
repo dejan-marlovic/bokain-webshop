@@ -1,15 +1,7 @@
-<div class="row">
-    <div class="col text-center">
-        <h1 class="large margin-bottom-small">{{model.phrases[languageService.currentShortLocale]?.name | name}}</h1>
-        <p>{{model.phrases[languageService.currentShortLocale]?.meta_description | name}}</p>
-    </div>
-</div>
-
-<div class="row margin-top-small">
-    <div class="l3 m4 s12 col"
-         *ngFor="let product of products">
-        <bo-productbox (addButtonClick)="selectedProductId = $event"
-                       [model]="product">
-        </bo-productbox>
+<div class="row collapse">
+    <div class="col">
+        <bo-product-list [title]="model.phrases[languageService.currentShortLocale]?.name | name"
+                         [description]="model.phrases[languageService.currentShortLocale]?.meta_description | name"
+                         [products]="products"></bo-product-list>
     </div>
 </div>

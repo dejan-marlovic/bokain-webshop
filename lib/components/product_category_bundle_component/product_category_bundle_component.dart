@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../skin_type_table_component/skin_type_table_component.dart';
@@ -13,13 +14,15 @@ import '../skin_type_table_component/skin_type_table_component.dart';
   changeDetection: ChangeDetectionStrategy.OnPush
 )
 class ProductCategoryBundleComponent {
-  ProductCategoryBundleComponent(this.skinTypeService, this.msg);
+  ProductCategoryBundleComponent(this.skinTypeService, this._router, this.msg);
 
-  void onSkinTypeTrigger(SkinType event) {
+  void onSkinTypeSelect(SkinType event) {
     print(event.url_name);
+    _router.navigate('${msg.product_categories_url()}/${msg.bundle(2)}/${event.url_name}');
   }
 
   final SkinTypeService skinTypeService;
+  final Router _router;
   final WebshopMessagesService msg;
 
 }

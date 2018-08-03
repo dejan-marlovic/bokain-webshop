@@ -1,0 +1,10 @@
+<h1 class="large text-center margin-bottom-small" *ngIf="title != null">{{title | name}}</h1>
+<p class="text-center margin-top-small margin-bottom-none" *ngIf="description != null">{{description | name}}</p>
+
+<div class="row" *ngIf="products != null">
+    <div class="l3 m4 s12 col"
+         *ngFor="let product of products">
+        <bo-productbox [model]="product">
+        </bo-productbox>
+    </div>
+</div>

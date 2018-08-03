@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
@@ -11,17 +10,11 @@ import '../../services/cart_service.dart';
     styleUrls: const ['productbox_component.css'],
     templateUrl: 'productbox_component.html',
     directives: const [MaterialButtonComponent, MaterialIconComponent])
-class ProductBoxComponent implements OnDestroy {
+class ProductBoxComponent {
   ProductBoxComponent(this.cartService, this.router);
 
-  @override
-  void ngOnDestroy() {
-    addButtonClickController.close();
-  }
-
   void addToCart() {
-    cartService.add(model.id);
-    addButtonClickController.add(model.id);
+    cartService.add(model.id);    
   }
 
   void openProduct() {
@@ -32,13 +25,6 @@ class ProductBoxComponent implements OnDestroy {
 
   @Input('model')
   Product model;
-
-  @Output('addButtonClick')
-  Stream<String> get addButtonClickOutput => addButtonClickController.stream;
-
-  final StreamController<String> addButtonClickController =
-      new StreamController();
-
 
   final CartService cartService;
   final Router router;

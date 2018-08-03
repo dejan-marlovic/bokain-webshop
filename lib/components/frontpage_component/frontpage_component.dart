@@ -4,7 +4,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../icon_component/icon_component.dart';
-import '../productbox_component/productbox_component.dart';
+import '../product_list_component/product_list_component.dart';
 
 @Component(
     selector: 'frontpage-component',
@@ -16,7 +16,7 @@ import '../productbox_component/productbox_component.dart';
       coreDirectives,
       IconComponent,
       MaterialButtonComponent,
-      ProductBoxComponent,
+      ProductListComponent,
       routerDirectives
     ],
     providers: const [],
@@ -28,7 +28,6 @@ class FrontpageComponent {
       : popularProducts =
             new List<Product>.from(productService.cachedModels.values)..take(4);
 
-  String selectedProductId;
   final LanguageService languageService;
   final ProductCategoryService productCategoryService;
   final ProductService productService;

@@ -19,6 +19,8 @@ import 'components/frontpage_component/frontpage_component.template.dart'
 import 'components/nav_large_component/nav_large_component.dart';
 import 'components/partners_component/partners_component.template.dart'
     as partners_comp;
+    import 'components/product_category_bundle_skin_type_filter_component/product_category_bundle_skin_type_filter_component.template.dart'
+    as product_category_bundle_skin_type_filter_comp;
 import 'components/product_category_filter_component/product_category_filter_component.template.dart'
     as product_category_filter_comp;
 import 'components/product_component/product_component.template.dart'
@@ -141,6 +143,9 @@ class AppComponent {
         RouteDefinition(
             routePath: route_paths.products,
             component: product_comp.ProductComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.bundleSkinTypeList,
+            component: product_category_bundle_skin_type_filter_comp.ProductCategoryBundleSkinTypeFilterComponentNgFactory),
 
         // Redirect everything else to frontpage
         RouteDefinition.redirect(
