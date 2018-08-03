@@ -12,12 +12,7 @@ class CartService {
       this._productService,
       this._settingsService,
       this._sanitizationService,
-      this._msg) {
-    /*
-        localeChangeSubscription =
-        _languageService.localeChanges.listen(_evaluateCheckout);
-        */
-  }
+      this._msg);
 
   void add(String productId) {
     productRegistry[productId] ??= 0;
@@ -38,6 +33,10 @@ class CartService {
   /// Evaluates which (if any) checkout to display, Klarna or Braintree
   Future<void> evaluateCheckout(String locale) async {
     klarnaHtml = null;
+
+    if (productRegistry.isEmpty) {
+      return;
+    }
 
     if (locale == 'SV') {
       await _updateKlarnaCheckout();
@@ -213,7 +212,6 @@ class CartService {
   bool shipping = true;
   SafeResourceUrl klarnaHtml;
   CheckoutOrder klarnaOrder;
-  StreamSubscription<String> localeChangeSubscription;
   final DomSanitizationService _sanitizationService;
   final KlarnaCheckoutService _klarnaCheckoutService;
   final CustomerService _customerService;

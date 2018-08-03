@@ -24,11 +24,13 @@ import '../productbox_component/productbox_component.dart';
       NamePipe
     ])
 class FrontpageComponent {
-  FrontpageComponent(this.productService, this.msg)
+  FrontpageComponent(this.languageService, this.productCategoryService, this.productService, this.msg)
       : popularProducts =
             new List<Product>.from(productService.cachedModels.values)..take(4);
 
   String selectedProductId;
+  final LanguageService languageService;
+  final ProductCategoryService productCategoryService;
   final ProductService productService;
   final WebshopMessagesService msg;
   final List<Product> popularProducts;

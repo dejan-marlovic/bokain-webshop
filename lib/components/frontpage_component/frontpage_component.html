@@ -14,7 +14,7 @@
 <div class="row collapse">
     <div class="l3 m6 col text-center">
         <div class="card clickable"
-             [routerLink]="msg.skin_types_url()">
+             routerLink="{{msg.skin_types_url()}}">
             <div>
                 <bo-icon icon="skin-type"
                          [size]="iconSize"></bo-icon>
@@ -24,7 +24,7 @@
     </div>
     <div class="l3 m6 col text-center">
         <div class="card clickable"
-             [routerLink]="msg.product_categories_url()">
+             [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name">
             <div>
                 <bo-icon icon="product-category"
                          [size]="iconSize"></bo-icon>
