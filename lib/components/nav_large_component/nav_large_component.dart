@@ -45,6 +45,8 @@ class NavLargeComponent {
   Future<void> _setLocale(String iso) async {
     await languageService.setLocale(iso);
 
+    await cartService.evaluateCheckout(languageService.currentShortLocale);
+
     languageMenuModel = new MenuModel([
       new MenuItemGroup(countryService.data.values
           .map((country) =>

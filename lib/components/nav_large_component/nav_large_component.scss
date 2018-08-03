@@ -32,24 +32,22 @@ $lowerMenuHeight: 100px;
             color: white;            
             font-size: 0.9em;
             line-height: 0.9em;
+            position: relative;
             img {
                 display: inline-block;
                 width: auto;                
                 height: 20px;
             }
             span.productCount {
+                position: absolute;
+                top: -0.5em;
+                right: -0.8em;
                 visibility: hidden;                
                 font-size: 0.8em;
                 background-color: $colorRedLight;
                 border-radius: 50%;                
                 display: inline-block;
                 padding: 0.2em 0.5em;
-
-                transform: translate(-0.4em, -0.2em);
-                -webkit-transform: translate(-0.4em, -0.2em);
-                -moz-transform: translate(-0.4em, -0.2em);
-                -ms-transform: translate(-0.4em, -0.2em);
-                -o-transform: translate(-0.4em, -0.2em);
             }
             span.productCount.visible {
                 visibility: visible;

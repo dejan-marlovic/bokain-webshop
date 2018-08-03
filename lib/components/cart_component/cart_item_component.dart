@@ -5,6 +5,7 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../services/cart_service.dart';
+
 @Component(
   selector: 'bo-cart-item',
   templateUrl: 'cart_item_component.html',
@@ -17,33 +18,28 @@ import '../../services/cart_service.dart';
   ],
   pipes: const [NamePipe],
 )
-class CartItemComponent implements OnDestroy {
-  CartItemComponent(this.cartService, this.languageService, this.settingsService, this.msg);
-
-  void ngOnDestroy() {
-    _changeController.close();        
-  }
+class CartItemComponent {
+  CartItemComponent(
+      this.cartService, this.languageService, this.settingsService, this.msg);
 
   void remove() {
-    cartService.productRegistry.remove(product.id);
-    _changeController.add(product.id);
+    cartService.remove(product.id, removeAll: true);
   }
 
   void onCountChange(int value) {
-    cartService.productRegistry[product.id] = value;    
-    _changeController.add(product.id);    
+    if (value > cartService.productRegistry[product.id]) {
+      cartService.add(product.id);
+    }
+    else {
+      cartService.remove(product.id);
+    }
   }
 
-  final StreamController<String> _changeController = new StreamController();
-  
   final LanguageService languageService;
   final CartService cartService;
   final SettingsService settingsService;
-  final WebshopMessagesService msg;  
+  final WebshopMessagesService msg;
 
   @Input()
   Product product;
-
-  @Output('change')
-  Stream<String> get countChange => _changeController.stream;  
 }

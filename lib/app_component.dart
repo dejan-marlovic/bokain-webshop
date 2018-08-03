@@ -61,6 +61,7 @@ import 'services/cart_service.dart';
       foProviders,
       IngredientService,
       LanguageService,
+      KlarnaCheckoutService,
       materialProviders,
       OrderService,
       ProductCategoryService,
