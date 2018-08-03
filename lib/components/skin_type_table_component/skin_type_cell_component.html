@@ -1,0 +1,9 @@
+<div [style.background-image]="background">
+    <div id="overlay" class="padding-top-x-large padding-bottom-x-large">
+        <h2 class="margin-bottom-small">{{model.label | name}}</h2>
+        <material-button
+                (trigger)="onTriggerController.add(model)">
+            {{msg.read_more()}}
+        </material-button>
+    </div>
+</div>

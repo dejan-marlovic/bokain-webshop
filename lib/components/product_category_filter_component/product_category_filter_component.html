@@ -25,15 +25,15 @@
 </div>
 
 
-<div class="row collapse margin-top-x-large" *ngIf="category != null">
+<div class="row collapse margin-top-large" *ngIf="category != null">
     <div class="col">
         <bo-product-category [model]="category"></bo-product-category>
     </div>
 </div>
 
 <!-- Bundles -->
-<div class="row collapse margin-top-x-large" *ngIf="category == null">
+<div class="row collapse margin-top-large" *ngIf="category == null">
     <div class="col">
-        <p>PRODUKTPAKET</p>
+        <bo-product-category-bundle></bo-product-category-bundle>
     </div>
 </div>

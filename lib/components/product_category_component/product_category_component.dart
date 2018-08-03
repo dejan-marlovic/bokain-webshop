@@ -9,7 +9,8 @@ import '../productbox_component/productbox_component.dart';
   styleUrls: const ['product_category_component.css'],
   directives: const [NgFor, NgIf, ProductBoxComponent],
   providers: const [],
-  pipes: const [NamePipe]
+  pipes: const [NamePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush
 )
 class ProductCategoryComponent implements OnInit {
 

@@ -4,6 +4,7 @@ import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:intl/intl.dart';
 import '../icon_component/icon_component.dart';
+import '../product_category_bundle_component/product_category_bundle_component.dart';
 import '../product_category_component/product_category_component.dart';
 
 @Component(
@@ -16,6 +17,7 @@ import '../product_category_component/product_category_component.dart';
       IconComponent,
       NgFor,
       NgIf,      
+      ProductCategoryBundleComponent,
       ProductCategoryComponent,
       routerDirectives
     ],
