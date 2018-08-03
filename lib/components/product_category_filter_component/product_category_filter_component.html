@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row hide-for-medium hide-for-small">
     <div class="col text-center">
         <div class="flexAligner">
             <div class="menuItem clickable"
@@ -10,19 +10,23 @@
                 </div>
                 {{msg.bundle(2) | name}}
             </div>
-
-
-            <!--<bo-icon icon="category-cleansing"></bo-icon>-->
-
+            <div *ngFor="let cat of categories"
+                 class="menuItem clickable"
+                 [routerLink]="msg.product_categories_url() + '/' + cat.phrases[languageService.currentShortLocale].url_name"        
+                 routerLinkActive="activeRoute">
+                <div>
+                    <bo-icon icon="category-{{cat.phrases['EN'].url_name}}"
+                             [size]="iconSize"></bo-icon>
+                </div>
+                {{cat.phrases[languageService.currentShortLocale].name | name}}
+            </div>
         </div>
-
     </div>
 </div>
-<div class="row">
-    <div class="l3 m4 s12 col"
-         *ngFor="let product of products">
-        <bo-productbox (addButtonClick)="selectedProductId = $event"
-                       [model]="product">
-        </bo-productbox>
+
+
+<div class="row collapse margin-top-x-large" *ngIf="category != null">
+    <div class="col">
+        <bo-product-category [model]="category"></bo-product-category>
     </div>
 </div>
