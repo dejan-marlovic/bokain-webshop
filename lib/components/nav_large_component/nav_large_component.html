@@ -12,7 +12,7 @@
                              alt="logotype">
                     </div>
                     <div class="menuItem clickable"
-                         [routerLink]="msg.my_profile_url()"
+                         [routerLink]="msg.my_profile_url()"                         
                          routerLinkActive="activeRoute">
                         {{msg.login() | name}}
                     </div>
@@ -61,7 +61,8 @@
             <div class="col">
                 <div class="flexAligner">
                     <div class="menuItem clickable"
-                         [routerLink]="msg.skin_types_url() + '/' + msg.symptom_acne()">
+                         [routerLink]="msg.skin_types_url() + '/' + msg.symptom_acne()"
+                         routerLinkSubActive="activeRoute">
                          <div class="text-center">
                              <bo-icon icon="skin-type" size="2.5rem"></bo-icon>
                          </div>
@@ -70,7 +71,8 @@
 
                     <div class="menuItem clickable"
                          *ngIf="productCategoryService.cachedModels.isNotEmpty"
-                         [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name">
+                         [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name"
+                         routerLinkSubActive="activeRoute">
                          <div class="text-center">
                              <bo-icon icon="product-category" size="2.5rem"></bo-icon>
                          </div>

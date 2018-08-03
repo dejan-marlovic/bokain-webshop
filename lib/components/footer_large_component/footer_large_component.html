@@ -10,7 +10,7 @@
                             <bo-icon icon="my-profile"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.my_profile()}}
+                        {{msg.my_profile() | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.skin_consultation_url()"
@@ -19,7 +19,7 @@
                             <bo-icon icon="skin-consultation"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.consultation(1)}}
+                        {{msg.consultation(1) | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.skin_guide_url()"
@@ -28,7 +28,7 @@
                             <bo-icon icon="skin-guide"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.skin_guide()}}
+                        {{msg.skin_guide() | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.results_url()"
@@ -37,7 +37,7 @@
                             <bo-icon icon="skin-results"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.result()}}
+                        {{msg.result() | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.faq_url()"
@@ -46,7 +46,7 @@
                             <bo-icon icon="faq"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.faq()}}
+                        {{msg.faq() | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.about_us_url()"
@@ -55,7 +55,7 @@
                             <bo-icon icon="about-us"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.about_us()}}
+                        {{msg.about_us() | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.standard_terms_url()"
@@ -64,7 +64,7 @@
                             <bo-icon icon="terms"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.standard_terms()}}
+                        {{msg.standard_terms() | name}}
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.customer_support_url()"
@@ -73,14 +73,14 @@
                             <bo-icon icon="customer-support"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.customer_support()}}
+                        {{msg.customer_support() | name}}
                     </div>
                     <div class="menuItem clickable">
                         <div>
                             <bo-icon icon="phone"
                                      [size]="iconSize"></bo-icon>
                         </div>
-                        {{msg.call_me()}}
+                        {{msg.call_me() | name}}
                     </div>
                 </div>
             </div>

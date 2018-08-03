@@ -45,19 +45,19 @@
             <div class="row">
                 <div class="col">
                     <h3>{{msg.product_description() | name}}</h3>
-                    <p>{{model.phrases[languageService.currentShortLocale].description_long}}</p>
+                    <p [safeInnerHtml]="description"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <material-expansionpanel-set>
                         <material-expansionpanel flat
-                                                 [name]="msg.usage_instructions()"
+                                                 [name]="msg.usage_instructions() | name"
                                                  [showSaveCancel]="false">
-                            <p>{{model.phrases[languageService.currentShortLocale].usage_instructions}}</p>
+                            <p [safeInnerHtml]="usageInstructions"></p>
                         </material-expansionpanel>
                         <material-expansionpanel flat
-                                                 [name]="msg.ingredient(2)"
+                                                 [name]="msg.ingredient(2) | name"
                                                  [showSaveCancel]="false">
                             <ul>
                                 <li *ngFor="let id of model.ingredient_ids">
