@@ -48,7 +48,10 @@ class RouterLinkSubActive implements AfterViewInit, OnDestroy {
     if (routerState != null) {
       for (var link in links) {
         final url = link.url;
-        if (url.path != routerState.path) continue;
+        final urlSegments = url.path.split('/');
+        final routeSegments = routerState.path.split('/');
+        if (urlSegments.first != routeSegments.first) continue;        
+
         // Only compare query parameters if specified in the [routerLink].
         if (url.queryParameters.isNotEmpty &&
             !const MapEquality()
