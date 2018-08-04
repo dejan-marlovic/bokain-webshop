@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col text-center">
+        <h1>{{msg.quick_links_title() | name}}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="m4 col">
+        <bo-quick-link-card class="clickable"
+                            [label]="msg.skin_test(1)"
+                            icon="skin-test"
+                            (click)="router.navigate(msg.skin_test_url())"></bo-quick-link-card>
+    </div>
+    <div class="m4 col">
+        <bo-quick-link-card class="clickable"
+                            [label]="msg.personal_skin_consultation()"
+                            icon="skin-consultation"
+                            (click)="router.navigate(msg.skin_consultation_url())"></bo-quick-link-card>
+    </div>
+    <div class="m4 col">
+        <bo-quick-link-card class="clickable"
+                            [label]="msg.skin_guide()"
+                            icon="skin-guide"
+                            (click)="router.navigate(msg.skin_guide_url())"></bo-quick-link-card>
+    </div>
+</div>
