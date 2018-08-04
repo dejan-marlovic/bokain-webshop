@@ -1,3 +1,4 @@
+import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
@@ -23,10 +24,20 @@ import '../product_list_component/product_list_component.dart';
     pipes: const [
       NamePipe
     ])
-class FrontpageComponent {
-  FrontpageComponent(this.languageService, this.productCategoryService, this.productService, this.msg)
+class FrontpageComponent implements OnActivate {
+  FrontpageComponent(this.languageService, this.productCategoryService,
+      this.productService, this.msg)
       : popularProducts =
-            new List<Product>.from(productService.cachedModels.values)..take(4);
+            new List<Product>.from(productService.cachedModels.values
+                .where((p) =>
+                    p.product_category_id != 'sub_product' &&
+                    p.product_category_id != 'bundle')
+                .take(4));
+
+  @override
+  void onActivate(RouterState previous, RouterState current) {
+    dom.window.scrollTo(0,0);
+  }
 
   final LanguageService languageService;
   final ProductCategoryService productCategoryService;

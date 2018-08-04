@@ -71,7 +71,7 @@
 
                     <div class="menuItem clickable"
                          *ngIf="productCategoryService.cachedModels.isNotEmpty"
-                         [routerLink]="msg.product_categories_url() + '/' + productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name"
+                         [routerLink]="msg.product_categories_url() + '/' + msg.bundle(2)"
                          routerLinkSubActive="activeRoute">
                          <div class="text-center">
                              <bo-icon icon="product-category" size="2.5rem"></bo-icon>

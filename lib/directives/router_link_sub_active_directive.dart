@@ -46,11 +46,24 @@ class RouterLinkSubActive implements AfterViewInit, OnDestroy {
   void _update(RouterState routerState) {
     var isActive = false;
     if (routerState != null) {
+      if (routerState.path.isEmpty) return;
+      final routeSegments = routerState.path.split('/')..remove('');
       for (var link in links) {
         final url = link.url;
-        final urlSegments = url.path.split('/');
-        final routeSegments = routerState.path.split('/');
-        if (urlSegments.first != routeSegments.first) continue;        
+        final urlSegments = url.path.split('/')..remove('');
+
+        bool checkPathRecursive(
+            List<String> urlSeg, List<String> routeSeg, int index) {
+          if (index > routeSeg.length - 2 && urlSeg[0] == routeSeg[0]) {
+            return true;
+          } else if (urlSeg[index] != routeSeg[index]) {
+            return false;
+          } else {
+            return checkPathRecursive(urlSeg, routeSeg, index + 1);
+          }
+        }
+
+        if (!checkPathRecursive(urlSegments, routeSegments, 0)) continue;
 
         // Only compare query parameters if specified in the [routerLink].
         if (url.queryParameters.isNotEmpty &&

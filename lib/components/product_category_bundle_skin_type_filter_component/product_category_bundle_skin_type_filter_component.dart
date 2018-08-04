@@ -27,7 +27,7 @@ class ProductCategoryBundleSkinTypeFilterComponent implements OnActivate {
     description = msg.bundles_for_description(skinType?.label);
 
     products = _productService.cachedModels.values
-        .where((p) => p.type == 'bundle' && p.skin_type_ids.contains(skinType));
+        .where((p) => p.product_category_id == 'bundle' && p.skin_type_ids.contains(skinType.id));
 
     _changeDetectorRef.markForCheck();
 

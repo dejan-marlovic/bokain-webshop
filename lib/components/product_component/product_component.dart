@@ -1,3 +1,4 @@
+import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular/security.dart';
 import 'package:angular_router/angular_router.dart';
@@ -37,6 +38,7 @@ class ProductComponent implements OnActivate {
 
   @override
   void onActivate(RouterState previous, RouterState current) {
+    dom.window.scrollTo(0,0);
     /// Figure out model
     if (current.parameters['url_name'] != null) {
       model = productService.cachedModels.values.firstWhere(
@@ -44,8 +46,10 @@ class ProductComponent implements OnActivate {
           orElse: () => null);
 
       if (model != null) {
-        description = sanitizationService.bypassSecurityTrustHtml(model.phrases[languageService.currentShortLocale].description_long);
-        usageInstructions = sanitizationService.bypassSecurityTrustHtml(model.phrases[languageService.currentShortLocale].usage_instructions);
+        description = sanitizationService.bypassSecurityTrustHtml(
+            model.phrases[languageService.currentShortLocale].description_long);
+        usageInstructions = sanitizationService.bypassSecurityTrustHtml(model
+            .phrases[languageService.currentShortLocale].usage_instructions);
       }
     }
   }
