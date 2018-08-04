@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col text-center">
+        <h1 class="large margin-bottom-small">
+            {{msg.skin_type(2) | name}}
+        </h1>
+        <p class="margin-top-small">
+            {{msg.skin_type_list_description() | name}}
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <bo-skin-type-table (trigger)="onSkinTypeSelect($event)"></bo-skin-type-table>
+    </div>
+</div>

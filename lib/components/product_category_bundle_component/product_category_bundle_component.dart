@@ -16,8 +16,7 @@ import '../skin_type_table_component/skin_type_table_component.dart';
 class ProductCategoryBundleComponent {
   ProductCategoryBundleComponent(this.skinTypeService, this._router, this.msg);
 
-  void onSkinTypeSelect(SkinType event) {
-    print(event.url_name);
+  void onSkinTypeSelect(SkinType event) {    
     _router.navigate('${msg.product_categories_url()}/${msg.bundle(2)}/${event.url_name}');
   }
 

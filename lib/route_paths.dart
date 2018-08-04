@@ -46,6 +46,10 @@ RoutePath get skinGuide =>
 RoutePath get skinTest =>
     RoutePath(path: Intl.message('skin-test', name: 'skin_test_url'));
 
+RoutePath get skinTypeList => RoutePath(
+  path: Intl.message('skin-types', name: 'skin_types_url')
+);
+
 RoutePath get skinTypeFilter => RoutePath(
     path: "${Intl.message('skin-types', name: 'skin_types_url')}/:id");
 

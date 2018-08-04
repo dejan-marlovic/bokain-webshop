@@ -19,7 +19,7 @@ import 'components/frontpage_component/frontpage_component.template.dart'
 import 'components/nav_large_component/nav_large_component.dart';
 import 'components/partners_component/partners_component.template.dart'
     as partners_comp;
-    import 'components/product_category_bundle_skin_type_filter_component/product_category_bundle_skin_type_filter_component.template.dart'
+import 'components/product_category_bundle_skin_type_filter_component/product_category_bundle_skin_type_filter_component.template.dart'
     as product_category_bundle_skin_type_filter_comp;
 import 'components/product_category_filter_component/product_category_filter_component.template.dart'
     as product_category_filter_comp;
@@ -37,6 +37,8 @@ import 'components/skin_test_component/skin_test_component.template.dart'
     as skin_test_comp;
 import 'components/skin_type_filter_component/skin_type_filter_component.template.dart'
     as skin_type_filter_comp;
+import 'components/skin_type_list_component/skin_type_list_component.template.dart'
+    as skin_type_list_comp;
 import 'components/standard_terms_component/standard_terms_component.template.dart'
     as standard_terms_comp;
 import 'route_paths.dart' as route_paths;
@@ -145,7 +147,11 @@ class AppComponent {
             component: product_comp.ProductComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.bundleSkinTypeList,
-            component: product_category_bundle_skin_type_filter_comp.ProductCategoryBundleSkinTypeFilterComponentNgFactory),
+            component: product_category_bundle_skin_type_filter_comp
+                .ProductCategoryBundleSkinTypeFilterComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.skinTypeList,
+            component: skin_type_list_comp.SkinTypeListComponentNgFactory),
 
         // Redirect everything else to frontpage
         RouteDefinition.redirect(
