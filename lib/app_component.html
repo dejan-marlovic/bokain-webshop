@@ -1,17 +1,14 @@
-<div *ngIf="loaded" class="page">
+<div *ngIf="loaded"
+     class="page">
     <header>
         <!-- Large top nav -->
         <div class="hide-for-medium hide-for-small">
             <bo-nav-large></bo-nav-large>
         </div>
     </header>
-    
+
     <main class="margin-top-medium">
-        <div class="row">
-            <div class="col">
-                <router-outlet [routes]="routes"></router-outlet>
-            </div>
-        </div>
+        <router-outlet [routes]="routes"></router-outlet>
     </main>
 
     <footer class="margin-top-medium">
@@ -19,4 +16,4 @@
             <bo-footer-large></bo-footer-large>
         </div>
     </footer>
-</div> 
+</div>

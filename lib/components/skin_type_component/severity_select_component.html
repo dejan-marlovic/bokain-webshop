@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col text-center">
+        <h2 class="large margin-top-none margin-bottom-small">{{msg.severity() | name}}</h2>
+        <p class="margin-top-small">
+            {{msg.which_skin_type_are_you() | name}}
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="s4 col text-center clickable"
+         *ngFor="let l of levels"
+         (click)="onLevelClick(l)">
+        <p class="margin-top-none margin-bottom-x-small">{{msg.severityLevel(l) | name}}</p>
+        <img [class.selected]="level == l"
+             [src]="model.image"
+             [alt]="msg.severityLevel(l)">
+    </div>
+</div>

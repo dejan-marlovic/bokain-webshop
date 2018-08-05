@@ -35,8 +35,8 @@ import 'components/skin_guide_component/skin_guide_component.template.dart'
     as skin_guide_comp;
 import 'components/skin_test_component/skin_test_component.template.dart'
     as skin_test_comp;
-import 'components/skin_type_filter_component/skin_type_filter_component.template.dart'
-    as skin_type_filter_comp;
+    import 'components/skin_type_component/skin_type_component.template.dart'
+    as skin_type_comp;
 import 'components/skin_type_list_component/skin_type_list_component.template.dart'
     as skin_type_list_comp;
 import 'components/standard_terms_component/standard_terms_component.template.dart'
@@ -103,8 +103,8 @@ class AppComponent {
             routePath: route_paths.skinConsultation,
             component: consultation_comp.SkinConsultationComponentNgFactory),
         RouteDefinition(
-            routePath: route_paths.skinTypeFilter,
-            component: skin_type_filter_comp.SkinTypeFilterComponentNgFactory),
+            routePath: route_paths.skinType,
+            component: skin_type_comp.SkinTypeComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.productCategoryFilter,
             component: product_category_filter_comp

@@ -1,0 +1,50 @@
+<div *ngIf="model != null">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="large">
+                {{model?.label | name}}
+            </h1>
+        </div>
+    </div>
+
+    <div class="grayBar">
+        <bo-severity-select *ngIf="model != null"
+                            [model]="model"
+                            [(level)]="severityLevel"></bo-severity-select>
+    </div>
+
+    <div class="row">
+        <div class="col text-center">
+            <h2 class="large">{{msg.products_for_severity(msg.severityLevel(severityLevel)) | name}} {{model.label | name}}</h2>
+        </div>
+    </div>
+
+
+    <div class="grayBar">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="large margin-bottom-small">{{msg.results() | name}}</h2>
+                <p class="margin-top-small">
+                    {{msg.other_customers_results() | name}}
+                </p>                
+            </div>
+        </div>
+        <div class="row collapse">
+            <div class="m4 col">img1</div>
+            <div class="m4 col">img2</div>
+            <div class="m4 col">img3</div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <material-button>
+                    {{msg.show_more_results()}}
+                </material-button>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<bo-quick-links></bo-quick-links>

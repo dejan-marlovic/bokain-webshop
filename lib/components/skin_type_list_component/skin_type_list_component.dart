@@ -17,7 +17,7 @@ import '../skin_type_table_component/skin_type_table_component.dart';
 class SkinTypeListComponent {
   SkinTypeListComponent(this._router, this.msg);
 
-  void onSkinTypeSelect(SkinType event) {    
+  void onSkinTypeSelect(SkinType event) {        
     _router.navigate('${msg.skin_type(2)}/${event.url_name}');
   }
 
