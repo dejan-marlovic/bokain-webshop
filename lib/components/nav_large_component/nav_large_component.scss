@@ -1,11 +1,10 @@
 @import 'package:angular_components/material_input/mixins';
 @import 'package:angular_components/material_menu/mixins';
-
+@import 'package:grid/constants';
 @import '../../colors';
 $upperMenuHeight: 40px;
 $lowerMenuHeight: 100px;
-:host {
-    @import 'package:grid/grid';
+:host {    
     @include dropdown-menu-nounderline;
     @include material-input-theme(white);
     @include material-input-no-underline();
@@ -57,12 +56,11 @@ $lowerMenuHeight: 100px;
     div.menuLower {
         padding-top: $upperMenuHeight;
         background-color: $colorGrayXLight;        
-        .flexAligner {
-            height: $lowerMenuHeight;
+        .flexAligner {            
             justify-content: center;
             .menuItem {                
                 color: $colorGrayDark;
-                margin: 0 $small;
+                padding: $medium $small; 
             }
             .menuItem.activeRoute {
                 color: $colorBlue;
