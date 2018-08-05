@@ -1,7 +1,5 @@
-@import '../../colors.scss';
-@import 'package:grid/grid.scss';
+@import 'package:grid/constants';
 
-.grayBar {
+.bar {
     padding: $large;
-    background-color: $colorGrayXLight;
 }

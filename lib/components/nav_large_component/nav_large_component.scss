@@ -1,6 +1,7 @@
 @import 'package:angular_components/material_input/mixins';
 @import 'package:angular_components/material_menu/mixins';
 @import 'package:grid/constants';
+@import 'package:fo_components/mixins';
 @import '../../colors';
 $upperMenuHeight: 40px;
 $lowerMenuHeight: 100px;
@@ -21,9 +22,8 @@ $lowerMenuHeight: 100px;
     }
     div.menuUpper {
         position: fixed;
-        box-shadow: 0 3px 4px -4px $colorGrayXDark;
+        @include boxShadow();        
         z-index: 99;
-        background-color: $colorBlue;        
         .flexAligner {
             height: $upperMenuHeight;
         }
@@ -43,7 +43,6 @@ $lowerMenuHeight: 100px;
                 right: -0.8em;
                 visibility: hidden;                
                 font-size: 0.8em;
-                background-color: $colorRedLight;
                 border-radius: 50%;                
                 display: inline-block;
                 padding: 0.2em 0.5em;
@@ -55,11 +54,9 @@ $lowerMenuHeight: 100px;
     }
     div.menuLower {
         padding-top: $upperMenuHeight;
-        background-color: $colorGrayXLight;        
         .flexAligner {            
             justify-content: center;
             .menuItem {                
-                color: $colorGrayDark;
                 padding: $medium $small; 
             }
             .menuItem.activeRoute {

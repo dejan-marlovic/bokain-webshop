@@ -22,6 +22,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-product-routines:before {
+    content: "\e916";
+  }
+
 .icon-skin-type:before {
     content: "\e900";
 }

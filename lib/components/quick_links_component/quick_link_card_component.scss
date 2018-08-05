@@ -1,9 +1,7 @@
-@import 'package:grid/grid.scss';
-@import '../../colors.scss';
+@import 'package:grid/constants';
+
 
 :host {
     display: block;
-    background-color: $colorGrayXLight;
-    color: $colorBlue;
     padding: $large;
 }

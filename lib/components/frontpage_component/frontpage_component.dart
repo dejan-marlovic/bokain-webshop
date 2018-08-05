@@ -27,16 +27,14 @@ import '../product_list_component/product_list_component.dart';
 class FrontpageComponent implements OnActivate {
   FrontpageComponent(this.languageService, this.productCategoryService,
       this.productService, this.msg)
-      : popularProducts =
-            new List<Product>.from(productService.cachedModels.values
-                .where((p) =>
-                    p.product_category_id != 'sub_product' &&
-                    p.product_category_id != 'bundle')
-                .take(4));
+      : popularProducts = new List<Product>.from(productService
+            .cachedModels.values
+            .where((p) => !p.sub_only && p.product_category_id != 'bundle')
+            .take(4));
 
   @override
   void onActivate(RouterState previous, RouterState current) {
-    dom.window.scrollTo(0,0);
+    dom.window.scrollTo(0, 0);
   }
 
   final LanguageService languageService;

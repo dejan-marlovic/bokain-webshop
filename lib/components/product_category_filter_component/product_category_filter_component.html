@@ -1,7 +1,7 @@
 <div class="row hide-for-medium hide-for-small">
     <div class="col text-center">
         <div class="flexAligner">
-            <div class="menuItem clickable"
+            <div class="menuItem color-2-dark clickable"
                  [routerLink]="msg.product_categories_url() + '/' + msg.bundle(1)"
                  routerLinkActive="activeRoute">
                 <div>
@@ -11,7 +11,7 @@
                 {{msg.bundle(2) | name}}
             </div>
             <div *ngFor="let cat of categories"
-                 class="menuItem clickable"
+                 class="menuItem color-2-dark clickable"
                  [routerLink]="msg.product_categories_url() + '/' + cat.phrases[languageService.currentShortLocale].url_name"        
                  routerLinkActive="activeRoute">
                 <div>

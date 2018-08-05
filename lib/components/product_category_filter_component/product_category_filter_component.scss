@@ -1,4 +1,4 @@
-@import 'package:grid/grid';
+@import 'package:grid/constants';
 @import '../../colors';
 
 :host {
@@ -7,7 +7,6 @@
         align-items: center;
         justify-content: center;
         div.menuItem {
-            color: $colorGrayDark;
             margin: 0 $small;
         }
         div.menuItem.activeRoute {

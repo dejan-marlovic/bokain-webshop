@@ -2,8 +2,9 @@
     <img alt="{{model.name}}"
          src="{{model.image_uri}}"
          (click)="openProduct()">
-    <material-button class="add_button"
+    <material-button class="blue"
                      clear-size
+                     raised
                      (trigger)="addToCart()">
         <material-icon icon="add" size="x-large"></material-icon>
     </material-button>
@@ -13,10 +14,10 @@
     <div class="nameContainer">
         <h3>{{model.phrases[lang]?.name}}</h3>
     </div>
-    <div class="descContainer">
+    <div class="descContainer color-2">
         <p>{{model.phrases[lang]?.description_short}}</p>
     </div>
     <div class="priceContainer">    
-        <p>{{model.price[cartService.currency]}} kr</p>
+        <p>{{cartService.addCurrency(model.price)}}</p>
     </div>
 </div>

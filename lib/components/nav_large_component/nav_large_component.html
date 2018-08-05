@@ -1,5 +1,5 @@
 <!-- Upper Menu -->
-<div class="row expand collapse menuUpper">
+<div class="row expand collapse menuUpper background-color-1">
     <div class="col">
         <div class="row collapse">
             <div class="col l5">
@@ -12,7 +12,7 @@
                              alt="logotype">
                     </div>
                     <div class="menuItem clickable"
-                         [routerLink]="msg.my_profile_url()"                         
+                         [routerLink]="msg.my_profile_url()"
                          routerLinkActive="activeRoute">
                         {{msg.login() | name}}
                     </div>
@@ -45,7 +45,8 @@
                          [routerLink]="msg.cart_url()"
                          routerLinkActive="activeRoute">
                         {{msg.cart() | name}}
-                        <span class="productCount" [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
+                        <span class="productCount color-white background-color-alert-light"
+                              [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
                     </div>
                 </div>
             </div>
@@ -55,44 +56,48 @@
 </div>
 
 <!-- Lower Menu -->
-<div class="row collapse expand menuLower">
+<div class="row collapse expand menuLower background-color-2-x-light">
     <div class="col">
         <div class="row collapse">
             <div class="col">
                 <div class="flexAligner">
-                    <div class="menuItem clickable"
+                    <div class="menuItem clickable color-2"
                          [routerLink]="msg.skin_types_url()"
                          routerLinkSubActive="activeRoute">
-                         <div class="text-center">
-                             <bo-icon icon="skin-type" size="2.5rem"></bo-icon>
-                         </div>
+                        <div class="text-center">
+                            <bo-icon icon="skin-type"
+                                     size="2.5rem"></bo-icon>
+                        </div>
                         {{msg.skin_type(1) | name}}
                     </div>
 
-                    <div class="menuItem clickable"
+                    <div class="menuItem clickable color-2"
                          *ngIf="productCategoryService.cachedModels.isNotEmpty"
                          [routerLink]="msg.product_categories_url() + '/' + msg.bundle(2)"
                          routerLinkSubActive="activeRoute">
-                         <div class="text-center">
-                             <bo-icon icon="product-category" size="2.5rem"></bo-icon>
-                         </div>
-                         {{msg.product_category(1) | name}}
+                        <div class="text-center">
+                            <bo-icon icon="product-category"
+                                     size="2.5rem"></bo-icon>
+                        </div>
+                        {{msg.product_category(1) | name}}
                     </div>
-                    <div class="menuItem clickable"
+                    <div class="menuItem clickable color-2"
                          [routerLink]="msg.skin_consultation_url()"
                          routerLinkActive="activeRoute">
-                         <div class="text-center">
-                             <bo-icon icon="skin-consultation" size="2.5rem"></bo-icon>
-                         </div>
-                         {{msg.consultation(1) | name}}
+                        <div class="text-center">
+                            <bo-icon icon="skin-consultation"
+                                     size="2.5rem"></bo-icon>
+                        </div>
+                        {{msg.consultation(1) | name}}
                     </div>
-                    <div class="menuItem clickable"
+                    <div class="menuItem clickable color-2"
                          [routerLink]="msg.skin_guide_url()"
                          routerLinkActive="activeRoute">
-                         <div class="text-center">
-                             <bo-icon icon="skin-guide" size="2.5rem"></bo-icon>
-                         </div>
-                         {{msg.skin_guide() | name}}                         
+                        <div class="text-center">
+                            <bo-icon icon="skin-guide"
+                                     size="2.5rem"></bo-icon>
+                        </div>
+                        {{msg.skin_guide() | name}}
                     </div>
                 </div>
             </div>

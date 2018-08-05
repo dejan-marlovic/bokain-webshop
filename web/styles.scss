@@ -1,6 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins);
 @import url(https://fonts.googleapis.com/css?family=Material+Icons);
 @import 'package:grid/grid';
+@import 'package:grid/theme';
+@import 'package:fo_components/theme';
+@import 'package:bokain_webshop/colors';
+@import 'package:angular_components/material_button/mixins';
+@include foColorAlert($colorRed);
+@include foColorConfirm($colorBlue);
+@include colorAlert($colorRed);
+@include colorConfirm($colorBlue);
+@include color1($colorBlue);
+@include color2($colorGray);
+
 
 @font-face {
     font-family: 'icomoon';
@@ -12,30 +23,26 @@
 }
 
 html {
-  overflow-y: scroll;
-  margin: 0;
-
-  body {
-      margin: 0;
-  }
+    overflow-y: scroll;
+    margin: 0;
+    body {
+        margin: 0;
+    }
 }
 
 * {
-  font-family: 'Poppins', Helvetica, Arial, sans-serif;
-  font-weight: lighter;
+    font-family: 'Poppins', Helvetica, Arial, sans-serif;
+    font-weight: lighter;
 }
 
 h1.large {
     font-size: 3em;
 }
+
 h2.large {
     font-size: 2em;
 }
 
-material-input {  
-  display: block !important;
-}
-
-.color-red {
-  color: red;
+material-input {
+    display: block !important;
 }

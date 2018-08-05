@@ -1,5 +1,7 @@
 @import '../../colors.scss';
+
 $lowerMenuHeight: 30px;
+
 :host {
     .col {
         padding-top: 0;
@@ -10,10 +12,8 @@ $lowerMenuHeight: 30px;
         align-items: center;
         justify-content: space-evenly;
     }
-    div.menuUpper {
-        background-color: $colorGrayXLight;
-        div.menuItem {
-            color: $colorGrayDark;
+    div.menuUpper {       
+        div.menuItem {         
             margin: 1rem 0.5rem;            
             text-align: center;
         }
@@ -21,8 +21,7 @@ $lowerMenuHeight: 30px;
             color: $colorBlue;
         }
     }
-    div.menuLower {
-        background-color: $colorBlue;
+    div.menuLower {        
         .flexAligner {
             height: $lowerMenuHeight;
             justify-content: center;

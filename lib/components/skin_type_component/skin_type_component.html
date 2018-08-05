@@ -2,41 +2,44 @@
     <div class="row">
         <div class="col text-center">
             <h1 class="large">
-                {{model?.label | name}}
+                {{model.label | name}}
             </h1>
         </div>
     </div>
-
     <div class="grayBar">
         <bo-severity-select *ngIf="model != null"
                             [model]="model"
-                            [(level)]="severityLevel"></bo-severity-select>
+                            [level]="severityLevel"
+                            (levelChange)="onSeverityLevelChange($event)"></bo-severity-select>
     </div>
 
-    <div class="row">
+    <div class="row padding-top-medium padding-bottom-medium">
         <div class="col text-center">
-            <h2 class="large">{{msg.products_for_severity(msg.severityLevel(severityLevel)) | name}} {{model.label | name}}</h2>
+            <h2 class="large">{{msg.products_for_severity(msg.severity_level(severityLevel)) | name}} {{model.label | name}}</h2>
+            <bo-product-bundlebox *ngIf="smallProduct != null"
+                                  [small]="smallProduct"
+                                  [large]="largeProduct"></bo-product-bundlebox>
         </div>
     </div>
 
 
-    <div class="grayBar">
+    <div class="bar background-color-2-x-light">
         <div class="row">
             <div class="col text-center">
-                <h2 class="large margin-bottom-small">{{msg.results() | name}}</h2>
+                <h2 class="large margin-top-none margin-bottom-small">{{msg.results() | name}}</h2>
                 <p class="margin-top-small">
                     {{msg.other_customers_results() | name}}
-                </p>                
+                </p>
             </div>
         </div>
         <div class="row collapse">
-            <div class="m4 col">img1</div>
-            <div class="m4 col">img2</div>
-            <div class="m4 col">img3</div>
+            <div class="m4 col text-center">img1</div>
+            <div class="m4 col text-center">img2</div>
+            <div class="m4 col text-center">img3</div>
         </div>
         <div class="row">
             <div class="col text-center">
-                <material-button>
+                <material-button [routerLink]="msg.results_url()">
                     {{msg.show_more_results()}}
                 </material-button>
             </div>

@@ -1,10 +1,4 @@
-@import 'package:grid/grid';
-@import 'package:angular_components/material_button/mixins';
-@import '../../colors';
-
-@include button-background-color('.add_button', $colorBlue);
-@include button-color('.add_button', $mat-white);
-@include button-background-color('material-button:hover.add_button', $colorBlueDark);
+@import 'package:grid/constants';
 
 :host {
     user-select: none;
@@ -56,7 +50,6 @@
             p {
                 flex: auto;
                 margin: 0;                
-                color: $colorGray;
             }                              
         }
         .priceContainer {

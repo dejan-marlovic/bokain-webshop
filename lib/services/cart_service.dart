@@ -43,6 +43,31 @@ class CartService {
     }
   }
 
+  String addCurrency(Map<String, num> price) {
+    
+    if (price == null) return '-';
+    final value = price[currency];
+    
+    switch (currency) {
+      case 'EUR':
+      return '€$value';
+      break;
+
+      case 'GBP':
+      return '£$value';
+      break;
+
+      case 'SEK':
+      return '$value kr';
+
+      case 'USD':
+      return '\$$value';
+
+      default:
+      return '$value $currency';
+    }
+  }
+
   Future<void> _updateKlarnaCheckout() async {
     
     final settings = _settingsService.get('1');

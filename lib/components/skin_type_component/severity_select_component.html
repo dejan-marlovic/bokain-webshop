@@ -10,9 +10,9 @@
     <div class="s4 col text-center clickable"
          *ngFor="let l of levels"
          (click)="onLevelClick(l)">
-        <p class="margin-top-none margin-bottom-x-small">{{msg.severityLevel(l) | name}}</p>
+        <p class="margin-top-none margin-bottom-x-small">{{msg.severity_level(l) | name}}</p>
         <img [class.selected]="level == l"
              [src]="model.image"
-             [alt]="msg.severityLevel(l)">
+             [alt]="msg.severity_level(l)">
     </div>
 </div>

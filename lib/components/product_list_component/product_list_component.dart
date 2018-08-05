@@ -14,7 +14,6 @@ import '../productbox_component/productbox_component.dart';
 class ProductListComponent {
   ProductListComponent(this.msg);
 
-
   final WebshopMessagesService msg;
 
   @Input()
