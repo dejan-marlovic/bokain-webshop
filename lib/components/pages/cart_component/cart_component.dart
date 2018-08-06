@@ -6,7 +6,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:angular/security.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import '../../services/cart_service.dart';
+import '../../../services/cart_service.dart';
 import 'cart_item_component.dart';
 
 @Component(

@@ -2,22 +2,22 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import '../../services/cart_service.dart';
-import '../icon_component/icon_component.dart';
+import '../../../../../services/cart_service.dart';
+import '../../../../icon_component/icon_component.dart';
 
 @Component(
-    selector: 'bo-product-bundlebox',
-    templateUrl: 'product_bundlebox_component.html',
-    styleUrls: const ['product_bundlebox_component.css'],
+    selector: 'bo-product-bundle',
+    templateUrl: 'product_bundle_component.html',
+    styleUrls: const ['product_bundle_component.css'],
     directives: const [IconComponent, MaterialButtonComponent, NgFor],
     providers: const [],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class ProductBundleBoxComponent implements OnInit {
-  ProductBundleBoxComponent(this.cartService, this.languageService,
+class ProductBundleComponent implements OnInit {
+  ProductBundleComponent(this.cartService, this.languageService,
       this._productService, this.productCategoryService, this.msg);
 
-  @override
+  @override 
   void ngOnInit() {
     onSelect(small);
   }

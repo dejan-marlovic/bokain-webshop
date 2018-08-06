@@ -3,10 +3,10 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import '../product_bundlebox_component/product_bundlebox_component.dart';
-import '../product_list_component/product_list_component.dart';
-import '../quick_links_component/quick_links_component.dart';
-import 'severity_select_component.dart';
+import '../../../product_list_component/product_list_component.dart';
+import '../../../quick_links_component/quick_links_component.dart';
+import 'product_bundle_component/product_bundle_component.dart';
+import 'severity_select_component/severity_select_component.dart';
 
 @Component(
     selector: 'bo-skin-type',
@@ -16,15 +16,15 @@ import 'severity_select_component.dart';
       NgFor,
       NgIf,
       MaterialButtonComponent,
-      ProductBundleBoxComponent,
+      ProductBundleComponent,
       ProductListComponent,
       QuickLinksComponent,
       routerDirectives,
-      SeveritySelectComponent
+      SeveritySelectComponent 
     ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class SkinTypeComponent implements OnActivate {
+class SkinTypeComponent implements OnActivate { 
   SkinTypeComponent(this._productService, this._skinTypeService,
       this._changeDetectorRef, this.msg);
 

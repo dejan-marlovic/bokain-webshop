@@ -1,5 +1,5 @@
 @import 'package:grid/constants';
-@import '../../colors';
+@import '../../../colors';
 
 :host {
     div.flexAligner {
@@ -8,7 +8,7 @@
         justify-content: center;
         div.menuItem {
             margin: 0 $small;
-        }
+        }        
         div.menuItem.activeRoute {
             color: $colorBlue;
         }

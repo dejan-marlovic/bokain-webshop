@@ -1,5 +1,5 @@
 <div class="row collapse">
-    <div class="m6 col">
+    <div class="m6 col align-middle">
         <img [src]="selected?.image_uri"
              [alt]="phrases?.name">
     </div>
@@ -7,14 +7,16 @@
         <div class="row">
             <div class="m6 col"
                  *ngFor="let product of subProducts">
-                <bo-icon [icon]="getIcon(product)"
+                <bo-icon class="color-1"
+                         [icon]="getIcon(product)"
                          [size]="iconSize"></bo-icon>
                 <p class="margin-top-small">
                     {{getName(product)}}
                 </p>
             </div>
             <div class="m6 col">
-                <bo-icon icon="product-routines"
+                <bo-icon class="color-1"
+                         icon="product-routines"
                          [size]="iconSize"></bo-icon>
                 <p class="margin-top-small">
                     {{msg.product_routine(2)}}
@@ -26,14 +28,14 @@
                 <material-button clear-size
                                  [class.blue]="selected == small"
                                  (trigger)="onSelect(small)">
-                    {{msg.bundle_small()}} {{cartService.addCurrency(small?.price)}}
+                    {{msg.bundle_small()}} ({{cartService.addCurrency(small?.price)}})
                 </material-button>
             </div>
             <div class="m6 col text-center">
-                <material-button clear-size                                 
+                <material-button clear-size
                                  [class.blue]="selected == large"
                                  (trigger)="onSelect(large)">
-                    {{msg.bundle_large()}}
+                    {{msg.bundle_large()}} ({{cartService.addCurrency(large?.price)}})
                 </material-button>
             </div>
         </div>

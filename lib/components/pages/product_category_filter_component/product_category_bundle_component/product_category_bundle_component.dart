@@ -2,8 +2,8 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import '../quick_links_component/quick_links_component.dart';
-import '../skin_type_table_component/skin_type_table_component.dart';
+import '../../../quick_links_component/quick_links_component.dart';
+import '../../../skin_type_table_component/skin_type_table_component.dart';
 
 @Component(
   selector: 'bo-product-category-bundle',

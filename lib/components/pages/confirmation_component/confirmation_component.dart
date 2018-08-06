@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular/security.dart';
 import 'package:bokain_models/bokain_models.dart';
-import '../../services/cart_service.dart';
+import '../../../services/cart_service.dart';
 
 @Component(
     selector: 'bo-confirmation',

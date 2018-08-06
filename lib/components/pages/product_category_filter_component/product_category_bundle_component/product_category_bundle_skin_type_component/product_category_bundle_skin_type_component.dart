@@ -2,18 +2,18 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:bokain_models/bokain_models.dart';
-import '../product_list_component/product_list_component.dart';
+import '../../../../product_list_component/product_list_component.dart';
 
 @Component(
-    selector: 'bo-product-category-bundle-skin-type-filter-component',
-    templateUrl: 'product_category_bundle_skin_type_filter_component.html',
-    styleUrls: const ['product_category_bundle_skin_type_filter_component.css'],
+    selector: 'bo-product-category-bundle-skin-type-component',
+    templateUrl: 'product_category_bundle_skin_type_component.html',
+    styleUrls: const ['product_category_bundle_skin_type_component.css'],
     directives: const [ProductListComponent],
     providers: const [],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class ProductCategoryBundleSkinTypeFilterComponent implements OnActivate {
-  ProductCategoryBundleSkinTypeFilterComponent(this._productService,
+class ProductCategoryBundleSkinTypeComponent implements OnActivate {
+  ProductCategoryBundleSkinTypeComponent(this._productService,
       this._skinTypeService, this._changeDetectorRef, this._router, this.msg);
 
   @override

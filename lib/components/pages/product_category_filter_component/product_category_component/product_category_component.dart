@@ -1,7 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:bokain_models/bokain_models.dart';
-import '../product_list_component/product_list_component.dart';
+import '../../../product_list_component/product_list_component.dart';
 
 @Component(
     selector: 'bo-product-category',

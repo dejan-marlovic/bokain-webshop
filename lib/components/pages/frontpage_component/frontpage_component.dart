@@ -4,8 +4,8 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import '../icon_component/icon_component.dart';
-import '../product_list_component/product_list_component.dart';
+import '../../icon_component/icon_component.dart';
+import '../../product_list_component/product_list_component.dart';
 
 @Component(
     selector: 'frontpage-component',

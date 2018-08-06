@@ -16,9 +16,9 @@
     <div class="row padding-top-medium padding-bottom-medium">
         <div class="col text-center">
             <h2 class="large">{{msg.products_for_severity(msg.severity_level(severityLevel)) | name}} {{model.label | name}}</h2>
-            <bo-product-bundlebox *ngIf="smallProduct != null"
-                                  [small]="smallProduct"
-                                  [large]="largeProduct"></bo-product-bundlebox>
+            <bo-product-bundle *ngIf="smallProduct != null"
+                                         [small]="smallProduct"
+                                         [large]="largeProduct"></bo-product-bundle>
         </div>
     </div>
 

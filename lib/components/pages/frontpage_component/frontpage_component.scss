@@ -1,10 +1,10 @@
 @import 'package:grid/constants';
-@import '../../colors.scss';
+//@import '../../colors.scss';
 :host {    
     div.card {
         padding: $large $medium;
-        background-color: $colorBlue;
-        color: white;
+        //background-color: $colorBlue;
+        //color: white;
         margin: 0 $x-small;
     }    
     div.card>p {
