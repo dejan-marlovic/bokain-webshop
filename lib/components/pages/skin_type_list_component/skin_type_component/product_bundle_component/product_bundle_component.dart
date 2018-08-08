@@ -17,7 +17,7 @@ class ProductBundleComponent implements OnInit {
   ProductBundleComponent(this.cartService, this.languageService,
       this._productService, this.productCategoryService, this.msg);
 
-  @override 
+  @override
   void ngOnInit() {
     onSelect(small);
   }
@@ -38,11 +38,10 @@ class ProductBundleComponent implements OnInit {
         : "category-${category.phrases['EN'].url_name}";
   }
 
-  String getName(Product product) {
-    return product.volume == null || product.volume <= 0
-        ? '${product.phrases[languageService.currentShortLocale].name}'
-        : '${product.phrases[languageService.currentShortLocale].name} (${product.volume}ml)';
-  }
+  String getName(Product product) => product.volume == null ||
+          product.volume <= 0
+      ? '${product.phrases[languageService.currentShortLocale].name}'
+      : '${product.phrases[languageService.currentShortLocale].name} (${product.volume}ml)';
 
   final CartService cartService;
   final LanguageService languageService;

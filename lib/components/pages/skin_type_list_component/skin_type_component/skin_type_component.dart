@@ -5,6 +5,7 @@ import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../../product_list_component/product_list_component.dart';
 import '../../../quick_links_component/quick_links_component.dart';
+import '../../../result_bar_component/result_bar_component.dart';
 import 'product_bundle_component/product_bundle_component.dart';
 import 'severity_select_component/severity_select_component.dart';
 
@@ -19,6 +20,7 @@ import 'severity_select_component/severity_select_component.dart';
       ProductBundleComponent,
       ProductListComponent,
       QuickLinksComponent,
+      ResultBarComponent,
       routerDirectives,
       SeveritySelectComponent 
     ],

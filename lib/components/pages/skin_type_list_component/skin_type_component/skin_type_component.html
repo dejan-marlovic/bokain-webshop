@@ -24,26 +24,7 @@
 
 
     <div class="bar background-color-2-x-light">
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="large margin-top-none margin-bottom-small">{{msg.results() | name}}</h2>
-                <p class="margin-top-small">
-                    {{msg.other_customers_results() | name}}
-                </p>
-            </div>
-        </div>
-        <div class="row collapse">
-            <div class="m4 col text-center">img1</div>
-            <div class="m4 col text-center">img2</div>
-            <div class="m4 col text-center">img3</div>
-        </div>
-        <div class="row">
-            <div class="col text-center">
-                <material-button [routerLink]="msg.results_url()">
-                    {{msg.show_more_results()}}
-                </material-button>
-            </div>
-        </div>
+        <bo-result-bar [skinType]="model"></bo-result-bar>
     </div>
 
 

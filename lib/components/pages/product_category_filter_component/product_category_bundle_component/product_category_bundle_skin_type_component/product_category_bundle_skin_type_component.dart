@@ -14,7 +14,7 @@ import '../../../../product_list_component/product_list_component.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductCategoryBundleSkinTypeComponent implements OnActivate {
   ProductCategoryBundleSkinTypeComponent(this._productService,
-      this._skinTypeService, this._changeDetectorRef, this._router, this.msg);
+      this._skinTypeService, this._changeDetectorRef, this.msg);
 
   @override
   void onActivate(RouterState previous, RouterState current) {
@@ -47,5 +47,4 @@ class ProductCategoryBundleSkinTypeComponent implements OnActivate {
   final SkinTypeService _skinTypeService;
   final WebshopMessagesService msg;
   final ChangeDetectorRef _changeDetectorRef;
-  final Router _router;
 }

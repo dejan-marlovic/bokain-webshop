@@ -8,11 +8,11 @@
 </div>
 <div class="row">
     <div class="s4 col text-center clickable"
-         *ngFor="let l of levels"
+         *ngFor="let l of levels; let i = index"
          (click)="onLevelClick(l)">
         <p class="margin-top-none margin-bottom-x-small">{{msg.severity_level(l) | name}}</p>
         <img [class.selected]="level == l"
-             [src]="model.image"
+             [src]="model.imageSeverity[i]"
              [alt]="msg.severity_level(l)">
     </div>
-</div>
+</div> 

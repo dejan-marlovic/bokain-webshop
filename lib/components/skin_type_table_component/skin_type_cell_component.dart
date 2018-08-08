@@ -20,7 +20,7 @@ class SkinTypeCellComponent implements OnDestroy {
     onTriggerController?.close();
   }
 
-  String get background => "url('${model.image}')";
+  String get background => "url('${model.imageSeverity[1]}')";
 
   final CoreMessagesService msg;
   final StreamController<SkinType> onTriggerController = new StreamController();

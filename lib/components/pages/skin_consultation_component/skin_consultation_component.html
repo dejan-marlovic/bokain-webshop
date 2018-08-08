@@ -1,271 +1,288 @@
-<div class="row margin-top-x-large" *ngIf="loading">
-  <div class="col text-center">
-    <material-spinner></material-spinner>
-  </div>
+<div class="row margin-top-x-large"
+     *ngIf="loading">
+    <div class="col text-center">
+        <material-spinner></material-spinner>
+    </div>
 </div>
 <div *ngIf="customer != null && consultation != null">
 
-  <!-- Regular consultation, show unless the customer has done consultation already -->
-  <material-expansionpanel-set *ngIf="step < 5 && customer.consultation_id == null">
-    <material-expansionpanel [name]="msg.detail(2)"
-                             [showSaveCancel]="false"
-                             [expanded]="step == 0"
-                             (open)="step = 0">
-      <div class="row">
+    <!-- Regular consultation, show unless the customer has done consultation already -->
+    <div class="row"
+         *ngIf="step < 5 && customer.consultation_id == null">
         <div class="col">
-          <bo-button-cloud-single-select [label]="msg.gender()"
-                                         [options]="genderOptions"
-                                         [centerLabel]="true"
-                                         [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
+            <h1 class="large margin-bottom-small text-center">{{msg.skin_consultation(1) | name}}</h1>
+            <p class="margin-top-small margin-bottom-large text-center">
+                {{msg.skin_consultation_intro_text() | name}}
+            </p>
+            <material-expansionpanel-set>
+                <material-expansionpanel [name]="msg.detail(2) | name"
+                                         [showSaveCancel]="false"
+                                         [expanded]="step == 0"
+                                         flat
+                                         (open)="step = 0">
+                    <div class="row">
+                        <div class="col">
+                            <bo-button-cloud-single-select [label]="msg.gender()"
+                                                           [options]="genderOptions"
+                                                           [centerLabel]="true"
+                                                           [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="l4 m3 s0 col"></div>
+                        <div class="l4 m6 col">
+                            <fo-social-number-input class="margin-top-x-large text-center"
+                                                    [(value)]="customer.social_number"></fo-social-number-input>
+                        </div>
+                        <div class="l4 m3 s0 col"></div>
+                    </div>
+                    <div class="row margin-top-medium">
+                        <div class="col text-center">
+                            <material-fab mini
+                                          [disabled]="customerService.loading || customer.social_number == null || customer.sex == null"
+                        
+                                          (trigger)="step = 1">
+                                <material-icon *ngIf="!customerService.loading"
+                                               icon="keyboard_arrow_down"
+                                               size="x-large"></material-icon>
+                                <material-icon *ngIf="customerService.loading"
+                                               icon="hourglass_empty"
+                                               size="x-large"></material-icon>
+                            </material-fab>
+                        </div>
+                    </div>
+                </material-expansionpanel>
+                <material-expansionpanel [name]="msg.problem_areas() | name"
+                                         [showSaveCancel]="false"
+                                         [disabled]="step < 1"
+                                         [expanded]="step == 1"
+                                         flat
+                                         (open)="step = 1">
+                    <bo-consultation-problem-areas [model]="consultation"
+                                                   [customer]="customer"></bo-consultation-problem-areas>
+                    <div class="row margin-top-medium">
+                        <div class="col text-center">
+                            <material-fab mini
+                                          [disabled]="consultation.area_face == false && consultation.area_chest == false && consultation.area_back == false && consultation.area_other == false || (consultation.area_face == true && consultation.zones.isEmpty)"
+                        
+                                          (trigger)="step = 2">
+                                <material-icon icon="keyboard_arrow_down"
+                                               size="x-large"></material-icon>
+                            </material-fab>
+                        </div>
+                    </div>
+                </material-expansionpanel>
+                <material-expansionpanel [name]="msg.symptom(2) | name"
+                                         [showSaveCancel]="false"
+                                         [disabled]="step < 2"
+                                         [expanded]="step == 2"
+                                         flat
+                                         (open)="step = 2">
+                    <bo-consultation-symptoms [model]="consultation"></bo-consultation-symptoms>
+                    <div class="row margin-top-medium">
+                        <div class="col text-center">
+                            <material-fab mini
+                                          [disabled]="consultation.customer_symptoms.isEmpty"
+                                          (trigger)="step = 3">
+                                <material-icon icon="keyboard_arrow_down"
+                                               size="x-large"></material-icon>
+                            </material-fab>
+                        </div>
+                    </div>
+                </material-expansionpanel>
+                <material-expansionpanel [name]="msg.photos() | name"
+                                         [showSaveCancel]="false"
+                                         [disabled]="step < 3"
+                                         [expanded]="step == 3"
+                                         flat
+                                         (open)="step = 3">
+                    <bo-consultation-pictures [model]="consultation"
+                                              [customer]="customer"
+                                              #pictures></bo-consultation-pictures>
+                    <div class="row margin-top-medium">
+                        <div class="col text-center">
+                            <material-fab mini
+                                          [disabled]="consultation.current_skin_status == null || consultation.skin_tone_id == null"
+                                          (trigger)="step = 4">
+                                <material-icon icon="keyboard_arrow_down"
+                                               size="x-large"></material-icon>
+                            </material-fab>
+                        </div>
+                    </div>
+                </material-expansionpanel>
+                <material-expansionpanel [name]="msg.contact() | name"
+                                         [showSaveCancel]="false"
+                                         [disabled]="step < 4"
+                                         [expanded]="step == 4"
+                                         float
+                                         (open)="step = 4">
+                    <form [ngFormModel]="form">
+                        <div class="row flex-for-large flex-for-medium">
+                            <div class="m6 col middle">
+                                <div class="row">
+                                    <div class="col">
+                                        <material-input label="{{msg.firstname()}}*"
+                                                        floatingLabel
+                                                        [disabled]="customerService.loading || consultationService.loading"
+                                                        [maxCount]="64"
+                                                        [ngFormControl]="form.controls['firstname']"
+                                                        [(ngModel)]="customer.firstname"></material-input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <material-input label="{{msg.lastname()}}*"
+                                                        floatingLabel
+                                                        [disabled]="customerService.loading || consultationService.loading"
+                                                        [maxCount]="64"
+                                                        [ngFormControl]="form.controls['lastname']"
+                                                        [(ngModel)]="customer.lastname"></material-input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <material-input label="{{msg.email()}}*"
+                                                        floatingLabel
+                                                        [disabled]="customerService.loading || consultationService.loading"
+                                                        [maxCount]="128"
+                                                        [ngFormControl]="form.controls['email']"
+                                                        [(ngModel)]="customer.email"></material-input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <material-input type="password"
+                                                        label="{{msg.password()}}*"
+                                                        floatingLabel
+                                                        [disabled]="customerService.loading || consultationService.loading"
+                                                        [maxCount]="64"
+                                                        [ngFormControl]="form.controls['password']"
+                                                        [(ngModel)]="password">
+
+                                        </material-input>
+                                    </div>
+                                </div>
+                                <div class="row collapse">
+                                    <div class="col">
+                                        <material-checkbox label="{{msg.call_me()}}"
+                                                           [disabled]="customerService.loading || consultationService.loading"
+                                                           [checked]="consultation.call_me"
+                                                           (checkedChange)="onCallMeChange($event)">
+                                        </material-checkbox>
+                                    </div>
+                                </div>
+                                <div class="row"
+                                     *ngIf="consultation.call_me">
+                                    <div class="s6 m3 l2 col">
+                                        <fo-select [label]="msg.country_code()"
+                                                   [disabled]="customerService.loading || consultationService.loading"
+                                                   [options]="countryCodeOptions"
+                                                   [(selectedId)]="customer.phone_country">
+                                        </fo-select>
+                                    </div>
+                                    <div class="m9 l10 col">
+                                        <material-input label="{{msg.phone()}}*"
+                                                        floatingLabel
+                                                        [disabled]="customerService.loading || consultationService.loading"
+                                                        [maxCount]="64"
+                                                        [ngFormControl]="form.controls['phone']"
+                                                        [(ngModel)]="customer.phone"></material-input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m6 col middle">
+                                <div class="row collapse">
+                                    <div class="col text-center">
+                                        <h4>GDPR</h4>
+                                        <p class="margin-bottom-small">{{msg.consultation_gdpr_terms()}}, {{msg.read_more()}}:
+                                            <a href="https://gdpr.dahlskincare.com"
+                                               target="_blank">https://gdpr.dahlskincare.com</a>.
+                                        </p>
+                                        <material-checkbox [label]="msg.i_accept_the_terms()"
+                                                           [(checked)]="termsAccepted">
+                                        </material-checkbox>
+                                    </div>
+                                </div>
+                                <div class="row collapse">
+                                    <div class="col text-center">
+                                        <material-button clear-size
+                                                         raised
+                                                         [disabled]="!termsAccepted || !form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"
+                                    
+                                                         (trigger)="onCreateConsultation()">
+                                            <span *ngIf="!consultationService.loading && !customerService.loading">{{msg.submit()}}</span>
+                                            <material-icon *ngIf="consultationService.loading || customerService.loading"
+                                                           icon="hourglass_empty"
+                                                           baseline
+                                                           size="x-large"></material-icon>
+                                        </material-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </material-expansionpanel>
+            </material-expansionpanel-set>
+
         </div>
-      </div>
-      <div class="row">
-        <div class="l4 m3 s0 col"></div>
-        <div class="l4 m6 col">
-          <fo-social-number-input class="margin-top-x-large text-center"
-                                  [(value)]="customer.social_number"></fo-social-number-input>
-        </div>
-        <div class="l4 m3 s0 col"></div>
-      </div>
-      <div class="row margin-top-medium">
-        <div class="col text-center">
-          <material-fab mini
-                        [disabled]="customerService.loading || customer.social_number == null || customer.sex == null"
-                        (trigger)="step = 1">
-            <material-icon *ngIf="!customerService.loading"
-                           icon="keyboard_arrow_down"
-                           size="x-large"></material-icon>
-            <material-icon *ngIf="customerService.loading"
-                           icon="hourglass_empty"
-                           size="x-large"></material-icon>
-          </material-fab>
-        </div>
-      </div>
-    </material-expansionpanel>
-    <material-expansionpanel name="{{msg.problem_areas()}}"
-                             [showSaveCancel]="false"
-                             [disabled]="step < 1"
-                             [expanded]="step == 1"
-                             (open)="step = 1">
-      <bo-consultation-problem-areas [model]="consultation"
-                                     [customer]="customer"></bo-consultation-problem-areas>
-      <div class="row margin-top-medium">
-        <div class="col text-center">
-          <material-fab mini
-                        [disabled]="consultation.area_face == false && consultation.area_chest == false && consultation.area_back == false && consultation.area_other == false || (consultation.area_face == true && consultation.zones.isEmpty)"
-        
-                        (trigger)="step = 2">
-            <material-icon icon="keyboard_arrow_down"
-                           size="x-large"></material-icon>
-          </material-fab>
-        </div>
-      </div>
-    </material-expansionpanel>
-    <material-expansionpanel name="{{msg.symptom(2)}}"
-                             [showSaveCancel]="false"
-                             [disabled]="step < 2"
-                             [expanded]="step == 2"
-                             (open)="step = 2">
-      <bo-consultation-symptoms [model]="consultation"></bo-consultation-symptoms>
-      <div class="row margin-top-medium">
-        <div class="col text-center">
-          <material-fab mini
-                        [disabled]="consultation.customer_symptoms.isEmpty"
-                        (trigger)="step = 3">
-            <material-icon icon="keyboard_arrow_down"
-                           size="x-large"></material-icon>
-          </material-fab>
-        </div>
-      </div>
-    </material-expansionpanel>
-    <material-expansionpanel name="{{msg.photos()}}"
-                             [showSaveCancel]="false"
-                             [disabled]="step < 3"
-                             [expanded]="step == 3"
-                             (open)="step = 3">
-      <bo-consultation-pictures [model]="consultation"
+    </div>
+
+    <!-- Survey, show unless the customer has completed the survey -->
+    <div *ngIf="step == 6">
+        <bo-consultation-survey [model]="consultation"
                                 [customer]="customer"
-                                #pictures></bo-consultation-pictures>
-      <div class="row margin-top-medium">
+                                (done)="onSurveyDone($event)"></bo-consultation-survey>
+    </div>
+
+    <div class="row margin-top-x-large"
+         *ngIf="step > 6 && customer != null">
         <div class="col text-center">
-          <material-fab mini
-                        [disabled]="consultation.current_skin_status == null || consultation.skin_tone_id == null"
-                        (trigger)="step = 4">
-            <material-icon icon="keyboard_arrow_down"
-                           size="x-large"></material-icon>
-          </material-fab>
+            <h1 class="margin-top-none">{{msg.thank_you() | name}}!</h1>
+            <p>{{msg.consultation_survey_done_text()}}</p>
         </div>
-      </div>
-    </material-expansionpanel>
-    <material-expansionpanel name="{{msg.contact()}}"
-                             [showSaveCancel]="false"
-                             [disabled]="step < 4"
-                             [expanded]="step == 4"
-                             (open)="step = 4">
-      <form [ngFormModel]="form">
-        <div class="row flex-for-large flex-for-medium">
-          <div class="m6 col middle">
-            <div class="row">
-              <div class="col">
-                <material-input label="{{msg.firstname()}}*"
-                                floatingLabel
-                                [disabled]="customerService.loading || consultationService.loading"
-                                [maxCount]="64"
-                                [ngFormControl]="form.controls['firstname']"
-                                [(ngModel)]="customer.firstname"></material-input>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <material-input label="{{msg.lastname()}}*"
-                                floatingLabel
-                                [disabled]="customerService.loading || consultationService.loading"
-                                [maxCount]="64"
-                                [ngFormControl]="form.controls['lastname']"
-                                [(ngModel)]="customer.lastname"></material-input>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <material-input label="{{msg.email()}}*"
-                                floatingLabel
-                                [disabled]="customerService.loading || consultationService.loading"
-                                [maxCount]="128"
-                                [ngFormControl]="form.controls['email']"
-                                [(ngModel)]="customer.email"></material-input>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <material-input type="password"
-                                label="{{msg.password()}}*"
-                                floatingLabel
-                                [disabled]="customerService.loading || consultationService.loading"
-                                [maxCount]="64"
-                                [ngFormControl]="form.controls['password']"
-                                [(ngModel)]="password">
+    </div>
 
-                </material-input>
-              </div>
+    <fo-modal title="{{msg.thank_you() | name}}!"
+              [whiteHeader]="true"
+              [smallPadding]="false"
+              [visible]="step == 5"
+              (visibleChange)="step = 6">
+        <div class="row">
+            <div class="col">
+                <p innerHtml="{{msg.consultation_done_text()}}"></p>
             </div>
-            <div class="row collapse">
-              <div class="col">
-                <material-checkbox label="{{msg.call_me()}}"
-                                   [disabled]="customerService.loading || consultationService.loading"
-                                   [checked]="consultation.call_me"
-                                   (checkedChange)="onCallMeChange($event)">
-                </material-checkbox>
-              </div>
+        </div>
+        <div class="text-right"
+             footer>
+            <material-button raised
+                             (trigger)="step = 6">
+                OK
+            </material-button>
+        </div>
+    </fo-modal>
+
+    <fo-modal [title]="errorTitle"
+              [visible]="errorText != null"
+              (visibleChange)="errorText = null; showResetPasswordButton = false; errorTitle = msg.error_occured();"
+              [whiteHeader]="false"
+              [smallPadding]="false">
+        <div class="row">
+            <div class="col">
+                <p>{{errorText | name}}</p>
             </div>
+        </div>
+        <div *ngIf="showResetPasswordButton">
             <div class="row"
-                 *ngIf="consultation.call_me">
-              <div class="s6 m3 l2 col">
-                <fo-select [label]="msg.country_code()"
-                           [disabled]="customerService.loading || consultationService.loading"
-                           [options]="countryCodeOptions"
-                           [(selectedId)]="customer.phone_country">
-                </fo-select>
-              </div>
-              <div class="m9 l10 col">
-                <material-input label="{{msg.phone()}}*"
-                                floatingLabel
-                                [disabled]="customerService.loading || consultationService.loading"
-                                [maxCount]="64"
-                                [ngFormControl]="form.controls['phone']"
-                                [(ngModel)]="customer.phone"></material-input>
-              </div>
+                 footer>
+                <div class="col text-right">
+                    <material-button raised
+                                     [disabled]="customerService.loading"
+                                     (trigger)="onResetPassword()">
+                        {{msg.reset_password()}}
+                    </material-button>
+                </div>
             </div>
-          </div>
-          <div class="m6 col middle">
-            <div class="row collapse">
-              <div class="col text-center">
-                <h4>GDPR</h4>
-                <p class="margin-bottom-small">{{msg.consultation_gdpr_terms()}}, {{msg.read_more()}}:
-                  <a href="https://gdpr.dahlskincare.com"
-                     target="_blank">https://gdpr.dahlskincare.com</a>.
-                </p>
-                <material-checkbox [label]="msg.i_accept_the_terms()"
-                                   [(checked)]="termsAccepted">
-                </material-checkbox>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="col text-center">
-                <material-button clear-size
-                                 raised
-                                 [disabled]="!termsAccepted || !form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"
-              
-                                 (trigger)="onCreateConsultation()">
-                  <span *ngIf="!consultationService.loading && !customerService.loading">{{msg.submit()}}</span>
-                  <material-icon *ngIf="consultationService.loading || customerService.loading"
-                                 icon="hourglass_empty"
-                                 baseline
-                                 size="x-large"></material-icon>
-                </material-button>
-              </div>
-            </div>
-          </div>
         </div>
-      </form>
-    </material-expansionpanel>
-  </material-expansionpanel-set>
 
-  <!-- Survey, show unless the customer has completed the survey -->
-  <div *ngIf="step == 6">
-    <bo-consultation-survey [model]="consultation"
-                            [customer]="customer"
-                            (done)="onSurveyDone($event)"></bo-consultation-survey>
-  </div>
-
-  <div class="row margin-top-x-large"
-       *ngIf="step > 6 && customer != null">
-    <div class="col text-center">
-      <h1 class="margin-top-none">{{msg.thank_you() | name}}!</h1>
-      <p>{{msg.consultation_survey_done_text()}}</p>
-    </div>
-  </div>
-
-  <fo-modal title="{{msg.thank_you() | name}}!"
-            [whiteHeader]="true"
-            [smallPadding]="false"
-            [visible]="step == 5" 
-            (visibleChange)="step = 6">
-    <div class="row">
-      <div class="col">
-        <p innerHtml="{{msg.consultation_done_text()}}"></p>
-      </div>
-    </div>
-    <div class="text-right"
-         footer>
-      <material-button raised
-                       (trigger)="step = 6">
-        OK
-      </material-button>
-    </div>
-  </fo-modal>
-
-  <fo-modal [title]="errorTitle"
-            [visible]="errorText != null"
-            (visibleChange)="errorText = null; showResetPasswordButton = false; errorTitle = msg.error_occured();"
-            [whiteHeader]="false"
-            [smallPadding]="false">
-    <div class="row">
-      <div class="col">
-        <p>{{errorText | name}}</p>
-      </div>
-    </div>
-    <div *ngIf="showResetPasswordButton">
-      <div class="row"
-           footer>
-        <div class="col text-right">
-          <material-button raised
-                           [disabled]="customerService.loading"
-                           (trigger)="onResetPassword()">
-            {{msg.reset_password()}}
-          </material-button>
-        </div>
-      </div>
-    </div>
-
-  </fo-modal>
+    </fo-modal>
 </div>
