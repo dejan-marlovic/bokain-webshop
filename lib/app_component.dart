@@ -85,10 +85,12 @@ class AppComponent {
       this._languageService,
       this._settingsService,
       this.router,
-      this.msg) {
+      this.msg) {        
     customerService
         .login('patrick.minogue@minoch.com', 'lok13rum')
-        .then(_loadResources);
+        .then(_loadResources);       
+        //int x;
+        //x++; 
   }
 
   void _onLocaleChange(String locale) {
