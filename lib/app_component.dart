@@ -88,9 +88,7 @@ class AppComponent {
       this.msg) {        
     customerService
         .login('patrick.minogue@minoch.com', 'lok13rum')
-        .then(_loadResources);       
-        //int x;
-        //x++; 
+        .then(_loadResources);               
   }
 
   void _onLocaleChange(String locale) {
