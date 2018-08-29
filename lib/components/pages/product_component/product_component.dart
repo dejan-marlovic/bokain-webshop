@@ -7,6 +7,7 @@ import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../../pipes/fetch_pipe.dart';
 import '../../../services/cart_service.dart';
+import '../../icon_component/icon_component.dart';
 
 @Component(
     selector: 'bo-product',
@@ -15,11 +16,16 @@ import '../../../services/cart_service.dart';
       'product_component.css'
     ],
     directives: const [
+      FoTabComponent,
+      FoTabPanelComponent,      
+      IconComponent,
       MaterialButtonComponent,
       MaterialExpansionPanel,
       MaterialExpansionPanelSet,
       NgFor,
       NgIf,
+      NgSwitch,
+      NgSwitchWhen,
       SafeInnerHtmlDirective
     ],
     providers: const [],
@@ -37,8 +43,8 @@ class ProductComponent implements OnActivate {
       this.msg);
 
   @override
-  void onActivate(RouterState previous, RouterState current) {
-    dom.window.scrollTo(0,0);
+  void onActivate(RouterState previous, RouterState current) {    
+    dom.window.scrollTo(0,0);    
     /// Figure out model
     if (current.parameters['url_name'] != null) {
       model = productService.cachedModels.values.firstWhere(
@@ -70,7 +76,6 @@ class ProductComponent implements OnActivate {
   final LanguageService languageService;
   final ProductService productService;
   final WebshopMessagesService msg;
-
   SafeHtml description;
   SafeHtml usageInstructions;
 }

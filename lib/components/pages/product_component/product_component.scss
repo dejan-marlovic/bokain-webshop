@@ -1,8 +1,13 @@
+@import 'package:bokain_models/colors';
 :host {
     ul {
         padding: 0;
         li {
             list-style-type: none;
         }
+    }
+    div.selected {
+        color: $color1 !important;
+
     }
 }

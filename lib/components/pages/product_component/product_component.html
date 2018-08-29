@@ -1,20 +1,23 @@
 <div *ngIf="model != null">
     <div class="row">
-        <div class="m8 col">
+        <div class="col text-center">
+            <h1 class="margin-bottom-none">{{model.phrases[languageService.currentShortLocale].name | name}}</h1>
+            <h3 class="margin-top-small">
+                {{model.phrases[languageService.currentShortLocale].description_short}},
+                <span class="text-x-small">{{model.volume}}ml</span>
+            </h3>
+            <h1>{{model.price[cartService.currency]}} {{cartService.currency}}</h1>
+        </div>
+    </div>
+    <div class="row margin-top-large">
+        <div class="m2 col"></div>
+        <div class="m4 col text-center">
             <img src="{{model.image_uri}}"
                  alt="{{model.phrases[languageService.currentShortLocale].name}}">
         </div>
         <div class="m4 col">
             <div class="row collapse">
-                <div class="col">
-                    <h1 class="margin-bottom-none">{{model.phrases[languageService.currentShortLocale].name | name}},
-                        <span class="text-x-small">{{model.volume}}ml</span>
-                    </h1>
-                    <h3 class="margin-top-small">{{model.phrases[languageService.currentShortLocale].description_short}}</h3>
-                </div>
-            </div>
-            <div class="row collapse">
-                <div class="col">
+                <div class="col text-center">
                     <p>PRODUKTRUTINER HÄR</p>
                     <p>PRODUKTRUTINER HÄR</p>
                     <p>PRODUKTRUTINER HÄR</p>
@@ -22,59 +25,39 @@
                 </div>
             </div>
             <div class="row collapse">
-                <div class="col">
-                    <h1>{{model.price[cartService.currency]}} {{cartService.currency}}</h1>
-                </div>
-            </div>
-            <div class="row collapse">
-                <div class="col">
-                    <material-button class="blue" (trigger)="cartService.add(model.id)">
+                <div class="col text-center">
+                    <material-button class="blue"
+                                     (trigger)="cartService.add(model.id)">
                         {{msg.add_to_cart()}}
                     </material-button>
                 </div>
             </div>
         </div>
+        <div class="m2 col"></div>
     </div>
-    <div class="row">
+    <div class="row margin-top-large background-color-2-x-light">
         <div class="col">
-            <hr />
-        </div>
-    </div>
-    <div class="row collapse">
-        <div class="m8 col">
-            <div class="row">
-                <div class="col">
-                    <h3>{{msg.product_description() | name}}</h3>
-                    <p [safeInnerHtml]="description"></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <material-expansionpanel-set>
-                        <material-expansionpanel flat
-                                                 [name]="msg.usage_instructions() | name"
-                                                 [showSaveCancel]="false">
-                            <p [safeInnerHtml]="usageInstructions"></p>
-                        </material-expansionpanel>
-                        <material-expansionpanel flat
-                                                 [name]="msg.ingredient(2) | name"
-                                                 [showSaveCancel]="false">
-                            <ul>
-                                <li *ngFor="let id of model.ingredient_ids">
-                                    {{id | fetch:ingredientService}}
-                                </li>
-                            </ul>
-                        </material-expansionpanel>
-                    </material-expansionpanel-set>
-                </div>
-            </div>
-
-        </div>
-        <div class="m4 col text-center">
-            <p>PRODUKTRUTINER HÄR</p>
-            <p>PRODUKTRUTINER HÄR</p>
-            <p>PRODUKTRUTINER HÄR</p>
-            <p>PRODUKTRUTINER HÄR</p>
+            <fo-tab-panel>
+                <fo-tab [label]="msg.information() | name">
+                    <h3>
+                        {{msg.product_description() | name}}
+                    </h3>
+                    <div [safeInnerHtml]="description">
+                    </div>
+                </fo-tab>
+                <fo-tab [label]="msg.instructions() | name">
+                    <p>{{msg.instructions()}}</p>
+                </fo-tab>
+                <fo-tab [label]="msg.ingredient(2) | name">
+                    <p>{{msg.ingredient(2)}}</p>
+                </fo-tab>
+                <fo-tab [label]="msg.important() | name">
+                    <p>{{msg.important()}}</p>
+                </fo-tab>
+                <fo-tab [label]="msg.combine() | name">
+                    <p>{{msg.combine()}}</p>
+                </fo-tab>
+            </fo-tab-panel>
         </div>
     </div>
 </div>
