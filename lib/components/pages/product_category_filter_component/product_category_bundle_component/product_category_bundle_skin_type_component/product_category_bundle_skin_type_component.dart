@@ -8,8 +8,7 @@ import '../../../../product_list_component/product_list_component.dart';
     selector: 'bo-product-category-bundle-skin-type-component',
     templateUrl: 'product_category_bundle_skin_type_component.html',
     styleUrls: const ['product_category_bundle_skin_type_component.css'],
-    directives: const [ProductListComponent],
-    providers: const [],
+    directives: const [ProductListComponent],    
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductCategoryBundleSkinTypeComponent implements OnActivate {

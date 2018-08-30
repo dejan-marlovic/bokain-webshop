@@ -35,7 +35,7 @@ import 'package:intl/intl.dart' show DateFormat;
       materialInputDirectives,
       MaterialSpinnerComponent
     ],
-    providers: const [
+    providers: const <Object>[
       ConsultationService,
       CountryService,
       CustomerService,
@@ -54,34 +54,34 @@ class SkinConsultationComponent {
       this.msg)
       : genderOptions = {'male': msg.male(), 'female': msg.female()},
         form = new ControlGroup({
-          'firstname': new Control(
+          'firstname': new Control<String>(
               '',
               Validators.compose([
                 Validators.required,
                 FoValidators.alpha,
                 Validators.maxLength(64)
               ])),
-          'lastname': new Control(
+          'lastname': new Control<String>(
               '',
               Validators.compose([
                 Validators.required,
                 FoValidators.alpha,
                 Validators.maxLength(64)
               ])),
-          'email': new Control(
+          'email': new Control<String>(
               '',
               Validators.compose([
                 Validators.required,
                 FoValidators.email
               ])),
-          'password': new Control(
+          'password': new Control<String>(
               '',
               Validators.compose([
                 Validators.required,
                 Validators.minLength(6),
                 Validators.maxLength(64)
               ])),
-          'phone': new Control('', Validators.compose([])),
+          'phone': new Control<String>('', Validators.compose([])),
         }),
         countryCodeOptions = countryService.data.values
             .map((country) => new FoModel()..id = country.calling_code)
@@ -172,7 +172,7 @@ class SkinConsultationComponent {
         return;
       }
     } else {
-      consultation.customer_id = customer.id;
+      consultation.customer_id = customer.id.toString();
     }
 
     customer.user_id ??= await _pickRandomWebConsultant();
@@ -186,7 +186,7 @@ class SkinConsultationComponent {
       }
     }
     customer.consultation_id = await consultationService.push(consultation);
-    await customerService.patch(customer.id, {
+    await customerService.patch(customer.id.toString(), <String, String>{
       'consultation_id': customer.consultation_id,
       'user_id': customer.user_id
     });
@@ -204,25 +204,25 @@ class SkinConsultationComponent {
   void onCallMeChange(bool event) {
     consultation.call_me = event;
     form = new ControlGroup({
-      'firstname': new Control(
+      'firstname': new Control<String>(
           customer.firstname,
           Validators.compose([
             Validators.required,
             FoValidators.alpha,
             Validators.maxLength(64)
           ])),
-      'lastname': new Control(
+      'lastname': new Control<String>(
           customer.lastname,
           Validators.compose([
             Validators.required,
             FoValidators.alpha,
             Validators.maxLength(64)
           ])),
-      'email': new Control(
+      'email': new Control<String>(
           customer.email,
           Validators.compose(
               [Validators.required, FoValidators.email])),
-      'password': new Control(
+      'password': new Control<String>(
           password,
           Validators.compose([
             Validators.required,
@@ -230,13 +230,13 @@ class SkinConsultationComponent {
             Validators.maxLength(64)
           ])),
       'phone': consultation.call_me
-          ? new Control(
+          ? new Control<String>(
               customer.phone,
               Validators.compose([
                 Validators.required,
                 FoValidators.phoneNumberWithoutCountryCode
               ]))
-          : new Control('', Validators.compose([]))
+          : new Control<String>('', Validators.compose([]))
     });
   }
 

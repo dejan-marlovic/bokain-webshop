@@ -7,8 +7,7 @@ import 'skin_type_cell_component.dart';
   selector: 'bo-skin-type-table',
   templateUrl: 'skin_type_table_component.html',
   styleUrls: const ['skin_type_table_component.css'],
-  directives: const [NgFor, SkinTypeCellComponent],
-  providers: const [],
+  directives: const [NgFor, SkinTypeCellComponent],  
   pipes: const []
 )
 class SkinTypeTableComponent implements OnDestroy {

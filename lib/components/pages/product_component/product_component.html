@@ -18,10 +18,18 @@
         <div class="m4 col">
             <div class="row collapse">
                 <div class="col text-center">
-                    <p>PRODUKTRUTINER HÄR</p>
-                    <p>PRODUKTRUTINER HÄR</p>
-                    <p>PRODUKTRUTINER HÄR</p>
-                    <p>PRODUKTRUTINER HÄR</p>
+                    <h1 class="margin-bottom-none">
+                        <fo-icon icon="category-{{productCategory.phrases['EN'].url_name}}"></fo-icon>
+                    </h1>
+                    <p class="margin-top-none">
+                        {{model.phrases[languageService.currentShortLocale].category_text}}
+                    </p>
+                    <h1 class="margin-bottom-none">
+                        <fo-icon icon="dailyRoutine.icon"></fo-icon>
+                    </h1>
+                    <p class="margin-top-none">
+                        {{model.phrases[languageService.currentShortLocale].daily_routine_text}}
+                    </p>
                 </div>
             </div>
             <div class="row collapse">
@@ -47,9 +55,10 @@
                     <h3>{{msg.skin_type(1) | name}}</h3>
                     <p>
                         <material-chips>
-                            <material-chip *ngFor="let id of model.skin_type_ids" [removable]="false">
-                                {{skinTypeService.webshopData[id]}}                      
-                            </material-chip>                            
+                            <material-chip *ngFor="let id of model.skin_type_ids"
+                                           [removable]="false">
+                                {{skinTypeService.webshopData[id]}}
+                            </material-chip>
                         </material-chips>
                     </p>
                 </fo-tab>

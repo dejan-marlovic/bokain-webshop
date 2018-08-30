@@ -23,8 +23,7 @@ import 'cart_item_component.dart';
       NgIf,
       NgFor,
       SafeInnerHtmlDirective
-    ],
-    providers: const [],
+    ],    
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.Default)
 class CartComponent implements OnActivate {

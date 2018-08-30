@@ -9,7 +9,7 @@ import '../../../services/cart_service.dart';
     templateUrl: 'confirmation_component.html',
     styleUrls: const ['confirmation_component.css'],
     directives: const [NgIf],
-    providers: const [KlarnaCheckoutService],
+    providers: const <Object>[KlarnaCheckoutService],
     pipes: const [])
 class ConfirmationComponent {
   ConfirmationComponent(this._cartService, this._klarnaCheckoutService,

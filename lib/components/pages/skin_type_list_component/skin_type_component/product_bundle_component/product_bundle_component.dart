@@ -8,8 +8,7 @@ import '../../../../../services/cart_service.dart';
     selector: 'bo-product-bundle',
     templateUrl: 'product_bundle_component.html',
     styleUrls: const ['product_bundle_component.css'],
-    directives: const [FoIconComponent, MaterialButtonComponent, NgFor],
-    providers: const [],
+    directives: const [FoIconComponent, MaterialButtonComponent, NgFor],    
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductBundleComponent implements OnInit {

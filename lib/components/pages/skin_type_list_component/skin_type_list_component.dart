@@ -9,8 +9,7 @@ import '../../skin_type_table_component/skin_type_table_component.dart';
   selector: 'bo-skin-type-list',
   templateUrl: 'skin_type_list_component.html',
   styleUrls: const ['skin_type_list_component.css'],
-  directives: const [QuickLinksComponent, SkinTypeTableComponent],
-  providers: const [],
+  directives: const [QuickLinksComponent, SkinTypeTableComponent],  
   pipes: const [NamePipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 )

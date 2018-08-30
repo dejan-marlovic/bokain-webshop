@@ -35,7 +35,7 @@ class NavLargeComponent {
     languageMenuModel = new MenuModel([
       new MenuItemGroup(countryService.data.values
           .map((country) =>
-              new MenuItem(country.name, action: () => _setLocale(country.language)))
+              new MenuItem<String>(country.name, action: () => _setLocale(country.language)))
           .toList(growable: false))
     ]);
   }
@@ -49,7 +49,7 @@ class NavLargeComponent {
     languageMenuModel = new MenuModel([
       new MenuItemGroup(countryService.data.values
           .map((country) =>
-              new MenuItem(country.name, action: () => _setLocale(country.language)))
+              new MenuItem<String>(country.name, action: () => _setLocale(country.language)))
           .toList(growable: false))
     ], tooltipText: msg.language());    
   }

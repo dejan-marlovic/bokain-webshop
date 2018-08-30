@@ -121,7 +121,7 @@ class CartService {
       final orderLine = new OrderLine()
         ..type = 'physical'
         ..reference = product.article_no
-        ..merchant_data = product.id
+        ..merchant_data = product.id.toString()
         ..name = product.phrases[_languageService.currentShortLocale].name
         ..quantity = productRegistry[productId]
         ..quantity_unit = _msg.pcs()
@@ -163,7 +163,7 @@ class CartService {
         ..name = _msg.standard()
         ..description = _msg.shipping_description()
         ..preselected = true
-        ..price = settings.shipping[currency] * 100;
+        ..price = settings.shipping[currency].round() * 100;
 
       shippingOption.tax_amount = shippingOption.price -
           shippingOption.price * 10000 ~/ (10000 + shippingOption.tax_rate);

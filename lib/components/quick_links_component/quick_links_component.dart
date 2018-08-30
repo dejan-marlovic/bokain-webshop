@@ -8,8 +8,7 @@ import 'quick_link_card_component.dart';
   selector: 'bo-quick-links',
   templateUrl: 'quick_links_component.html',
   styleUrls: const ['quick_links_component.css'],
-  directives: const [QuickLinkCardComponent],
-  providers: const [],
+  directives: const [QuickLinkCardComponent],  
   pipes: const [NamePipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 )

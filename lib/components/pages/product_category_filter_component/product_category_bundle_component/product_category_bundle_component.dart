@@ -10,8 +10,7 @@ import '../../../skin_type_table_component/skin_type_table_component.dart';
   templateUrl: 'product_category_bundle_component.html',
   styleUrls: const ['product_category_bundle_component.css'],
   directives: const [QuickLinksComponent, SkinTypeTableComponent],
-  pipes: const [NamePipe],
-  providers: const [],
+  pipes: const [NamePipe],  
   changeDetection: ChangeDetectionStrategy.OnPush
 )
 class ProductCategoryBundleComponent {

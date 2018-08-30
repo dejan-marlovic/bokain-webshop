@@ -19,6 +19,12 @@ import 'components/pages/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
 import 'components/pages/partners_component/partners_component.template.dart'
     as partners_comp;
+    /*
+import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_component.template.dart'
+    as product_category_bundle;
+    */
+import 'components/pages/product_category_filter_component/product_category_component/product_category_component.template.dart'
+    as product_category_comp;
 import 'components/pages/product_category_filter_component/product_category_filter_component.template.dart'
     as product_category_filter_comp;
 import 'components/pages/product_component/product_component.template.dart'
@@ -39,12 +45,6 @@ import 'components/pages/skin_type_list_component/skin_type_list_component.templ
     as skin_type_list_comp;
 import 'components/pages/standard_terms_component/standard_terms_component.template.dart'
     as standard_terms_comp;
-import 'components/pages/product_category_filter_component/product_category_filter_component.template.dart'
-    as product_category_filter_comp;
-import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_component.template.dart'
-    as product_category_bundle;
-import 'components/pages/product_category_filter_component/product_category_component/product_category_component.template.dart'
-    as product_category_comp;
 import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
 import 'services/route_service.dart';
@@ -60,13 +60,14 @@ import 'services/route_service.dart';
       NgIf,
       routerDirectives
     ],
-    providers: const [
+    providers: const <Object>[
       CartService,
       CountryService,
       ConsultationMessagesService,
       CoreMessagesService,
       CustomerLogService,
       CustomerService,
+      DailyRoutineService,
       foProviders,
       IngredientService,
       LanguageService,
@@ -161,7 +162,6 @@ class AppComponent {
         // Redirect everything else to frontpage
         RouteDefinition.redirect(
             path: '.+', redirectTo: route_paths.frontpage.toUrl())
-            
       ]
       ..productCategoryRoutes = [
         RouteDefinition(

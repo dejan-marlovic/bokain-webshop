@@ -9,8 +9,7 @@ import '../../../services/route_service.dart';
     selector: 'bo-product-category-filter',
     templateUrl: 'product_category_filter_component.html',
     styleUrls: const ['product_category_filter_component.css'],
-    directives: const [FoIconComponent, NgFor, NgIf, RouterLink, RouterLinkActive, RouterOutlet, RouterLinkSubActive],
-    providers: const [],
+    directives: const [FoIconComponent, NgFor, NgIf, RouterLink, RouterLinkActive, RouterOutlet, RouterLinkSubActive],    
     pipes: const [NamePipe])
 class ProductCategoryFilterComponent implements OnActivate {
   ProductCategoryFilterComponent(this.languageService,

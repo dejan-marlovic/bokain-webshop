@@ -22,15 +22,15 @@ class CartItemComponent {
       this.cartService, this.languageService, this.settingsService, this.msg);
 
   void remove() {
-    cartService.remove(product.id, removeAll: true);
+    cartService.remove(product.id.toString(), removeAll: true);
   }
 
   void onCountChange(int value) {
     if (value > cartService.productRegistry[product.id]) {
-      cartService.add(product.id);
+      cartService.add(product.id.toString());
     }
     else {
-      cartService.remove(product.id);
+      cartService.remove(product.id.toString());
     }
   }
 

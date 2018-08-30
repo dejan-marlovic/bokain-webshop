@@ -18,8 +18,7 @@ import '../../product_list_component/product_list_component.dart';
       MaterialButtonComponent,
       ProductListComponent,
       routerDirectives
-    ],
-    providers: const [],
+    ],    
     pipes: const [
       NamePipe
     ])

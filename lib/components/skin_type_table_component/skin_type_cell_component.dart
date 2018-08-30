@@ -8,8 +8,7 @@ import 'package:fo_components/fo_components.dart';
   selector: 'bo-skin-type-cell',
   templateUrl: 'skin_type_cell_component.html',
   styleUrls: const ['skin_type_cell_component.css'],
-  directives: const [MaterialButtonComponent, NgStyle],
-  providers: const [],
+  directives: const [MaterialButtonComponent, NgStyle],  
   pipes: const [NamePipe]
 )
 class SkinTypeCellComponent implements OnDestroy {

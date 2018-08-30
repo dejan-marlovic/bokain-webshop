@@ -8,8 +8,7 @@ import '../../../product_list_component/product_list_component.dart';
     selector: 'bo-product-category',
     templateUrl: 'product_category_component.html',
     styleUrls: const ['product_category_component.css'],
-    directives: const [NgFor, NgIf, ProductListComponent],
-    providers: const [],
+    directives: const [NgFor, NgIf, ProductListComponent],    
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.Default)
 class ProductCategoryComponent implements OnActivate {

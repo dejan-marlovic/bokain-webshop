@@ -19,7 +19,7 @@ class ProductBoxComponent implements OnInit {
   }
 
   void addToCart() {
-    cartService.add(model.id);
+    cartService.add(model.id.toString());
   }
 
   void openProduct() {

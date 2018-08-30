@@ -7,8 +7,7 @@ import 'package:fo_components/fo_components.dart';
   selector: 'bo-severity-select',
   templateUrl: 'severity_select_component.html',
   styleUrls: const ['severity_select_component.css'],
-  directives: const [NgClass, NgFor],
-  providers: const [],
+  directives: const [NgClass, NgFor],  
   pipes: [NamePipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 )

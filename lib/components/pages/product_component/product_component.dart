@@ -16,7 +16,7 @@ import '../../../services/cart_service.dart';
     ],
     directives: const [
       FoTabComponent,
-      FoTabPanelComponent,      
+      FoTabPanelComponent,
       FoIconComponent,
       MaterialButtonComponent,
       MaterialChipComponent,
@@ -29,7 +29,6 @@ import '../../../services/cart_service.dart';
       NgSwitchWhen,
       SafeInnerHtmlDirective
     ],
-    providers: const [],
     pipes: const [
       FetchPipe,
       NamePipe
@@ -37,16 +36,19 @@ import '../../../services/cart_service.dart';
 class ProductComponent implements OnActivate {
   ProductComponent(
       this.cartService,
+      this.dailyRoutineService,
       this.languageService,
       this.ingredientService,
       this.productService,
+      this.productCategoryService,
       this.skinTypeService,
       this.sanitizationService,
       this.msg);
 
   @override
-  void onActivate(RouterState previous, RouterState current) {    
-    dom.window.scrollTo(0,0);    
+  void onActivate(RouterState previous, RouterState current) {
+    dom.window.scrollTo(0, 0);
+
     /// Figure out model
     if (current.parameters['url_name'] != null) {
       model = productService.cachedModels.values.firstWhere(
@@ -58,6 +60,10 @@ class ProductComponent implements OnActivate {
             model.phrases[languageService.currentShortLocale].description_long);
         usageInstructions = sanitizationService.bypassSecurityTrustHtml(model
             .phrases[languageService.currentShortLocale].usage_instructions);
+
+        productCategory = productCategoryService.get(model.product_category_id);
+        
+        dailyRoutine = dailyRoutineService.get(model.daily_routine_id);
       }
     }
   }
@@ -71,15 +77,19 @@ class ProductComponent implements OnActivate {
   }
 
   Product model;
+  ProductCategory productCategory;
+  DailyRoutine dailyRoutine;
 
   final CartService cartService;
+  final DailyRoutineService dailyRoutineService;
   final DomSanitizationService sanitizationService;
   final IngredientService ingredientService;
   final LanguageService languageService;
   final ProductService productService;
+  final ProductCategoryService productCategoryService;
   final SkinTypeService skinTypeService;
   final WebshopMessagesService msg;
-  
+
   SafeHtml description;
   SafeHtml usageInstructions;
 }

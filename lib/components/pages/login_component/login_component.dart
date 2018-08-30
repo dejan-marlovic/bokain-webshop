@@ -17,7 +17,7 @@ import 'package:fo_components/fo_components.dart';
       MaterialButtonComponent,
       materialInputDirectives,
     ],
-    providers: const [
+    providers: const <Object>[
       FORM_PROVIDERS
     ],
     pipes: const [

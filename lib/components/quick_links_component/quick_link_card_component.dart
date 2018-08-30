@@ -5,8 +5,7 @@ import 'package:fo_components/fo_components.dart';
   selector: 'bo-quick-link-card',
   templateUrl: 'quick_link_card_component.html',
   styleUrls: const ['quick_link_card_component.css'],
-  directives: const [FoIconComponent],
-  providers: const [],
+  directives: const [FoIconComponent],  
   pipes: const [NamePipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 )
