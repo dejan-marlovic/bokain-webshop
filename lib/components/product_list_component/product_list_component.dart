@@ -24,4 +24,7 @@ class ProductListComponent {
 
   @Input()
   String description;
+
+  @Input()
+  String rootUrl = 'products';
 }

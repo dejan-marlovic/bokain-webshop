@@ -10,22 +10,31 @@ import '../../services/cart_service.dart';
     styleUrls: const ['productbox_component.css'],
     templateUrl: 'productbox_component.html',
     directives: const [MaterialButtonComponent, MaterialIconComponent])
-class ProductBoxComponent {
-  ProductBoxComponent(this.cartService, this.router);
+class ProductBoxComponent implements OnInit {
+  ProductBoxComponent(this.cartService, this.router, this._msg);
+
+  @override
+  void ngOnInit() {
+    rootUrl ??= _msg.product(2);
+  }
 
   void addToCart() {
-    cartService.add(model.id);    
+    cartService.add(model.id);
   }
 
   void openProduct() {
-    router.navigate('products/${model.phrases[lang].url_name}');
+    router.navigate('$rootUrl/${model.phrases[lang].url_name}');    
   }
 
   String get lang => Intl.shortLocale(Intl.getCurrentLocale()).toUpperCase();
 
-  @Input('model')
+  @Input()
   Product model;
 
+  @Input()
+  String rootUrl;
+
   final CartService cartService;
+  final CoreMessagesService _msg;
   final Router router;
 }

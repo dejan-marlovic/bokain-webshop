@@ -3,7 +3,7 @@
         <div class="flexAligner">
             <div class="menuItem color-2-dark clickable"
                  [routerLink]="msg.product_categories_url() + '/' + msg.bundle(1)"
-                 routerLinkActive="activeRoute">
+                 routerLinkSubActive="activeRoute">
                 <div>
                     <fo-icon icon="category-bundle"
                              [size]="iconSize"></fo-icon>
@@ -13,7 +13,7 @@
             <div *ngFor="let cat of categories"
                  class="menuItem color-2-dark clickable"
                  [routerLink]="msg.product_categories_url() + '/' + cat.phrases[languageService.currentShortLocale].url_name"        
-                 routerLinkActive="activeRoute">
+                 routerLinkSubActive="activeRoute">
                 <div>
                     <fo-icon icon="category-{{cat.phrases['EN'].url_name}}"
                              [size]="iconSize"></fo-icon>
@@ -24,16 +24,8 @@
     </div>
 </div>
 
-
-<div class="row collapse margin-top-large" *ngIf="category != null">
+<div class="row collapse margin-top-large">
     <div class="col">
-        <bo-product-category [model]="category"></bo-product-category>
-    </div>
-</div>
-
-<!-- Bundles -->
-<div class="row collapse margin-top-large" *ngIf="category == null">
-    <div class="col">
-        <bo-product-category-bundle></bo-product-category-bundle>
+        <router-outlet [routes]="routeService.productCategoryRoutes"></router-outlet>
     </div>
 </div>

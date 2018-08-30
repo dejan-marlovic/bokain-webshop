@@ -4,7 +4,6 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-
 import 'components/footer_large_component/footer_large_component.dart';
 import 'components/nav_large_component/nav_large_component.dart';
 import 'components/pages/about_us_component/about_us_component.template.dart'
@@ -20,8 +19,6 @@ import 'components/pages/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
 import 'components/pages/partners_component/partners_component.template.dart'
     as partners_comp;
-import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_skin_type_component/product_category_bundle_skin_type_component.template.dart'
-    as product_category_bundle_comp;
 import 'components/pages/product_category_filter_component/product_category_filter_component.template.dart'
     as product_category_filter_comp;
 import 'components/pages/product_component/product_component.template.dart'
@@ -42,8 +39,15 @@ import 'components/pages/skin_type_list_component/skin_type_list_component.templ
     as skin_type_list_comp;
 import 'components/pages/standard_terms_component/standard_terms_component.template.dart'
     as standard_terms_comp;
+import 'components/pages/product_category_filter_component/product_category_filter_component.template.dart'
+    as product_category_filter_comp;
+import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_component.template.dart'
+    as product_category_bundle;
+import 'components/pages/product_category_filter_component/product_category_component/product_category_component.template.dart'
+    as product_category_comp;
 import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
+import 'services/route_service.dart';
 
 @Component(
     selector: 'my-app',
@@ -71,6 +75,7 @@ import 'services/cart_service.dart';
       OrderService,
       ProductCategoryService,
       ProductService,
+      RouteService,
       SettingsService,
       SkinTypeService,
       WebshopMessagesService
@@ -83,20 +88,23 @@ class AppComponent {
       this.productService,
       this.customerService,
       this._languageService,
+      this.routeService,
       this._settingsService,
       this.router,
-      this.msg) {        
+      this.msg) {
     customerService
         .login('patrick.minogue@minoch.com', 'lok13rum')
-        .then(_loadResources);               
+        .then(_loadResources);
   }
 
   void _onLocaleChange(String locale) {
     _cartService.klarnaOrder = null;
-    routes = _setupRoutes();
+    //routeService.routes = _setupRoutes();
   }
 
-  List<RouteDefinition> _setupRoutes() => [
+  void _setupRoutes() {
+    routeService
+      ..routes = [
         RouteDefinition(
             routePath: route_paths.frontpage,
             component: frontpage_comp.FrontpageComponentNgFactory),
@@ -106,10 +114,6 @@ class AppComponent {
         RouteDefinition(
             routePath: route_paths.skinType,
             component: skin_type_comp.SkinTypeComponentNgFactory),
-        RouteDefinition(
-            routePath: route_paths.productCategoryFilter,
-            component: product_category_filter_comp
-                .ProductCategoryFilterComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.profile,
             component: profile_comp.ProfileComponentNgFactory),
@@ -147,17 +151,27 @@ class AppComponent {
             routePath: route_paths.products,
             component: product_comp.ProductComponentNgFactory),
         RouteDefinition(
-            routePath: route_paths.bundlesBySkinType,
-            component: product_category_bundle_comp
-                .ProductCategoryBundleSkinTypeComponentNgFactory),
-        RouteDefinition(
             routePath: route_paths.skinTypeList,
             component: skin_type_list_comp.SkinTypeListComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.productCategories,
+            component: product_category_filter_comp
+                .ProductCategoryFilterComponentNgFactory),
 
         // Redirect everything else to frontpage
         RouteDefinition.redirect(
             path: '.+', redirectTo: route_paths.frontpage.toUrl())
+            
+      ]
+      ..productCategoryRoutes = [
+        RouteDefinition(
+            routePath: route_paths.productCategory,
+            component: product_category_comp.ProductCategoryComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.productCategoryProduct,
+            component: product_comp.ProductComponentNgFactory)
       ];
+  }
 
   Future<void> _loadResources(String token) async {
     await _languageService.setLocale('SV');
@@ -169,7 +183,7 @@ class AppComponent {
         .where('status', '==', 'active')
         .orderBy('score', 'desc'));
 
-    routes = _setupRoutes();
+    _setupRoutes();
 
     _languageService.localeChanges.listen(_onLocaleChange);
 
@@ -179,6 +193,7 @@ class AppComponent {
   bool get loaded => _loaded;
 
   final CartService _cartService;
+  final RouteService routeService;
   final ProductCategoryService productCategoryService;
   final ProductService productService;
   final CustomerService customerService;
@@ -187,6 +202,5 @@ class AppComponent {
   final Router router;
   final WebshopMessagesService msg;
 
-  List<RouteDefinition> routes;
   bool _loaded = false;
 }

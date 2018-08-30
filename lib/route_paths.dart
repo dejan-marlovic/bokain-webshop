@@ -24,10 +24,11 @@ RoutePath get frontpage => RoutePath(path: 'index.html', useAsDefault: true);
 RoutePath get partners =>
     RoutePath(path: Intl.message('partners', name: 'partners_url'));
 
+/*
 RoutePath get productCategoryFilter => RoutePath(
     path:
-        "${Intl.message('product-categories', name: 'product_categories_url')}/:id");
-
+        "${Intl.message('product-categories', name: 'product_categories_url')}");
+  */      
 RoutePath get products => RoutePath(
     path: "${Intl.message('products', name: 'products_url')}/:url_name");
 
@@ -46,9 +47,8 @@ RoutePath get skinGuide =>
 RoutePath get skinTest =>
     RoutePath(path: Intl.message('skin-test', name: 'skin_test_url'));
 
-RoutePath get skinTypeList => RoutePath(
-  path: Intl.message('skin-types', name: 'skin_types_url')
-);
+RoutePath get skinTypeList =>
+    RoutePath(path: Intl.message('skin-types', name: 'skin_types_url'));
 
 RoutePath get skinType => RoutePath(
     path: "${Intl.message('skin-types', name: 'skin_types_url')}/:url_name");
@@ -56,7 +56,15 @@ RoutePath get skinType => RoutePath(
 RoutePath get standardTerms =>
     RoutePath(path: Intl.message('standard-terms', name: 'standard_terms_url'));
 
-RoutePath get bundlesBySkinType => RoutePath(
-    path: Intl.message(
-        "${Intl.message('product-categories', name: 'product_categories_url')}/:id/:skinType"));
- 
+
+RoutePath get productCategories => RoutePath(
+    path:
+        Intl.message('product-categories', name: 'product_categories_url'));
+
+RoutePath get productCategory => RoutePath(
+  path: ':url_name',
+  parent: productCategories);
+
+RoutePath get productCategoryProduct => RoutePath(
+    path: ':category_url_name/:url_name',
+    parent: productCategories);

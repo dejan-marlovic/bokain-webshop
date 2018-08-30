@@ -19,7 +19,7 @@ import '../../services/cart_service.dart';
     NgFor,
     NgIf,
     routerDirectives,
-    RouterLinkSubActive,
+    RouterLinkSubActive
   ],
   pipes: const [NamePipe]
 )

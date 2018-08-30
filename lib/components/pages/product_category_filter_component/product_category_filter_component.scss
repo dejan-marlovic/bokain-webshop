@@ -7,6 +7,7 @@
         align-items: center;
         justify-content: center;
         div.menuItem {
+            color: $colorGray;
             margin: 0 $small;
         }        
         div.menuItem.activeRoute {

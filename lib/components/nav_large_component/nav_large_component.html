@@ -73,13 +73,13 @@
 
                     <div class="menuItem clickable color-2"
                          *ngIf="productCategoryService.cachedModels.isNotEmpty"
-                         [routerLink]="msg.product_categories_url() + '/' + msg.bundle(2)"
+                         [routerLink]="msg.product_categories_url()"
                          routerLinkSubActive="activeRoute">
                         <div class="text-center">
                             <fo-icon icon="product-category"
                                      size="2.5rem"></fo-icon>
                         </div>
-                        {{msg.product_category(1) | name}}
+                        {{msg.product_category(2) | name}}
                     </div>
                     <div class="menuItem clickable color-2"
                          [routerLink]="msg.skin_consultation_url()"

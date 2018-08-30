@@ -1,7 +1,8 @@
-<div class="row collapse">
-    <div class="col">
+<div class="row collapse" *ngIf="model != null">
+    <div class="col">        
         <bo-product-list [title]="model.phrases[languageService.currentShortLocale]?.name | name"
                          [description]="model.phrases[languageService.currentShortLocale]?.meta_description | name"
-                         [products]="products"></bo-product-list>
+                         [products]="products"
+                         [rootUrl]="rootUrl"></bo-product-list>
     </div>
 </div>
