@@ -35,26 +35,38 @@
         </div>
         <div class="m2 col"></div>
     </div>
-    <div class="row margin-top-large background-color-2-x-light">
+    <div class="row margin-top-large">
         <div class="col">
             <fo-tab-panel>
-                <fo-tab [label]="msg.information() | name">
-                    <h3>
-                        {{msg.product_description() | name}}
-                    </h3>
+                <fo-tab [label]="msg.information() | name"
+                        icon="information">
+                    <h3>{{msg.product_description() | name}}</h3>
                     <div [safeInnerHtml]="description">
                     </div>
+                    <h3>{{msg.properties() | name}}</h3>
+                    <h3>{{msg.skin_type(1) | name}}</h3>
+                    <p>
+                        <material-chips>
+                            <material-chip *ngFor="let id of model.skin_type_ids" [removable]="false">
+                                {{skinTypeService.webshopData[id]}}                      
+                            </material-chip>                            
+                        </material-chips>
+                    </p>
                 </fo-tab>
-                <fo-tab [label]="msg.instructions() | name">
+                <fo-tab [label]="msg.instructions() | name"
+                        icon="instructions">
                     <p>{{msg.instructions()}}</p>
                 </fo-tab>
-                <fo-tab [label]="msg.ingredient(2) | name">
+                <fo-tab [label]="msg.ingredient(2) | name"
+                        icon="ingredients">
                     <p>{{msg.ingredient(2)}}</p>
                 </fo-tab>
-                <fo-tab [label]="msg.important() | name">
+                <fo-tab [label]="msg.important() | name"
+                        icon="important">
                     <p>{{msg.important()}}</p>
                 </fo-tab>
-                <fo-tab [label]="msg.combine() | name">
+                <fo-tab [label]="msg.combine() | name"
+                        icon="combine">
                     <p>{{msg.combine()}}</p>
                 </fo-tab>
             </fo-tab-panel>

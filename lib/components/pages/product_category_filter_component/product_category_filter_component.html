@@ -5,8 +5,8 @@
                  [routerLink]="msg.product_categories_url() + '/' + msg.bundle(1)"
                  routerLinkActive="activeRoute">
                 <div>
-                    <bo-icon icon="category-bundle"
-                             [size]="iconSize"></bo-icon>
+                    <fo-icon icon="category-bundle"
+                             [size]="iconSize"></fo-icon>
                 </div>
                 {{msg.bundle(2) | name}}
             </div>
@@ -15,8 +15,8 @@
                  [routerLink]="msg.product_categories_url() + '/' + cat.phrases[languageService.currentShortLocale].url_name"        
                  routerLinkActive="activeRoute">
                 <div>
-                    <bo-icon icon="category-{{cat.phrases['EN'].url_name}}"
-                             [size]="iconSize"></bo-icon>
+                    <fo-icon icon="category-{{cat.phrases['EN'].url_name}}"
+                             [size]="iconSize"></fo-icon>
                 </div>
                 {{cat.phrases[languageService.currentShortLocale].name | name}}
             </div>

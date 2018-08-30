@@ -3,7 +3,6 @@ import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:intl/intl.dart';
-import '../../icon_component/icon_component.dart';
 import 'product_category_bundle_component/product_category_bundle_component.dart';
 import 'product_category_component/product_category_component.dart';
 
@@ -14,7 +13,7 @@ import 'product_category_component/product_category_component.dart';
       'product_category_filter_component.css'
     ],
     directives: const [
-      IconComponent,
+      FoIconComponent,
       NgFor,
       NgIf,      
       ProductCategoryBundleComponent,

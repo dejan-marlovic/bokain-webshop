@@ -7,7 +7,6 @@ import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../directives/router_link_sub_active_directive.dart';
 import '../../services/cart_service.dart';
-import '../icon_component/icon_component.dart';
 
 @Component(
   selector: 'bo-nav-large',
@@ -15,7 +14,7 @@ import '../icon_component/icon_component.dart';
   templateUrl: 'nav_large_component.html',
   directives: const [
     DropdownMenuComponent,
-    IconComponent,
+    FoIconComponent,
     MaterialInputComponent,
     NgFor,
     NgIf,

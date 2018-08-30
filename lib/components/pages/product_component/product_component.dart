@@ -7,7 +7,6 @@ import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../../pipes/fetch_pipe.dart';
 import '../../../services/cart_service.dart';
-import '../../icon_component/icon_component.dart';
 
 @Component(
     selector: 'bo-product',
@@ -18,8 +17,10 @@ import '../../icon_component/icon_component.dart';
     directives: const [
       FoTabComponent,
       FoTabPanelComponent,      
-      IconComponent,
+      FoIconComponent,
       MaterialButtonComponent,
+      MaterialChipComponent,
+      MaterialChipsComponent,
       MaterialExpansionPanel,
       MaterialExpansionPanelSet,
       NgFor,
@@ -39,6 +40,7 @@ class ProductComponent implements OnActivate {
       this.languageService,
       this.ingredientService,
       this.productService,
+      this.skinTypeService,
       this.sanitizationService,
       this.msg);
 
@@ -75,7 +77,9 @@ class ProductComponent implements OnActivate {
   final IngredientService ingredientService;
   final LanguageService languageService;
   final ProductService productService;
+  final SkinTypeService skinTypeService;
   final WebshopMessagesService msg;
+  
   SafeHtml description;
   SafeHtml usageInstructions;
 }

@@ -7,17 +7,17 @@
         <div class="row">
             <div class="m6 col"
                  *ngFor="let product of subProducts">
-                <bo-icon class="color-1"
+                <fo-icon class="color-1"
                          [icon]="getIcon(product)"
-                         [size]="iconSize"></bo-icon>
+                         [size]="iconSize"></fo-icon>
                 <p class="margin-top-small">
                     {{getName(product)}}
                 </p>
             </div>
             <div class="m6 col">
-                <bo-icon class="color-1"
+                <fo-icon class="color-1"
                          icon="product-routines"
-                         [size]="iconSize"></bo-icon>
+                         [size]="iconSize"></fo-icon>
                 <p class="margin-top-small">
                     {{msg.product_routine(2)}}
                 </p>
