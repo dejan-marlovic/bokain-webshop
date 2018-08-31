@@ -28,7 +28,7 @@ RoutePath get partners =>
 RoutePath get productCategoryFilter => RoutePath(
     path:
         "${Intl.message('product-categories', name: 'product_categories_url')}");
-  */      
+  */
 RoutePath get products => RoutePath(
     path: "${Intl.message('products', name: 'products_url')}/:url_name");
 
@@ -56,15 +56,16 @@ RoutePath get skinType => RoutePath(
 RoutePath get standardTerms =>
     RoutePath(path: Intl.message('standard-terms', name: 'standard_terms_url'));
 
-
 RoutePath get productCategories => RoutePath(
-    path:
-        Intl.message('product-categories', name: 'product_categories_url'));
+    path: Intl.message('product-categories', name: 'product_categories_url'));
 
-RoutePath get productCategory => RoutePath(
-  path: ':url_name',
-  parent: productCategories);
+RoutePath get productCategory =>
+    RoutePath(path: ':url_name', parent: productCategories);
 
-RoutePath get productCategoryProduct => RoutePath(
-    path: ':category_url_name/:url_name',
+RoutePath get productCategoryBundles => RoutePath(
+    path: Intl.plural(2,
+        one: 'bundle', other: 'bundles', name: 'bundle', args: <int>[2]),
     parent: productCategories);
+
+RoutePath get productCategoryProduct =>
+    RoutePath(path: ':category_url_name/:url_name', parent: productCategories);

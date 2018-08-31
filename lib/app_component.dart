@@ -19,7 +19,7 @@ import 'components/pages/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
 import 'components/pages/partners_component/partners_component.template.dart'
     as partners_comp;
-    /*
+/*
 import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_component.template.dart'
     as product_category_bundle;
     */
@@ -165,11 +165,14 @@ class AppComponent {
       ]
       ..productCategoryRoutes = [
         RouteDefinition(
+            routePath: route_paths.productCategoryBundles,
+            component: skin_type_list_comp.SkinTypeListComponentNgFactory),
+        RouteDefinition(
             routePath: route_paths.productCategory,
             component: product_category_comp.ProductCategoryComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.productCategoryProduct,
-            component: product_comp.ProductComponentNgFactory)
+            component: product_comp.ProductComponentNgFactory),        
       ];
   }
 
