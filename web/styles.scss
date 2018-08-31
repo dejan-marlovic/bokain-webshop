@@ -4,7 +4,6 @@
 @import 'package:grid/theme';
 @import 'package:fo_components/theme';
 @import 'package:bokain_webshop/colors';
-@import 'package:angular_components/material_button/mixins';
 @include foColorAlert($colorRed);
 @include foColorConfirm($colorBlue);
 @include colorAlert($colorRed);

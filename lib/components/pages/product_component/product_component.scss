@@ -1,5 +1,9 @@
 @import 'package:bokain_models/colors';
-:host {
+
+:host {    
+    material-button {
+        display: block;
+    }
     ul {
         padding: 0;
         li {
@@ -8,6 +12,5 @@
     }
     div.selected {
         color: $color1 !important;
-
     }
 }

@@ -10,12 +10,12 @@
         </div>
     </div>
     <div class="row margin-top-large">
-        <div class="m2 col"></div>
-        <div class="m4 col text-center align-bottom">
+        <div class="l2 m0 s0 col"></div>
+        <div class="l5 m6 col text-center align-bottom">
             <img src="{{model.image_uri}}"
                  alt="{{model.phrases[languageService.currentShortLocale].name}}">
         </div>
-        <div class="m4 col align-bottom">
+        <div class="l3 m6 col align-bottom">
             <div class="row collapse">
                 <div class="col text-center">
                     <h1 class="margin-bottom-none">
@@ -35,13 +35,14 @@
             <div class="row collapse">
                 <div class="col text-center">
                     <material-button class="blue"
-                                     (trigger)="cartService.add(model.id)">
+                                     raised
+                                     (trigger)="cartService.add(model.id.toString())">
                         {{msg.add_to_cart()}}
                     </material-button>
                 </div>
             </div>
         </div>
-        <div class="m2 col"></div>
+        <div class="l2 m0 s0 col"></div>
     </div>
     <div class="row margin-top-large">
         <div class="col">
