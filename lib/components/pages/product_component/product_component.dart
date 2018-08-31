@@ -5,6 +5,8 @@ import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
+import '../../../components/product_list_component/product_list_component.dart';
+import '../../../components/quick_links_component/quick_links_component.dart';
 import '../../../pipes/fetch_pipe.dart';
 import '../../../services/cart_service.dart';
 
@@ -23,6 +25,8 @@ import '../../../services/cart_service.dart';
       MaterialChipsComponent,
       MaterialExpansionPanel,
       MaterialExpansionPanelSet,
+      ProductListComponent,
+      QuickLinksComponent,
       NgFor,
       NgIf,
       NgSwitch,
@@ -60,10 +64,11 @@ class ProductComponent implements OnActivate {
             model.phrases[languageService.currentShortLocale].description_long);
         usageInstructions = sanitizationService.bypassSecurityTrustHtml(model
             .phrases[languageService.currentShortLocale].usage_instructions);
+        importantNotice = sanitizationService.bypassSecurityTrustHtml(model.phrases[languageService.currentShortLocale].important_notice);
 
         productCategory = productCategoryService.get(model.product_category_id);
-        
         dailyRoutine = dailyRoutineService.get(model.daily_routine_id);
+        relatedProducts = productService.getMany(model.related_product_ids);
       }
     }
   }
@@ -79,6 +84,7 @@ class ProductComponent implements OnActivate {
   Product model;
   ProductCategory productCategory;
   DailyRoutine dailyRoutine;
+  List<Product> relatedProducts;
 
   final CartService cartService;
   final DailyRoutineService dailyRoutineService;
@@ -92,4 +98,5 @@ class ProductComponent implements OnActivate {
 
   SafeHtml description;
   SafeHtml usageInstructions;
+  SafeHtml importantNotice;
 }

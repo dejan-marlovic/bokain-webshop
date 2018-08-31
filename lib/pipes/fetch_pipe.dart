@@ -7,8 +7,13 @@ class FetchPipe extends PipeTransform {
 
   Object transform(String id, FirestoreService service) {
     if (_service == null) {
+
+      void setModel(Object i) {
+        _cachedModel = i;
+      }
+
       _service = service;      
-      _service.fetch(id, force: false, cache: true).then((Object i) => _cachedModel = i);      
+      _service.fetch(id, force: false, cache: true).then(setModel);      
     }
     return _cachedModel;
   }
