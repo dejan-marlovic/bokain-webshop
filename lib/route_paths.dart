@@ -24,13 +24,8 @@ RoutePath get frontpage => RoutePath(path: 'index.html', useAsDefault: true);
 RoutePath get partners =>
     RoutePath(path: Intl.message('partners', name: 'partners_url'));
 
-/*
-RoutePath get productCategoryFilter => RoutePath(
-    path:
-        "${Intl.message('product-categories', name: 'product_categories_url')}");
-  */
 RoutePath get products => RoutePath(
-    path: "${Intl.message('products', name: 'products_url')}/:url_name");
+    path: "${Intl.plural(2, one:'product', other: 'products', name: 'product', args: <int>[2])}/:url_name");
 
 RoutePath get profile =>
     RoutePath(path: Intl.message('profile', name: 'my_profile_url'));

@@ -36,10 +36,18 @@
             <div class="col l4">
                 <div class="flexAligner">
                     <div class="menuItem">
-                        <material-input [label]="msg.search() | name"
-                                        leadingGlyph="search"
-                                        [displayBottomPanel]="false">
-                        </material-input>
+                        <material-auto-suggest-input [label]="msg.search() | name"
+                                                     [filterSuggestions]="true"
+                                                     [popupMatchInputWidth]="true"
+                                                     [shouldClearOnSelection]="true"
+                                                     [factoryRenderer]="factoryRenderer"
+                                                     [highlightOptions]="false"
+                                                     leadingGlyph="search"
+                                                     [limit]="200"
+                                                     [selection]="searchModel"
+                                                     [selectionOptions]="searchOptions"
+                                                     [displayBottomPanel]="false">
+                        </material-auto-suggest-input>
                     </div>
                     <div class="menuItem clickable"
                          [routerLink]="msg.cart_url()"

@@ -11,7 +11,9 @@ import '../productbox_component/productbox_component.dart';
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductListComponent {
-  ProductListComponent(this.msg);
+  ProductListComponent(this.msg) {
+    rootUrl ??= msg.product(2);
+  }
 
   final WebshopMessagesService msg;
 
@@ -25,5 +27,5 @@ class ProductListComponent {
   String description;
 
   @Input()
-  String rootUrl = 'products';
+  String rootUrl;
 }
