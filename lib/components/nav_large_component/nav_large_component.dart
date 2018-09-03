@@ -47,18 +47,18 @@ class NavLargeComponent implements OnDestroy {
   }
 
   void _onSearchChange(List<SelectionChangeRecord<dynamic>> changes) {
-    
     if (changes.isNotEmpty && changes.first.added.isNotEmpty) {
       final FoModel added = changes.first.added.first;
       if (added is Product) {
-        print('${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
-        router.navigate('${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
-      }
-      else if (added is ProductCategory) {
-        router.navigate('${msg.product_categories_url()}/${added.phrases[languageService.currentShortLocale].url_name}');
-      }
-      else if (added is SkinType) {
-        router.navigate('${msg.skin_type(2)}/${added.url_name}');        
+        print(
+            '${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
+        router.navigate(
+            '${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
+      } else if (added is ProductCategory) {
+        router.navigate(
+            '${msg.product_categories_url()}/${added.phrases[languageService.currentShortLocale].url_name}');
+      } else if (added is SkinType) {
+        router.navigate('${msg.skin_type(2)}/${added.url_name}');
       }
     }
   }
@@ -84,22 +84,30 @@ class NavLargeComponent implements OnDestroy {
           msg.product_category(2)),
       new OptionGroup.withLabel(
           productService.cachedModels.values
-              .where((p) => p.sub_only == false && p.sub_product_ids.isEmpty) // dont list bundles or sub_products
+              .where((p) =>
+                  p.sub_only == false &&
+                  p.sub_product_ids
+                      .isEmpty) // dont list bundles or sub_products
               .toList(growable: false),
           msg.product(2)),
       new OptionGroup.withLabel(
-          skinTypeService.webshopData.values.toList(growable: false), msg.skin_type(2))
+          skinTypeService.webshopData.values.toList(growable: false),
+          msg.skin_type(2))
     ];
 
     searchOptions =
         new StringSelectionOptions<FoModel>.withOptionGroups(optionGroups);
   }
 
+/*
   bool get skinTypesOpen =>
       router.current?.path?.startsWith(msg.skin_types_url()) == true;
 
   bool get productCategoriesOpen =>
       router.current?.path?.startsWith(msg.product_categories_url()) == true;
+*/
+  String get productCategoryLink =>
+      '${msg.product_categories_url()}/${productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name}';
 
   final CartService cartService;
   final LanguageService languageService;
@@ -147,14 +155,14 @@ class SearchOptionRendererComponent implements RendersValue<FoModel> {
   @Input()
   set value(FoModel newValue) {
     if (newValue is Product) {
-      product = newValue;      
+      product = newValue;
       displayValue = product.phrases[languageService.currentShortLocale].name;
     } else if (newValue is ProductCategory) {
       productCategory = newValue;
       displayValue =
           productCategory.phrases[languageService.currentShortLocale].name;
     } else if (newValue is SkinType) {
-      skinType = newValue;      
+      skinType = newValue;
       displayValue = skinType.label;
     } else
       displayValue = newValue.toString();
