@@ -99,13 +99,11 @@ class NavLargeComponent implements OnDestroy {
         new StringSelectionOptions<FoModel>.withOptionGroups(optionGroups);
   }
 
-/*
-  bool get skinTypesOpen =>
-      router.current?.path?.startsWith(msg.skin_types_url()) == true;
+  String get profileLinkLabel =>
+      FirestoreService.currentFirebaseUser.uid == FirestoreService.defaultCustomerAuthId
+          ? msg.login()
+          : msg.my_profile();
 
-  bool get productCategoriesOpen =>
-      router.current?.path?.startsWith(msg.product_categories_url()) == true;
-*/
   String get productCategoryLink =>
       '${msg.product_categories_url()}/${productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name}';
 
@@ -125,11 +123,11 @@ class NavLargeComponent implements OnDestroy {
   StreamSubscription<List<SelectionChangeRecord>> _onSearchSubscription;
 
   FactoryRenderer<FoModel, SearchOptionRendererComponent> get factoryRenderer =>
-      (Object d) => nav.SearchOptionRendererComponentNgFactory;
+      (dynamic d) => nav.SearchOptionRendererComponentNgFactory;
 }
 
 @Component(
-  selector: 'example-renderer',
+  selector: 'search-item-renderer',
   template: r'''
         <div class="row collapse">
           <div class="s1 col text-center align-middle">
