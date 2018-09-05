@@ -24,14 +24,14 @@
 html {
     overflow-y: scroll;
     margin: 0;
+    font-weight: lighter;
     body {
         margin: 0;
     }
 }
 
 * {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif;
-    font-weight: lighter;
+    font-family: 'Poppins', Helvetica, Arial, sans-serif;    
 }
 
 h1.large {
@@ -44,4 +44,5 @@ h2.large {
 
 material-input {
     display: block !important;
+    width: 100% !important;
 }

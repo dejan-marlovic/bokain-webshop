@@ -1,0 +1,94 @@
+<div *ngIf="customer == null">
+    <div class="row margin-top-medium">
+        <div class="col text-center">
+            <material-spinner></material-spinner>
+        </div>
+    </div>
+</div>
+<div *ngIf="customer != null">
+    <div class="row collapse">
+        <div class="col">
+            <div class="text-center">                
+                <div>
+                    <strong>{{msg.email() | name}}:</strong> {{customer.email}}
+                </div>
+                <div *ngIf="customer.social_number != null">
+                    <strong>{{msg.ssn() | name}}:</strong> {{customer.social_number}}
+                </div>
+            </div>
+            <div class="margin-top-medium">
+                <form>
+                    <fieldset [disabled]="customerService.loading">
+                        <div class="row">
+                            <div class="m6 col">
+                                <div class="row">
+                                    <div class="col">
+                                        <material-input [label]="msg.firstname() | name"
+                                                        floatingLabel
+                                                        [(ngModel)]="customer.firstname">
+                                        </material-input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <material-input [label]="msg.lastname() | name"
+                                                        floatingLabel
+                                                        [(ngModel)]="customer.lastname">
+                                        </material-input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <material-input [label]="msg.phone() | name"
+                                                        floatingLabel
+                                                        [(ngModel)]="customer.phone">
+                                        </material-input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m6 col">
+                                <div class="row">
+                                    <div class="m6 col">
+                                        <material-input [label]="msg.street() | name"
+                                                        floatingLabel
+                                                        [(ngModel)]="customer.address.street">
+                                        </material-input>
+                                    </div>
+                                    <div class="m6 col">
+                                        <material-input [label]="msg.street2() | name"
+                                                        floatingLabel
+                                                        [(ngModel)]="customer.address.street2">
+                                        </material-input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="m4 col">
+                                        <material-input [label]="msg.postal_code() | name"
+                                                        floatingLabel
+                                                        [(ngModel)]="customer.address.zip">
+                                        </material-input>
+                                    </div>
+                                    <div class="m8 col">
+                                        <material-input [label]="msg.city() | name"
+                                                        floatingLabel
+                                                        [(ngModel)]="customer.address.city">
+                                        </material-input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <fo-select [label]="msg.country()"
+                                                   [options]="countryService.data.values"
+                                                   [(selectedId)]="customer.address.country">
+
+                                        </fo-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

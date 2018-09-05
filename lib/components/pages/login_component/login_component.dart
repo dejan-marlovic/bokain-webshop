@@ -26,10 +26,10 @@ import 'package:fo_components/fo_components.dart';
 class LoginComponent {
   LoginComponent(this.customerService, this.msg);
 
-  Future<void> onLogin() async {
-    print(email);
+  Future<void> onLogin() async {    
     try {
       await customerService.login(email, password);
+      await customerService.fetch(email);
       // ignore: avoid_catches_without_on_clauses
     } catch (e) {
       print(e.toString());
@@ -37,8 +37,8 @@ class LoginComponent {
     }
   }
 
-  String email;
-  String password;
+  String email = 'test@minoch.com';
+  String password = 'lok13rum';
   String errorMessage;
 
   final CustomerService customerService;

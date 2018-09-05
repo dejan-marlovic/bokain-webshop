@@ -5,49 +5,35 @@
     <div class="row">
         <div class="col">
             <fo-tab-panel>
-                <fo-tab [label]="msg.detail(2)">
-                    <div class="row">
-                        <div class="col">
-                            UPPGIFTER HÄR
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col text-right">
-                            <material-button
-                                    raised
-                                    (trigger)="onLogout()">
+                <fo-tab [label]="msg.detail(2) | name">
+                    <div class="row"
+                         *ngIf="customer != null">
+                        <div class="col text-center">
+                            <h1 class="margin-bottom-small">
+                                {{customer?.firstname}} {{customer?.lastname}}
+                            </h1>
+                            <p class="margin-top-small">
+                                <material-button raised
+                                                 (trigger)="onLogout()">
                                     {{msg.logout()}}
-                            </material-button>
+                                </material-button>
+                            </p>
                         </div>
                     </div>
+                    <bo-profile-details [customer]="customer"></bo-profile-details>
                 </fo-tab>
-                <fo-tab [label]="msg.chat(1)">
-                    <div class="row">
-                        <div class="col">
-                            <bo-customer-chat [customerId]="currentUserId" [customerPerspective]="true"></bo-customer-chat>
-                        </div>
-                    </div>
+                <fo-tab [label]="msg.chat(1) | name">
+                    <bo-customer-chat [customerId]="currentUserId"
+                                      [customerPerspective]="true"></bo-customer-chat>
                 </fo-tab>
-                <fo-tab [label]="msg.product(2)">
-                    <div class="row">
-                        <div class="col">
-                            FAVORITPRODUKTER HÄR
-                        </div>
-                    </div>
+                <fo-tab [label]="msg.product(2) | name">
+                    FAVORITPRODUKTER HÄR
                 </fo-tab>
-                <fo-tab [label]="msg.service(2)">
-                    <div class="row">
-                        <div class="col">
-                            REKOMMENDERADE TJÄNSTER HÄR
-                        </div>
-                    </div>
+                <fo-tab [label]="msg.service(2) | name">
+                    REKOMMENDERADE TJÄNSTER HÄR
                 </fo-tab>
-                <fo-tab [label]="msg.product_routine(2)">
-                    <div class="row">
-                        <div class="col">
-                            PRODUKTRUTINER HÄR
-                        </div>
-                    </div>
+                <fo-tab [label]="msg.product_routine(2) | name">
+                    PRODUKTRUTINER HÄR
                 </fo-tab>
             </fo-tab-panel>
         </div>
