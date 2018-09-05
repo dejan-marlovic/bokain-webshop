@@ -28,13 +28,12 @@ class ProfileComponent {
   ProfileComponent(this.customerService, this.msg);
 
 
-  void onLogout() async {
-    await customerService.logout();
-    await customerService.login(FirestoreService.defaultCustomerAuthId, 'lok13rum');
+  void onLogout() async {    
+    await customerService.login(FirestoreService.defaultCustomerId, 'lok13rum');
   }
 
-  Customer get customer => customerService.get(FirestoreService.currentUserId);
   String get currentUserId => FirestoreService.currentUserId;
+  Customer get customer => customerService.get(currentUserId);
 
   bool get loggedIn =>
       FirestoreService.currentFirebaseUser.uid != null &&
