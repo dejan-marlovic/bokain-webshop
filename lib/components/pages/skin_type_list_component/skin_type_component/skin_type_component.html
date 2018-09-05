@@ -26,9 +26,6 @@
     <div class="bar background-color-2-x-light">
         <bo-result-bar [skinType]="model"></bo-result-bar>
     </div>
-
-
-
+    <bo-quick-links></bo-quick-links>
 </div>
-
-<bo-quick-links></bo-quick-links>
+<bo-not-found *ngIf="showNotFound"></bo-not-found>

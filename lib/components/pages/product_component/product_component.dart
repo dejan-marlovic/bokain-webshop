@@ -1,75 +1,32 @@
 import 'dart:html' as dom;
 import 'package:angular/angular.dart';
-import 'package:angular/security.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:bokain_models/bokain_models.dart';
-import 'package:fo_components/fo_components.dart';
-import '../../../components/product_list_component/product_list_component.dart';
-import '../../../components/quick_links_component/quick_links_component.dart';
-import '../../../pipes/fetch_pipe.dart';
-import '../../../services/cart_service.dart';
+import '../not_found_component/not_found_component.dart';
+import 'product_bundle_component/product_bundle_component.dart';
+import 'sub_product_component/sub_product_component.dart';
 
 @Component(
     selector: 'bo-product',
     templateUrl: 'product_component.html',
-    styleUrls: const [
-      'product_component.css'
-    ],
-    directives: const [
-      FoTabComponent,
-      FoTabPanelComponent,
-      FoIconComponent,
-      MaterialButtonComponent,
-      MaterialChipComponent,
-      MaterialChipsComponent,
-      MaterialExpansionPanel,
-      MaterialExpansionPanelSet,
-      ProductListComponent,
-      QuickLinksComponent,
-      NgFor,
-      NgIf,
-      NgSwitch,
-      NgSwitchWhen,
-      SafeInnerHtmlDirective
-    ],
-    pipes: const [
-      FetchPipe,
-      NamePipe
-    ])
+    styleUrls: const ['product_component.css'],
+    directives: const [NgIf, NotFoundComponent, ProductBundleComponent, SubProductComponent])
 class ProductComponent implements OnActivate {
-  ProductComponent(
-      this.cartService,
-      this.dailyRoutineService,
-      this.languageService,
-      this.ingredientService,
-      this.productService,
-      this.productCategoryService,
-      this.skinTypeService,
-      this.sanitizationService,
-      this.msg);
+  ProductComponent(this.languageService, this.productService);
 
   @override
   void onActivate(RouterState previous, RouterState current) {
     dom.window.scrollTo(0, 0);
-
+    
     /// Figure out model
     if (current.parameters['url_name'] != null) {
       model = productService.cachedModels.values.firstWhere(
           (p) => _match(p, current.parameters['url_name']),
           orElse: () => null);
+    }
 
-      if (model != null) {
-        description = sanitizationService.bypassSecurityTrustHtml(
-            model.phrases[languageService.currentShortLocale].description_long);
-        usageInstructions = sanitizationService.bypassSecurityTrustHtml(model
-            .phrases[languageService.currentShortLocale].usage_instructions);
-        importantNotice = sanitizationService.bypassSecurityTrustHtml(model.phrases[languageService.currentShortLocale].important_notice);
-
-        productCategory = productCategoryService.get(model.product_category_id);
-        dailyRoutine = dailyRoutineService.get(model.daily_routine_id);
-        relatedProducts = productService.getMany(model.related_product_ids);
-      }
+    if (model == null) {
+      showNotFound = true;
     }
   }
 
@@ -82,21 +39,7 @@ class ProductComponent implements OnActivate {
   }
 
   Product model;
-  ProductCategory productCategory;
-  DailyRoutine dailyRoutine;
-  List<Product> relatedProducts;
-
-  final CartService cartService;
-  final DailyRoutineService dailyRoutineService;
-  final DomSanitizationService sanitizationService;
-  final IngredientService ingredientService;
+  bool showNotFound = false;
   final LanguageService languageService;
   final ProductService productService;
-  final ProductCategoryService productCategoryService;
-  final SkinTypeService skinTypeService;
-  final WebshopMessagesService msg;
-
-  SafeHtml description;
-  SafeHtml usageInstructions;
-  SafeHtml importantNotice;
 }

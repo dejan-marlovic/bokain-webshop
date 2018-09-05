@@ -6,6 +6,7 @@ import 'package:fo_components/fo_components.dart';
 import '../../../product_list_component/product_list_component.dart';
 import '../../../quick_links_component/quick_links_component.dart';
 import '../../../result_bar_component/result_bar_component.dart';
+import '../../not_found_component/not_found_component.dart';
 import 'product_bundle_component/product_bundle_component.dart';
 import 'severity_select_component/severity_select_component.dart';
 
@@ -16,17 +17,18 @@ import 'severity_select_component/severity_select_component.dart';
     directives: const [
       NgFor,
       NgIf,
+      NotFoundComponent,
       MaterialButtonComponent,
       ProductBundleComponent,
       ProductListComponent,
       QuickLinksComponent,
       ResultBarComponent,
       routerDirectives,
-      SeveritySelectComponent 
+      SeveritySelectComponent
     ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class SkinTypeComponent implements OnActivate { 
+class SkinTypeComponent implements OnActivate {
   SkinTypeComponent(this._productService, this._skinTypeService,
       this._changeDetectorRef, this.msg);
 
@@ -36,7 +38,11 @@ class SkinTypeComponent implements OnActivate {
       model = _skinTypeService.webshopData.values.firstWhere(
           (skinType) => skinType.url_name == current.parameters['url_name'],
           orElse: () => null);
+    }
 
+    if (model == null) {
+      showNotFound = true;
+    } else {
       skinTypeProducts = _productService.cachedModels.values
           .where((product) =>
               product.product_category_id == 'bundle' &&
@@ -44,8 +50,8 @@ class SkinTypeComponent implements OnActivate {
           .toList(growable: false);
 
       _evaluateProducts();
-      _changeDetectorRef.markForCheck();
     }
+    _changeDetectorRef.markForCheck();
   }
 
   void onSeverityLevelChange(int level) {
@@ -60,7 +66,7 @@ class SkinTypeComponent implements OnActivate {
     smallProduct = products.firstWhere((p) => p.bundle_size == 'small',
         orElse: () => null);
     largeProduct = products.firstWhere((p) => p.bundle_size == 'large',
-        orElse: () => null);    
+        orElse: () => null);
   }
 
   Product smallProduct;
@@ -68,6 +74,7 @@ class SkinTypeComponent implements OnActivate {
 
   SkinType model;
   List<Product> skinTypeProducts;
+  bool showNotFound = false;
   int severityLevel = 2;
   final ChangeDetectorRef _changeDetectorRef;
   final ProductService _productService;

@@ -104,9 +104,6 @@ class NavLargeComponent implements OnDestroy {
           ? msg.login()
           : msg.my_profile();
 
-  String get productCategoryLink =>
-      '${msg.product_categories_url()}/${productCategoryService.cachedModels.values.first.phrases[languageService.currentShortLocale].url_name}';
-
   final CartService cartService;
   final LanguageService languageService;
   final CountryService countryService;

@@ -42,7 +42,7 @@ class RouterLinkSubActive implements AfterViewInit, OnDestroy {
     }
   }
 
-  void _update(RouterState routerState) {
+  void _update(RouterState routerState) {    
     final isActive = routerState != null &&
         routerState.path.isNotEmpty &&
         routerState.path.contains(links.first.url.toString());

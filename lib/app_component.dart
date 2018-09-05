@@ -17,12 +17,14 @@ import 'components/pages/customer_support_component/customer_support_component.t
 import 'components/pages/faq_component/faq_component.template.dart' as faq_comp;
 import 'components/pages/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
+import 'components/pages/not_found_component/not_found_component.template.dart'
+    as not_found_comp;
 import 'components/pages/partners_component/partners_component.template.dart'
     as partners_comp;
-/*
 import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_component.template.dart'
     as product_category_bundle;
-    */
+import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_skin_type_component/product_category_bundle_skin_type_component.template.dart'
+    as product_category_bundle_skin_type;
 import 'components/pages/product_category_filter_component/product_category_component/product_category_component.template.dart'
     as product_category_comp;
 import 'components/pages/product_category_filter_component/product_category_filter_component.template.dart'
@@ -100,7 +102,7 @@ class AppComponent {
 
   void _onLocaleChange(String locale) {
     _cartService.klarnaOrder = null;
-    //routeService.routes = _setupRoutes();
+    _setupRoutes();
   }
 
   void _setupRoutes() {
@@ -143,13 +145,10 @@ class AppComponent {
             routePath: route_paths.skinGuide,
             component: skin_guide_comp.SkinGuideComponentNgFactory),
         RouteDefinition(
-            routePath: route_paths.standardTerms,
-            component: standard_terms_comp.StandardTermsComponentNgFactory),
-        RouteDefinition(
             routePath: route_paths.skinTest,
             component: skin_test_comp.SkinTestComponentNgFactory),
         RouteDefinition(
-            routePath: route_paths.products,
+            routePath: route_paths.product,
             component: product_comp.ProductComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.skinTypeList,
@@ -158,21 +157,32 @@ class AppComponent {
             routePath: route_paths.productCategories,
             component: product_category_filter_comp
                 .ProductCategoryFilterComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.notFound,
+            component: not_found_comp.NotFoundComponentNgFactory),
 
         // Redirect everything else to frontpage
         RouteDefinition.redirect(
-            path: '.+', redirectTo: route_paths.frontpage.toUrl())
+            path: '.+', redirectTo: route_paths.notFound.toUrl())
       ]
       ..productCategoryRoutes = [
         RouteDefinition(
             routePath: route_paths.productCategoryBundles,
-            component: skin_type_list_comp.SkinTypeListComponentNgFactory),
+            component: product_category_bundle
+                .ProductCategoryBundleComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.productCategoryBundlesSkinType,
+            component: product_category_bundle_skin_type
+                .ProductCategoryBundleSkinTypeComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.productCategoryBundlesSkinTypeBundle,
+            component: product_comp.ProductComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.productCategory,
             component: product_category_comp.ProductCategoryComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.productCategoryProduct,
-            component: product_comp.ProductComponentNgFactory),        
+            component: product_comp.ProductComponentNgFactory),
       ];
   }
 

@@ -24,8 +24,9 @@ RoutePath get frontpage => RoutePath(path: 'index.html', useAsDefault: true);
 RoutePath get partners =>
     RoutePath(path: Intl.message('partners', name: 'partners_url'));
 
-RoutePath get products => RoutePath(
-    path: "${Intl.plural(2, one:'product', other: 'products', name: 'product', args: <int>[2])}/:url_name");
+RoutePath get product => RoutePath(
+        path:
+            "${Intl.plural(2, one: 'product', other: 'products', name: 'product', args: <int>[2])}/:url_name");
 
 RoutePath get profile =>
     RoutePath(path: Intl.message('profile', name: 'my_profile_url'));
@@ -48,8 +49,7 @@ RoutePath get skinTypeList =>
 RoutePath get skinType => RoutePath(
     path: "${Intl.message('skin-types', name: 'skin_types_url')}/:url_name");
 
-RoutePath get standardTerms =>
-    RoutePath(path: Intl.message('standard-terms', name: 'standard_terms_url'));
+RoutePath get notFound => RoutePath(path: '404');
 
 RoutePath get productCategories => RoutePath(
     path: Intl.message('product-categories', name: 'product_categories_url'));
@@ -61,6 +61,12 @@ RoutePath get productCategoryBundles => RoutePath(
     path: Intl.plural(2,
         one: 'bundle', other: 'bundles', name: 'bundle', args: <int>[2]),
     parent: productCategories);
+
+RoutePath get productCategoryBundlesSkinType => RoutePath(
+    path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [2], name: 'bundle')}/:skin_type");
+
+RoutePath get productCategoryBundlesSkinTypeBundle => RoutePath(
+    path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [2], name: 'bundle')}/:skin_type/:url_name");
 
 RoutePath get productCategoryProduct =>
     RoutePath(path: ':category_url_name/:url_name', parent: productCategories);

@@ -1,2 +1,7 @@
-<bo-product-list [title]="title" [description]="description" [products]="products">
+<bo-product-list *ngIf="products != null"
+                 [title]="title"
+                 [description]="description"
+                 [products]="products"
+                 [rootUrl]="currentPath">
 </bo-product-list>
+<bo-not-found *ngIf="showNotFound"></bo-not-found>

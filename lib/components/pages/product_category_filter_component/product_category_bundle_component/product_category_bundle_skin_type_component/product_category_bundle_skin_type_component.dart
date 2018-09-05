@@ -3,12 +3,13 @@ import 'package:angular_router/angular_router.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:bokain_models/bokain_models.dart';
 import '../../../../product_list_component/product_list_component.dart';
+import '../../../not_found_component/not_found_component.dart';
 
 @Component(
     selector: 'bo-product-category-bundle-skin-type-component',
     templateUrl: 'product_category_bundle_skin_type_component.html',
     styleUrls: const ['product_category_bundle_skin_type_component.css'],
-    directives: const [ProductListComponent],    
+    directives: const [NgIf, NotFoundComponent, ProductListComponent],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductCategoryBundleSkinTypeComponent implements OnActivate {
@@ -17,30 +18,30 @@ class ProductCategoryBundleSkinTypeComponent implements OnActivate {
 
   @override
   void onActivate(RouterState previous, RouterState current) {
-    final label = current.path.split('/').last;
+    currentPath = current.path;
+
+    final label = current.parameters['skin_type'];
 
     final skinType = _skinTypeService.webshopData.values
         .firstWhere((s) => s.url_name == label, orElse: () => null);
 
-    title = msg.bundles_for_title(skinType?.label);
-    description = msg.bundles_for_description(skinType?.label);
+    if (skinType == null) {
+      showNotFound = true;
+    } else {
+      title = msg.bundles_for_title(skinType?.label);
+      description = msg.bundles_for_description(skinType?.label);
 
-    products = _productService.cachedModels.values
-        .where((p) => p.product_category_id == 'bundle' && p.skin_type_ids.contains(skinType.id));
-
+      products = _productService.cachedModels.values.where((p) =>
+          p.product_category_id == 'bundle' &&
+          p.skin_type_ids.contains(skinType.id));
+    }
     _changeDetectorRef.markForCheck();
-
-
-    /*
-    if (products.isEmpty) {
-      _router.navigate('index.html');
-    }            
-    */
   }
 
   String title;
   String description;
-
+  String currentPath;
+  bool showNotFound = false;
   Iterable<Product> products;
   final ProductService _productService;
   final SkinTypeService _skinTypeService;
