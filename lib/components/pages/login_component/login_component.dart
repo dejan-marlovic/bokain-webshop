@@ -37,8 +37,8 @@ class LoginComponent {
     }
   }
 
-  String email = 'test@minoch.com';
-  String password = 'lok13rum';
+  String email;// = 'test@minoch.com';
+  String password;// = 'lok13rum';
   String errorMessage;
 
   final CustomerService customerService;

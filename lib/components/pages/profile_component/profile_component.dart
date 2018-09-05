@@ -27,7 +27,6 @@ import 'profile_details_component.dart';
 class ProfileComponent {
   ProfileComponent(this.customerService, this.msg);
 
-
   void onLogout() async {    
     await customerService.login(FirestoreService.defaultCustomerId, 'lok13rum');
   }
