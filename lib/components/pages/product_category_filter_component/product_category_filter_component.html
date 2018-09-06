@@ -1,22 +1,17 @@
 <div class="row hide-for-medium hide-for-small">
     <div class="col text-center">
         <div class="flexAligner">
-            <div class="menuItem color-2-dark clickable"
-                 [routerLink]="msg.product_categories_url() + '/' + msg.bundle(1)"
+            <div class="menuItem color-2-dark clickable" [routerLink]="msg.product_categories_url() + '/' + msg.bundle(1)"
                  routerLinkSubActive="activeRoute">
                 <div>
-                    <fo-icon icon="category-bundle"
-                             [size]="iconSize"></fo-icon>
+                    <fo-icon icon="category-bundle" [size]="iconSize"></fo-icon>
                 </div>
                 {{msg.bundle(2) | name}}
             </div>
-            <div *ngFor="let cat of categories"
-                 class="menuItem color-2-dark clickable"
-                 [routerLink]="msg.product_categories_url() + '/' + cat.phrases[languageService.currentShortLocale].url_name"        
+            <div *ngFor="let cat of categories" class="menuItem color-2-dark clickable" [routerLink]="msg.product_categories_url() + '/' + cat.phrases[languageService.currentShortLocale].url_name"
                  routerLinkSubActive="activeRoute">
                 <div>
-                    <fo-icon icon="category-{{cat.phrases['EN'].url_name}}"
-                             [size]="iconSize"></fo-icon>
+                    <fo-icon icon="category-{{cat.phrases['EN'].url_name}}" [size]="iconSize"></fo-icon>
                 </div>
                 {{cat.phrases[languageService.currentShortLocale].name | name}}
             </div>
@@ -24,8 +19,5 @@
     </div>
 </div>
 
-<div class="row collapse margin-top-large">
-    <div class="col">
-        <router-outlet [routes]="routeService.productCategoryRoutes"></router-outlet>
-    </div>
-</div>
+
+<router-outlet class="margin-top-large" [routes]="routeService.productCategoryRoutes"></router-outlet>

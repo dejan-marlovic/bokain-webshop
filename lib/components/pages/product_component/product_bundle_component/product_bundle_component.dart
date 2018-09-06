@@ -8,6 +8,7 @@ import '../../../../components/product_list_component/product_list_component.dar
 import '../../../../components/quick_links_component/quick_links_component.dart';
 import '../../../../pipes/fetch_pipe.dart';
 import '../../../../services/cart_service.dart';
+import '../../../result_bar_component/result_bar_component.dart';
 
 @Component(
     selector: 'bo-product-bundle',
@@ -26,10 +27,9 @@ import '../../../../services/cart_service.dart';
       MaterialExpansionPanelSet,
       ProductListComponent,
       QuickLinksComponent,
+      ResultBarComponent,
       NgFor,
       NgIf,
-      NgSwitch,
-      NgSwitchWhen,
       SafeInnerHtmlDirective
     ],
     pipes: const [
@@ -52,17 +52,39 @@ class ProductBundleComponent implements OnInit {
   void ngOnInit() {
     dom.window.scrollTo(0, 0);
 
-    description = sanitizationService.bypassSecurityTrustHtml(
-        model.phrases[languageService.currentShortLocale].description_long);
-    usageInstructions = sanitizationService.bypassSecurityTrustHtml(
-        model.phrases[languageService.currentShortLocale].usage_instructions);
-    importantNotice = sanitizationService.bypassSecurityTrustHtml(
-        model.phrases[languageService.currentShortLocale].important_notice);
+    description =
+        sanitizationService.bypassSecurityTrustHtml(phrases.description_long);
+    usageInstructions =
+        sanitizationService.bypassSecurityTrustHtml(phrases.usage_instructions);
+    importantNotice =
+        sanitizationService.bypassSecurityTrustHtml(phrases.important_notice);
 
     productCategory = productCategoryService.get(model.product_category_id);
     dailyRoutine = dailyRoutineService.get(model.daily_routine_id);
     relatedProducts = productService.getMany(model.related_product_ids);
+    subProducts = productService.getMany(model.sub_product_ids);
   }
+
+  String getIcon(Product product) {
+    final category = productCategoryService.get(product.product_category_id);
+    return category == null
+        ? null
+        : "category-${category.phrases['EN'].url_name}";
+  }
+
+  String getName(Product product) {
+    final category = productCategoryService.get(product.product_category_id);
+    if (product.volume == 0) {
+      return product.phrases[languageService.currentShortLocale].name;
+    } else {
+      return category == null
+          ? null
+          : '${category.phrases[languageService.currentShortLocale].name} ${product.volume}ml';
+    }
+  }
+
+  ProductPhrases get phrases =>
+      model == null ? null : model.phrases[languageService.currentShortLocale];
 
   @Input()
   Product model;
@@ -70,7 +92,9 @@ class ProductBundleComponent implements OnInit {
   ProductCategory productCategory;
   DailyRoutine dailyRoutine;
   List<Product> relatedProducts;
+  List<Product> subProducts;
 
+  final String iconSize = '3rem';
   final CartService cartService;
   final DailyRoutineService dailyRoutineService;
   final DomSanitizationService sanitizationService;

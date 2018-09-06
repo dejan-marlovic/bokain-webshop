@@ -1,1 +1,98 @@
-<h1>PRODUCT BUNDLE</h1> 
+<div class="row">
+    <div class="col text-center">
+        <h1>{{phrases?.name}}</h1>
+        <p>{{phrases?.description_short}}</p>
+        <h1>{{cartService.addCurrency(model.price)}}</h1>
+    </div>
+</div>
+<div class="row collapse">
+    <div class="l7 m6 col align-middle">
+        <img [src]="model?.image_uri" [alt]="phrases?.name">
+    </div>
+    <div class="l5 m6 col text-center align-middle">
+        <div class="row">
+            <div class="m6 col" *ngFor="let product of subProducts">
+                <fo-icon class="color-1" [icon]="getIcon(product)" [size]="iconSize"></fo-icon>
+                <p class="margin-top-small">
+                    {{getName(product)}}
+                </p>
+            </div>
+            <div class="m6 col">
+                <fo-icon class="color-1" icon="product-routines" [size]="iconSize"></fo-icon>
+                <p class="margin-top-small">
+                    {{msg.product_routine(2) | name}}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <material-button raised class="blue" (trigger)="cartService.add(model.id)">
+                    {{msg.add_to_cart()}}
+                </material-button>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="row">
+        <div class="col">
+            <fo-tab-panel>
+                <fo-tab icon="information" [label]="msg.information() | name">
+                    <h3 class="margin-bottom-small">{{msg.product_description() | name}}</h3>
+                    <div [safeInnerHtml]="description"></div>
+                    <h3 class="margin-bottom-small">{{msg.properties() | name}}</h3>
+                    <ul class="margin-small">
+                        <li *ngFor="let property of model.phrases[languageService.currentShortLocale].properties">
+                            {{property}}
+                        </li>
+                    </ul>
+                    <h3 class="margin-bottom-small">{{msg.skin_type(2) | name}}</h3>
+                    <p class="margin-top-small">
+                        <material-chips>
+                            <material-chip *ngFor="let id of model.skin_type_ids" [removable]="false">
+                                {{skinTypeService.webshopData[id].toString() | name}}
+                            </material-chip>
+                        </material-chips>
+                    </p>
+
+                </fo-tab>
+                <fo-tab icon="instructions" [label]="msg.instructions() | name">
+                    <h3 class="margin-bottom-small">{{msg.instructions() | name}}</h3>
+                    <div [safeInnerHtml]="usageInstructions"></div>
+
+                </fo-tab>
+                <fo-tab icon="ingredients" [label]="msg.ingredient(2) | name">
+                    <h3 class="margin-bottom-small">{{msg.ingredient(2) | name}}</h3>
+
+                    <div *ngFor="let subProduct of subProducts">
+                        <div *ngIf="subProduct.ingredient_ids.isNotEmpty">
+                            <h4 class="margin-bottom-small">
+                                {{subProduct.phrases[languageService.currentShortLocale].name}}
+                            </h4>
+                            <material-chips>
+                                <material-chip *ngFor="let id of subProduct.ingredient_ids" [removable]="false">
+                                    {{id | fetch:ingredientService}}
+                                </material-chip>
+                            </material-chips>
+                        </div>
+                    </div>
+                </fo-tab>
+                <fo-tab *ngIf="phrases.important_notice != null" icon="important" [label]="msg.important() | name">
+                    <h3 class="margin-bottom-small">{{msg.important_notice() | name}}</h3>
+                    <div [safeInnerHtml]="importantNotice"></div>
+                </fo-tab>
+                <fo-tab *ngIf="relatedProducts.isNotEmpty" icon="combine" [label]="msg.combine() | name">
+                    <h3 class="margin-bottom-small">{{msg.combine() | name}}</h3>
+                    <bo-product-list [products]="relatedProducts"></bo-product-list>
+                </fo-tab>
+                <!--<fo-tab icon="skin-results" [label]="msg.compare() | name"></fo-tab>-->
+            </fo-tab-panel>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="model.skin_type_ids.isNotEmpty" class="background-color-2-x-light margin-top-large padding-top-medium padding-bottom-medium">
+    <bo-result-bar [skinType]="skinTypeService.webshopData[model.skin_type_ids.first]"></bo-result-bar>
+</div>
+
+<bo-quick-links class="margin-top-large margin-bottom-large"></bo-quick-links>

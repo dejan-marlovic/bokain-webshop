@@ -1,10 +1,6 @@
 @import 'package:grid/constants';
 
-:host {
-    user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;    
+:host {    
     display: block;
 
     .upper {        

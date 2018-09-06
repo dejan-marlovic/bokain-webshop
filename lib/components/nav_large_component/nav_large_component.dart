@@ -120,7 +120,7 @@ class NavLargeComponent implements OnDestroy {
   StreamSubscription<List<SelectionChangeRecord>> _onSearchSubscription;
 
   FactoryRenderer<FoModel, SearchOptionRendererComponent> get factoryRenderer =>
-      (dynamic d) => nav.SearchOptionRendererComponentNgFactory;
+      (Object d) => nav.SearchOptionRendererComponentNgFactory;
 }
 
 @Component(
