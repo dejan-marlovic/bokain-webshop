@@ -25,6 +25,7 @@ import '../../../result_bar_component/result_bar_component.dart';
       MaterialChipsComponent,
       MaterialExpansionPanel,
       MaterialExpansionPanelSet,
+      MaterialSpinnerComponent,
       ProductListComponent,
       QuickLinksComponent,
       ResultBarComponent,
@@ -104,6 +105,8 @@ class ProductBundleComponent implements OnInit {
   final ProductCategoryService productCategoryService;
   final SkinTypeService skinTypeService;
   final WebshopMessagesService msg;
+
+  bool imageLoaded = false;
 
   SafeHtml description;
   SafeHtml usageInstructions;

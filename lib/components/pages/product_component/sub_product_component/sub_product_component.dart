@@ -21,6 +21,7 @@ import '../../../../services/cart_service.dart';
       MaterialChipsComponent,
       MaterialExpansionPanel,
       MaterialExpansionPanelSet,
+      MaterialSpinnerComponent,
       ProductListComponent,
       QuickLinksComponent,
       NgFor,
@@ -73,6 +74,7 @@ class SubProductComponent implements OnInit {
   final SkinTypeService skinTypeService;
   final WebshopMessagesService msg;
 
+  bool imageLoaded = false;
   SafeHtml description;
   SafeHtml usageInstructions;
   SafeHtml importantNotice;

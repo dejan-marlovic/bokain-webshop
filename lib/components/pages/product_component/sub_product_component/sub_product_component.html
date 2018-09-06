@@ -11,10 +11,11 @@
     </div>
     <div class="row margin-top-large">
         <div class="l2 m0 s0 col"></div>
-        <div class="l5 m6 col text-center align-bottom">
-            <img src="{{model.image_uri}}" alt="{{model.phrases[languageService.currentShortLocale].name}}">
+        <div class="l5 m6 col text-center align-middle">
+            <material-spinner *ngIf="!imageLoaded" class="spinner"></material-spinner>
+            <img (load)="imageLoaded = true" src="{{model.image_uri}}" alt="{{model.phrases[languageService.currentShortLocale].name}}">
         </div>
-        <div class="l3 m6 col align-bottom">
+        <div class="l3 m6 col align-middle">
             <div class="row collapse">
                 <div class="col text-center">
                     <h1 class="margin-bottom-none">

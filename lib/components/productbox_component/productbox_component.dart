@@ -9,7 +9,8 @@ import '../../services/cart_service.dart';
     selector: 'bo-productbox',
     styleUrls: const ['productbox_component.css'],
     templateUrl: 'productbox_component.html',
-    directives: const [MaterialButtonComponent, MaterialIconComponent])
+    directives: const [MaterialButtonComponent, MaterialIconComponent, MaterialSpinnerComponent, NgIf],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductBoxComponent implements OnInit {
   ProductBoxComponent(this.cartService, this.router, this._msg);
 
@@ -37,4 +38,5 @@ class ProductBoxComponent implements OnInit {
   final CartService cartService;
   final CoreMessagesService _msg;
   final Router router;
+  bool imageLoaded = false;
 }

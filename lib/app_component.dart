@@ -45,8 +45,6 @@ import 'components/pages/skin_type_list_component/skin_type_component/skin_type_
     as skin_type_comp;
 import 'components/pages/skin_type_list_component/skin_type_list_component.template.dart'
     as skin_type_list_comp;
-import 'components/pages/standard_terms_component/standard_terms_component.template.dart'
-    as standard_terms_comp;
 import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
 import 'services/route_service.dart';
@@ -168,8 +166,9 @@ class AppComponent {
       ..productCategoryRoutes = [
         RouteDefinition(
             routePath: route_paths.productCategoryBundles,
-            component: product_category_bundle
-                .ProductCategoryBundleComponentNgFactory),
+            component:
+                product_category_bundle.ProductCategoryBundleComponentNgFactory,
+            useAsDefault: true),
         RouteDefinition(
             routePath: route_paths.productCategoryBundlesSkinType,
             component: product_category_bundle_skin_type
@@ -190,8 +189,9 @@ class AppComponent {
     await _languageService.setLocale('SV');
     await _settingsService.fetch('1');
 
-    await productCategoryService.fetchQuery(
-        productCategoryService.collection.where('status', '==', 'active'));
+    await productCategoryService.fetchQuery(productCategoryService.collection
+        .where('status', '==', 'active')
+        .orderBy('search_rank'));
     await productService.fetchQuery(productService.collection
         .where('status', '==', 'active')
         .orderBy('score', 'desc'));

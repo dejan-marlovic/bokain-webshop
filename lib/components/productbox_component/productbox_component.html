@@ -1,11 +1,7 @@
 <div class="upper">
-    <img alt="{{model.name}}"
-         src="{{model.image_uri}}"
-         (click)="openProduct()">
-    <material-button class="blue"
-                     clear-size
-                     raised
-                     (trigger)="addToCart()">
+    <material-spinner *ngIf="!imageLoaded" class="spinner"></material-spinner>
+    <img (load)="imageLoaded = true" alt="{{model.name}}" src="{{model.image_uri}}" (click)="openProduct()">
+    <material-button class="blue" clear-size raised (trigger)="addToCart()">
         <material-icon icon="add" size="x-large"></material-icon>
     </material-button>
 </div>
@@ -17,7 +13,7 @@
     <div class="descContainer color-2">
         <p>{{model.phrases[lang]?.description_short}}</p>
     </div>
-    <div class="priceContainer">    
+    <div class="priceContainer">
         <p>{{cartService.addCurrency(model.price)}}</p>
     </div>
 </div>

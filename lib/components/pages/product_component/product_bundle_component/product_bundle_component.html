@@ -7,7 +7,8 @@
 </div>
 <div class="row collapse">
     <div class="l7 m6 col align-middle">
-        <img [src]="model?.image_uri" [alt]="phrases?.name">
+        <material-spinner *ngIf="!imageLoaded" class="spinner"></material-spinner>
+        <img (load)="imageLoaded = true" [src]="model?.image_uri" [alt]="phrases?.name">
     </div>
     <div class="l5 m6 col text-center align-middle">
         <div class="row">
