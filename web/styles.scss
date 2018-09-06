@@ -3,13 +3,14 @@
 @import 'package:grid/grid';
 @import 'package:grid/theme';
 @import 'package:fo_components/theme';
-@import 'package:bokain_webshop/colors';
-@include foColorAlert($colorRed);
-@include foColorConfirm($colorBlue);
-@include colorAlert($colorRed);
-@include colorConfirm($colorBlue);
-@include color1($colorBlue);
-@include color2($colorGray);
+@import 'package:bokain_models/colors';
+@include foColorAlert($colorAlert);
+@include foColorConfirm(#348bc0);
+@include colorAlert($colorAlert);
+@include colorConfirm(#348bc0);
+@include color1(#348bc0);
+@include color2(#ccc);
+//@include color3(#ccc);
 
 
 @font-face {
@@ -22,7 +23,7 @@
 }
 
 html {
-    overflow-y: scroll;
+    overflow-y: scroll; 
     margin: 0;
     font-weight: lighter;
     body {

@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="m4 col">
+        <div id="buttonPanel">
+            <div *ngFor="let page of pages" class="pageButton" [class.active]="page.active" (click)="onPageClick(page)">
+                <p class="margin-top-none margin-bottom-none">
+                    {{page.label}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="m8 col">
+        <ng-content></ng-content>
+    </div>
+</div>

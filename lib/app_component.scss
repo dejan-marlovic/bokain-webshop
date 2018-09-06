@@ -1,5 +1,5 @@
 @import 'package:angular_components/material_button/mixins';
-@import 'colors';
+@import 'package:bokain_models/colors';
 
 @mixin colorizeButton($selector, $color) {
     $raised: $selector + '[raised]';
@@ -9,8 +9,8 @@
     @include button-color($not-raised, $color);
 }
 
-@include colorizeButton("material-button.blue", $colorBlue);
-@include colorizeButton("material-button.alert", $colorRed);
+@include colorizeButton("material-button.blue", $color1);
+@include colorizeButton("material-button.alert", $colorAlert);
 
 :host {
     display: block;

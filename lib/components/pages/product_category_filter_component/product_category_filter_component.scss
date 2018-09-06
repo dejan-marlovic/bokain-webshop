@@ -1,5 +1,5 @@
 @import 'package:grid/constants';
-@import '../../../colors';
+@import 'package:bokain_models/colors';
 
 :host {
     div.flexAligner {
@@ -7,11 +7,11 @@
         align-items: center;
         justify-content: center;
         div.menuItem {
-            color: $colorGray;
+            color: $color2;
             margin: 0 $small;
         }        
         div.menuItem.activeRoute {
-            color: $colorBlue;
+            color: $color1;
         }
     }
-}
+} 

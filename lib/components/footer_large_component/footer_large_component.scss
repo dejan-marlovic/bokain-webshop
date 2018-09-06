@@ -1,4 +1,4 @@
-@import '../../colors.scss';
+@import 'package:bokain_models/colors';
 
 $lowerMenuHeight: 30px;
 
@@ -18,7 +18,7 @@ $lowerMenuHeight: 30px;
             text-align: center;
         }
         .menuItem.activeRoute {
-            color: $colorBlue;
+            color: $color1;
         }
     }
     div.menuLower {        

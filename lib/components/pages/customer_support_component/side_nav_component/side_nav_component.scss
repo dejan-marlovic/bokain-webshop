@@ -1,0 +1,12 @@
+@import 'package:bokain_models/colors';
+ 
+div#buttonPanel {
+    div.pageButton {
+        color: $colorBlack;
+        background-color: $color2;
+    }
+    div.pageButton.active {
+        color: white;
+        background-color: $color1;    
+    }
+}
