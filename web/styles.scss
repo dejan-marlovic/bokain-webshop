@@ -3,14 +3,18 @@
 @import 'package:grid/grid';
 @import 'package:grid/theme';
 @import 'package:fo_components/theme';
-@import 'package:bokain_models/colors';
+@import 'package:bokain_webshop/colors';
+
+// Fo
 @include foColorAlert($colorAlert);
-@include foColorConfirm(#348bc0);
+@include foColorConfirm($color1);
+
+// Grid theme
 @include colorAlert($colorAlert);
-@include colorConfirm(#348bc0);
-@include color1(#348bc0);
-@include color2(#ccc);
-//@include color3(#ccc);
+@include colorConfirm($color1);
+@include color1($color1);
+@include color2($color2);
+@include color3($color3);
 
 
 @font-face {
