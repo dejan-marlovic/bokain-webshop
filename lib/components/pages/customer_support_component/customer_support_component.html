@@ -1,13 +1,25 @@
 <div class="row collapse">
     <div class="col">
-        <bo-side-nav>    
-            <bo-side-nav-page label="test #1">
+        <bo-side-nav>
+            <bo-side-nav-page [label]="msg.customer_support() | name">
                 <p>test #1</p>
             </bo-side-nav-page>
-            <bo-side-nav-page label="test #2">
-                <p>test #2</p>
+            <bo-side-nav-page [label]="msg.partner(2) | name">
+                <div [safeInnerHtml]="partners"></div>
             </bo-side-nav-page>
-
+            <bo-side-nav-page label="{{msg.standard_terms() | name}} & GDPR">
+                <div [safeInnerHtml]="standard_terms"></div>
+            </bo-side-nav-page>
+            <bo-side-nav-page [label]="msg.faq() | name">
+                <div [safeInnerHtml]="faq"></div>
+            </bo-side-nav-page>
+            <bo-side-nav-page [label]="msg.about_us() | name">
+                <div [safeInnerHtml]="about"></div>
+            </bo-side-nav-page>
+            <bo-side-nav-page [label]="msg.track_parcel() | name">
+                <p>test #5</p>
+            </bo-side-nav-page>
         </bo-side-nav>
     </div>
 </div>
+<bo-quick-links></bo-quick-links>

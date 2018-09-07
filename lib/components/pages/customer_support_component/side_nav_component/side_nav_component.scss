@@ -3,7 +3,10 @@
 div#buttonPanel {
     div.pageButton {
         color: $colorBlack;
-        background-color: $color2;
+        background-color: $color2XBright;
+        padding: 0.5rem 1rem;
+        margin: 0.3rem 0;
+        cursor: pointer;
     }
     div.pageButton.active {
         color: white;

@@ -79,6 +79,7 @@ import 'services/route_service.dart';
       RouteService,
       SettingsService,
       SkinTypeService,
+      WebshopContentService,
       WebshopMessagesService
     ],
     pipes: const [])
