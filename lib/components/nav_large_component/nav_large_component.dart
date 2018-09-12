@@ -64,7 +64,7 @@ class NavLargeComponent implements OnDestroy {
   }
 
   Future<void> _setLocale(String iso) async {
-    await languageService.setLocale(iso);
+    await languageService.setLocale(iso, LanguageContext.webshop);
     await cartService.evaluateCheckout(languageService.currentShortLocale);
 
     _setupModels();

@@ -2,11 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Material+Icons);
 @import 'package:grid/grid';
 @import 'package:grid/theme';
-@import 'package:fo_components/mixins';
 @import 'package:bokain_webshop/colors';
-
-// Fo
-@include fo-colors($color1, $color2, $colorAlert);
 
 // Grid theme
 @include colorAlert($colorAlert);

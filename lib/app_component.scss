@@ -1,6 +1,17 @@
 @import 'package:angular_components/material_button/mixins';
 @import 'package:bokain_webshop/colors';
 
+// Fo
+@import 'package:fo_components/mixins';
+@include fo-colors($color1, $color2, $colorAlert);
+
+// Consultation
+@import 'package:bokain_consultation/mixins';
+@include consultationColor1($color1);
+@include consultationColor2($color2);
+@include consultationColorBlack($colorBlack);
+
+
 @mixin colorizeButton($selector, $color) {
     $raised: $selector + '[raised]';
     @include button-background-color($raised, $color);

@@ -133,7 +133,7 @@ class AppComponent {
             component: customer_support_comp.CustomerSupportComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.faq,
-            component: faq_comp.FaqComponentNgFactory),
+            component: customer_support_comp.CustomerSupportComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.partners,
             component: partners_comp.PartnersComponentNgFactory),
@@ -187,7 +187,7 @@ class AppComponent {
   }
 
   Future<void> _loadResources(String token) async {
-    await _languageService.setLocale('SV');
+    await _languageService.setLocale('SV', LanguageContext.webshop);
     await _settingsService.fetch('1');
 
     await productCategoryService.fetchQuery(productCategoryService.collection

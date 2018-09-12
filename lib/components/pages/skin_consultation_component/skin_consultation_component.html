@@ -5,14 +5,12 @@
     </div>
 </div>
 <div *ngIf="customer != null && consultation != null">
-
     <!-- Regular consultation, show unless the customer has done consultation already -->
     <div class="row"
          *ngIf="step < 5 && customer.consultation_id == null">
         <div class="col">
             <h1 class="large margin-bottom-small text-center">{{msg.skin_consultation(1) | name}}</h1>
-            <p class="margin-top-small margin-bottom-large text-center">
-                {{msg.skin_consultation_intro_text() | name}}
+            <p class="margin-top-small margin-bottom-large text-center"> {{msg.skin_consultation_intro_text() | name}}
             </p>
             <material-expansionpanel-set>
                 <material-expansionpanel [name]="msg.detail(2) | name"
@@ -22,7 +20,7 @@
                                          (open)="step = 0">
                     <div class="row">
                         <div class="col">
-                            <bo-button-cloud-single-select [label]="msg.gender()"
+                            <bo-button-cloud-single-select [label]="msg.gender() | name"
                                                            [options]="genderOptions"
                                                            [centerLabel]="true"
                                                            [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
@@ -40,7 +38,6 @@
                         <div class="col text-center">
                             <material-fab mini
                                           [disabled]="customerService.loading || customer.social_number == null || customer.sex == null"
-                        
                                           (trigger)="step = 1">
                                 <material-icon *ngIf="!customerService.loading"
                                                icon="keyboard_arrow_down"
@@ -64,7 +61,6 @@
                         <div class="col text-center">
                             <material-fab mini
                                           [disabled]="consultation.area_face == false && consultation.area_chest == false && consultation.area_back == false && consultation.area_other == false || (consultation.area_face == true && consultation.zones.isEmpty)"
-                        
                                           (trigger)="step = 2">
                                 <material-icon icon="keyboard_arrow_down"
                                                size="x-large"></material-icon>
@@ -158,7 +154,6 @@
                                                         [maxCount]="64"
                                                         [ngFormControl]="form.controls['password']"
                                                         [(ngModel)]="password">
-
                                         </material-input>
                                     </div>
                                 </div>
@@ -194,10 +189,9 @@
                                 <div class="row collapse">
                                     <div class="col text-center">
                                         <h4>GDPR</h4>
-                                        <p class="margin-bottom-small">{{msg.consultation_gdpr_terms()}}, {{msg.read_more()}}:
-                                            <a href="https://gdpr.dahlskincare.com"
-                                               target="_blank">https://gdpr.dahlskincare.com</a>.
-                                        </p>
+                                        <p class="margin-bottom-small">{{msg.consultation_gdpr_terms()}},
+                                            {{msg.read_more()}}: <a href="https://gdpr.dahlskincare.com"
+                                               target="_blank">https://gdpr.dahlskincare.com</a>. </p>
                                         <material-checkbox [label]="msg.i_accept_the_terms()"
                                                            [(checked)]="termsAccepted">
                                         </material-checkbox>
@@ -208,7 +202,6 @@
                                         <material-button clear-size
                                                          raised
                                                          [disabled]="!termsAccepted || !form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"
-                                    
                                                          (trigger)="onCreateConsultation()">
                                             <span *ngIf="!consultationService.loading && !customerService.loading">{{msg.submit()}}</span>
                                             <material-icon *ngIf="consultationService.loading || customerService.loading"
@@ -223,17 +216,14 @@
                     </form>
                 </material-expansionpanel>
             </material-expansionpanel-set>
-
         </div>
     </div>
-
     <!-- Survey, show unless the customer has completed the survey -->
     <div *ngIf="step == 6">
         <bo-consultation-survey [model]="consultation"
                                 [customer]="customer"
                                 (done)="onSurveyDone($event)"></bo-consultation-survey>
     </div>
-
     <div class="row margin-top-x-large"
          *ngIf="step > 6 && customer != null">
         <div class="col text-center">
@@ -241,7 +231,6 @@
             <p>{{msg.consultation_survey_done_text()}}</p>
         </div>
     </div>
-
     <fo-modal title="{{msg.thank_you() | name}}!"
               [whiteHeader]="true"
               [smallPadding]="false"
@@ -255,12 +244,9 @@
         <div class="text-right"
              footer>
             <material-button raised
-                             (trigger)="step = 6">
-                OK
-            </material-button>
+                             (trigger)="step = 6"> OK </material-button>
         </div>
     </fo-modal>
-
     <fo-modal [title]="errorTitle"
               [visible]="errorText != null"
               (visibleChange)="errorText = null; showResetPasswordButton = false; errorTitle = msg.error_occured();"
@@ -277,12 +263,9 @@
                 <div class="col text-right">
                     <material-button raised
                                      [disabled]="customerService.loading"
-                                     (trigger)="onResetPassword()">
-                        {{msg.reset_password()}}
-                    </material-button>
+                                     (trigger)="onResetPassword()"> {{msg.reset_password()}} </material-button>
                 </div>
             </div>
         </div>
-
     </fo-modal>
 </div>
