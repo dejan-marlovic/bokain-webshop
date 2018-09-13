@@ -10,14 +10,17 @@ class SideNavPageComponent {
   SideNavPageComponent(this._changeDetector);
 
   bool get active => _active;
-
+  
   set active(bool flag) {
     _active = flag;
     _changeDetector.markForCheck();
   }
 
   @Input()
-  String label;  
+  String label;
+
+  @Input()
+  String name;
 
   bool _active = false;
 

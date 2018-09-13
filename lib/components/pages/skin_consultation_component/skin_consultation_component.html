@@ -231,8 +231,7 @@
             <p>{{msg.consultation_survey_done_text()}}</p>
         </div>
     </div>
-    <fo-modal title="{{msg.thank_you() | name}}!"
-              [whiteHeader]="true"
+    <fo-modal title="{{msg.thank_you() | name}}!"              
               [smallPadding]="false"
               [visible]="step == 5"
               (visibleChange)="step = 6">
@@ -249,8 +248,7 @@
     </fo-modal>
     <fo-modal [title]="errorTitle"
               [visible]="errorText != null"
-              (visibleChange)="errorText = null; showResetPasswordButton = false; errorTitle = msg.error_occured();"
-              [whiteHeader]="false"
+              (visibleChange)="errorText = null; showResetPasswordButton = false; errorTitle = msg.error_occured();"              
               [smallPadding]="false">
         <div class="row">
             <div class="col">

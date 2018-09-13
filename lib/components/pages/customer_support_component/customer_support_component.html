@@ -1,23 +1,108 @@
 <div class="row collapse">
     <div class="col">
-        <bo-side-nav>
-            <bo-side-nav-page [label]="msg.customer_support() | name">
-                <p>test #1</p>
+        <bo-side-nav [(activePage)]="currentPage">
+            <bo-side-nav-page [label]="msg.customer_support() | name"
+                              [name]="msg.customer_support_url()">
+                <div class="row">
+                    <div class="col">
+                        <h2>{{msg.contact() | name}}</h2>
+                        <div *ngIf="ticket != null">
+                            <h3 class="margin-bottom-small">{{msg.contact_us_description_title()}}</h3>
+                            <p class="margin-top-small">{{msg.contact_us_description_text()}}</p>
+                        </div>
+                        <div *ngIf="ticket == null">
+                            <h3 class="margin-bottom-small">{{msg.thank_you() | name}}!</h3>
+                            <p class="margin-top-small">{{msg.contact_us_thank_you_text()}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="col"
+                         *ngIf="loaded">
+                        <form *ngIf="ticket != null" #f="ngForm" [ngFormModel]="form">
+                            <div class="row">
+                                <div class="col">
+                                    <fo-select [label]="msg.category(1) | name"
+                                               [options]="supportCategories"
+                                               [(selectedId)]="ticket.category"></fo-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <material-input label="{{msg.name() | name}}*"
+                                                    floatingLabel
+                                                    ngControl="name"
+                                                    [maxCount]="128"
+                                                    [(ngModel)]="ticket.name"></material-input>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <material-input label="{{msg.email() | name}}*"
+                                                    floatingLabel
+                                                    ngControl="email"
+                                                    [maxCount]="128"
+                                                    [(ngModel)]="ticket.email"></material-input>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <material-input [label]="msg.order_no() | name"
+                                                    floatingLabel
+                                                    ngControl="order_no"
+                                                    [maxCount]="32"
+                                                    [(ngModel)]="ticket.order_no"></material-input>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <material-input label="{{msg.message(1) | name}}*"
+                                                    floatingLabel
+                                                    multiline
+                                                    rows="5"
+                                                    ngControl="message"
+                                                    [maxCount]="5000"
+                                                    [maxRows]="5"
+                                                    [(ngModel)]="ticket.message"></material-input>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <material-button (trigger)="sendEmail()"
+                                                     [disabled]="mailerService.loading || !form.valid"
+                                                     raised>{{msg.send()}}</material-button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </bo-side-nav-page>
-            <bo-side-nav-page [label]="msg.partner(2) | name">
+            <bo-side-nav-page [label]="msg.partner(2) | name"
+                              [name]="msg.partners_url()">
                 <div [safeInnerHtml]="partners"></div>
             </bo-side-nav-page>
-            <bo-side-nav-page label="{{msg.standard_terms() | name}} & GDPR">
+            <bo-side-nav-page label="{{msg.standard_terms() | name}} & GDPR"
+                              [name]="msg.standard_terms_url()">
                 <div [safeInnerHtml]="standard_terms"></div>
             </bo-side-nav-page>
-            <bo-side-nav-page [label]="msg.faq() | name">
+            <bo-side-nav-page [label]="msg.faq() | name"
+                              [name]="msg.faq_url()">
                 <div [safeInnerHtml]="faq"></div>
             </bo-side-nav-page>
-            <bo-side-nav-page [label]="msg.about_us() | name">
+            <bo-side-nav-page [label]="msg.about_us() | name"
+                              [name]="msg.about_us_url()">
                 <div [safeInnerHtml]="about"></div>
             </bo-side-nav-page>
-            <bo-side-nav-page [label]="msg.track_parcel() | name">
-                <p>test #5</p>
+            <bo-side-nav-page [label]="msg.track_parcel() | name"
+                              name="track-parcel">
+                <h2 class="margin-bottom-small">{{msg.track_parcel() | name}}</h2>
+                <div>
+                    <material-input class="flexWidth"
+                                    [label]="msg.parcel_no()"
+                                    floatingLabel
+                                    [(ngModel)]="parcelNo"></material-input>
+                    <material-button raised>{{msg.send()}}</material-button>
+                </div>
             </bo-side-nav-page>
         </bo-side-nav>
     </div>
