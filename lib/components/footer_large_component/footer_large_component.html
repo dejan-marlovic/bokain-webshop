@@ -9,8 +9,7 @@
                         <div>
                             <fo-icon icon="my-profile"
                                      [size]="iconSize"></fo-icon>
-                        </div>
-                        {{msg.my_profile() | name}}
+                        </div> {{msg.my_profile() | name}}
                     </div>
                     <div class="menuItem clickable color-2"
                          [routerLink]="msg.skin_consultation_url()"
@@ -18,8 +17,7 @@
                         <div>
                             <fo-icon icon="skin-consultation"
                                      [size]="iconSize"></fo-icon>
-                        </div>
-                        {{msg.consultation(1) | name}}
+                        </div> {{msg.consultation(1) | name}}
                     </div>
                     <div class="menuItem clickable color-2"
                          [routerLink]="msg.skin_guide_url()"
@@ -27,8 +25,7 @@
                         <div>
                             <fo-icon icon="skin-guide"
                                      [size]="iconSize"></fo-icon>
-                        </div>
-                        {{msg.skin_guide() | name}}
+                        </div> {{msg.skin_guide() | name}}
                     </div>
                     <div class="menuItem clickable color-2"
                          [routerLink]="msg.results_url()"
@@ -36,8 +33,7 @@
                         <div>
                             <fo-icon icon="skin-results"
                                      [size]="iconSize"></fo-icon>
-                        </div>
-                        {{msg.results() | name}}
+                        </div> {{msg.results() | name}}
                     </div>
                     <div class="menuItem clickable color-2"
                          [routerLink]="msg.faq_url()"
@@ -45,31 +41,58 @@
                         <div>
                             <fo-icon icon="faq"
                                      [size]="iconSize"></fo-icon>
-                        </div>
-                        {{msg.faq() | name}}
-                    </div>                    
+                        </div> {{msg.faq() | name}}
+                    </div>
                     <div class="menuItem clickable color-2"
                          [routerLink]="msg.customer_support_url()"
                          routerLinkActive="activeRoute">
                         <div>
                             <fo-icon icon="customer-support"
                                      [size]="iconSize"></fo-icon>
-                        </div>
-                        {{msg.customer_support() | name}}
+                        </div> {{msg.customer_support() | name}}
                     </div>
-                    <div class="menuItem clickable color-2">
+                    <div class="menuItem clickable color-2"
+                         popupSource
+                         #source="popupSource"
+                         (click)="phonePopupVisible = true">
                         <div>
                             <fo-icon icon="phone"
                                      [size]="iconSize"></fo-icon>
-                        </div>
-                        {{msg.call_me() | name}}
+                        </div> {{msg.call_me() | name}}
                     </div>
+                    <material-popup [source]="source"
+                                    [(visible)]="phonePopupVisible"
+                                    [enforceSpaceConstraints]="true"
+                                    [preferredPositions]="position">
+                        <div class="padding-medium">
+                            <div *ngIf="phone != null">
+                                <p class="infoText"> {{msg.call_me_info_text()}} </p>
+                                <form [ngFormModel]="form">
+                                    <material-input [maxCount]="32"
+                                                    [label]="msg.phone()"
+                                                    floatingLabel
+                                                    ngControl="phone"
+                                                    [(ngModel)]="phone"></material-input>
+                                    <div class="text-right">
+                                        <material-button raised
+                                                         [disabled]="!form.valid || mailerService.loading"
+                                                         (trigger)="sendCallMeRequest()">{{msg.send()}}</material-button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div *ngIf="phone == null" class="infoText">
+                                <h3 class="margin-bottom-small margin-top-small">{{msg.thank_you() | name}}!</h3>
+                                <p class="margin-top-small">
+                                    {{msg.call_me_info_text_after()}}
+                                </p>
+                            </div>
+                        </div>
+                    </material-popup>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="row expand collapse menuLower background-color-1">
     <div class="col">
         <div class="flexAligner">

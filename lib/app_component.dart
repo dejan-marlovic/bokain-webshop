@@ -14,7 +14,6 @@ import 'components/pages/confirmation_component/confirmation_component.template.
     as confirmation_comp;
 import 'components/pages/customer_support_component/customer_support_component.template.dart'
     as customer_support_comp;
-import 'components/pages/faq_component/faq_component.template.dart' as faq_comp;
 import 'components/pages/frontpage_component/frontpage_component.template.dart'
     as frontpage_comp;
 import 'components/pages/not_found_component/not_found_component.template.dart'
@@ -47,6 +46,7 @@ import 'components/pages/skin_type_list_component/skin_type_list_component.templ
     as skin_type_list_comp;
 import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
+import 'services/config_service.dart';
 import 'services/route_service.dart';
 
 @Component(
@@ -62,9 +62,10 @@ import 'services/route_service.dart';
     ],
     providers: const <Object>[
       CartService,
-      CountryService,
+      ConfigService,
       ConsultationMessagesService,
       CoreMessagesService,
+      CountryService,
       CustomerLogService,
       CustomerService,
       DailyRoutineService,

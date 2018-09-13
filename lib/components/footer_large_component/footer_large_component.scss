@@ -1,6 +1,11 @@
 @import 'package:bokain_webshop/colors';
-
 $lowerMenuHeight: 30px;
+.infoText {
+    width: 300px;
+}
+material-input {    
+    width: 300px !important;
+}
 
 :host {
     .col {
@@ -12,16 +17,16 @@ $lowerMenuHeight: 30px;
         align-items: center;
         justify-content: space-evenly;
     }
-    div.menuUpper {       
-        div.menuItem {         
-            margin: 1rem 0.5rem;            
+    div.menuUpper {
+        div.menuItem {
+            margin: 1rem 0.5rem;
             text-align: center;
         }
         .menuItem.activeRoute {
             color: $color1;
         }
     }
-    div.menuLower {        
+    div.menuLower {
         .flexAligner {
             height: $lowerMenuHeight;
             justify-content: center;

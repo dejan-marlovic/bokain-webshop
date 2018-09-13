@@ -7,6 +7,7 @@ import 'package:angular/security.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
+import '../../../services/config_service.dart';
 import '../../quick_links_component/quick_links_component.dart';
 import 'side_nav_component/side_nav_component.dart';
 import 'side_nav_component/side_nav_page_component.dart';
@@ -30,7 +31,7 @@ import 'side_nav_component/side_nav_page_component.dart';
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class CustomerSupportComponent implements OnActivate {
-  CustomerSupportComponent(this.mailerService, this.webshopContentService,
+  CustomerSupportComponent(this._configService, this.mailerService, this.webshopContentService,
       this.languageService, this._sanitizer, this._changeDetector, this.msg) {
     _loadResources();
     languageService.localeChanges.listen((_) => _loadResources());
@@ -41,11 +42,10 @@ class CustomerSupportComponent implements OnActivate {
     currentPage = current.path;
   }
 
-  Future<void> sendEmail() async {
-    final email = 'support@dahlskincare.com';
+  Future<void> sendEmail() async {    
     final subject = 'Nytt ärende webshop';
     await mailerService.mail(
-        ticket.emailBody, subject, email);
+        ticket.emailBody, subject, _configService.supportEmail);
     ticket = null;
     _changeDetector.markForCheck();
   }
@@ -79,6 +79,7 @@ class CustomerSupportComponent implements OnActivate {
       .get('1')
       .phrases[languageService.currentShortLocale];
 
+  final ConfigService _configService;
   final LanguageService languageService;
   final MailerService mailerService;
   final WebshopContentService webshopContentService;
