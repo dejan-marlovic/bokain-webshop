@@ -33,7 +33,7 @@ class ProductCategoryComponent implements OnActivate {
           product.product_category_id == model.id && !product.sub_only);
     }
 
-    rootUrl = '${_msg.product_category(2)}/$category';
+    rootUrl = '${_msg.product_categories_url()}/$category';    
   }
 
   String rootUrl;
@@ -43,7 +43,7 @@ class ProductCategoryComponent implements OnActivate {
   final LanguageService languageService;
   final ProductService _productService;
   final ProductCategoryService _productCategoryService;
-  final CoreMessagesService _msg;
+  final WebshopMessagesService _msg;
 
   ProductCategory model;
 }
