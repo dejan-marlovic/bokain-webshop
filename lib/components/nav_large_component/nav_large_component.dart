@@ -49,16 +49,14 @@ class NavLargeComponent implements OnDestroy {
   void _onSearchChange(List<SelectionChangeRecord<dynamic>> changes) {
     if (changes.isNotEmpty && changes.first.added.isNotEmpty) {
       final FoModel added = changes.first.added.first;
-      if (added is Product) {
-        print(
-            '${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
+      if (added is Product) {        
         router.navigate(
             '${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
       } else if (added is ProductCategory) {
         router.navigate(
             '${msg.product_categories_url()}/${added.phrases[languageService.currentShortLocale].url_name}');
       } else if (added is SkinType) {
-        router.navigate('${msg.skin_type(2)}/${added.url_name}');
+        router.navigate('${msg.skin_types_url()}/${added.url_name}');
       }
     }
   }
