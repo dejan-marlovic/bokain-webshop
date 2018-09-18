@@ -8,9 +8,9 @@ import 'package:fo_components/fo_components.dart';
 import '../../services/config_service.dart';
 
 @Component(
-    selector: 'bo-footer-large',
-    styleUrls: const ['footer_large_component.css'],
-    templateUrl: 'footer_large_component.html',
+    selector: 'bo-footer',
+    styleUrls: const ['footer_component.css'],
+    templateUrl: 'footer_component.html',
     directives: const [
       formDirectives,
       routerDirectives,

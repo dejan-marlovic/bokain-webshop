@@ -1,0 +1,86 @@
+<!-- Upper Menu -->
+<div class="row expand collapse menuUpper background-color-1">
+    <div class="col">
+        <div class="row collapse">
+            <div class="col l5 m6">
+                <div class="flexAligner">
+                    <div class="menuItem">
+                        <img class="clickable"
+                             routerLink="index.html"
+                             routerLinkActive="activeRoute"
+                             src="gfx/swedskin-logotype-white.png"
+                             alt="logotype">
+                    </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.my_profile_url()"
+                         routerLinkActive="activeRoute"> {{profileLinkLabel | name}} </div>
+                    <div class="menuItem clickable"
+                         [routerLink]="msg.customer_support_url()"
+                         routerLinkActive="activeRoute"> {{msg.customer_support() | name}} </div>
+                    <div class="menuItem clickable">
+                        <dropdown-menu [menu]="languageMenuModel"
+                                       [buttonText]="msg.country() | name">
+                        </dropdown-menu>
+                    </div>
+                </div>
+            </div>
+            <div class="col l3 m2">
+            </div>
+            <div class="col m4">
+                <div class="flexAligner">
+                    <div class="menuItem">
+                        <bo-search popupPosition="below"></bo-search>
+                    </div>
+                    <div class="menuItem clickable cartItem"
+                         [routerLink]="msg.cart_url()"
+                         routerLinkActive="activeRoute"><material-icon icon="shopping_cart"></material-icon> <span class="productCount color-white background-color-alert-light"
+                              [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Lower Menu -->
+<div class="row collapse expand menuLower background-color-2-x-light">
+    <div class="col">
+        <div class="row collapse">
+            <div class="col">
+                <div class="flexAligner">
+                    <div class="menuItem clickable color-2"
+                         [routerLink]="msg.skin_types_url()"
+                         routerLinkSubActive="activeRoute">
+                        <div class="text-center">
+                            <fo-icon icon="skin-type"
+                                     size="2.5rem"></fo-icon>
+                        </div> {{msg.skin_type(2) | name}}
+                    </div>
+                    <div class="menuItem clickable color-2"                         
+                         [routerLink]="msg.product_categories_url()"
+                         routerLinkSubActive="activeRoute">
+                        <div class="text-center">
+                            <fo-icon icon="product-category"
+                                     size="2.5rem"></fo-icon>
+                        </div> {{msg.product_category(2) | name}}
+                    </div>
+                    <div class="menuItem clickable color-2"
+                         [routerLink]="msg.skin_consultation_url()"
+                         routerLinkActive="activeRoute">
+                        <div class="text-center">
+                            <fo-icon icon="skin-consultation"
+                                     size="2.5rem"></fo-icon>
+                        </div> {{msg.consultation(1) | name}}
+                    </div>
+                    <div class="menuItem clickable color-2"
+                         [routerLink]="msg.skin_guide_url()"
+                         routerLinkActive="activeRoute">
+                        <div class="text-center">
+                            <fo-icon icon="skin-guide"
+                                     size="2.5rem"></fo-icon>
+                        </div> {{msg.skin_guide() | name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

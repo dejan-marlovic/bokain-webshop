@@ -1,19 +1,14 @@
 <div *ngIf="loaded"
      class="page">
     <header>
-        <!-- Large top nav -->
-        <div class="hide-for-medium hide-for-small">
-            <bo-nav-large></bo-nav-large>
-        </div>
+        <bo-nav></bo-nav>
     </header>
-
     <main class="margin-top-medium">
+        <!-- Offset for to compensate for small screen top navbar -->
+        <div class="hide-for-large margin-top-large"></div>
         <router-outlet [routes]="routeService.routes"></router-outlet>
     </main>
-
     <footer class="margin-top-medium">
-        <div class="hide-for-medium hide-for-small">
-            <bo-footer-large></bo-footer-large>
-        </div>
+        <bo-footer></bo-footer>
     </footer>
 </div>

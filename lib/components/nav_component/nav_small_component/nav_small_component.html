@@ -1,0 +1,72 @@
+<div class="row expand collapse header background-color-1">
+    <div class="col align-middle">
+        <div class="iconContainer">
+            <material-icon (click)="slideOpen = !slideOpen"
+                           [icon]="slideOpen ? 'close' : 'menu'"></material-icon>
+        </div>
+        <div class="iconContainer"
+             id="shoppingCart"
+             [routerLink]="msg.cart_url()">
+            <material-icon icon="shopping_cart"></material-icon><span class="productCount color-white background-color-alert-light"
+                  [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
+        </div>
+        <img src="gfx/swedskin-logotype-white.png"
+             alt="logo"
+             routerLink="index.html">
+    </div>
+</div>
+<material-drawer temporary
+                 [attr.overlay]="true"
+                 [(visible)]="slideOpen">
+    <div class="drawerContent">
+        <material-list>
+            <div group>
+                <material-list-item [routerLink]="msg.my_profile_url()">
+                    <fo-icon icon="my-profile"
+                             [size]="iconSize"></fo-icon>{{profileLinkLabel | name}}
+                </material-list-item>
+                <material-list-item [routerLink]="msg.customer_support_url()">
+                    <fo-icon icon="customer-support"
+                             [size]="iconSize"></fo-icon>{{msg.customer_support() | name}}
+                </material-list-item>
+            </div>
+            <div group>
+                <material-list-item [routerLink]="msg.skin_consultation_url()">
+                    <fo-icon icon="skin-consultation"
+                             [size]="iconSize"></fo-icon>{{msg.consultation(1) | name}}
+                </material-list-item>
+                <material-list-item [routerLink]="msg.skin_guide_url()">
+                    <fo-icon icon="skin-guide"
+                             [size]="iconSize"></fo-icon>{{msg.skin_guide() | name}}
+                </material-list-item>
+                <material-list-item [routerLink]="msg.skin_types_url()">
+                    <fo-icon icon="skin-type"
+                             [size]="iconSize"></fo-icon>{{msg.skin_type(2) | name}}
+                </material-list-item>
+            </div>
+            <div group>
+                <div label>{{msg.product_category(2) | name}}</div>
+                <material-list-item routerLink="{{msg.product_categories_url()}}/{{msg.bundles_url()}}">
+                    <fo-icon icon="category-bundle"
+                             [size]="iconSize"></fo-icon>{{msg.bundle(2) | name}}
+                </material-list-item>
+                <material-list-item *ngFor="let category of productCategoryService.cachedModels.values"
+                                    routerLink="{{msg.product_categories_url()}}/{{category.phrases[languageService.currentShortLocale].url_name}}">
+                    <fo-icon icon="category-{{category.phrases['EN'].url_name}}"
+                             [size]="iconSize"></fo-icon>{{category.phrases[languageService.currentShortLocale].name |
+                    name}}
+                </material-list-item>
+            </div>
+            <div group>
+                <material-list-item>
+                    <bo-search popupPosition="above"></bo-search>
+                </material-list-item>
+                <material-list-item>
+                    <dropdown-menu [menu]="languageMenuModel"
+                                   [buttonText]="msg.country() | name">
+                    </dropdown-menu>
+                </material-list-item>
+            </div>
+        </material-list>
+    </div>
+</material-drawer>

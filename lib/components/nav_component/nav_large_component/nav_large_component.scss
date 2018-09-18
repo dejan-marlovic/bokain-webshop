@@ -4,7 +4,7 @@
 @import 'package:fo_components/mixins';
 @import 'package:bokain_webshop/colors';
 $upperMenuHeight: 40px;
-$lowerMenuHeight: 100px;
+
 :host {    
     @include dropdown-menu-nounderline;
     @include material-input-theme(white);
@@ -50,6 +50,9 @@ $lowerMenuHeight: 100px;
             span.productCount.visible {
                 visibility: visible;
             }
+        }
+        div.menuItem.cartItem {
+            margin-right: 1rem;
         }
     }
     div.menuLower {

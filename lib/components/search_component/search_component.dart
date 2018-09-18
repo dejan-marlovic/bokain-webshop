@@ -1,45 +1,42 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:angular_components/model/menu/menu.dart';
 import 'package:angular_components/model/ui/has_factory.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../directives/router_link_sub_active_directive.dart';
-import '../../services/cart_service.dart';
-import 'nav_large_component.template.dart' as nav;
+import 'search_component.template.dart' as search;
 
 @Component(
-    selector: 'bo-nav-large',
-    styleUrls: const ['nav_large_component.css'],
-    templateUrl: 'nav_large_component.html',
+    selector: 'bo-search',
+    templateUrl: 'search_component.html',
+    styleUrls: const ['search_component.css'],
     directives: const [
-      DropdownMenuComponent,
-      FoIconComponent,
       MaterialAutoSuggestInputComponent,
-      NgFor,
-      NgIf,
-      routerDirectives,
-      RouterLinkSubActive
+      materialInputDirectives
     ],
-    pipes: const [NamePipe])
-class NavLargeComponent implements OnDestroy {
-  NavLargeComponent(
+    pipes: const [NamePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush)
+class SearchComponent implements OnDestroy {
+  SearchComponent(
       this.languageService,
-      this.countryService,
-      this.cartService,
       this.productService,
       this.productCategoryService,
       this.skinTypeService,
-      this.router,
+      this._router,
       this.msg) {
     _setupModels();
-
     _onSearchSubscription =
         searchModel.selectionChanges.listen(_onSearchChange);
   }
+
+  @Input()
+  String popupPosition = 'below'; // below or above
+
+  List<RelativePosition> get positions => popupPosition == 'below'
+      ? RelativePosition.AdjacentBottomEdge
+      : RelativePosition.AdjacentTopEdge;
 
   @override
   void ngOnDestroy() {
@@ -49,33 +46,24 @@ class NavLargeComponent implements OnDestroy {
   void _onSearchChange(List<SelectionChangeRecord<dynamic>> changes) {
     if (changes.isNotEmpty && changes.first.added.isNotEmpty) {
       final FoModel added = changes.first.added.first;
-      if (added is Product) {        
-        router.navigate(
+      if (added is Product) {
+        _router.navigate(
             '${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
       } else if (added is ProductCategory) {
-        router.navigate(
+        _router.navigate(
             '${msg.product_categories_url()}/${added.phrases[languageService.currentShortLocale].url_name}');
       } else if (added is SkinType) {
-        router.navigate('${msg.skin_types_url()}/${added.url_name}');
+        _router.navigate('${msg.skin_types_url()}/${added.url_name}');
       }
     }
   }
 
-  Future<void> _setLocale(String iso) async {
-    await languageService.setLocale(iso, LanguageContext.webshop);
-    await cartService.evaluateCheckout(languageService.currentShortLocale);
+  FactoryRenderer<FoModel, SearchOptionRendererComponent> get factoryRenderer =>
+      (Object d) => search.SearchOptionRendererComponentNgFactory;
 
-    _setupModels();
-  }
+  StreamSubscription<List<SelectionChangeRecord>> _onSearchSubscription;
 
   void _setupModels() {
-    languageMenuModel = new MenuModel([
-      new MenuItemGroup(countryService.data.values
-          .map((country) => new MenuItem<String>(country.name,
-              action: () => _setLocale(country.language)))
-          .toList(growable: false))
-    ], tooltipText: msg.language());
-
     final optionGroups = <OptionGroup<FoModel>>[
       new OptionGroup.withLabel(
           productCategoryService.cachedModels.values.toList(growable: false),
@@ -97,28 +85,15 @@ class NavLargeComponent implements OnDestroy {
         new StringSelectionOptions<FoModel>.withOptionGroups(optionGroups);
   }
 
-  String get profileLinkLabel =>
-      FirestoreService.currentFirebaseUser.uid == FirestoreService.defaultCustomerAuthId
-          ? msg.login()
-          : msg.my_profile();
-
-  final CartService cartService;
-  final LanguageService languageService;
-  final CountryService countryService;
-  final ProductService productService;
-  final ProductCategoryService productCategoryService;
-  final SkinTypeService skinTypeService;
-  final WebshopMessagesService msg;
-  final Router router;
-
   final SelectionModel searchModel = new SelectionModel<FoModel>.single();
   StringSelectionOptions<FoModel> searchOptions;
 
-  MenuModel<MenuItem> languageMenuModel;
-  StreamSubscription<List<SelectionChangeRecord>> _onSearchSubscription;
-
-  FactoryRenderer<FoModel, SearchOptionRendererComponent> get factoryRenderer =>
-      (Object d) => nav.SearchOptionRendererComponentNgFactory;
+  final LanguageService languageService;
+  final ProductService productService;
+  final ProductCategoryService productCategoryService;
+  final SkinTypeService skinTypeService;
+  final Router _router;
+  final WebshopMessagesService msg;
 }
 
 @Component(
@@ -164,6 +139,5 @@ class SearchOptionRendererComponent implements RendersValue<FoModel> {
   Product product;
   ProductCategory productCategory;
   SkinType skinType;
-
   final LanguageService languageService;
 }

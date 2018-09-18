@@ -4,8 +4,8 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import 'components/footer_large_component/footer_large_component.dart';
-import 'components/nav_large_component/nav_large_component.dart';
+import 'components/footer_component/footer_component.dart';
+import 'components/nav_component/nav_component.dart';
 import 'components/pages/about_us_component/about_us_component.template.dart'
     as about_us_comp;
 import 'components/pages/cart_component/cart_component.template.dart'
@@ -56,7 +56,7 @@ import 'services/route_service.dart';
     directives: const [
       FooterLargeComponent,
       MaterialInputComponent,
-      NavLargeComponent,
+      NavComponent,
       NgIf,
       routerDirectives
     ],

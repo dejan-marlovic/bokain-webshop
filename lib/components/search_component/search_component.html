@@ -1,0 +1,14 @@
+<material-auto-suggest-input [label]="msg.search() | name"
+                             [filterSuggestions]="true"
+                             [popupMatchInputWidth]="false"
+                             [shouldClearOnSelection]="true"
+                             [factoryRenderer]="factoryRenderer"
+                             [highlightOptions]="false"
+                             leadingGlyph="search"
+                             [limit]="200"
+                             [selection]="searchModel"
+                             [selectionOptions]="searchOptions"
+                             [displayBottomPanel]="false"            
+                             [constrainToViewport]="true"                 
+                             [popupPositions]="positions">
+</material-auto-suggest-input>

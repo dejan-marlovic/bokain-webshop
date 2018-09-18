@@ -1,5 +1,5 @@
 @import 'package:bokain_webshop/colors';
-$lowerMenuHeight: 30px;
+
 .infoText {
     width: 300px;
 }
@@ -28,7 +28,7 @@ material-input {
     }
     div.menuLower {
         .flexAligner {
-            height: $lowerMenuHeight;
+            height: 30px;
             justify-content: center;
             img {
                 display: inline-block;
