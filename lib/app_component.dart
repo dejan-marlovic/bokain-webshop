@@ -69,6 +69,7 @@ import 'services/route_service.dart';
       CustomerLogService,
       CustomerService,
       DailyRoutineService,
+      FaceZoneService,
       foProviders,
       IngredientService,
       LanguageService,

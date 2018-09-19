@@ -1,1 +1,110 @@
-<p>SKIN TEST COMPONENT</p>
+<div class="row">
+    <div class="col text-center">
+        <div>
+            <fo-icon icon="skin-test"
+                     size="3rem"></fo-icon>
+        </div>
+        <h1 class="margin-top-none">{{msg.skin_test(1) | name}}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <form>
+            <material-stepper legalJumps="backwards"
+                              orientation="vertical"
+                              size="default">
+                <template step
+                          [name]="msg.who_are_you() | name"
+                          (continue)="validDelayedCheck($event)">
+                    <div>                        
+                        <bo-button-cloud-single-select [centerButtons]="true"
+                                                       [showLabel]="false"
+                                                       [(ngModel)]="model.gender"
+                                                       [options]="genderOptions">
+                        </bo-button-cloud-single-select>
+                    </div>
+                </template>
+                <template step
+                          [name]="msg.who_are_you() | name"
+                          (continue)="validDelayedCheck($event)">
+                    <div>                        
+                        <bo-button-cloud-single-select [centerButtons]="true"
+                                                       [showLabel]="false"
+                                                       [(ngModel)]="model.gender"
+                                                       [options]="genderOptions">
+                        </bo-button-cloud-single-select>
+                    </div>
+                </template>
+                <template step
+                          [name]="msg.who_are_you() | name"
+                          (continue)="validDelayedCheck($event)">
+                    <div>                        
+                        <bo-button-cloud-single-select [centerButtons]="true"
+                                                       [showLabel]="false"
+                                                       [(ngModel)]="model.gender"
+                                                       [options]="genderOptions">
+                        </bo-button-cloud-single-select>
+                    </div>
+                </template>
+                <template step
+                          [name]="msg.where_are_your_problem_areas() | name"
+                          (continue)="validDelayedCheck($event)">
+                    <div>                        
+                        <div class="row collapse"
+                             *ngIf="model.gender == 'female'">
+                            <div class="s6 col">
+                                <fo-image-map src="/gfx/female_face_front.png"
+                                              [zones]="faceZoneService.imageMapZonesFrontFemale"
+                                              label="zones"
+                                              [showSelector]="false"
+                                              [selectedIds]="model.problem_areas">
+                                </fo-image-map>
+                            </div>
+                            <div class="s6 col">
+                                <fo-image-map src="/gfx/female_face_side.png"
+                                              [zones]="faceZoneService.imageMapZonesSideFemale"
+                                              [showSelector]="false"
+                                              [selectedIds]="model.problem_areas">
+                                </fo-image-map>
+                            </div>
+                        </div>
+                        <div class="row"
+                             *ngIf="model.gender == 'male'">
+                            <div class="s6 col">
+                                <fo-image-map src="/gfx/male_face_front.png"
+                                              [zones]="faceZoneService.imageMapZonesFrontMale"
+                                              label="zones"
+                                              [showSelector]="false"
+                                              [selectedIds]="model.problem_areas">
+                                </fo-image-map>
+                            </div>
+                            <div class="s6 col">
+                                <fo-image-map src="/gfx/male_face_side.png"
+                                              [zones]="faceZoneService.imageMapZonesSideMale"
+                                              [showSelector]="false"
+                                              [selectedIds]="model.problem_areas">
+                                </fo-image-map>
+                            </div>
+                        </div>
+                        <bo-button-cloud-multi-select [centerButtons]="true"
+                                                      [showLabel]="false"
+                                                      [(ngModel)]="model.problem_areas"
+                                                      [options]="problemAreaOptions">
+                        </bo-button-cloud-multi-select>
+                    </div>
+                </template>
+                <template step
+                          [name]="msg.who_are_you() | name"
+                          (continue)="validDelayedCheck($event)">
+                    <div>                        
+                        <bo-button-cloud-single-select [centerButtons]="true"
+                                                       [showLabel]="false"
+                                                       [(ngModel)]="model.gender"
+                                                       [options]="genderOptions">
+                        </bo-button-cloud-single-select>
+                    </div>
+                </template>
+            </material-stepper>
+        </form>
+    </div>
+</div>
