@@ -16,13 +16,12 @@
                             [(ngModel)]="password"></material-input>
         </div>
     </div>
-    <div footer>
+    <div>
         <div class="row">
             <div class="col text-right">
                 <material-button raised
-                                 (trigger)="onLogin()">
-                    {{msg.login()}}
-                </material-button>
+                                 clear-size
+                                 (trigger)="onLogin()"> {{msg.login()}} </material-button>
             </div>
         </div>
     </div>

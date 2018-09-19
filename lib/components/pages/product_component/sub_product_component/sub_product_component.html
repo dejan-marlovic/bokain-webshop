@@ -46,44 +46,64 @@
         <div class="col">
             <fo-tab-panel>
                 <fo-tab [label]="msg.information() | name" icon="information">
-                    <h3 class="margin-bottom-small">{{msg.product_description() | name}}</h3>
-                    <div [safeInnerHtml]="description"></div>
-                    <h3 class="margin-bottom-small">{{msg.properties() | name}}</h3>
-                    <ul class="margin-small">
-                        <li *ngFor="let property of model.phrases[languageService.currentShortLocale].properties">
-                            {{property}}
-                        </li>
-                    </ul>
-                    <h3 class="margin-bottom-small">{{msg.skin_type(2) | name}}</h3>
-                    <p class="margin-top-small">
-                        <material-chips>
-                            <material-chip *ngFor="let id of model.skin_type_ids" [removable]="false">
-                                {{skinTypeService.webshopData[id]}}
-                            </material-chip>
-                        </material-chips>
-                    </p>
+                    <div class="row">
+                        <div class="col">                            
+                            <h3 class="margin-bottom-small">{{msg.product_description() | name}}</h3>
+                            <div [safeInnerHtml]="description"></div>
+                            <h3 class="margin-bottom-small">{{msg.properties() | name}}</h3>
+                            <ul class="margin-small">
+                                <li *ngFor="let property of model.phrases[languageService.currentShortLocale].properties">
+                                    {{property}}
+                                </li>
+                            </ul>
+                            <h3 class="margin-bottom-small">{{msg.skin_type(2) | name}}</h3>
+                            <p class="margin-top-small">
+                                <material-chips>
+                                    <material-chip *ngFor="let id of model.skin_type_ids" [removable]="false">
+                                        {{skinTypeService.webshopData[id]}}
+                                    </material-chip>
+                                </material-chips>
+                            </p>
+                        </div>
+                    </div>
                 </fo-tab>
                 <fo-tab [label]="msg.instructions() | name" icon="instructions">
-                    <h3 class="margin-bottom-small">{{msg.instructions() | name}}</h3>
-                    <div [safeInnerHtml]="usageInstructions"></div>
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="margin-bottom-small">{{msg.instructions() | name}}</h3>
+                            <div [safeInnerHtml]="usageInstructions"></div>
+                        </div>
+                    </div>
                 </fo-tab>
                 <fo-tab [label]="msg.ingredient(2) | name" icon="ingredients">
-                    <h3 class="margin-bottom-small">{{msg.ingredient(2) | name}}</h3>
-                    <p class="margin-top-small">
-                        <material-chips>
-                            <material-chip *ngFor="let id of model.ingredient_ids" [removable]="false">
-                                {{id | fetch:ingredientService}}
-                            </material-chip>
-                        </material-chips>
-                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="margin-bottom-small">{{msg.ingredient(2) | name}}</h3>
+                            <p class="margin-top-small">
+                                <material-chips>
+                                    <material-chip *ngFor="let id of model.ingredient_ids" [removable]="false">
+                                        {{id | fetch:ingredientService}}
+                                    </material-chip>
+                                </material-chips>
+                            </p>
+                        </div>
+                    </div>
                 </fo-tab>
-                <fo-tab [label]="msg.important() | name" icon="important">
-                    <h3 class="margin-bottom-small">{{msg.important_notice() | name}}</h3>
-                    <div [safeInnerHtml]="importantNotice"></div>
+                <fo-tab *ngIf="model.phrases[languageService.currentShortLocale].important_notice != null" [label]="msg.important() | name" icon="important">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="margin-bottom-small">{{msg.important_notice() | name}}</h3>
+                            <div [safeInnerHtml]="importantNotice"></div>
+                        </div>
+                    </div>
                 </fo-tab>
-                <fo-tab [label]="msg.combine() | name" icon="combine">
-                    <h3 class="margin-bottom-small">{{msg.combine() | name}}</h3>
-                    <bo-product-list [products]="relatedProducts"></bo-product-list>
+                <fo-tab *ngIf="model.related_product_ids.isNotEmpty" [label]="msg.combine() | name" icon="combine">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="margin-bottom-small">{{msg.combine() | name}}</h3>
+                            <bo-product-list [products]="relatedProducts"></bo-product-list>
+                        </div>
+                    </div>
                 </fo-tab>
             </fo-tab-panel>
         </div>
