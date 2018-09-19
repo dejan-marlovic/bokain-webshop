@@ -1,13 +1,17 @@
-<h1 class="large text-center margin-bottom-small"
-    *ngIf="title != null">{{title | name}}</h1>
-<p class="text-center margin-top-small margin-bottom-none"
-   *ngIf="description != null">{{description | name}}</p>
+<div class="row">
+    <div class="col text-center">
+        <h1 class="large margin-bottom-small"
+            *ngIf="title != null">{{title | name}}</h1>
+        <div class="margin-top-small margin-bottom-none"
+             *ngIf="descriptionHtml != null"
+             [safeInnerHtml]="descriptionHtml"></div>
+    </div>
+</div>
 <div class="row"
      *ngIf="products != null">
     <div class="l3 m4 s12 col align-bottom"
          *ngFor="let product of products">
-        <bo-productbox [model]="product"
-                       [rootUrl]="rootUrl">
+        <bo-productbox [model]="product">
         </bo-productbox>
     </div>
 </div>

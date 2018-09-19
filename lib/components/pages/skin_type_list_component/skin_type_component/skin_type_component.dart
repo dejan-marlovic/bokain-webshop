@@ -6,7 +6,6 @@ import 'package:fo_components/fo_components.dart';
 import '../../../product_list_component/product_list_component.dart';
 import '../../../quick_links_component/quick_links_component.dart';
 import '../../../result_bar_component/result_bar_component.dart';
-import '../../not_found_component/not_found_component.dart';
 import 'product_bundle_component/product_bundle_component.dart';
 import 'severity_select_component/severity_select_component.dart';
 
@@ -16,8 +15,7 @@ import 'severity_select_component/severity_select_component.dart';
     styleUrls: const ['skin_type_component.css'],
     directives: const [
       NgFor,
-      NgIf,
-      NotFoundComponent,
+      NgIf,      
       MaterialButtonComponent,
       ProductBundleComponent,
       ProductListComponent,
@@ -40,8 +38,7 @@ class SkinTypeComponent implements OnActivate {
           orElse: () => null);
     }
 
-    if (model == null) {
-      showNotFound = true;
+    if (model == null) {      
     } else {
       skinTypeProducts = _productService.cachedModels.values
           .where((product) =>
@@ -73,8 +70,7 @@ class SkinTypeComponent implements OnActivate {
   Product largeProduct;
 
   SkinType model;
-  List<Product> skinTypeProducts;
-  bool showNotFound = false;
+  List<Product> skinTypeProducts;  
   int severityLevel = 2;
   final ChangeDetectorRef _changeDetectorRef;
   final ProductService _productService;

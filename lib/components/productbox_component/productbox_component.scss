@@ -1,9 +1,12 @@
 @import 'package:grid/constants';
+@import 'package:bokain_webshop/colors';
 
 :host {    
+    @include box-shadow();
     display: block;
     margin: 2rem auto 0 auto;
-    max-width: 85vw;
+    max-width: 85vw;        
+    padding: $medium;
 
     .upper {        
         cursor: pointer;

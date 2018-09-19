@@ -5,5 +5,6 @@ import 'package:angular/angular.dart';
   templateUrl: 'skin_test_component.html',
   styleUrls: const ['skin_test_component.css'],
   directives: const [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 )
 class SkinTestComponent {}

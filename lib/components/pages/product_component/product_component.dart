@@ -2,7 +2,6 @@ import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
-import '../not_found_component/not_found_component.dart';
 import 'product_bundle_component/product_bundle_component.dart';
 import 'sub_product_component/sub_product_component.dart';
 
@@ -10,7 +9,7 @@ import 'sub_product_component/sub_product_component.dart';
     selector: 'bo-product',
     templateUrl: 'product_component.html',
     styleUrls: const ['product_component.css'],
-    directives: const [NgIf, NotFoundComponent, ProductBundleComponent, SubProductComponent])
+    directives: const [NgIf, ProductBundleComponent, SubProductComponent])
 class ProductComponent implements OnActivate {
   ProductComponent(this.languageService, this.productService);
 
@@ -26,7 +25,7 @@ class ProductComponent implements OnActivate {
     }
 
     if (model == null) {
-      showNotFound = true;
+      
     }
   }
 
@@ -39,7 +38,6 @@ class ProductComponent implements OnActivate {
   }
 
   Product model;
-  bool showNotFound = false;
   final LanguageService languageService;
   final ProductService productService;
 }

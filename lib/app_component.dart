@@ -146,15 +146,12 @@ class AppComponent {
             component: skin_guide_comp.SkinGuideComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.skinTest,
-            component: skin_test_comp.SkinTestComponentNgFactory),
-        RouteDefinition(
-            routePath: route_paths.product,
-            component: product_comp.ProductComponentNgFactory),
+            component: skin_test_comp.SkinTestComponentNgFactory),            
         RouteDefinition(
             routePath: route_paths.skinTypeList,
             component: skin_type_list_comp.SkinTypeListComponentNgFactory),
         RouteDefinition(
-            routePath: route_paths.productCategories,
+            routePath: route_paths.products,
             component: product_category_filter_comp
                 .ProductCategoryFilterComponentNgFactory),
         RouteDefinition(
@@ -168,9 +165,8 @@ class AppComponent {
       ..productCategoryRoutes = [
         RouteDefinition(
             routePath: route_paths.productCategoryBundles,
-            component:
-                product_category_bundle.ProductCategoryBundleComponentNgFactory,
-            useAsDefault: true),
+            component: product_category_bundle
+                .ProductCategoryBundleComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.productCategoryBundlesSkinType,
             component: product_category_bundle_skin_type
@@ -184,6 +180,11 @@ class AppComponent {
         RouteDefinition(
             routePath: route_paths.productCategoryProduct,
             component: product_comp.ProductComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.empty,
+            component: product_category_comp.ProductCategoryComponentNgFactory),
+        RouteDefinition.redirect(
+            path: '.+', redirectTo: route_paths.notFound.toUrl())
       ];
   }
 

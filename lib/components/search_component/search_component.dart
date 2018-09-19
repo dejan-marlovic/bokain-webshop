@@ -44,14 +44,32 @@ class SearchComponent implements OnDestroy {
   }
 
   void _onSearchChange(List<SelectionChangeRecord<dynamic>> changes) {
+    String getProductCategoryUrl(Product product) {
+      final category = productCategoryService.get(product.product_category_id);
+
+      if (category == null) {
+        /// We're dealing with a product category, add it's skin type to the url
+        try {
+          final skinType = skinTypeService.webshopData[product.skin_type_ids.first];
+          return '${msg.bundle(2)}/${skinType.url_name}';
+        } on StateError catch (e) {
+          print(e);
+          return '';
+        }      
+      }
+      else {
+        return category.phrases[languageService.currentShortLocale].url_name;
+      }
+    }
+
     if (changes.isNotEmpty && changes.first.added.isNotEmpty) {
       final FoModel added = changes.first.added.first;
       if (added is Product) {
         _router.navigate(
-            '${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
+            '${msg.product(2)}/${getProductCategoryUrl(added)}/${added.phrases[languageService.currentShortLocale].url_name}');
       } else if (added is ProductCategory) {
         _router.navigate(
-            '${msg.product_categories_url()}/${added.phrases[languageService.currentShortLocale].url_name}');
+            '${msg.product(2)}/${added.phrases[languageService.currentShortLocale].url_name}');
       } else if (added is SkinType) {
         _router.navigate('${msg.skin_types_url()}/${added.url_name}');
       }
@@ -71,9 +89,7 @@ class SearchComponent implements OnDestroy {
       new OptionGroup.withLabel(
           productService.cachedModels.values
               .where((p) =>
-                  p.sub_only == false &&
-                  p.sub_product_ids
-                      .isEmpty) // dont list bundles or sub_products
+                  p.sub_only == false) // dont list sub_products
               .toList(growable: false),
           msg.product(2)),
       new OptionGroup.withLabel(

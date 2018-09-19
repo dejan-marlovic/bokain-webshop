@@ -3,13 +3,12 @@ import 'package:angular_router/angular_router.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:bokain_models/bokain_models.dart';
 import '../../../../product_list_component/product_list_component.dart';
-import '../../../not_found_component/not_found_component.dart';
 
 @Component(
     selector: 'bo-product-category-bundle-skin-type-component',
     templateUrl: 'product_category_bundle_skin_type_component.html',
     styleUrls: const ['product_category_bundle_skin_type_component.css'],
-    directives: const [NgIf, NotFoundComponent, ProductListComponent],
+    directives: const [NgIf, ProductListComponent],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductCategoryBundleSkinTypeComponent implements OnActivate {
@@ -26,7 +25,7 @@ class ProductCategoryBundleSkinTypeComponent implements OnActivate {
         .firstWhere((s) => s.url_name == label, orElse: () => null);
 
     if (skinType == null) {
-      showNotFound = true;
+      
     } else {
       title = msg.bundles_for_title(skinType?.label);
       description = msg.bundles_for_description(skinType?.label);
@@ -40,8 +39,7 @@ class ProductCategoryBundleSkinTypeComponent implements OnActivate {
 
   String title;
   String description;
-  String currentPath;
-  bool showNotFound = false;
+  String currentPath;  
   Iterable<Product> products;
   final ProductService _productService;
   final SkinTypeService _skinTypeService;

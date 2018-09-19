@@ -6,6 +6,8 @@ library route_paths;
 import 'package:angular_router/angular_router.dart';
 import 'package:intl/intl.dart';
 
+final RoutePath empty = new RoutePath(path: '');
+
 RoutePath get aboutUs =>
     RoutePath(path: Intl.message('about-us', name: 'about_us_url'));
 
@@ -51,16 +53,16 @@ RoutePath get skinType => RoutePath(
 
 RoutePath get notFound => RoutePath(path: '404');
 
-RoutePath get productCategories => RoutePath(
-    path: Intl.message('product-categories', name: 'product_categories_url'));
+RoutePath get products => RoutePath(
+    path: Intl.plural(2, one:'product', other:'products', name: 'products', args: [2]));
 
 RoutePath get productCategory =>
-    RoutePath(path: ':url_name', parent: productCategories);
+    RoutePath(path: ':url_name', parent: products);
 
 RoutePath get productCategoryBundles => RoutePath(
     path: Intl.plural(2,
         one: 'bundle', other: 'bundles', name: 'bundle', args: <int>[2]),
-    parent: productCategories);
+    parent: products);
 
 RoutePath get productCategoryBundlesSkinType => RoutePath(
     path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [2], name: 'bundle')}/:skin_type");
@@ -69,4 +71,4 @@ RoutePath get productCategoryBundlesSkinTypeBundle => RoutePath(
     path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [2], name: 'bundle')}/:skin_type/:url_name");
 
 RoutePath get productCategoryProduct =>
-    RoutePath(path: ':category_url_name/:url_name', parent: productCategories);
+    RoutePath(path: ':category_url_name/:url_name', parent: products);

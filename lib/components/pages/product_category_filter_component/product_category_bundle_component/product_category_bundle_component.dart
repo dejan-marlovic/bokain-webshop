@@ -17,7 +17,7 @@ class ProductCategoryBundleComponent {
   ProductCategoryBundleComponent(this.skinTypeService, this._router, this.msg);
 
   void onSkinTypeSelect(SkinType event) {    
-    _router.navigate('${msg.product_categories_url()}/${msg.bundle(2)}/${event.url_name}');
+    _router.navigate('${msg.product(2)}/${msg.bundle(2)}/${event.url_name}');
   }
 
   final SkinTypeService skinTypeService;
