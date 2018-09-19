@@ -35,6 +35,11 @@
                     <fo-icon icon="skin-consultation"
                              [size]="iconSize"></fo-icon>{{msg.consultation(1) | name}}
                 </material-list-item>
+                <material-list-item [routerLink]="msg.skin_test_url()">
+                    <fo-icon icon="skin-test"
+                             [size]="iconSize">
+                    </fo-icon>{{msg.skin_test(1) | name}}
+                </material-list-item>
                 <material-list-item [routerLink]="msg.skin_guide_url()">
                     <fo-icon icon="skin-guide"
                              [size]="iconSize"></fo-icon>{{msg.skin_guide() | name}}
