@@ -1,28 +1,63 @@
-<form>
-    <div class="row">
-        <div class="col">
-            <material-input [label]="msg.email()"
-                            floatingLabel
-                            [maxCount]="128"
-                            [(ngModel)]="email"></material-input>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <material-input type="password"
-                            [label]="msg.password()"
-                            floatingLabel
-                            [maxCount]="64"
-                            [(ngModel)]="password"></material-input>
-        </div>
-    </div>
-    <div>
-        <div class="row">
-            <div class="col text-right">
-                <material-button raised
-                                 clear-size
-                                 (trigger)="onLogin()"> {{msg.login()}} </material-button>
+<div class="row margin-top-x-large">
+    <div class="l3 m2 s0 col"></div>
+    <div class="l6 m8 s12 col">
+        <form [ngFormModel]="loginForm"
+              *ngIf="state == 'login'">
+            <h3 class="margin-none"> {{msg.login() | name}} </h3>
+            <p class="margin-top-none text-small"
+               [class.color-alert]="loginSubtitle == msg.invalid_password()">{{loginSubtitle | name}}</p>
+            <div>
+                <material-input autoFocus
+                                [label]="msg.email()"
+                                floatingLabel
+                                ngControl="email"
+                                [maxCount]="128"
+                                [(ngModel)]="email"></material-input>
             </div>
-        </div>
+            <div>
+                <material-input type="password"
+                                [label]="msg.password()"
+                                floatingLabel
+                                ngControl="password"
+                                [maxCount]="64"
+                                [(ngModel)]="password"></material-input>
+            </div>
+            <div class="margin-top-medium">
+                <div>
+                    <span class="text-small clickable"
+                          (click)="state = 'reset_password'"> {{msg.reset_password()}} </span>
+                    <material-button class="float-right"
+                                     raised
+                                     clear-size
+                                     [disabled]="!loginForm.valid || customerService.loading"
+                                     (trigger)="onLogin()"> {{msg.login()}} </material-button>
+                </div>
+            </div>
+        </form>
+        <form [ngFormModel]="resetPasswordForm"
+              *ngIf="state == 'reset_password'">
+            <h3 class="margin-none"> {{msg.reset_password() | name}} </h3>
+            <p class="margin-top-none text-small">{{resetPasswordSubtitle | name}}</p>
+            <div>
+                <material-input autoFocus
+                                [label]="msg.email()"
+                                floatingLabel
+                                ngControl="email"
+                                [maxCount]="128"
+                                [(ngModel)]="email"></material-input>
+            </div>
+            <div class="margin-top-medium">
+                <div>
+                    <span class="text-small clickable"
+                          (click)="state = 'login'"> {{msg.back()}} </span>
+                    <material-button class="float-right"
+                                     raised
+                                     clear-size
+                                     [disabled]="!resetPasswordForm.valid || customerService.loading"
+                                     (trigger)="onResetPassword()"> {{msg.send()}} </material-button>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+    <div class="l3 m2 s0 col"></div>
+</div>

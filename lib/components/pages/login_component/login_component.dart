@@ -8,39 +8,69 @@ import 'package:fo_components/fo_components.dart';
 @Component(
     selector: 'bo-login',
     templateUrl: 'login_component.html',
-    styleUrls: const [
-      'login_component.css'
-    ],
+    styleUrls: const ['login_component.css'],
     directives: const [
+      AutoFocusDirective,
       FoModalComponent,
       formDirectives,
       MaterialButtonComponent,
       materialInputDirectives,
+      NgClass,
+      NgIf
     ],
-    providers: const <Object>[
-      FORM_PROVIDERS
-    ],
-    pipes: const [
-      NamePipe
-    ])
+    providers: const <Object>[FORM_PROVIDERS],
+    pipes: const [NamePipe],
+    changeDetection: ChangeDetectionStrategy.Default)
 class LoginComponent {
-  LoginComponent(this.customerService, this.msg);
+  LoginComponent(this.customerService, this.msg) {
+    loginSubtitle = msg.login_subtitle();
+    resetPasswordSubtitle = msg.reset_password_instructions();
+  }
 
-  Future<void> onLogin() async {    
+  Future<void> onLogin() async {
     try {
+      loginSubtitle = msg.please_wait();
       await customerService.login(email, password);
       await customerService.fetch(email);
-      // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      print(e.toString());
-      errorMessage = e.toString();
+    } on UserAuthException {
+      loginSubtitle = msg.invalid_password();
     }
+  }
+
+  Future<void> onResetPassword() async {
+    resetPasswordSubtitle = msg.please_wait();
+
   }
 
   String email = 'test@minoch.com';
   String password = 'lok13rum';
-  String errorMessage;
+  String loginSubtitle;
+  String resetPasswordSubtitle;
+  //reset_password_email_not_found
+  String state = 'login';
+
+
 
   final CustomerService customerService;
   final WebshopMessagesService msg;
+  final ControlGroup loginForm = new ControlGroup({
+    'email': new Control(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(128),
+          FoValidators.email
+        ])),
+    'password': new Control(
+        '', Validators.compose([Validators.required, Validators.maxLength(64)]))
+  });
+  final ControlGroup resetPasswordForm = new ControlGroup({
+    'email': new Control(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(128),
+          FoValidators.email
+        ]))
+  });
 }

@@ -1,0 +1,20 @@
+@import 'package:bokain_webshop/colors';
+@import 'package:grid/constants';
+
+:host {
+    display: block;
+    div.row { 
+        div.col {
+            form {                
+                @include box-shadow();                
+                padding: $large;
+                .text-small {
+                    font-size: 0.8rem;
+                }
+                .float-right {
+                    float: right;
+                }                
+            }
+        }
+    }
+}
