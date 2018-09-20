@@ -27,12 +27,19 @@ import 'side_nav_component/side_nav_page_component.dart';
       SideNavComponent,
       SideNavPageComponent
     ],
-    providers: const [MailerService],
+    providers: const [MailerService, PacsoftService],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class CustomerSupportComponent implements OnActivate {
-  CustomerSupportComponent(this._configService, this.mailerService, this.webshopContentService,
-      this.languageService, this._sanitizer, this._changeDetector, this.msg) {
+  CustomerSupportComponent(
+      this._configService,
+      this.mailerService,
+      this.pacsoftService,
+      this.webshopContentService,
+      this.languageService,
+      this._sanitizer,
+      this._changeDetector,
+      this.msg) {
     _loadResources();
     languageService.localeChanges.listen((_) => _loadResources());
   }
@@ -42,12 +49,16 @@ class CustomerSupportComponent implements OnActivate {
     currentPage = current.path;
   }
 
-  Future<void> sendEmail() async {    
+  Future<void> sendEmail() async {
     final subject = 'Nytt ärende webshop';
     await mailerService.mail(
         ticket.emailBody, subject, _configService.supportEmail);
     ticket = null;
     _changeDetector.markForCheck();
+  }
+
+  Future<void> fetchParcelInfo() async {
+    parcelData = await pacsoftService.fetchParcelInfo(parcelNo);
   }
 
   Future<void> _loadResources() async {
@@ -82,6 +93,7 @@ class CustomerSupportComponent implements OnActivate {
   final ConfigService _configService;
   final LanguageService languageService;
   final MailerService mailerService;
+  final PacsoftService pacsoftService;
   final WebshopContentService webshopContentService;
   final ChangeDetectorRef _changeDetector;
   final DomSanitizationService _sanitizer;
@@ -96,6 +108,8 @@ class CustomerSupportComponent implements OnActivate {
   SafeHtml about;
   bool loaded;
   Ticket ticket = new Ticket();
+
+  String parcelData;
 
   ControlGroup form = new ControlGroup({
     'name': new Control('',

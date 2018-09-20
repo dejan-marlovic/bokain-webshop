@@ -19,7 +19,9 @@
                 <div class="row collapse">
                     <div class="col"
                          *ngIf="loaded">
-                        <form *ngIf="ticket != null" #f="ngForm" [ngFormModel]="form">
+                        <form *ngIf="ticket != null"
+                              #f="ngForm"
+                              [ngFormModel]="form">
                             <div class="row">
                                 <div class="col">
                                     <fo-select [label]="msg.category(1) | name"
@@ -100,8 +102,12 @@
                     <material-input class="flexWidth"
                                     [label]="msg.parcel_no()"
                                     floatingLabel
-                                    [(ngModel)]="parcelNo"></material-input>
-                    <material-button raised>{{msg.send()}}</material-button>
+                                    [(ngModel)]="parcelNo"
+                                    [disabled]="pacsoftService.loading"></material-input>
+                    <material-button (trigger)="fetchParcelInfo()"
+                                     [disabled]="pacsoftService.loading"
+                                     raised>{{msg.send()}}</material-button>
+                    <p> {{parcelData}} </p>
                 </div>
             </bo-side-nav-page>
         </bo-side-nav>
