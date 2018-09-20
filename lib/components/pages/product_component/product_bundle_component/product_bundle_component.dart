@@ -95,6 +95,8 @@ class ProductBundleComponent implements OnInit {
   List<Product> relatedProducts;
   List<Product> subProducts;
 
+  final List<String> hideTabLabelsOn = ['small'];
+
   final String iconSize = '3rem';
   final CartService cartService;
   final DailyRoutineService dailyRoutineService;

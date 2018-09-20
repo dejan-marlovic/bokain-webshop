@@ -74,6 +74,8 @@ class SubProductComponent implements OnInit {
   final SkinTypeService skinTypeService;
   final WebshopMessagesService msg;
 
+  final List<String> hideTabLabelsOn = ['small'];
+
   bool imageLoaded = false;
   SafeHtml description;
   SafeHtml usageInstructions;
