@@ -7,8 +7,8 @@ import '../../../skin_type_table_component/skin_type_table_component.dart';
 
 @Component(
   selector: 'bo-product-category-bundle',
-  templateUrl: 'product_category_bundle_component.html',
-  styleUrls: const ['product_category_bundle_component.css'],
+  templateUrl: 'bundle_component.html',
+  styleUrls: const ['bundle_component.css'],
   directives: const [QuickLinksComponent, SkinTypeTableComponent],
   pipes: const [NamePipe],  
   changeDetection: ChangeDetectionStrategy.OnPush

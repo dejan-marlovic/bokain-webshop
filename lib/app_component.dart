@@ -20,9 +20,9 @@ import 'components/pages/not_found_component/not_found_component.template.dart'
     as not_found_comp;
 import 'components/pages/partners_component/partners_component.template.dart'
     as partners_comp;
-import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_component.template.dart'
+import 'components/pages/product_category_filter_component/bundle_component/bundle_component.template.dart'
     as product_category_bundle;
-import 'components/pages/product_category_filter_component/product_category_bundle_component/product_category_bundle_skin_type_component/product_category_bundle_skin_type_component.template.dart'
+import 'components/pages/product_category_filter_component/bundle_component/skin_type_component/skin_type_component.template.dart'
     as product_category_bundle_skin_type;
 import 'components/pages/product_category_filter_component/product_category_component/product_category_component.template.dart'
     as product_category_comp;

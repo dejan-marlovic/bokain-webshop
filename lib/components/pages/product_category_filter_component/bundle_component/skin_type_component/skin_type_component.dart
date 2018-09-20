@@ -6,8 +6,8 @@ import '../../../../product_list_component/product_list_component.dart';
 
 @Component(
     selector: 'bo-product-category-bundle-skin-type-component',
-    templateUrl: 'product_category_bundle_skin_type_component.html',
-    styleUrls: const ['product_category_bundle_skin_type_component.css'],
+    templateUrl: 'skin_type_component.html',
+    styleUrls: const ['skin_type_component.css'],
     directives: const [NgIf, ProductListComponent],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
