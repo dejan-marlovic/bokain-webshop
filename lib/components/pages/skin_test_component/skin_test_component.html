@@ -10,46 +10,36 @@
 <div class="row">
     <div class="col">
         <form>
-            <material-stepper legalJumps="backwards"
+            <material-stepper #stepper
+                              legalJumps="backwards"
                               orientation="vertical"
                               size="default">
                 <template step
+                          hideButtons
+                          [complete]="model.gender != null"
                           [name]="msg.who_are_you() | name"
                           (continue)="validDelayedCheck($event)">
-                    <div>                        
+                    <div class="margin-top-large">
                         <bo-button-cloud-single-select [centerButtons]="true"
                                                        [showLabel]="false"
                                                        [(ngModel)]="model.gender"
                                                        [options]="genderOptions">
                         </bo-button-cloud-single-select>
                     </div>
-                </template>
-                <template step
-                          [name]="msg.who_are_you() | name"
-                          (continue)="validDelayedCheck($event)">
-                    <div>                        
-                        <bo-button-cloud-single-select [centerButtons]="true"
-                                                       [showLabel]="false"
-                                                       [(ngModel)]="model.gender"
-                                                       [options]="genderOptions">
-                        </bo-button-cloud-single-select>
+                    <div class="text-center margin-top-medium margin-bottom-large">
+                        <material-fab mini
+                                      raised
+                                      [disabled]="model.gender == null"
+                                      (trigger)="stepper.stepForward($event, stepper.activeStep)">
+                            <material-icon icon="keyboard_arrow_down"></material-icon>
+                        </material-fab>
                     </div>
                 </template>
                 <template step
-                          [name]="msg.who_are_you() | name"
-                          (continue)="validDelayedCheck($event)">
-                    <div>                        
-                        <bo-button-cloud-single-select [centerButtons]="true"
-                                                       [showLabel]="false"
-                                                       [(ngModel)]="model.gender"
-                                                       [options]="genderOptions">
-                        </bo-button-cloud-single-select>
-                    </div>
-                </template>
-                <template step
+                          hideButtons
                           [name]="msg.where_are_your_problem_areas() | name"
                           (continue)="validDelayedCheck($event)">
-                    <div>                        
+                    <div>
                         <div class="row collapse"
                              *ngIf="model.gender == 'female'">
                             <div class="s6 col">
@@ -92,16 +82,13 @@
                                                       [options]="problemAreaOptions">
                         </bo-button-cloud-multi-select>
                     </div>
-                </template>
-                <template step
-                          [name]="msg.who_are_you() | name"
-                          (continue)="validDelayedCheck($event)">
-                    <div>                        
-                        <bo-button-cloud-single-select [centerButtons]="true"
-                                                       [showLabel]="false"
-                                                       [(ngModel)]="model.gender"
-                                                       [options]="genderOptions">
-                        </bo-button-cloud-single-select>
+                    <div class="text-center margin-top-medium margin-bottom-large">
+                        <material-fab mini
+                                      raised
+                                      [disabled]="model.problem_areas.isEmpty"
+                                      (trigger)="stepper.stepForward($event, stepper.activeStep)">
+                            <material-icon icon="keyboard_arrow_down"></material-icon>
+                        </material-fab>
                     </div>
                 </template>
             </material-stepper>

@@ -18,6 +18,8 @@ import 'skin_test.dart';
       FoImageMapComponent,
       ButtonCloudMultiSelectComponent,
       ButtonCloudSingleSelectComponent,
+      MaterialFabComponent,
+      MaterialIconComponent,
       MaterialStepperComponent,
       NgIf,
       StepDirective
