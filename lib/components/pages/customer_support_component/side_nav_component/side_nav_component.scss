@@ -1,15 +1,19 @@
 @import 'package:bokain_webshop/colors';
- 
-div#buttonPanel {
-    div.pageButton {
-        color: $colorBlack;
-        background-color: $color2XBright;
-        padding: 0.5rem 1rem;
-        margin: 0.3rem 0;
-        cursor: pointer;
-    }
-    div.pageButton.active {
-        color: white;
-        background-color: $color1;    
+
+:host {
+    display: block;
+    min-height: 40rem;
+    div#buttonPanel {
+        div.pageButton {
+            color: $colorBlack;
+            background-color: $color2XBright;
+            padding: 0.5rem 1rem;
+            margin: 0.3rem 0;
+            cursor: pointer;
+        }
+        div.pageButton.active {
+            color: white;
+            background-color: $color1;    
+        }
     }
 }

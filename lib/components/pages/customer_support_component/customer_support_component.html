@@ -5,7 +5,7 @@
                               [name]="msg.customer_support_url()">
                 <div class="row">
                     <div class="col">
-                        <h2>{{msg.contact() | name}}</h2>
+                        <h2>{{msg.contact() | name}}</h2>                        
                         <div *ngIf="ticket != null">
                             <h3 class="margin-bottom-small">{{msg.contact_us_description_title()}}</h3>
                             <p class="margin-top-small">{{msg.contact_us_description_text()}}</p>
@@ -13,7 +13,7 @@
                         <div *ngIf="ticket == null">
                             <h3 class="margin-bottom-small">{{msg.thank_you() | name}}!</h3>
                             <p class="margin-top-small">{{msg.contact_us_thank_you_text()}}</p>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
                 <div class="row collapse">
@@ -23,7 +23,7 @@
                               #f="ngForm"
                               [ngFormModel]="form">
                             <div class="row">
-                                <div class="col">
+                                <div class="col"> 
                                     <fo-select [label]="msg.category(1) | name"
                                                [options]="supportCategories"
                                                [(selectedId)]="ticket.category"></fo-select>
@@ -98,17 +98,18 @@
             <bo-side-nav-page [label]="msg.track_parcel() | name"
                               name="track-parcel">
                 <h2 class="margin-bottom-small">{{msg.track_parcel() | name}}</h2>
-                <div>
+                <form>
                     <material-input class="flexWidth"
-                                    [label]="msg.parcel_no()"
+                                    [label]="msg.parcel_no()"                                    
+                                    [maxCount]="13"
                                     floatingLabel
                                     [(ngModel)]="parcelNo"
                                     [disabled]="pacsoftService.loading"></material-input>
                     <material-button (trigger)="fetchParcelInfo()"
-                                     [disabled]="pacsoftService.loading"
+                                     [disabled]="pacsoftService.loading || parcelNo.length > 13"
                                      raised>{{msg.send()}}</material-button>
-                    <p> {{parcelData}} </p>
-                </div>
+                    <bo-pacsoft-tracking-info *ngIf="parcelInfo != null" [model]="parcelInfo"></bo-pacsoft-tracking-info>
+                </form>
             </bo-side-nav-page>
         </bo-side-nav>
     </div>

@@ -1,0 +1,30 @@
+<div *ngIf="model.compositeFault == null">
+    <div *ngIf="model.shipments?.isEmpty == false">
+        <div *ngFor="let shipment of model.shipments">
+            <h3 class="margin-bottom-small">{{msg.status() | name}}: {{shipment.statusText.header}}</h3>
+            <p class="margin-top-small">{{shipment.statusText.body}}</p>
+            <div *ngFor="let item of shipment.items">
+                <div *ngIf="item.dropOffDate != null">{{msg.sent() | name}}: {{item.dropOffDate}}</div>
+            </div>
+            <p *ngIf="shipment.statusText?.estimatedTimeOfArrival != null">
+                {{msg.estimated_time_of_arrival() | name}}: {{shipment.statusText.estimatedTimeOfArrival}}
+            </p>
+            <div *ngIf="shipment.deliveryPoint != null">
+                <h4 class="margin-bottom-small">{{msg.delivery_point()}}</h4>
+                <div>{{shipment.deliveryPoint.name}}</div>
+                <div>{{shipment.deliveryPoint.address.street1}}</div>
+                <div>{{shipment.deliveryPoint.address.street2}}</div>
+                <div>{{shipment.deliveryPoint.address.city}}</div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="model.shipments?.isEmpty != false">
+        <p class="color-alert">
+            {{msg.error_occured() | name}}: {{msg.could_not_find_tracking_info() | name}}
+        </p>
+    </div>
+</div>
+
+<p class="color-alert" *ngIf="model.compositeFault?.faults?.isEmpty == false">
+    {{msg.error_occured() | name}}: {{model.compositeFault.faults.first.explanationText}}
+</p>

@@ -9,6 +9,7 @@ import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
 import '../../../services/config_service.dart';
 import '../../quick_links_component/quick_links_component.dart';
+import 'pacsoft_tracking_info_component/pacsoft_tracking_info_component.dart';
 import 'side_nav_component/side_nav_component.dart';
 import 'side_nav_component/side_nav_page_component.dart';
 
@@ -22,13 +23,14 @@ import 'side_nav_component/side_nav_page_component.dart';
       MaterialButtonComponent,
       materialInputDirectives,
       NgIf,
+      PacsoftTrackingInfoComponent,
       QuickLinksComponent,
       SafeInnerHtmlDirective,
       SideNavComponent,
       SideNavPageComponent
     ],
     providers: const [MailerService, PacsoftService],
-    pipes: const [NamePipe],
+    pipes: const [JsonPipe, NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class CustomerSupportComponent implements OnActivate {
   CustomerSupportComponent(
@@ -58,7 +60,8 @@ class CustomerSupportComponent implements OnActivate {
   }
 
   Future<void> fetchParcelInfo() async {
-    parcelData = await pacsoftService.fetchParcelInfo(parcelNo);
+    parcelInfo = await pacsoftService.fetchParcelInfo(parcelNo);
+    _changeDetector.markForCheck();
   }
 
   Future<void> _loadResources() async {
@@ -100,7 +103,7 @@ class CustomerSupportComponent implements OnActivate {
   final WebshopMessagesService msg;
   List<FoModel> supportCategories;
 
-  String parcelNo;
+  String parcelNo = '';
   String currentPage;
   SafeHtml partners;
   SafeHtml standard_terms;
@@ -109,7 +112,7 @@ class CustomerSupportComponent implements OnActivate {
   bool loaded;
   Ticket ticket = new Ticket();
 
-  String parcelData;
+  PacsoftTrackingInformationResponse parcelInfo;
 
   ControlGroup form = new ControlGroup({
     'name': new Control('',

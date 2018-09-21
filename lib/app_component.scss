@@ -24,7 +24,8 @@
 @include colorizeButton("material-button.alert", $colorAlert);
 
 :host {
-    display: block;
+    display: block;    
+
     div.page {
         display: flex;
         flex-direction: column;

@@ -1,4 +1,7 @@
-material-input.flexWidth {
-    display: inline-flex !important;
-    width: 60% !important;
+:host {
+    display: block;    
+    material-input.flexWidth {
+        display: inline-flex !important;
+        width: 60% !important;
+    }
 }

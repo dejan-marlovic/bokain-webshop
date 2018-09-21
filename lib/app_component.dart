@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
@@ -99,6 +100,10 @@ class AppComponent {
     customerService
         .login('patrick.minogue@minoch.com', 'lok13rum')
         .then(_loadResources);
+
+        router.onNavigationStart.listen((_) {
+          html.window.scrollTo(0,0);
+        });
   }
 
   void _onLocaleChange(String locale) {
