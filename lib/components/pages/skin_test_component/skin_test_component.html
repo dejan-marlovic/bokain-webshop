@@ -17,8 +17,7 @@
                 <template step
                           hideButtons
                           [complete]="model.gender != null"
-                          [name]="msg.who_are_you() | name"
-                          (continue)="validDelayedCheck($event)">
+                          [name]="msg.who_are_you() | name">
                     <div class="margin-top-large">
                         <bo-button-cloud-single-select [centerButtons]="true"
                                                        [showLabel]="false"
@@ -37,8 +36,7 @@
                 </template>
                 <template step
                           hideButtons
-                          [name]="msg.where_are_your_problem_areas() | name"
-                          (continue)="validDelayedCheck($event)">
+                          [name]="msg.where_are_your_problem_areas() | name">
                     <div>
                         <div class="row collapse"
                              *ngIf="model.gender == 'female'">
@@ -90,6 +88,64 @@
                             <material-icon icon="keyboard_arrow_down"></material-icon>
                         </material-fab>
                     </div>
+                </template>
+                <template step
+                          hideButtons
+                          [complete]="model.problem_type_ids.isNotEmpty"
+                          [name]="msg.describe_your_skin() | name">
+                    <div class="row margin-top-large">
+                        <div class="m4 s6 col"
+                             *ngFor="let id of problemTypes.keys">
+                            <div class="problemTypeBox text-center clickable"
+                                 [class.selected]="model.problem_type_ids.contains(id)"
+                                 (click)="toggleProblemType(id)">
+                                <div class="row problemTypeBoxInner">
+                                    <div class="col align-middle text-center">
+                                        {{problemTypes[id].name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-center margin-top-medium margin-bottom-large">
+                        <material-fab mini
+                                      raised
+                                      [disabled]="model.problem_type_ids.isEmpty"
+                                      (trigger)="evaluateSkinType(); stepper.stepForward($event, stepper.activeStep)">
+                            <material-icon icon="keyboard_arrow_down"></material-icon>
+                        </material-fab>
+                    </div>
+                </template>
+                <template step
+                          hideButtons
+                          [complete]="model.severity != null"
+                          [name]="msg.skin_test_severity_title() | name">
+                    <div class="row margin-top-large">
+                        <div class="col">
+                            <bo-severity-select *ngIf="model.skin_type_id != null"
+                                                [model]="skinTypeService.webshopData[model.skin_type_id]"
+                                                [(level)]="model.severity"></bo-severity-select>
+                        </div>
+                    </div>
+                    <div class="text-center margin-top-medium margin-bottom-large">
+                        <material-fab mini
+                                      raised
+                                      [disabled]="model.severity == null"
+                                      (trigger)="evaluateRecommendedProductBundle(); stepper.stepForward($event, stepper.activeStep);">
+                            <material-icon icon="keyboard_arrow_down"></material-icon>
+                        </material-fab>
+                    </div>
+                </template>
+                <template step
+                          hideButtons
+                          [complete]="model.severity != null"
+                          [name]="msg.your_recommendation() | name">
+                    <div class="row margin-top-large">
+                        <div class="col">
+                            <bo-product-bundle *ngIf="recSmall != null && recLarge != null" [small]="recSmall" [large]="recLarge"></bo-product-bundle>
+                        </div>
+                    </div>                    
                 </template>
             </material-stepper>
         </form>
