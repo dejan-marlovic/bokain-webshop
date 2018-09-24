@@ -3,12 +3,13 @@ import 'package:angular_components/angular_components.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import '../../../../../services/cart_service.dart';
+import '../../../../productbox_component/productbox_component.dart';
 
 @Component(
     selector: 'bo-product-bundle',
     templateUrl: 'product_bundle_component.html',
     styleUrls: const ['product_bundle_component.css'],
-    directives: const [FoIconComponent, MaterialButtonComponent, NgFor],    
+    directives: const [FoIconComponent, MaterialButtonComponent, NgFor, ProductBoxComponent],    
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class ProductBundleComponent implements OnInit {
@@ -51,7 +52,7 @@ class ProductBundleComponent implements OnInit {
       ? null
       : selected.phrases[languageService.currentShortLocale];
 
-  final String iconSize = '3rem';
+  final String iconSize = '2.5rem';
   Product selected;
   List<Product> subProducts;
 

@@ -17,6 +17,8 @@
         height: 18rem;        
         min-height: 18rem;
         img {            
+            width: auto;
+            max-width: 100%;
             max-height: 18rem;
         }
         material-button {
@@ -42,11 +44,12 @@
     .lower {
         .nameContainer {
             margin-top: 0.5rem;
+            height: 2.4rem;
+            display: flex;
+            align-items: center;            
+            justify-content: center;
             h3 {
-                margin: 0;
-                overflow: hidden;      
-                white-space: nowrap;
-                text-overflow: ellipsis;
+                margin: 0;                
             }            
         }
         .descContainer {  

@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col text-center">
-        <div>
+    <div class="col">
+        <h1 class="margin-top-none color-black">
             <fo-icon icon="skin-test"
-                     size="3rem"></fo-icon>
-        </div>
-        <h1 class="margin-top-none">{{msg.skin_test(1) | name}}</h1>
+                     size="2.5rem"></fo-icon>
+            &nbsp;{{msg.skin_test(1) | name}}
+        </h1>
     </div>
 </div>
 <div class="row">
@@ -141,11 +141,13 @@
                           hideButtons
                           [complete]="model.severity != null"
                           [name]="msg.your_recommendation() | name">
-                    <div class="row margin-top-large">
+                    <div class="row">
                         <div class="col">
-                            <bo-product-bundle *ngIf="recSmall != null && recLarge != null" [small]="recSmall" [large]="recLarge"></bo-product-bundle>
+                            <bo-product-bundle *ngIf="recSmall != null && recLarge != null"
+                                               [small]="recSmall"
+                                               [large]="recLarge"></bo-product-bundle>
                         </div>
-                    </div>                    
+                    </div>
                 </template>
             </material-stepper>
         </form>

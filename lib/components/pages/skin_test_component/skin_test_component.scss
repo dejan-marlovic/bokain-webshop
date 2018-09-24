@@ -2,14 +2,16 @@
 @import 'package:bokain_webshop/colors';
 
 div.problemTypeBox {
-    border: 2px solid black;    
+    border: 1px solid $color1;
+    color: $colorBlack;
     overflow: hidden;
 
     div.problemTypeBoxInner {
-        height: 4rem;        
+        height: 3.5rem;        
     }    
 }
 
-div.problemTypeBox.selected {
-    border-color: $color1;
+div.problemTypeBox.selected {    
+    color: white;
+    background-color: $color1;
 }

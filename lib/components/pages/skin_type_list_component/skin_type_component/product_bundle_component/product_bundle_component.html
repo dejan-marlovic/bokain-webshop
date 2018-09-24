@@ -1,53 +1,45 @@
-<div class="row collapse">
+<div class="row">
     <div class="m6 col align-middle">
-        <img [src]="selected?.image_uri"
-             [alt]="phrases?.name">
+        <bo-productbox [model]="selected"></bo-productbox>
     </div>
     <div class="m6 col text-center align-middle">
         <div class="row">
-            <div class="m6 col"
+            <div class="m6 col margin-top-medium"
                  *ngFor="let product of subProducts">
                 <fo-icon class="color-1"
                          [icon]="getIcon(product)"
                          [size]="iconSize"></fo-icon>
-                <p class="margin-top-small">
+                <p class="margin-top-small text-small">
                     {{getName(product)}}
                 </p>
             </div>
-            <div class="m6 col">
+            <div class="m6 col margin-top-medium">
                 <fo-icon class="color-1"
                          icon="product-routines"
                          [size]="iconSize"></fo-icon>
-                <p class="margin-top-small">
-                    {{msg.product_routine(2)}}
+                <p class="margin-top-small text-small">
+                    {{msg.product_routine(2) | name}}
                 </p>
             </div>
         </div>
         <div class="row margin-top-medium">
             <div class="m6 col text-center">
                 <material-button clear-size
+                                 raised
                                  [class.blue]="selected == small"
                                  (trigger)="onSelect(small)">
-                    {{msg.bundle_small()}} ({{cartService.addCurrency(small?.price)}})
+                    {{msg.bundle_small()}}
                 </material-button>
             </div>
             <div class="m6 col text-center">
-                <material-button clear-size
+                <material-button raised
+                                 clear-size
                                  [class.blue]="selected == large"
                                  (trigger)="onSelect(large)">
-                    {{msg.bundle_large()}} ({{cartService.addCurrency(large?.price)}})
+                    {{msg.bundle_large()}}
                 </material-button>
             </div>
         </div>
 
-    </div>
-</div>
-<div class="row">
-    <div class="col text-center">
-        <material-button raised
-                         class="blue"
-                         (trigger)="cartService.add(selected.id)">
-            {{msg.add_to_cart()}}
-        </material-button>
     </div>
 </div>
