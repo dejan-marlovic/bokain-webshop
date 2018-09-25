@@ -1,30 +1,38 @@
 <div *ngIf="model != null">
     <div class="row">
         <div class="col text-center">
-            <h1 class="large">
+            <h1 class="large margin-top-medium margin-bottom-x-small">
                 {{model.label | name}}
             </h1>
         </div>
     </div>
-    <div class="grayBar">
-        <bo-severity-select *ngIf="model != null"
-                            [model]="model"
-                            [level]="severityLevel"
-                            (levelChange)="onSeverityLevelChange($event)"></bo-severity-select>
-    </div>
+    <bo-severity-select *ngIf="model != null"
+                        [model]="model"
+                        [level]="severityLevel"
+                        (levelChange)="onSeverityLevelChange($event)"></bo-severity-select>
 
-    <div class="row padding-top-medium padding-bottom-medium">
+    <div class="row collapse">
         <div class="col text-center">
-            <h2 class="large">{{msg.products_for_severity(msg.severity_level(severityLevel)) | name}} {{model.label | name}}</h2>
+            <h2 class="margin-top-medium margin-bottom-none">{{msg.products_for_severity(msg.severity_level(severityLevel))
+                | name}}
+                {{model.label | name}}</h2>
             <bo-product-bundle *ngIf="smallProduct != null"
-                                         [small]="smallProduct"
-                                         [large]="largeProduct"></bo-product-bundle>
+                               [small]="smallProduct"
+                               [large]="largeProduct"></bo-product-bundle>
         </div>
     </div>
 
 
-    <div class="bar background-color-2-x-light">
-        <bo-result-bar [skinType]="model"></bo-result-bar>
+    <div class="background-color-2-x-light margin-top-large">
+        <div class="row">
+            <div class="col">
+                <bo-result-bar [skinType]="model"></bo-result-bar>
+            </div>
+        </div>
     </div>
-    <bo-quick-links></bo-quick-links>
+    <div class="row collapse margin-top-medium">
+        <div class="col">
+            <bo-quick-links></bo-quick-links>
+        </div>
+    </div>
 </div>

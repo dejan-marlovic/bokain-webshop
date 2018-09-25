@@ -4,8 +4,8 @@
 :host {    
     @include box-shadow();
     display: block;
-    margin: 2rem auto 0 auto;
-    max-width: 85vw;        
+    margin: $small auto 0 auto;
+    //max-width: 85vw;        
     padding: $medium;
 
     .upper {        

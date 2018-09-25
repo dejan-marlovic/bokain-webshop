@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col text-center">
-        <p class="margin-top-small">
+        <p class="margin-top-small margin-bottom-none">
             {{msg.how_severe_is_your() | name}} {{model.label}}?
         </p>
     </div>
@@ -9,7 +9,7 @@
     <div class="s4 col text-center clickable"
          *ngFor="let l of levels; let i = index"
          (click)="onLevelClick(l)">
-        <p class="margin-top-none margin-bottom-x-small">{{msg.severity_level(l) | name}}</p>
+        <label class="color-2-dark">{{msg.severity_level(l) | name}}</label>
         <img [class.selected]="level == l"
              [src]="model.imageSeverity[i]"
              [alt]="msg.severity_level(l)">
