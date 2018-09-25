@@ -22,7 +22,8 @@ import 'package:fo_components/fo_components.dart';
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.Default)
 class LoginComponent {
-  LoginComponent(this.customerService, this.msg) {
+  LoginComponent(this.customerService, this.consultationService,
+      this.serviceService, this.msg) {
     loginSubtitle = msg.login_subtitle();
     resetPasswordSubtitle = msg.reset_password_instructions();
   }
@@ -31,7 +32,14 @@ class LoginComponent {
     try {
       loginSubtitle = msg.please_wait();
       await customerService.login(email, password);
-      await customerService.fetch(email);
+      final customer = await customerService.fetch(email);
+      if (customer.consultation_id != null) {
+        final consultation =
+            await consultationService.fetch(customer.consultation_id);
+        if (consultation.service_id != null) {
+          await serviceService.fetch(consultation.service_id);
+        }
+      }
     } on UserAuthException {
       loginSubtitle = msg.invalid_password();
     }
@@ -43,7 +51,8 @@ class LoginComponent {
       await customerService.sendPasswordResetEmail(email);
       resetPasswordSubtitle =
           msg.we_have_sent_password_reset_instructions(email);
-    } catch(e) { // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      // ignore: avoid_catches_without_on_clauses
       resetPasswordSubtitle = msg.reset_password_email_not_found();
     }
   }
@@ -51,10 +60,12 @@ class LoginComponent {
   String email = 'test@minoch.com';
   String password = 'lok13rum';
   String loginSubtitle;
-  String resetPasswordSubtitle;  
+  String resetPasswordSubtitle;
   String state = 'login';
 
   final CustomerService customerService;
+  final ConsultationService consultationService;
+  final ServiceService serviceService;
   final WebshopMessagesService msg;
   final ControlGroup loginForm = new ControlGroup({
     'email': new Control(

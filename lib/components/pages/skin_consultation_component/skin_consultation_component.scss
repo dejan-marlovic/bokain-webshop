@@ -1,0 +1,8 @@
+@import 'package:angular_components/material_datepicker/mixins';
+
+
+:host {
+    material-datepicker {
+        @include menu-width(100%);
+    }
+}

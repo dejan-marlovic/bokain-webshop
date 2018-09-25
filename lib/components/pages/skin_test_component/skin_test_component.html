@@ -93,21 +93,12 @@
                           hideButtons
                           [complete]="model.problem_type_ids.isNotEmpty"
                           [name]="msg.describe_your_skin() | name">
-                    <div class="row margin-top-large">
-                        <div class="m4 s6 col"
-                             *ngFor="let id of problemTypes.keys">
-                            <div class="problemTypeBox text-center clickable"
-                                 [class.selected]="model.problem_type_ids.contains(id)"
-                                 (click)="toggleProblemType(id)">
-                                <div class="row problemTypeBoxInner">
-                                    <div class="col align-middle text-center">
-                                        {{problemTypes[id].name}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    <bo-button-cloud-multi-select class="margin-top-large"                                                  
+                                                  [centerButtons]="true"
+                                                  [showLabel]="false"
+                                                  [(ngModel)]="model.problem_type_ids"
+                                                  [options]="problemTypes">
+                    </bo-button-cloud-multi-select>
                     <div class="text-center margin-top-medium margin-bottom-large">
                         <material-fab mini
                                       raised

@@ -28,9 +28,14 @@
                     </div>
                     <div class="row">
                         <div class="l4 m3 s0 col"></div>
-                        <div class="l4 m6 col">
-                            <fo-social-number-input class="margin-top-x-large text-center"
-                                                    [(value)]="customer.social_number"></fo-social-number-input>
+                        <div class="l4 m6 col text-center">
+                            <div class="margin-top-medium">
+                                <material-datepicker class="text-left"                                                     
+                                                     [(date)]="birthDate"
+                                                     [minDate]="minDate"
+                                                     [maxDate]="maxDate">
+                                </material-datepicker>
+                            </div>
                         </div>
                         <div class="l4 m3 s0 col"></div>
                     </div>
@@ -60,7 +65,7 @@
                     <div class="row margin-top-medium">
                         <div class="col text-center">
                             <material-fab mini
-                                          [disabled]="consultation.area_face == false && consultation.area_chest == false && consultation.area_back == false && consultation.area_other == false || (consultation.area_face == true && consultation.zones.isEmpty)"
+                                          [disabled]="consultation.problem_areas.isEmpty || (consultation.problem_areas.contains('face') && consultation.zones.isEmpty)"
                                           (trigger)="step = 2">
                                 <material-icon icon="keyboard_arrow_down"
                                                size="x-large"></material-icon>
@@ -159,7 +164,7 @@
                                 </div>
                                 <div class="row collapse">
                                     <div class="col">
-                                        <material-checkbox label="{{msg.call_me()}}"
+                                        <material-checkbox label="{{msg.call_me() | name}}"
                                                            [disabled]="customerService.loading || consultationService.loading"
                                                            [checked]="consultation.call_me"
                                                            (checkedChange)="onCallMeChange($event)">
@@ -168,14 +173,7 @@
                                 </div>
                                 <div class="row"
                                      *ngIf="consultation.call_me">
-                                    <div class="s6 m3 l2 col">
-                                        <fo-select [label]="msg.country_code()"
-                                                   [disabled]="customerService.loading || consultationService.loading"
-                                                   [options]="countryCodeOptions"
-                                                   [(selectedId)]="customer.phone_country">
-                                        </fo-select>
-                                    </div>
-                                    <div class="m9 l10 col">
+                                    <div class="col">
                                         <material-input label="{{msg.phone()}}*"
                                                         floatingLabel
                                                         [disabled]="customerService.loading || consultationService.loading"
@@ -185,16 +183,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="m6 col middle">
+                            <div class="m6 col align-middle">
                                 <div class="row collapse">
                                     <div class="col text-center">
-                                        <h4>GDPR</h4>
-                                        <p class="margin-bottom-small">{{msg.consultation_gdpr_terms()}},
-                                            {{msg.read_more()}}: <a href="https://gdpr.dahlskincare.com"
-                                               target="_blank">https://gdpr.dahlskincare.com</a>. </p>
-                                        <material-checkbox [label]="msg.i_accept_the_terms()"
+                                        <material-checkbox [label]="msg.i_accept_the_terms() | name"
                                                            [(checked)]="termsAccepted">
                                         </material-checkbox>
+                                        <p class="margin-top-x-small margin-bottom-small small">
+                                            {{msg.read_more() | name}}: <a href="https://gdpr.dahlskincare.com"
+                                               target="_blank">https://gdpr.dahlskincare.com</a>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="row collapse">
@@ -231,7 +229,7 @@
             <p>{{msg.consultation_survey_done_text()}}</p>
         </div>
     </div>
-    <fo-modal title="{{msg.thank_you() | name}}!"              
+    <fo-modal title="{{msg.thank_you() | name}}!"
               [smallPadding]="false"
               [visible]="step == 5"
               (visibleChange)="step = 6">
@@ -248,7 +246,7 @@
     </fo-modal>
     <fo-modal [title]="errorTitle"
               [visible]="errorText != null"
-              (visibleChange)="errorText = null; showResetPasswordButton = false; errorTitle = msg.error_occured();"              
+              (visibleChange)="errorText = null; showResetPasswordButton = false; errorTitle = msg.error_occured();"
               [smallPadding]="false">
         <div class="row">
             <div class="col">

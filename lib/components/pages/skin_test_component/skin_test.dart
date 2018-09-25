@@ -10,4 +10,6 @@ class ProblemType {
   String name;
   String skin_type_id;
   int rank;
+
+  String toString() => name;
 }

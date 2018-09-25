@@ -1,18 +1,19 @@
 <bo-login *ngIf="!loggedIn">
 </bo-login>
 
-<div *ngIf="loggedIn">
+<div *ngIf="loggedIn && customer != null">
     <div class="row">
         <div class="col">
-            <fo-tab-panel>
-                <fo-tab [label]="msg.detail(2) | name">
-                    <div class="row" *ngIf="customer != null">
+            <fo-tab-panel [hideLabelsOn]="['small']">
+                <fo-tab [label]="msg.detail(2) | name" icon="my-profile">
+                    <div class="row">
                         <div class="col text-center">
                             <h1 class="margin-bottom-small">
-                                {{customer?.firstname}} {{customer?.lastname}}
+                                {{customer.firstname}} {{customer.lastname}}
                             </h1>
                             <p class="margin-top-small">
-                                <material-button raised (trigger)="onLogout()">
+                                <material-button raised
+                                                 (trigger)="onLogout()">
                                     {{msg.logout()}}
                                 </material-button>
                             </p>
@@ -21,15 +22,21 @@
                     <bo-profile-details [customer]="customer"></bo-profile-details>
                 </fo-tab>
                 <fo-tab [label]="msg.chat(1) | name">
-                    <bo-customer-chat class="margin-top-medium" [customerId]="currentUserId" [customerPerspective]="true"></bo-customer-chat>
+                    <bo-customer-chat class="margin-top-medium"
+                                      [customerId]="currentUserId"
+                                      [customerPerspective]="true"></bo-customer-chat>
                 </fo-tab>
-                <fo-tab [label]="msg.product(2) | name">
-                    FAVORITPRODUKTER HÄR
+                <fo-tab *ngIf="customer.favorite_product_ids.isNotEmpty"
+                        [label]="msg.product(2) | name"
+                        icon="product-category">
+                    <bo-product-list [products]="favoriteProducts"></bo-product-list>
                 </fo-tab>
-                <fo-tab [label]="msg.service(2) | name">
+                <fo-tab *ngIf="recommendedService != null"
+                        [label]="msg.service(2) | name">
                     REKOMMENDERADE TJÄNSTER HÄR
                 </fo-tab>
-                <fo-tab [label]="msg.product_routine(2) | name">
+                <fo-tab *ngIf="customer.consultation_id != null"
+                        [label]="msg.product_routine(2) | name" icon="product-routines">
                     PRODUKTRUTINER HÄR
                 </fo-tab>
             </fo-tab-panel>

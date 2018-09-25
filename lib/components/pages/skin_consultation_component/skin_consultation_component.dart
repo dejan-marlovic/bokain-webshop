@@ -24,10 +24,10 @@ import 'package:intl/intl.dart' show DateFormat;
       coreDirectives,
       FoModalComponent,
       formDirectives,
-      FoSelectComponent,
-      FoSocialNumberInputComponent,
+      FoSelectComponent,      
       MaterialButtonComponent,
       MaterialCheckboxComponent,
+      MaterialDatepickerComponent,
       MaterialExpansionPanel,
       MaterialExpansionPanelSet,
       MaterialFabComponent,
@@ -68,12 +68,8 @@ class SkinConsultationComponent {
                 FoValidators.alpha,
                 Validators.maxLength(64)
               ])),
-          'email': new Control<String>(
-              '',
-              Validators.compose([
-                Validators.required,
-                FoValidators.email
-              ])),
+          'email': new Control<String>('',
+              Validators.compose([Validators.required, FoValidators.email])),
           'password': new Control<String>(
               '',
               Validators.compose([
@@ -82,10 +78,9 @@ class SkinConsultationComponent {
                 Validators.maxLength(64)
               ])),
           'phone': new Control<String>('', Validators.compose([])),
-        }),
-        countryCodeOptions = countryService.data.values
-            .map((country) => new FoModel()..id = country.calling_code)
-            .toList(growable: false) {
+        }),        
+        minDate = new Date(1900),
+        maxDate = new Date.today().add(years: -10) {
     errorTitle = msg.error_occured();
     _evaluatedLoginState();
   }
@@ -111,8 +106,7 @@ class SkinConsultationComponent {
         ..firstname = 'patrick'
         ..lastname = 'minogue'
         ..email = 'test@minoch.com';
-      consultation = new Consultation()
-        ..area_back = true
+      consultation = new Consultation()        
         ..customer_symptoms = ['dry']
         ..skin_tone_id = 'neither'
         ..current_skin_status = 'same_as_usual';
@@ -151,14 +145,14 @@ class SkinConsultationComponent {
       try {
         consultation.customer_id = await _registerOrLogin();
         customer = await customerService.fetch(consultation.customer_id);
-        
-        if (customer.consultation_id != null) {          
+
+        if (customer.consultation_id != null) {
           consultation =
               await consultationService.fetch(customer.consultation_id);
           if (consultation != null) {
             // A consultation already exists for this customer
             step = consultation.surveyCompleted ? 7 : 6;
-            throw new Exception(msg.error_customer_already_has_consultation());            
+            throw new Exception(msg.error_customer_already_has_consultation());
           }
         }
       } on InvalidPasswordException {
@@ -218,10 +212,8 @@ class SkinConsultationComponent {
             FoValidators.alpha,
             Validators.maxLength(64)
           ])),
-      'email': new Control<String>(
-          customer.email,
-          Validators.compose(
-              [Validators.required, FoValidators.email])),
+      'email': new Control<String>(customer.email,
+          Validators.compose([Validators.required, FoValidators.email])),
       'password': new Control<String>(
           password,
           Validators.compose([
@@ -234,7 +226,7 @@ class SkinConsultationComponent {
               customer.phone,
               Validators.compose([
                 Validators.required,
-                FoValidators.phoneNumberWithoutCountryCode
+                FoValidators.numeric
               ]))
           : new Control<String>('', Validators.compose([]))
     });
@@ -244,7 +236,15 @@ class SkinConsultationComponent {
     step++;
   }
 
-  final List<FoModel> countryCodeOptions;
+  Date get birthDate => _birthdate ??=
+      (customer.social_number == null || customer.social_number.length < 8)
+          ? null
+          : new Date.fromTime(
+              DateTime.parse(customer.social_number.substring(0, 8)));
+
+  set birthDate(Date value) {
+    customer.social_number = '${value.format(ssn)}';
+  }  
 
   ControlGroup form;
 
@@ -258,6 +258,10 @@ class SkinConsultationComponent {
   bool termsAccepted = true;
   String errorText;
   String errorTitle;
+
+  final Date minDate;
+  final Date maxDate;
+  Date _birthdate;
 
   String password = '111111';
   bool showResetPasswordButton = false;
