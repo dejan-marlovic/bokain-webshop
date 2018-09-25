@@ -21,7 +21,6 @@ $color3XDark: darken($color3, $colorStep * 2);
 
 @mixin box-shadow()
 {
-    
   -webkit-box-shadow: 1px 1px 4px $colorBlack;
   -moz-box-shadow: 1px 1px 4px $colorBlack;
   box-shadow: 1px 1px 4px $colorBlack;
