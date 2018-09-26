@@ -20,7 +20,9 @@
                          icon="skin-type"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p class="color-white">{{msg.skin_care_by() | name}} {{msg.skin_type(1) | name}}</p>
+            <div class="pageLabelContainer">
+                <p class="color-white">{{msg.skin_care_by() | name}} {{msg.skin_type(1) | name}}</p>
+            </div>
         </div>
     </div>
     <div class="l3 m6 s6 col text-center">
@@ -31,7 +33,9 @@
                          icon="product-category"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p class="color-white">{{msg.skin_care_by() | name}} {{msg.product_category(1) | name}}</p>
+            <div class="pageLabelContainer">
+                <p class="color-white">{{msg.skin_care_by() | name}}<wbr/>{{msg.product_category(1) | name}}</p>
+            </div>
         </div>
     </div>
     <div class="l3 m6 s6 col text-center">
@@ -42,7 +46,9 @@
                          icon="skin-consultation"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p class="color-white">{{msg.skin_consultation(1) | name}}</p>
+            <div class="pageLabelContainer">
+                <p class="color-white">{{msg.skin_consultation(1) | name}}</p>
+            </div>
         </div>
     </div>
     <div class="l3 m6 s6 col text-center">
@@ -53,7 +59,9 @@
                          icon="skin-guide"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p class="color-white">{{msg.skin_guide() | name}}</p>
+            <div class="pageLabelContainer">
+                <p class="color-white">{{msg.skin_guide() | name}}</p>
+            </div>
         </div>
     </div>
 </div>

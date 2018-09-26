@@ -1,19 +1,24 @@
 @import 'package:grid/constants';
 :host {
     div.card {
-        padding: $large $medium;
+        padding: $medium;
         margin: 0 $x-small;
     }
-    div.card>p {
-        margin-bottom: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    div.card>.pageLabelContainer {        
+        overflow: hidden;        
+        height: 3.4rem;        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p {
+            line-height: 120%;
+            margin: 0;
+        }
     }
     div.resultBox {
         h2,
         material-button {
-            color: white;
+            color: white; 
         }
         background-image: url('gfx/faces.jpg');
         div.overlay {
