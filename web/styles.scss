@@ -38,7 +38,11 @@ iframe {
 }
 
 * {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', Helvetica, Arial, sans-serif;    
+}
+
+h1, h2, h3, h4, p {
+    color: $colorBlack;
 }
 
 h1.large {

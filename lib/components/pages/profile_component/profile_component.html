@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col">
             <fo-tab-panel [hideLabelsOn]="['small']">
-                <fo-tab [label]="msg.detail(2) | name" icon="my-profile">
+                <fo-tab [label]="msg.detail(2) | name"
+                        icon="my-profile">
                     <div class="row">
                         <div class="col text-center">
                             <h1 class="margin-bottom-small">
@@ -21,23 +22,30 @@
                     </div>
                     <bo-profile-details [customer]="customer"></bo-profile-details>
                 </fo-tab>
-                <fo-tab [label]="msg.chat(1) | name">
-                    <bo-customer-chat class="margin-top-medium"
+                <fo-tab [label]="msg.chat(1) | name"
+                        #chat>
+                    <bo-customer-chat *ngIf="chat.active"
+                                      class="margin-top-medium"
                                       [customerId]="currentUserId"
                                       [customerPerspective]="true"></bo-customer-chat>
                 </fo-tab>
                 <fo-tab *ngIf="customer.favorite_product_ids.isNotEmpty"
+                        #products
                         [label]="msg.product(2) | name"
                         icon="product-category">
-                    <bo-product-list [products]="favoriteProducts"></bo-product-list>
+                    <bo-product-list *ngIf="products.active"
+                                     [products]="favoriteProducts"></bo-product-list>
                 </fo-tab>
                 <fo-tab *ngIf="recommendedService != null"
+                        #services
                         [label]="msg.service(2) | name">
-                    REKOMMENDERADE TJÄNSTER HÄR
+                    <div *ngIf="services.active">REKOMMENDERADE TJÄNSTER HÄR</div>
                 </fo-tab>
                 <fo-tab *ngIf="customer.consultation_id != null"
-                        [label]="msg.product_routine(2) | name" icon="product-routines">
-                    PRODUKTRUTINER HÄR
+                        #productRoutines
+                        [label]="msg.product_routine(2) | name"
+                        icon="product-routines">
+                    <div *ngIf="productRoutines.active">PRODUKTRUTINER HÄR</div>
                 </fo-tab>
             </fo-tab-panel>
         </div>

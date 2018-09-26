@@ -16,40 +16,44 @@
         <div class="card background-color-1 color-white clickable"
              routerLink="{{msg.skin_types_url()}}">
             <div>
-                <fo-icon icon="skin-type"
+                <fo-icon class="color-white"
+                         icon="skin-type"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p>{{msg.skin_care_by() | name}} {{msg.skin_type(1) | name}}</p>
+            <p class="color-white">{{msg.skin_care_by() | name}} {{msg.skin_type(1) | name}}</p>
         </div>
     </div>
     <div class="l3 m6 s6 col text-center">
-        <div class="card background-color-1 color-white clickable"
+        <div class="card background-color-1 clickable"
              [routerLink]="msg.product(2) + '/' + msg.bundle(2)">
             <div>
-                <fo-icon icon="product-category"
+                <fo-icon class="color-white"
+                         icon="product-category"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p>{{msg.skin_care_by() | name}} {{msg.product_category(1) | name}}</p>
+            <p class="color-white">{{msg.skin_care_by() | name}} {{msg.product_category(1) | name}}</p>
         </div>
     </div>
     <div class="l3 m6 s6 col text-center">
-        <div class="card background-color-1 color-white clickable"
+        <div class="card background-color-1 clickable"
              [routerLink]="msg.skin_consultation_url()">
             <div>
-                <fo-icon icon="skin-consultation"
+                <fo-icon class="color-white"
+                         icon="skin-consultation"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p>{{msg.skin_consultation(1) | name}}</p>
+            <p class="color-white">{{msg.skin_consultation(1) | name}}</p>
         </div>
     </div>
     <div class="l3 m6 s6 col text-center">
-        <div class="card background-color-1 color-white clickable"
+        <div class="card background-color-1 clickable"
              [routerLink]="msg.skin_guide_url()">
             <div>
-                <fo-icon icon="skin-guide"
+                <fo-icon class="color-white"
+                         icon="skin-guide"
                          [size]="iconSize"></fo-icon>
             </div>
-            <p>{{msg.skin_guide() | name}}</p>
+            <p class="color-white">{{msg.skin_guide() | name}}</p>
         </div>
     </div>
 </div>
@@ -57,9 +61,10 @@
 
 <div class="row margin-top-large collapse">
     <div class="col">
-        <bo-product-list [title]="msg.top_sellers() | name" [products]="popularProducts"></bo-product-list>
+        <bo-product-list [title]="msg.top_sellers() | name"
+                         [products]="popularProducts"></bo-product-list>
 
-    </div>    
+    </div>
 </div>
 
 <div class="row collapse margin-top-x-large margin-bottom-x-large">

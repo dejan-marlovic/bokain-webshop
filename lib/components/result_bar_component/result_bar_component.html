@@ -17,9 +17,9 @@
         <img [src]="skinType.imageProgress[2]" [alt]="msg.results()">
     </div> 
 </div>
-<div class="row">
+<div class="row margin-bottom-small">
     <div class="col text-center">
-        <material-button [routerLink]="msg.results_url()">
+        <material-button [routerLink]="msg.results_url()" raised> 
             {{msg.show_more_results()}}
         </material-button>
     </div>
