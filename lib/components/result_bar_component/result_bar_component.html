@@ -1,26 +1,32 @@
 <div class="row">
     <div class="col text-center">
-        <h2 class="large margin-top-none margin-bottom-small">{{msg.results() | name}}</h2>
-        <h3 class="margin-top-small">
+        <h2 class="large margin-top-none margin-bottom-x-small">{{msg.results() | name}}</h2>
+        <h3 class="margin-top-x-small">
             {{msg.other_customers_results() | name}}
         </h3>
     </div>
 </div>
-<div class="row collapse">
+<div class="row collapse"
+     *ngFor="let progress of visibleProgress">
     <div class="s4 col text-center">
-        <img [src]="skinType.imageProgress[0]" [alt]="msg.results()">
-    </div> 
+        <img [src]="progress[0]"
+             [alt]="msg.results()">
+    </div>
     <div class="s4 col text-center">
-        <img [src]="skinType.imageProgress[1]" [alt]="msg.results()">
-    </div> 
+        <img [src]="progress[1]"
+             [alt]="msg.results()">
+    </div>
     <div class="s4 col text-center">
-        <img [src]="skinType.imageProgress[2]" [alt]="msg.results()">
-    </div> 
+        <img [src]="progress[2]"
+             [alt]="msg.results()">
+    </div>
 </div>
 <div class="row margin-bottom-small">
     <div class="col text-center">
-        <material-button [routerLink]="msg.results_url()" raised> 
+        <material-button [disabled]="visibleProgress.length == skinType.imageProgress.length"
+                         (trigger)="showMore()"
+                         raised>
             {{msg.show_more_results()}}
         </material-button>
     </div>
-</div> 
+</div>

@@ -25,6 +25,7 @@ html {
     overflow-y: scroll; 
     margin: 0;
     font-weight: lighter;
+    color: $colorBlack;
     body {
         margin: 0;
         h1 {
@@ -39,10 +40,6 @@ iframe {
 
 * {
     font-family: 'Poppins', Helvetica, Arial, sans-serif;    
-}
-
-h1, h2, h3, h4, p {
-    color: $colorBlack;
 }
 
 h1.large {

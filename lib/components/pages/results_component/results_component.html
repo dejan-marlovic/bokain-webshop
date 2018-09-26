@@ -1,1 +1,18 @@
-<h1>RESULTS</h1>
+<div class="row">
+    <div class="col">
+        <h1 class="text-center large margin-bottom-small">{{msg.results() | name}}</h1>
+    </div>
+</div>
+
+<ng-container *ngFor="let skinType of skinTypeService.webshopData.values">
+    <h2 class="text-center margin-bottom-x-small">{{skinType.label | name}}</h2>
+    <div class="row collapse"
+         *ngFor="let progress of skinType.imageProgress">
+        <div class="s4 col"><img [src]="progress[0]"
+                 alt="untreated"></div>
+        <div class="s4 col"><img [src]="progress[1]"
+                 alt="in progress"></div>
+        <div class="s4 col"><img [src]="progress[2]"
+                 alt="progress complete"></div>
+    </div>
+</ng-container>

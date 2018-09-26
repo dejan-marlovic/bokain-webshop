@@ -1,24 +1,24 @@
 @import 'package:grid/constants';
-
-:host {    
+:host {
     div.card {
         padding: $large $medium;
         margin: 0 $x-small;
-    }    
+    }
     div.card>p {
         margin-bottom: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
-    div.resultBox {          
-        color: white;
+    div.resultBox {
+        h2,
+        material-button {
+            color: white;
+        }
         background-image: url('gfx/faces.jpg');
         div.overlay {
             padding: $x-large $medium;
-            background-color: rgba(0,0,0,0.6);
-
+            background-color: rgba(0, 0, 0, 0.6);
         }
     }
 }

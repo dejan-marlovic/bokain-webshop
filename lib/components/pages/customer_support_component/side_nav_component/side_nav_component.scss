@@ -1,5 +1,4 @@
 @import 'package:bokain_webshop/colors';
-
 :host {
     display: block;
     min-height: 40rem;
@@ -12,8 +11,10 @@
             cursor: pointer;
         }
         div.pageButton.active {
-            color: white;
-            background-color: $color1;    
+            p {
+                color: white;
+            }
+            background-color: $color1;
         }
     }
 }

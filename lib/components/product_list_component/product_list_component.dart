@@ -8,7 +8,7 @@ import '../productbox_component/productbox_component.dart';
     selector: 'bo-product-list',
     templateUrl: 'product_list_component.html',
     styleUrls: const ['product_list_component.css'],
-    directives: const [
+    directives: const [      
       NgFor,
       NgIf,
       ProductBoxComponent,
