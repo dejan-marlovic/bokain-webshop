@@ -119,7 +119,7 @@ class SearchComponent implements OnDestroy {
           <div class="s1 col text-center align-middle">
             <fo-icon *ngIf="productCategory != null" icon="category-{{productCategory.phrases['EN'].url_name}}"></fo-icon>
             <img *ngIf="product != null" [src]="product.image_uri" /> 
-            <img *ngIf="skinType != null" [src]="skinType.imageProgress[0]" />
+            <img *ngIf="skinType != null" [src]="skinType.imageProgress[0][0]" />
           </div>
           <div class="s11 col">
             <span>{{displayValue | name}}</span>
