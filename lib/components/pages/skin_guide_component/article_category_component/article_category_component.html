@@ -8,18 +8,23 @@
         <p class="margin-top-x-small">{{model.description}}</p>
     </div>
 </div>
-
+<ng-container *ngIf="!loaded">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">
+                <material-spinner></material-spinner>
+            </h1>
+        </div>
+    </div>
+</ng-container>
 <ng-container *ngIf="loaded">
     <div class="row"
          *ngFor="let article of articleService.cachedModels.values">
         <div class="col">
-            <h4 class="clickable margin-bottom-none">
-                {{article.title}}
-            </h4>
-            <p class="margin-top-x-small margin-bottom-x-small">
-                {{article.description}}
-            </p>
-            <div><span class="clickable" [routerLink]="linkOf(article)">[{{msg.read_more()}}]</span>&nbsp;({{article.duration_minutes}}min)</div>
+            <h4 class="clickable margin-bottom-none"> {{article.title}} </h4>
+            <p class="margin-top-x-small margin-bottom-x-small"> {{article.description}} </p>
+            <div><span class="clickable"
+                      [routerLink]="linkOf(article)">[{{msg.read_more()}}]</span>&nbsp;({{article.duration_minutes}}min)</div>
         </div>
     </div>
 </ng-container>

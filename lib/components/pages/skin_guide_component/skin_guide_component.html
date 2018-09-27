@@ -3,6 +3,15 @@
         <h1 class="large margin-bottom-medium">{{msg.skin_guide() | name}}</h1>
     </div>
 </div>
+<ng-container *ngIf="!loaded">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">
+                <material-spinner></material-spinner>
+            </h1>
+        </div>
+    </div>
+</ng-container>
 <ng-container *ngIf="loaded">
     <div class="row"
          *ngFor="let category of articleCategoryService.cachedModels.values">

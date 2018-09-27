@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
@@ -7,7 +8,7 @@ import 'package:fo_components/fo_components.dart';
     selector: 'bo-article-category',
     templateUrl: 'article_category_component.html',
     styleUrls: const ['article_category_component.css'],
-    directives: const [NgFor, NgIf, routerDirectives],
+    directives: const [MaterialSpinnerComponent, NgFor, NgIf, routerDirectives],
     pipes: const [NamePipe],
     providers: const [ArticleService],
     changeDetection: ChangeDetectionStrategy.OnPush)

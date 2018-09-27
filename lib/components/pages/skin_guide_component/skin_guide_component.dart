@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
 import 'article_category_component/article_category_component.dart';
@@ -7,7 +8,7 @@ import 'article_category_component/article_category_component.dart';
     selector: 'bo-skin-guide',
     templateUrl: 'skin_guide_component.html',
     styleUrls: const ['skin_guide_component.css'],
-    directives: const [ArticleCategoryComponent, NgFor, NgIf],
+    directives: const [ArticleCategoryComponent, MaterialSpinnerComponent, NgFor, NgIf],
     providers: const [ArticleCategoryService],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
