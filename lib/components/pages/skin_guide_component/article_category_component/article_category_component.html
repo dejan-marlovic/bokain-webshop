@@ -1,11 +1,11 @@
 <div class="row">
     <div class="l2 m3 col">
         <img [src]="model.image_url"
-             [alt]="model.phrases[languageService.currentShortLocale].title">
+             [alt]="model.title">
     </div>
     <div class="l10 m9 col">
-        <h3 class="margin-top-none margin-bottom-none">{{model.phrases[languageService.currentShortLocale].title}}</h3>
-        <p class="margin-top-x-small">{{model.phrases[languageService.currentShortLocale].description}}</p>
+        <h3 class="margin-top-none margin-bottom-none">{{model.title}}</h3>
+        <p class="margin-top-x-small">{{model.description}}</p>
     </div>
 </div>
 
@@ -14,12 +14,12 @@
          *ngFor="let article of articleService.cachedModels.values">
         <div class="col">
             <h4 class="clickable margin-bottom-none">
-                {{article.phrases[languageService.currentShortLocale].title}}
+                {{article.title}}
             </h4>
             <p class="margin-top-x-small margin-bottom-x-small">
-                {{article.phrases[languageService.currentShortLocale].description}}
+                {{article.description}}
             </p>
-            <div class="clickable">[{{msg.read_more()}}]</div>
+            <div><span class="clickable" [routerLink]="linkOf(article)">[{{msg.read_more()}}]</span>&nbsp;({{article.duration_minutes}}min)</div>
         </div>
     </div>
 </ng-container>

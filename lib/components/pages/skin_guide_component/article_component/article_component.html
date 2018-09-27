@@ -1,0 +1,13 @@
+<ng-container *ngIf="model != null && content != null">
+    <div class="row">
+        <div class="col">
+            <h1>{{model.title | name}}</h1>
+            <img [src]="model.image_url" [alt]="model.title">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" [safeInnerHtml]="contentHtml">
+
+        </div>
+    </div>
+</ng-container>

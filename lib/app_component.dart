@@ -37,6 +37,8 @@ import 'components/pages/results_component/results_component.template.dart'
     as results_comp;
 import 'components/pages/skin_consultation_component/skin_consultation_component.template.dart'
     as consultation_comp;
+import 'components/pages/skin_guide_component/article_component/article_component.template.dart'
+    as article_comp;
 import 'components/pages/skin_guide_component/skin_guide_component.template.dart'
     as skin_guide_comp;
 import 'components/pages/skin_test_component/skin_test_component.template.dart'
@@ -101,9 +103,9 @@ class AppComponent {
         .login('patrick.minogue@minoch.com', 'lok13rum')
         .then(_loadResources);
 
-        router.onNavigationStart.listen((_) {
-          html.window.scrollTo(0,0);
-        });
+    router.onNavigationStart.listen((_) {
+      html.window.scrollTo(0, 0);
+    });
   }
 
   void _onLocaleChange(String locale) {
@@ -151,8 +153,11 @@ class AppComponent {
             routePath: route_paths.skinGuide,
             component: skin_guide_comp.SkinGuideComponentNgFactory),
         RouteDefinition(
+            routePath: route_paths.skinGuideArticle,
+            component: article_comp.ArticleComponentNgFactory),
+        RouteDefinition(
             routePath: route_paths.skinTest,
-            component: skin_test_comp.SkinTestComponentNgFactory),            
+            component: skin_test_comp.SkinTestComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.skinTypeList,
             component: skin_type_list_comp.SkinTypeListComponentNgFactory),

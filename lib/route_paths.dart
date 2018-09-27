@@ -28,7 +28,9 @@ RoutePath get partners =>
 
 RoutePath get product => RoutePath(
         path:
-            "${Intl.plural(2, one: 'product', other: 'products', name: 'product', args: <int>[2])}/:url_name");
+            "${Intl.plural(2, one: 'product', other: 'products', name: 'product', args: <int>[
+      2
+    ])}/:url_name");
 
 RoutePath get profile =>
     RoutePath(path: Intl.message('profile', name: 'my_profile_url'));
@@ -42,6 +44,9 @@ RoutePath get skinConsultation => RoutePath(
 RoutePath get skinGuide =>
     RoutePath(path: Intl.message('skin-guide', name: 'skin_guide_url'));
 
+RoutePath get skinGuideArticle =>
+    RoutePath(path: "${Intl.message('skin-guide', name: 'skin_guide_url')}/:category_url/:article_url");
+
 RoutePath get skinTest =>
     RoutePath(path: Intl.message('skin-test', name: 'skin_test_url'));
 
@@ -54,10 +59,10 @@ RoutePath get skinType => RoutePath(
 RoutePath get notFound => RoutePath(path: '404');
 
 RoutePath get products => RoutePath(
-    path: Intl.plural(2, one:'product', other:'products', name: 'products', args: [2]));
+    path: Intl.plural(2,
+        one: 'product', other: 'products', name: 'products', args: [2]));
 
-RoutePath get productCategory =>
-    RoutePath(path: ':url_name', parent: products);
+RoutePath get productCategory => RoutePath(path: ':url_name', parent: products);
 
 RoutePath get productCategoryBundles => RoutePath(
     path: Intl.plural(2,
@@ -65,10 +70,14 @@ RoutePath get productCategoryBundles => RoutePath(
     parent: products);
 
 RoutePath get productCategoryBundlesSkinType => RoutePath(
-    path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [2], name: 'bundle')}/:skin_type");
+    path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [
+          2
+        ], name: 'bundle')}/:skin_type");
 
 RoutePath get productCategoryBundlesSkinTypeBundle => RoutePath(
-    path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [2], name: 'bundle')}/:skin_type/:url_name");
+    path: "${Intl.plural(2, one: 'bundle', other: 'bundles', args: [
+          2
+        ], name: 'bundle')}/:skin_type/:url_name");
 
 RoutePath get productCategoryProduct =>
     RoutePath(path: ':category_url_name/:url_name', parent: products);
