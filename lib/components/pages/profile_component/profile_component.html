@@ -1,6 +1,5 @@
 <bo-login *ngIf="!loggedIn">
 </bo-login>
-
 <div *ngIf="loggedIn && customer != null">
     <div class="row">
         <div class="col">
@@ -9,20 +8,17 @@
                         icon="my-profile">
                     <div class="row">
                         <div class="col text-center">
-                            <h1 class="margin-bottom-small">
-                                {{customer.firstname}} {{customer.lastname}}
-                            </h1>
+                            <h1 class="margin-bottom-small"> {{customer.firstname}} {{customer.lastname}} </h1>
                             <p class="margin-top-small">
                                 <material-button raised
-                                                 (trigger)="onLogout()">
-                                    {{msg.logout()}}
-                                </material-button>
+                                                 (trigger)="onLogout()"> {{msg.logout()}} </material-button>
                             </p>
                         </div>
                     </div>
                     <bo-profile-details [customer]="customer"></bo-profile-details>
                 </fo-tab>
                 <fo-tab [label]="msg.chat(1) | name"
+                        icon="chatt"
                         #chat>
                     <bo-customer-chat *ngIf="chat.active"
                                       class="margin-top-medium"
@@ -38,7 +34,8 @@
                 </fo-tab>
                 <fo-tab *ngIf="recommendedService != null"
                         #services
-                        [label]="msg.service(2) | name">
+                        [label]="msg.service(2) | name"
+                        icon="service">
                     <div *ngIf="services.active">REKOMMENDERADE TJÄNSTER HÄR</div>
                 </fo-tab>
                 <fo-tab *ngIf="customer.consultation_id != null"

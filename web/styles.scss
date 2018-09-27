@@ -3,15 +3,12 @@
 @import 'package:grid/grid';
 @import 'package:grid/theme';
 @import 'package:bokain_webshop/colors';
-
 // Grid theme
 @include colorAlert($colorAlert);
 @include colorConfirm($color1);
 @include color1($color1);
 @include color2($color2);
 @include color3($color3);
-
-
 @font-face {
     font-family: 'icomoon';
     src: url('fonts/icomoon.eot?xf6dd5');
@@ -20,9 +17,9 @@
     font-style: normal;
     font-display: block; // Make icons take up space even if they haven't loaded
 }
- 
+
 html {
-    overflow-y: scroll; 
+    overflow-y: scroll;
     margin: 0;
     font-weight: lighter;
     color: $colorBlack;
@@ -39,7 +36,7 @@ iframe {
 }
 
 * {
-    font-family: 'Poppins', Helvetica, Arial, sans-serif;    
+    font-family: 'Poppins', Helvetica, Arial, sans-serif;
 }
 
 h1.large {
@@ -53,4 +50,134 @@ h2.large {
 material-input {
     display: block !important;
     width: 100% !important;
+}
+
+/* Icomoon icons */
+
+.icon-information:before {
+    content: "\e917";
+}
+
+.icon-instructions:before {
+    content: "\e918";
+}
+
+.icon-ingredients:before {
+    content: "\e919";
+}
+
+.icon-important:before {
+    content: "\e91a";
+}
+
+.icon-combine:before {
+    content: "\e91b";
+}
+
+.icon-day:before {
+    content: "\e91c";
+}
+
+.icon-evening:before {
+    content: "\e91d";
+}
+
+.icon-night:before {
+    content: "\e91e";
+}
+
+.icon-morning-and-evening:before {
+    content: "\e91f";
+}
+
+.icon-time-specified:before {
+    content: "\e920";
+}
+
+.icon-service:before {
+    content: "\e907";
+}
+
+.icon-chatt:before {
+    content: "\e908";
+}
+
+.icon-product-routines:before {
+    content: "\e916";
+}
+
+.icon-skin-type:before {
+    content: "\e900";
+}
+
+.icon-product-category:before {
+    content: "\e901";
+}
+
+.icon-skin-consultation:before {
+    content: "\e902";
+}
+
+.icon-skin-guide:before {
+    content: "\e903";
+}
+
+.icon-my-profile:before {
+    content: "\e904";
+}
+
+.icon-skin-results:before {
+    content: "\e905";
+}
+
+.icon-faq:before {
+    content: "\e906";
+}
+
+.icon-customer-support:before {
+    content: "\e909";
+}
+
+.icon-phone:before {
+    content: "\e90a";
+}
+
+.icon-category-bundle:before {
+    content: "\e90b";
+}
+
+.icon-category-cleansing:before {
+    content: "\e90c";
+}
+
+.icon-category-rehydrating:before {
+    content: "\e90d";
+}
+
+.icon-category-healing:before {
+    content: "\e90e";
+}
+
+.icon-category-serum:before {
+    content: "\e90f";
+}
+
+.icon-category-facemask:before {
+    content: "\e910";
+}
+
+.icon-category-eye-care:before {
+    content: "\e911";
+}
+
+.icon-category-toner:before {
+    content: "\e912";
+}
+
+.icon-category-sunscreen:before {
+    content: "\e913";
+}
+
+.icon-category-accessories:before {
+    content: "\e914";
 }
