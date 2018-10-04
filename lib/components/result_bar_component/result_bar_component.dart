@@ -7,7 +7,7 @@ import 'package:fo_components/fo_components.dart';
   selector: 'bo-result-bar',
   templateUrl: 'result_bar_component.html',
   styleUrls: const ['result_bar_component.css'],
-  directives: const [MaterialButtonComponent, NgFor],  
+  directives: const [MaterialButtonComponent, NgFor, NgIf],  
   pipes: const [NamePipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 )

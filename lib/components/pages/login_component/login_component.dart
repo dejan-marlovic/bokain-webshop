@@ -51,8 +51,8 @@ class LoginComponent {
       await customerService.sendPasswordResetEmail(email);
       resetPasswordSubtitle =
           msg.we_have_sent_password_reset_instructions(email);
-    } catch (e) {
       // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
       resetPasswordSubtitle = msg.reset_password_email_not_found();
     }
   }

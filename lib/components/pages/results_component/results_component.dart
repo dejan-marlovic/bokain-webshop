@@ -11,9 +11,7 @@ import 'package:fo_components/fo_components.dart';
   changeDetection: ChangeDetectionStrategy.OnPush
 )
 class ResultsComponent {
-  ResultsComponent(this.skinTypeService, this.msg) {    
-  }
-
+  ResultsComponent(this.skinTypeService, this.msg);
 
   final SkinTypeService skinTypeService;
   final WebshopMessagesService msg;

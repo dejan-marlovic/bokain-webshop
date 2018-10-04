@@ -6,7 +6,6 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:bokain_consultation/bokain_consultation.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
-import 'package:fo_model/fo_model.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 @Component(
@@ -46,8 +45,7 @@ import 'package:intl/intl.dart' show DateFormat;
       NamePipe
     ])
 class SkinConsultationComponent {
-  SkinConsultationComponent(
-      CountryService countryService,
+  SkinConsultationComponent(      
       this.consultationService,
       this.customerService,
       this.settingsService,

@@ -3,6 +3,8 @@ import 'package:bokain_models/bokain_models.dart';
 
 @Pipe('fetch', pure: false)
 class FetchPipe extends PipeTransform {
+  FetchPipe(this._changeDetector);
+
   Object _cachedModel;
 
   Object transform(String id, FirestoreService service) {
@@ -10,6 +12,7 @@ class FetchPipe extends PipeTransform {
 
       void setModel(Object i) {
         _cachedModel = i;
+        _changeDetector.markForCheck();
       }
 
       _service = service;      
@@ -18,4 +21,5 @@ class FetchPipe extends PipeTransform {
     return _cachedModel;
   }
   FirestoreService _service;
+  final ChangeDetectorRef _changeDetector;
 }

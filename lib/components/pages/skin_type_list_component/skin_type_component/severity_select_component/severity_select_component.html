@@ -1,17 +1,15 @@
 <div class="row">
-    <div class="col text-center">
-        <p class="margin-top-small margin-bottom-none">
-            {{msg.how_severe_is_your() | name}} {{model.label}}?
-        </p>
-    </div>
+  <div class="col text-center">
+    <h3 class="margin-top-none margin-bottom-none">{{model.label | name}}</h3>
+  </div>
 </div>
-<div class="row">
-    <div class="s4 col text-center clickable"
-         *ngFor="let l of levels; let i = index"
-         (click)="onLevelClick(l)">
-        <label class="color-2-dark">{{msg.severity_level(l) | name}}</label>
-        <img [class.selected]="level == l"
-             [src]="model.imageSeverity[i]"
-             [alt]="msg.severity_level(l)">
-    </div>
-</div> 
+<div class="row center">
+  <div class="s4 col text-center clickable"
+       *ngFor="let l of model.imageSeverity.keys"
+       (click)="onLevelClick(l)">
+    <img [class.selected]="selectedLevel == l"
+         [src]="l"
+         [alt]="model.imageSeverity[l] | name">
+    <label class="color-2-dark">{{model.imageSeverity[l] | name}}</label>
+  </div>
+</div>

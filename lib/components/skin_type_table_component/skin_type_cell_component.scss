@@ -1,18 +1,22 @@
-@import 'package:grid/grid.scss';
-
+@import 'package:grid/constants';
 :host>div {
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-
-    margin: 0 $x-small;
-
-    div#overlay {
-        background-color: rgba(0,0,0,0.3);
-        text-align: center;
-        color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 0 $x-small;
+  div#overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: white;
+    div#titleContainer {
+      height: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 2.2rem;
     }
+  }
 }

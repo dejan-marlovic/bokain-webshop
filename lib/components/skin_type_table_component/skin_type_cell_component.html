@@ -1,8 +1,11 @@
-<div class="clickable" [style.background-image]="background" (click)="onTriggerController.add(model)">
-    <div id="overlay" class="padding-top-x-large padding-bottom-x-large">
-        <h2 class="margin-bottom-small color-white large">{{model.label | name}}</h2>
-        <material-button>
-            {{msg.read_more()}}
-        </material-button>
+<div class="clickable"
+     [style.background-image]="background"
+     (click)="onTriggerController.add(model)">
+  <div id="overlay"
+       class="padding-top-x-large padding-bottom-x-large">
+    <div id="titleContainer">
+      <h2 class="margin-top-none margin-bottom-small color-white">{{model.label | name}}</h2>
     </div>
+    <material-button> {{msg.read_more()}} </material-button>
+  </div>
 </div>

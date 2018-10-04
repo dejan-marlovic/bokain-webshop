@@ -1,5 +1,5 @@
 <div class="row collapse">
-    <div class="m4 col"
+    <div class="m3 col"
          *ngFor="let skinType of skinTypeService.webshopData.values">
         <bo-skin-type-cell [model]="skinType" (trigger)="onTriggerController.add($event)"></bo-skin-type-cell>
     </div>

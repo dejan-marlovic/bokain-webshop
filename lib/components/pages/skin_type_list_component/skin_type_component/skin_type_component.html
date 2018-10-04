@@ -12,10 +12,7 @@
                         (levelChange)="onSeverityLevelChange($event)"></bo-severity-select>
 
     <div class="row collapse">
-        <div class="col text-center">
-            <h2 class="margin-top-medium margin-bottom-none">{{msg.products_for_severity(msg.severity_level(severityLevel))
-                | name}}
-                {{model.label | name}}</h2>
+        <div class="col text-center">    
             <bo-product-bundle *ngIf="smallProduct != null"
                                [small]="smallProduct"
                                [large]="largeProduct"></bo-product-bundle>
