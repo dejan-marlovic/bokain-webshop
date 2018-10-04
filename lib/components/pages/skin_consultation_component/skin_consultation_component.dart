@@ -23,7 +23,7 @@ import 'package:intl/intl.dart' show DateFormat;
       coreDirectives,
       FoModalComponent,
       formDirectives,
-      FoSelectComponent,      
+      FoSelectComponent,
       MaterialButtonComponent,
       MaterialCheckboxComponent,
       MaterialDatepickerComponent,
@@ -45,11 +45,8 @@ import 'package:intl/intl.dart' show DateFormat;
       NamePipe
     ])
 class SkinConsultationComponent {
-  SkinConsultationComponent(      
-      this.consultationService,
-      this.customerService,
-      this.settingsService,
-      this.msg)
+  SkinConsultationComponent(this.consultationService, this.customerService,
+      this.settingsService, this.msg)
       : genderOptions = {'male': msg.male(), 'female': msg.female()},
         form = new ControlGroup({
           'firstname': new Control<String>(
@@ -76,7 +73,7 @@ class SkinConsultationComponent {
                 Validators.maxLength(64)
               ])),
           'phone': new Control<String>('', Validators.compose([])),
-        }),        
+        }),
         minDate = new Date(1900),
         maxDate = new Date.today().add(years: -10) {
     errorTitle = msg.error_occured();
@@ -104,7 +101,7 @@ class SkinConsultationComponent {
         ..firstname = 'patrick'
         ..lastname = 'minogue'
         ..email = 'test@minoch.com';
-      consultation = new Consultation()        
+      consultation = new Consultation()
         ..customer_symptoms = ['dry']
         ..skin_tone_id = 'neither'
         ..current_skin_status = 'same_as_usual';
@@ -220,12 +217,8 @@ class SkinConsultationComponent {
             Validators.maxLength(64)
           ])),
       'phone': consultation.call_me
-          ? new Control<String>(
-              customer.phone,
-              Validators.compose([
-                Validators.required,
-                FoValidators.numeric
-              ]))
+          ? new Control<String>(customer.phone,
+              Validators.compose([Validators.required, FoValidators.numeric]))
           : new Control<String>('', Validators.compose([]))
     });
   }
@@ -242,7 +235,7 @@ class SkinConsultationComponent {
 
   set birthDate(Date value) {
     customer.social_number = '${value.format(ssn)}';
-  }  
+  }
 
   ControlGroup form;
 
