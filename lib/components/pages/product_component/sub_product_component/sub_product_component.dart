@@ -50,8 +50,12 @@ class SubProductComponent implements OnInit {
         model.phrases[languageService.currentShortLocale].description_long);
     usageInstructions = sanitizationService.bypassSecurityTrustHtml(
         model.phrases[languageService.currentShortLocale].usage_instructions);
-    importantNotice = sanitizationService.bypassSecurityTrustHtml(
-        model.phrases[languageService.currentShortLocale].important_notice);
+    importantNotice = (model.phrases[languageService.currentShortLocale]
+                .important_notice?.isEmpty ==
+            false)
+        ? sanitizationService.bypassSecurityTrustHtml(
+            model.phrases[languageService.currentShortLocale].important_notice)
+        : null;
     productCategory = productCategoryService.get(model.product_category_id);
     dailyRoutine = dailyRoutineService.get(model.daily_routine_id);
     relatedProducts = productService.getMany(model.related_product_ids);

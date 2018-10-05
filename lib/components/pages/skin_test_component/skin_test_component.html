@@ -1,146 +1,146 @@
 <div class="row">
-    <div class="col">
-        <h1 class="margin-top-none color-black">
-            <fo-icon icon="skin-test"
-                     size="2.5rem"></fo-icon>
-            &nbsp;{{msg.skin_test(1) | name}}
-        </h1>
-    </div>
+  <div class="col">
+    <h1 class="margin-top-none color-black">
+      <fo-icon icon="skin-test"
+               size="2.5rem"></fo-icon> &nbsp;{{msg.skin_test(1) | name}}
+    </h1>
+  </div>
 </div>
 <div class="row">
-    <div class="col">
-        <form>
-            <material-stepper #stepper
-                              legalJumps="backwards"
-                              orientation="vertical"
-                              size="default">
-                <template step
-                          hideButtons
-                          [complete]="model.gender != null"
-                          [name]="msg.who_are_you() | name">
-                    <div class="margin-top-large">
-                        <bo-button-cloud-single-select [centerButtons]="true"
-                                                       [showLabel]="false"
-                                                       [(ngModel)]="model.gender"
-                                                       [options]="genderOptions">
-                        </bo-button-cloud-single-select>
-                    </div>
-                    <div class="text-center margin-top-medium margin-bottom-large">
-                        <material-fab mini
-                                      raised
-                                      [disabled]="model.gender == null"
-                                      (trigger)="stepper.stepForward($event, stepper.activeStep)">
-                            <material-icon icon="keyboard_arrow_down"></material-icon>
-                        </material-fab>
-                    </div>
-                </template>
-                <template step
-                          hideButtons
-                          [name]="msg.where_are_your_problem_areas() | name">
-                    <div>
-                        <div class="row collapse"
-                             *ngIf="model.gender == 'female'">
-                            <div class="s6 col">
-                                <fo-image-map src="/gfx/female_face_front.png"
-                                              [zones]="faceZoneService.imageMapZonesFrontFemale"
-                                              label="zones"
-                                              [showSelector]="false"
-                                              [selectedIds]="model.problem_areas">
-                                </fo-image-map>
-                            </div>
-                            <div class="s6 col">
-                                <fo-image-map src="/gfx/female_face_side.png"
-                                              [zones]="faceZoneService.imageMapZonesSideFemale"
-                                              [showSelector]="false"
-                                              [selectedIds]="model.problem_areas">
-                                </fo-image-map>
-                            </div>
-                        </div>
-                        <div class="row"
-                             *ngIf="model.gender == 'male'">
-                            <div class="s6 col">
-                                <fo-image-map src="/gfx/male_face_front.png"
-                                              [zones]="faceZoneService.imageMapZonesFrontMale"
-                                              label="zones"
-                                              [showSelector]="false"
-                                              [selectedIds]="model.problem_areas">
-                                </fo-image-map>
-                            </div>
-                            <div class="s6 col">
-                                <fo-image-map src="/gfx/male_face_side.png"
-                                              [zones]="faceZoneService.imageMapZonesSideMale"
-                                              [showSelector]="false"
-                                              [selectedIds]="model.problem_areas">
-                                </fo-image-map>
-                            </div>
-                        </div>
-                        <bo-button-cloud-multi-select [centerButtons]="true"
-                                                      [showLabel]="false"
-                                                      [(ngModel)]="model.problem_areas"
-                                                      [options]="problemAreaOptions">
-                        </bo-button-cloud-multi-select>
-                    </div>
-                    <div class="text-center margin-top-medium margin-bottom-large">
-                        <material-fab mini
-                                      raised
-                                      [disabled]="model.problem_areas.isEmpty"
-                                      (trigger)="stepper.stepForward($event, stepper.activeStep)">
-                            <material-icon icon="keyboard_arrow_down"></material-icon>
-                        </material-fab>
-                    </div>
-                </template>
-                <template step
-                          hideButtons
-                          [complete]="model.problem_type_ids.isNotEmpty"
-                          [name]="msg.describe_your_skin() | name">
-                    <bo-button-cloud-multi-select class="margin-top-large"                                                  
-                                                  [centerButtons]="true"
-                                                  [showLabel]="false"
-                                                  [(ngModel)]="model.problem_type_ids"
-                                                  [options]="problemTypes">
-                    </bo-button-cloud-multi-select>
-                    <div class="text-center margin-top-medium margin-bottom-large">
-                        <material-fab mini
-                                      raised
-                                      [disabled]="model.problem_type_ids.isEmpty"
-                                      (trigger)="evaluateSkinType(); stepper.stepForward($event, stepper.activeStep)">
-                            <material-icon icon="keyboard_arrow_down"></material-icon>
-                        </material-fab>
-                    </div>
-                </template>
-                <template step
-                          hideButtons
-                          [complete]="model.severity != null"
-                          [name]="msg.skin_test_severity_title() | name">
-                    <div class="row margin-top-large">
-                        <div class="col">
-                            <bo-severity-select *ngIf="model.skin_type_id != null"
-                                                [model]="skinTypeService.webshopData[model.skin_type_id]"
-                                                [(level)]="model.severity"></bo-severity-select>
-                        </div>
-                    </div>
-                    <div class="text-center margin-top-medium margin-bottom-large">
-                        <material-fab mini
-                                      raised
-                                      [disabled]="model.severity == null"
-                                      (trigger)="evaluateRecommendedProductBundle(); stepper.stepForward($event, stepper.activeStep);">
-                            <material-icon icon="keyboard_arrow_down"></material-icon>
-                        </material-fab>
-                    </div>
-                </template>
-                <template step
-                          hideButtons
-                          [complete]="model.severity != null"
-                          [name]="msg.your_recommendation() | name">
-                    <div class="row">
-                        <div class="col">
-                            <bo-product-bundle *ngIf="recSmall != null && recLarge != null"
-                                               [small]="recSmall"
-                                               [large]="recLarge"></bo-product-bundle>
-                        </div>
-                    </div>
-                </template>
-            </material-stepper>
-        </form>
-    </div>
+  <div class="col">
+    <form>
+      <material-stepper #stepper
+                        legalJumps="backwards"
+                        orientation="vertical"
+                        size="default">
+        <template step
+                  hideButtons
+                  [complete]="model.gender != null"
+                  [name]="msg.who_are_you() | name">
+          <div class="margin-top-large">
+            <div class="row center">
+              <div class="l4 m6 col">
+                <bo-button-cloud-single-select [showLabel]="false"
+                                               [(ngModel)]="model.gender"
+                                               [options]="genderOptions">
+                </bo-button-cloud-single-select>
+              </div>
+            </div>
+          </div>
+          <div class="text-center margin-top-medium margin-bottom-large">
+            <material-fab mini
+                          raised
+                          [disabled]="model.gender == null"
+                          (trigger)="stepper.stepForward($event, stepper.activeStep)">
+              <material-icon icon="keyboard_arrow_down"></material-icon>
+            </material-fab>
+          </div>
+        </template>
+        <template step
+                  hideButtons
+                  [name]="msg.where_are_your_problem_areas() | name">
+          <div>
+            <div class="row collapse"
+                 *ngIf="model.gender == 'female'">
+              <div class="s6 col">
+                <fo-image-map src="/gfx/female_face_front.png"
+                              [zones]="faceZoneService.imageMapZonesFrontFemale"
+                              label="zones"
+                              [showSelector]="false"
+                              [selectedIds]="model.problem_areas">
+                </fo-image-map>
+              </div>
+              <div class="s6 col">
+                <fo-image-map src="/gfx/female_face_side.png"
+                              [zones]="faceZoneService.imageMapZonesSideFemale"
+                              [showSelector]="false"
+                              [selectedIds]="model.problem_areas">
+                </fo-image-map>
+              </div>
+            </div>
+            <div class="row"
+                 *ngIf="model.gender == 'male'">
+              <div class="s6 col">
+                <fo-image-map src="/gfx/male_face_front.png"
+                              [zones]="faceZoneService.imageMapZonesFrontMale"
+                              label="zones"
+                              [showSelector]="false"
+                              [selectedIds]="model.problem_areas">
+                </fo-image-map>
+              </div>
+              <div class="s6 col">
+                <fo-image-map src="/gfx/male_face_side.png"
+                              [zones]="faceZoneService.imageMapZonesSideMale"
+                              [showSelector]="false"
+                              [selectedIds]="model.problem_areas">
+                </fo-image-map>
+              </div>
+            </div>
+            <bo-button-cloud-multi-select [showLabel]="false"
+                                          [(ngModel)]="model.problem_areas"
+                                          [options]="problemAreaOptions">
+            </bo-button-cloud-multi-select>
+          </div>
+          <div class="text-center margin-top-medium margin-bottom-large">
+            <material-fab mini
+                          raised
+                          [disabled]="model.problem_areas.isEmpty"
+                          (trigger)="stepper.stepForward($event, stepper.activeStep)">
+              <material-icon icon="keyboard_arrow_down"></material-icon>
+            </material-fab>
+          </div>
+        </template>
+        <template step
+                  hideButtons
+                  [complete]="model.problem_type_ids.isNotEmpty"
+                  [name]="msg.describe_your_skin() | name">
+          <bo-button-cloud-multi-select class="margin-top-large"
+                                        [showLabel]="false"
+                                        [(ngModel)]="model.problem_type_ids"
+                                        [options]="problemTypes">
+          </bo-button-cloud-multi-select>
+          <div class="text-center margin-top-medium margin-bottom-large">
+            <material-fab mini
+                          raised
+                          [disabled]="model.problem_type_ids.isEmpty"
+                          (trigger)="evaluateSkinType(); stepper.stepForward($event, stepper.activeStep)">
+              <material-icon icon="keyboard_arrow_down"></material-icon>
+            </material-fab>
+          </div>
+        </template>
+        <template step
+                  hideButtons
+                  [complete]="model.severity != null"
+                  [name]="msg.skin_test_severity_title() | name">
+          <div class="row margin-top-large">
+            <div class="col">
+              <bo-severity-select *ngIf="model.skin_type_id != null"
+                                  [model]="skinTypeService.webshopData[model.skin_type_id]"
+                                  [(level)]="model.severity"></bo-severity-select>
+            </div>
+          </div>
+          <div class="text-center margin-top-medium margin-bottom-large">
+            <material-fab mini
+                          raised
+                          [disabled]="model.severity == null"
+                          (trigger)="evaluateRecommendedProductBundle(); stepper.stepForward($event, stepper.activeStep);">
+              <material-icon icon="keyboard_arrow_down"></material-icon>
+            </material-fab>
+          </div>
+        </template>
+        <template step
+                  hideButtons
+                  [complete]="model.severity != null"
+                  [name]="msg.your_recommendation() | name">
+          <div class="row">
+            <div class="col">
+              <bo-product-bundle *ngIf="recSmall != null && recLarge != null"
+                                 [small]="recSmall"
+                                 [large]="recLarge"></bo-product-bundle>
+            </div>
+          </div>
+        </template>
+      </material-stepper>
+    </form>
+  </div>
 </div>

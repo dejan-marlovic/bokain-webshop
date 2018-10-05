@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </fo-tab>
-                <fo-tab *ngIf="model.phrases[languageService.currentShortLocale].important_notice != null" [label]="msg.important() | name" icon="important">
+                <fo-tab *ngIf="importantNotice != null" [label]="msg.important() | name" icon="important">
                     <div class="row">
                         <div class="col">
                             <h3 class="margin-bottom-small">{{msg.important_notice() | name}}</h3>

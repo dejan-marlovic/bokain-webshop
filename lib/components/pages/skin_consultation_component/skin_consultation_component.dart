@@ -94,17 +94,8 @@ class SkinConsultationComponent {
         step = consultation.surveyCompleted ? 7 : 6;
       }
     } else {
-      customer = new Customer()
-        ..phone_country = '+46'
-        ..sex = 'male'
-        ..social_number = '198303247491'
-        ..firstname = 'patrick'
-        ..lastname = 'minogue'
-        ..email = 'test@minoch.com';
-      consultation = new Consultation()
-        ..customer_symptoms = ['dry']
-        ..skin_tone_id = 'neither'
-        ..current_skin_status = 'same_as_usual';
+      customer = new Customer();
+      consultation = new Consultation();
     }
     loading = false;
   }
@@ -137,7 +128,8 @@ class SkinConsultationComponent {
       customer = await customerService.fetch(consultation.customer_id);
 
       if (customer.consultation_id != null) {
-        await customerService.login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword);
+        await customerService.login(FirestoreService.defaultCustomerId,
+            FirestoreService.defaultCustomerPassword);
         consultation.customer_id = null;
         customer.consultation_id = null;
         throw new StateError(msg.error_customer_already_has_consultation());

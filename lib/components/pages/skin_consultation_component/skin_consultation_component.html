@@ -17,11 +17,10 @@
                                  [expanded]="step == 0"
                                  flat
                                  (open)="step = 0">
-          <div class="row">
-            <div class="col">
+          <div class="row center">
+            <div class="l4 m6 col">
               <bo-button-cloud-single-select [label]="msg.gender() | name"
-                                             [options]="genderOptions"
-                                             [centerLabel]="true"
+                                             [options]="genderOptions"                                             
                                              [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
             </div>
           </div>
