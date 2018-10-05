@@ -38,15 +38,8 @@
                                         </material-input>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="l2 m4 s5 col">
-                                        <fo-select [label]="msg.country_code()"
-                                                   [options]="countryCodeOptions"
-                                                   [selectedId]="customer.phone_country"
-                                                   (selectedIdChange)="customer.phone_country = $event; patch('phone_country', $event);">
-                                        </fo-select>
-                                    </div>
-                                    <div class="l10 m8 s7 col">
+                                <div class="row">                                    
+                                    <div class="col">
                                         <material-input label="{{msg.phone()}}"
                                                         floatingLabel
                                                         [maxCount]="32"                                                        
