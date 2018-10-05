@@ -29,7 +29,7 @@ class ProfileComponent {
       this.productService, this.serviceService, this.msg);
 
   void onLogout() async {
-    await customerService.login(FirestoreService.defaultCustomerId, 'lok13rum');
+    await customerService.login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword);
   }
 
   String get currentUserId => FirestoreService.currentUserId;

@@ -100,7 +100,7 @@ class AppComponent {
       this.router,
       this.msg) {
     customerService
-        .login('patrick.minogue@minoch.com', 'lok13rum')
+        .login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword)
         .then(_loadResources);
 
     router.onNavigationStart.listen((_) {

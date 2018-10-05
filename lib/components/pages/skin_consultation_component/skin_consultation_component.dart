@@ -120,67 +120,53 @@ class SkinConsultationComponent {
       return null;
   }
 
-  // Attempts to register a new account, or attempts to login using specified details if an account already exists.
-  // Returns the customer id on success, null otherwise
-  Future<String> _registerOrLogin() async {
-    try {
-      await customerService.register(customer, password);
-      return await customerService.login(customer.email, password,
-          requireEmailVerified: false);
-    } on EmailAlreadyRegisteredException {
-      // Customer exists already, attempt to login with specified details
-      return await customerService.login(customer.email, password,
-          requireEmailVerified: true);
-    }
-  }
-
   Future<void> onCreateConsultation() async {
     errorText = null;
-    if (customer.id == null) {
+
+    try {
       try {
-        consultation.customer_id = await _registerOrLogin();
-        customer = await customerService.fetch(consultation.customer_id);
+        consultation.customer_id =
+            await customerService.register(customer, password);
+      } on EmailAlreadyRegisteredException {
+        print('customer already registered, attempting to login');
+      }
 
-        if (customer.consultation_id != null) {
-          consultation =
-              await consultationService.fetch(customer.consultation_id);
-          if (consultation != null) {
-            // A consultation already exists for this customer
-            step = consultation.surveyCompleted ? 7 : 6;
-            throw new Exception(msg.error_customer_already_has_consultation());
-          }
+      consultation.customer_id = await customerService
+          .login(customer.email, password, requireEmailVerified: false);
+
+      customer = await customerService.fetch(consultation.customer_id);
+
+      if (customer.consultation_id != null) {
+        await customerService.login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword);
+        consultation.customer_id = null;
+        customer.consultation_id = null;
+        throw new StateError(msg.error_customer_already_has_consultation());
+      }
+
+      customer.user_id ??= await _pickRandomWebConsultant();
+      consultation.user_id = customer.user_id;
+
+      /// Upload images
+      for (var index = 0; index < pictures.model.image_uris.length; index++) {
+        if (pictures.model.image_uris[index].isNotEmpty) {
+          consultation.image_uris[index] =
+              await consultationService.uploadImage(
+                  '${customer.id}_$index', pictures.model.image_uris[index]);
         }
-      } on InvalidPasswordException {
-        errorText = msg.invalid_password();
-        showResetPasswordButton = true;
-        return;
       }
-      // ignore: avoid_catches_without_on_clauses
-      catch (e) {
-        errorText = e.toString();
-        return;
-      }
-    } else {
-      consultation.customer_id = customer.id.toString();
+      customer.consultation_id = await consultationService.push(consultation);
+      await customerService.patch(customer.id.toString(), <String, String>{
+        'consultation_id': customer.consultation_id,
+        'user_id': customer.user_id
+      });
+
+      step = 5;
+    } on UserAuthException {
+      errorText = msg.invalid_password();
+      showResetPasswordButton = true;
+    } on StateError catch (e) {
+      errorText = e.message;
     }
-
-    customer.user_id ??= await _pickRandomWebConsultant();
-    consultation.user_id = customer.user_id;
-
-    /// Upload images
-    for (var index = 0; index < pictures.model.image_uris.length; index++) {
-      if (pictures.model.image_uris[index].isNotEmpty) {
-        consultation.image_uris[index] = await consultationService.uploadImage(
-            '${customer.id}_$index', pictures.model.image_uris[index]);
-      }
-    }
-    customer.consultation_id = await consultationService.push(consultation);
-    await customerService.patch(customer.id.toString(), <String, String>{
-      'consultation_id': customer.consultation_id,
-      'user_id': customer.user_id
-    });
-
-    step = 5;
   }
 
   Future<void> onResetPassword() async {
