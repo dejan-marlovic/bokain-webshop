@@ -56,14 +56,16 @@
                                     {{property}}
                                 </li>
                             </ul>
-                            <h3 class="margin-bottom-small">{{msg.skin_type(2) | name}}</h3>
-                            <p class="margin-top-small">
-                                <material-chips>
-                                    <material-chip *ngFor="let id of model.skin_type_ids" [removable]="false">
-                                        {{skinTypeService.webshopData[id]}}
-                                    </material-chip>
-                                </material-chips>
-                            </p>
+                            <ng-container *ngIf="model.skin_type_ids.isNotEmpty">
+                              <h3 class="margin-bottom-small">{{msg.skin_type(2) | name}}</h3>
+                              <p class="margin-top-small">
+                                  <material-chips>
+                                      <material-chip *ngFor="let id of model.skin_type_ids" [removable]="false">
+                                          {{skinTypeService.webshopData[id]}}
+                                      </material-chip>
+                                  </material-chips>
+                              </p>
+                            </ng-container>
                         </div>
                     </div>
                 </fo-tab>
