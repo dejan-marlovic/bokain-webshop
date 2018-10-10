@@ -84,6 +84,7 @@ import 'services/route_service.dart';
       RouteService,
       SettingsService,
       SkinTypeService,
+      SymptomService,
       WebshopContentService,
       WebshopMessagesService
     ],
