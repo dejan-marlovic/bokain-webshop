@@ -76,7 +76,7 @@ class SearchComponent implements OnDestroy {
     }
   }
 
-  FactoryRenderer<FoModel, SearchOptionRendererComponent> get factoryRenderer =>
+  FactoryRenderer<SearchOptionRendererComponent, FoModel> get factoryRenderer =>
       (Object d) => search.SearchOptionRendererComponentNgFactory;
 
   StreamSubscription<List<SelectionChangeRecord>> _onSearchSubscription;

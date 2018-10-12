@@ -101,7 +101,7 @@ class AppComponent {
       this.router,
       this.msg) {
     customerService
-        .login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword)
+        .login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword, requireEmailVerified: false)
         .then(_loadResources);
 
     router.onNavigationStart.listen((_) {

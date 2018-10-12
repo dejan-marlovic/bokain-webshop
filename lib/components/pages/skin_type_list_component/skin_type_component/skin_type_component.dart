@@ -15,7 +15,7 @@ import 'severity_select_component/severity_select_component.dart';
     styleUrls: const ['skin_type_component.css'],
     directives: const [
       NgFor,
-      NgIf,      
+      NgIf,
       MaterialButtonComponent,
       ProductBundleComponent,
       ProductListComponent,
@@ -38,11 +38,12 @@ class SkinTypeComponent implements OnActivate {
           orElse: () => null);
     }
 
-    if (model == null) {      
+    if (model == null) {
     } else {
       skinTypeProducts = _productService.cachedModels.values
           .where((product) =>
               product.product_category_id == 'bundle' &&
+              product.skin_type_ids.isNotEmpty &&
               product.skin_type_ids.first == model.id)
           .toList(growable: false);
 
@@ -70,7 +71,7 @@ class SkinTypeComponent implements OnActivate {
   Product largeProduct;
 
   SkinType model;
-  List<Product> skinTypeProducts;  
+  List<Product> skinTypeProducts;
   int severityLevel = 2;
   final ChangeDetectorRef _changeDetectorRef;
   final ProductService _productService;
