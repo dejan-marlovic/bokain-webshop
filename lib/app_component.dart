@@ -102,7 +102,7 @@ class AppComponent {
       this.msg) {
     customerService
         .login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword, requireEmailVerified: false)
-        .then(_loadResources);
+        .then(_loadResources);        
 
     router.onNavigationStart.listen((_) {
       html.window.scrollTo(0, 0);
@@ -200,9 +200,10 @@ class AppComponent {
       ];
   }
 
-  Future<void> _loadResources(String token) async {
+  Future<void> _loadResources(String user_id) async {    
+    
     await _languageService.setLocale('SV', LanguageContext.webshop);
-    await _settingsService.fetch('1');
+    await _settingsService.fetch('1');    
 
     await productCategoryService.fetchQuery(productCategoryService.collection
         .where('status', '==', 'active')

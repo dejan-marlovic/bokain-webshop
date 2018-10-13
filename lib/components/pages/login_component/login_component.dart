@@ -57,8 +57,8 @@ class LoginComponent {
     }
   }
 
-  String email = 'test@minoch.com';
-  String password = 'lok13rum';
+  String email = '';
+  String password = '';
   String loginSubtitle;
   String resetPasswordSubtitle;
   String state = 'login';

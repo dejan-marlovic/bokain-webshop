@@ -9,6 +9,7 @@ import 'main.template.dart' as self;
 final InjectorFactory injector = self.injector$Injector;
 
 void main() {
+  
   fb.initializeApp(
       apiKey: 'AIzaSyCI0vWdEbluGat7P20ffnl8u5PCRPo_pC4',
       authDomain: 'bokain-admin.firebaseapp.com',
@@ -16,6 +17,5 @@ void main() {
       storageBucket: 'bokain-admin.appspot.com',
       projectId: 'bokain-admin');
 
-      
   runApp(ng.AppComponentNgFactory, createInjector: injector);
 }

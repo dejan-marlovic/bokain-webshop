@@ -82,11 +82,13 @@ class SkinConsultationComponent {
 
   Future<void> _evaluatedLoginState() async {
     loading = true;
+
     if (FirestoreService.currentFirebaseUser.uid !=
         FirestoreService.defaultCustomerAuthId) {
       // Customer is logged in
       customer = await customerService.fetch(FirestoreService.currentUserId);
-      if (customer.consultation_id == null) {
+
+      if (customer?.consultation_id == null) {
         consultation = new Consultation();
       } else {
         consultation =
@@ -102,7 +104,7 @@ class SkinConsultationComponent {
 
   Future<String> _pickRandomWebConsultant() async {
     /// Pick a random web consultant for the user
-    final settings = await settingsService.fetch('1');
+    final settings = await settingsService.fetch('1', force: false);
     if (settings.web_consultant_ids.isNotEmpty) {
       final index = new Random(new DateTime.now().millisecondsSinceEpoch)
           .nextInt(settings.web_consultant_ids.length);
@@ -117,37 +119,15 @@ class SkinConsultationComponent {
     try {
       try {
         consultation.customer_id =
-            await customerService.register(customer, password);
+            await customerService.register(customer, password: password, temporary: false);
       } on EmailAlreadyRegisteredException {
-        print('customer already registered, attempting to login');
-      }
-
-      consultation.customer_id = await customerService
-          .login(customer.email, password, requireEmailVerified: false);
-
-      customer = await customerService.fetch(consultation.customer_id);
-
-      if (customer.consultation_id != null) {
-        await customerService.login(FirestoreService.defaultCustomerId,
-            FirestoreService.defaultCustomerPassword);
-        consultation.customer_id = null;
-        customer.consultation_id = null;
         throw new StateError(msg.error_customer_already_has_consultation());
       }
 
       customer.user_id ??= await _pickRandomWebConsultant();
       consultation.user_id = customer.user_id;
-
-      /// Upload images
-      for (var index = 0; index < pictures.model.image_uris.length; index++) {
-        if (pictures.model.image_uris[index].isNotEmpty) {
-          consultation.image_uris[index] =
-              await consultationService.uploadImage(
-                  '${customer.id}_$index', pictures.model.image_uris[index]);
-        }
-      }
       customer.consultation_id = await consultationService.push(consultation);
-      await customerService.patch(customer.id.toString(), <String, String>{
+      await customerService.patch(customer.id.toString(), {
         'consultation_id': customer.consultation_id,
         'user_id': customer.user_id
       });
@@ -232,7 +212,7 @@ class SkinConsultationComponent {
   final Date maxDate;
   Date _birthdate;
 
-  String password = '111111';
+  String password = '';
   bool showResetPasswordButton = false;
   bool loading;
   int step = 0;

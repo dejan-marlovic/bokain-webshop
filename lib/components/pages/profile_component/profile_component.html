@@ -38,7 +38,7 @@
                         icon="service">
                     <div *ngIf="services.active">REKOMMENDERADE TJÄNSTER HÄR</div>
                 </fo-tab>
-                <fo-tab *ngIf="customer.consultation_id != null"
+                <fo-tab *ngIf="consultation?.product_routine_id != null"
                         #productRoutines
                         [label]="msg.product_routine(2) | name"
                         icon="product-routines">

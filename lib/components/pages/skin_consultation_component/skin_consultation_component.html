@@ -20,14 +20,15 @@
           <div class="row center">
             <div class="l4 m6 col">
               <bo-button-cloud-single-select [label]="msg.gender() | name"
-                                             [options]="genderOptions"                                             
+                                             [options]="genderOptions"
                                              [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
             </div>
           </div>
           <div class="row">
             <div class="l4 m3 s0 col"></div>
             <div class="l4 m6 col text-center">
-              <div class="margin-top-medium">
+              <div>
+                <p class="margin-bottom-none">{{msg.birthdate() | name}}</p>
                 <material-datepicker class="text-left"
                                      [(date)]="birthDate"
                                      [minDate]="minDate"
@@ -196,10 +197,10 @@
                   <div class="col text-center">
                     <material-button clear-size
                                      raised
-                                     [disabled]="!termsAccepted || !form.valid || consultationService.loading || customerService.loading || customer.consultation_id != null"
+                                     [disabled]="!termsAccepted || !form.valid || consultationService.loading || customerService.loading || settingsService.loading || customer.consultation_id != null"
                                      (trigger)="onCreateConsultation()">
-                      <span *ngIf="!consultationService.loading && !customerService.loading">{{msg.submit()}}</span>
-                      <material-icon *ngIf="consultationService.loading || customerService.loading"
+                      <span *ngIf="!consultationService.loading && !customerService.loading && !settingsService.loading">{{msg.submit()}}</span>
+                      <material-icon *ngIf="consultationService.loading || customerService.loading || settingsService.loading"
                                      icon="hourglass_empty"
                                      baseline
                                      size="x-large"></material-icon>

@@ -24,12 +24,21 @@ import 'profile_details_component.dart';
     providers: const [ConsultationService, ServiceService],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.Default)
-class ProfileComponent {
+class ProfileComponent implements OnInit {
   ProfileComponent(this.consultationService, this.customerService,
       this.productService, this.serviceService, this.msg);
 
+  @override
+  void ngOnInit() {
+    if (loggedIn) {
+      customerService.fetch(FirestoreService.currentUserId, force: false);
+      consultationService.fetch(customer.consultation_id, force: false);
+    }
+  }
+
   void onLogout() async {
-    await customerService.login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword);
+    await customerService.login(FirestoreService.defaultCustomerId,
+        FirestoreService.defaultCustomerPassword);
   }
 
   String get currentUserId => FirestoreService.currentUserId;
@@ -44,6 +53,10 @@ class ProfileComponent {
         ? null
         : serviceService.get(consultation.service_id);
   }
+
+  Consultation get consultation => consultationService.get(customer?.consultation_id);
+
+
 
   bool get loggedIn =>
       FirestoreService.currentFirebaseUser.uid != null &&
