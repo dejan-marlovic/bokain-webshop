@@ -60,7 +60,7 @@ class SkinTypeComponent implements OnActivate {
 
   void _evaluateProducts() {
     final products =
-        skinTypeProducts.where((p) => p.bundle_severity == severityLevel);
+        skinTypeProducts.where((p) => p.bundle_severity == severityLevel);        
     smallProduct = products.firstWhere((p) => p.bundle_size == 'small',
         orElse: () => null);
     largeProduct = products.firstWhere((p) => p.bundle_size == 'large',
