@@ -45,6 +45,12 @@ class LoginComponent {
     }
   }
 
+  Future<void> onPasswordChange() async {
+    if (password.isNotEmpty) {
+      await onLogin();
+    }
+  }
+
   Future<void> onResetPassword() async {
     resetPasswordSubtitle = msg.please_wait();
     try {

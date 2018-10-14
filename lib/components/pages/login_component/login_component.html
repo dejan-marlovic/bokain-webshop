@@ -20,6 +20,7 @@
                                 floatingLabel
                                 ngControl="password"
                                 [maxCount]="64"
+                                (change)="onPasswordChange()"
                                 [(ngModel)]="password"></material-input>
             </div>
             <div class="margin-top-medium">
