@@ -216,11 +216,9 @@ class CartService {
       klarnaOrder =
           await _klarnaCheckoutService.updateCheckoutOrder(klarnaOrder);
     }
-
-    final snippet =
-        'data:text/html;charset=utf-8,${Uri.encodeFull(klarnaOrder.html_snippet)}';
-
-    klarnaHtml = _sanitizationService.bypassSecurityTrustResourceUrl(snippet);
+    
+    final dataUrl = Uri.encodeFull(klarnaOrder.html_snippet).replaceAll('#', '%23');
+    klarnaHtml = _sanitizationService.bypassSecurityTrustResourceUrl('data:text/html;charset=utf-8,$dataUrl');
   }
 
   int get productCount {

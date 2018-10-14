@@ -48,7 +48,7 @@ class CustomerSupportComponent implements OnActivate {
 
   @override
   void onActivate(RouterState previous, RouterState current) {
-    currentPage = current.path;
+    currentPage = current.path.replaceAll('/', '');        
   }
 
   Future<void> sendEmail() async {

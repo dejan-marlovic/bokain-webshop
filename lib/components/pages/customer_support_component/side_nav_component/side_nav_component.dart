@@ -42,7 +42,7 @@ class SideNavComponent implements OnDestroy {
     for (final t in _pages) {
       t.active = false;
     }
-    _pages.firstWhere((p) => p.name == _activePage, orElse: () => null)?.active = true;    
+    _pages.firstWhere((p) => p.name == _activePage, orElse: () => null)?.active = true;      
   }
 
   @Output() 

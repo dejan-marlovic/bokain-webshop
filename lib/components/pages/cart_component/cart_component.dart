@@ -41,7 +41,7 @@ class CartComponent implements OnActivate {
     dom.window.scrollTo(0,0);
   }
 
-  SafeResourceUrl klarnaHtml;
+  //SafeResourceUrl klarnaHtml;
   String discountCode;
   
   final CartService cartService;
