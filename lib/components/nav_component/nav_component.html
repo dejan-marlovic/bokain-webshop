@@ -1,2 +1,186 @@
+<!--
 <bo-nav-large class="hide-for-small hide-for-medium"></bo-nav-large>
 <bo-nav-small class="hide-for-large"></bo-nav-small>
+-->
+
+<!-- Upper Menu -->
+<div class="row expand collapse menuUpper background-color-1">
+  <div class="col">
+    <div class="row collapse">
+      <div class="col l4 hide-for-small hide-for-medium">
+        <div class="flexAligner">
+          <div class="menuItem">
+            <img class="clickable"
+                 routerLink="index.html"
+                 routerLinkActive="activeRoute"
+                 src="gfx/logotype_white.png"
+                 alt="logotype">
+          </div>
+          <div class="menuItem clickable"
+               [routerLink]="msg.my_profile_url()"
+               routerLinkActive="activeRoute"> {{profileLinkLabel | name}} </div>
+          <div class="menuItem clickable"
+               [routerLink]="msg.customer_support_url()"
+               routerLinkActive="activeRoute"> {{msg.customer_support() | name}} </div>
+          <div class="menuItem clickable">
+            <dropdown-menu [menu]="languageMenuModel"
+                           [buttonText]="msg.country() | name">
+            </dropdown-menu>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 hide-for-small hide-for-medium">
+      </div>
+      <div class="col s2 hide-for-large">
+        <div class="flexAligner">
+          <div class="menuItem clickable">
+            <material-icon (click)="slideOpen = !slideOpen"
+                           [icon]="slideOpen ? 'close' : 'menu'"></material-icon>
+          </div>
+        </div>
+      </div>
+      <div class="col s8 text-center hide-for-large">
+        <div class="flexAligner">
+          <div class="menuItem">
+            <img class="clickable"
+                 routerLink="index.html"
+                 routerLinkActive="activeRoute"
+                 src="gfx/logotype_white.png"
+                 alt="logotype">
+          </div>
+        </div>
+      </div>
+
+      <div class="col l4 s2">
+        <div class="flexAligner">
+          <div class="menuItem hide-for-small hide-for-medium">
+            <bo-search popupPosition="below"></bo-search>
+          </div>
+          <div class="menuItem clickable cartItem"
+               [routerLink]="msg.cart_url()"
+               routerLinkActive="activeRoute">
+            <material-icon icon="shopping_cart"
+                           popupSource
+                           #source="popupSource"></material-icon> <span class="productCount color-white background-color-alert-light"
+                  [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Lower Menu -->
+<div class="row collapse expand menuLower background-color-2-x-light hide-for-small">
+  <div class="col">
+    <div class="row collapse">
+      <div class="col">
+        <div class="flexAligner">
+          <div class="menuItem clickable color-2"
+               [routerLink]="msg.skin_types_url()"
+               routerLinkSubActive="activeRoute">
+            <div class="text-center">
+              <fo-icon icon="skin-type"
+                       size="2.5rem"></fo-icon>
+            </div> {{msg.skin_type(2) | name}}
+          </div>
+          <div class="menuItem clickable color-2"
+               [routerLink]="msg.product(2)"
+               routerLinkSubActive="activeRoute">
+            <div class="text-center">
+              <fo-icon icon="product-category"
+                       size="2.5rem"></fo-icon>
+            </div> {{msg.product(2) | name}}
+          </div>
+          <div class="menuItem clickable color-2"
+               [routerLink]="msg.skin_consultation_url()"
+               routerLinkActive="activeRoute">
+            <div class="text-center">
+              <fo-icon icon="skin-consultation"
+                       size="2.5rem"></fo-icon>
+            </div> {{msg.consultation(1) | name}}
+          </div>
+          <div class="menuItem clickable color-2"
+               [routerLink]="msg.skin_guide_url()"
+               routerLinkActive="activeRoute">
+            <div class="text-center">
+              <fo-icon icon="skin-guide"
+                       size="2.5rem"></fo-icon>
+            </div> {{msg.skin_guide() | name}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<material-drawer temporary
+                 [attr.overlay]="true"
+                 [(visible)]="slideOpen">
+  <div class="drawerContent">
+    <material-list>
+      <div group>
+        <material-list-item [routerLink]="msg.my_profile_url()">
+          <fo-icon icon="my-profile"
+                   [size]="iconSize"></fo-icon>{{profileLinkLabel | name}}
+        </material-list-item>
+        <material-list-item [routerLink]="msg.customer_support_url()">
+          <fo-icon icon="customer-support"
+                   [size]="iconSize"></fo-icon>{{msg.customer_support() | name}}
+        </material-list-item>
+      </div>
+      <div group>
+        <material-list-item [routerLink]="msg.skin_consultation_url()">
+          <fo-icon icon="skin-consultation"
+                   [size]="iconSize"></fo-icon>{{msg.consultation(1) | name}}
+        </material-list-item>
+        <material-list-item [routerLink]="msg.skin_test_url()">
+          <fo-icon icon="skin-test"
+                   [size]="iconSize">
+          </fo-icon>{{msg.skin_test(1) | name}}
+        </material-list-item>
+        <material-list-item [routerLink]="msg.skin_guide_url()">
+          <fo-icon icon="skin-guide"
+                   [size]="iconSize"></fo-icon>{{msg.skin_guide() | name}}
+        </material-list-item>
+        <material-list-item [routerLink]="msg.skin_types_url()">
+          <fo-icon icon="skin-type"
+                   [size]="iconSize"></fo-icon>{{msg.skin_type(2) | name}}
+        </material-list-item>
+      </div>
+      <div group>
+        <div label>{{msg.product_category(2) | name}}</div>
+        <material-list-item routerLink="{{msg.product(2)}}/{{msg.bundles_url()}}">
+          <fo-icon icon="category-bundle"
+                   [size]="iconSize"></fo-icon>{{msg.bundle(2) | name}}
+        </material-list-item>
+        <material-list-item *ngFor="let category of productCategoryService.cachedModels.values"
+                            routerLink="{{msg.product(2)}}/{{category.phrases[languageService.currentShortLocale].url_name}}">
+          <fo-icon icon="category-{{category.phrases['EN'].url_name}}"
+                   [size]="iconSize"></fo-icon>{{category.phrases[languageService.currentShortLocale].name |
+          name}}
+        </material-list-item>
+      </div>
+      <div group>
+        <material-list-item>
+          <bo-search popupPosition="above"></bo-search>
+        </material-list-item>
+        <material-list-item>
+          <dropdown-menu [menu]="languageMenuModel"
+                         [buttonText]="msg.country() | name">
+          </dropdown-menu>
+        </material-list-item>
+      </div>
+    </material-list>
+  </div>
+</material-drawer>
+
+<material-popup [source]="source"
+                [hasBox]="false"
+                [visible]="cartService.previewProduct != null"
+                [enforceSpaceConstraints]="true"
+                [constrainToViewport]="true"                                
+                [preferredPositions]="position">
+  <div class="padding-medium">
+    <bo-cart-preview></bo-cart-preview>
+  </div>
+</material-popup>

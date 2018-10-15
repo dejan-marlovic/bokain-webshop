@@ -18,6 +18,10 @@ class CartService {
     productRegistry[productId] ??= 0;
     productRegistry[productId]++;
     evaluateCheckout(_languageService.currentShortLocale);
+
+    _previewProduct = _productService.get(productId);
+    new Timer(const Duration(milliseconds: 2000), () => _previewProduct = null);
+    
   }
 
   void remove(String productId, {bool removeAll = false}) {
@@ -229,10 +233,13 @@ class CartService {
     return output;
   }
 
+  Product get previewProduct => _previewProduct;
+  
   // Key: Product id Value: number of products
   final Map<String, int> productRegistry = {};
 
   bool shipping = true;
+  Product _previewProduct;
   SafeResourceUrl klarnaHtml;
   CheckoutOrder klarnaOrder;
   final DomSanitizationService _sanitizationService;
