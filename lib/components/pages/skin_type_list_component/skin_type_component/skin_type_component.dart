@@ -37,9 +37,7 @@ class SkinTypeComponent implements OnActivate {
           (skinType) => skinType.url_name == current.parameters['url_name'],
           orElse: () => null);
     }
-
-    if (model == null) {
-    } else {
+    if (model != null) {
       skinTypeProducts = _productService.cachedModels.values
           .where((product) =>
               product.product_category_id == 'bundle' &&
@@ -48,23 +46,22 @@ class SkinTypeComponent implements OnActivate {
           .toList(growable: false);
 
       _evaluateProducts();
-    }
-    _changeDetectorRef.markForCheck();
+    }    
   }
 
   void onSeverityLevelChange(int level) {
     severityLevel = level;
     _evaluateProducts();
-    _changeDetectorRef.markForCheck();
   }
 
   void _evaluateProducts() {
     final products =
-        skinTypeProducts.where((p) => p.bundle_severity == severityLevel);        
+        skinTypeProducts.where((p) => p.bundle_severity == severityLevel);
     smallProduct = products.firstWhere((p) => p.bundle_size == 'small',
         orElse: () => null);
     largeProduct = products.firstWhere((p) => p.bundle_size == 'large',
         orElse: () => null);
+    _changeDetectorRef.markForCheck();
   }
 
   Product smallProduct;

@@ -1,4 +1,3 @@
-@import 'package:angular_components/material_input/mixins';
 @import 'package:angular_components/material_menu/mixins';
 @import 'package:grid/constants';
 @import 'package:fo_components/mixins';
@@ -6,9 +5,7 @@
 $upperMenuHeight: 40px;
 :host {
   @include dropdown-menu-nounderline;
-  @include material-input-theme(white);
-  @include material-input-no-underline();
-  @include input-label-color(white);
+
   .col {
     padding-top: 0;
     padding-bottom: 0;

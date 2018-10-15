@@ -14,7 +14,8 @@ import 'search_component.template.dart' as search;
     styleUrls: const ['search_component.css'],
     directives: const [
       MaterialAutoSuggestInputComponent,
-      materialInputDirectives
+      materialInputDirectives,
+      NgClass
     ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
@@ -33,6 +34,9 @@ class SearchComponent implements OnDestroy {
 
   @Input()
   String popupPosition = 'below'; // below or above
+
+  @Input()
+  bool white = true;
 
   List<RelativePosition> get positions => popupPosition == 'below'
       ? RelativePosition.AdjacentBottomEdge
@@ -129,6 +133,7 @@ class SearchComponent implements OnDestroy {
   styles: ['fo-icon { } img { display: flex; } span { margin-left: 8px; }'],
   pipes: const [NamePipe],
   directives: [FoIconComponent, NgIf],
+  changeDetection: ChangeDetectionStrategy.OnPush
 )
 class SearchOptionRendererComponent implements RendersValue<FoModel> {
   SearchOptionRendererComponent(this.languageService);

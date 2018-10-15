@@ -1,6 +1,6 @@
 <div class="upper">
     <material-spinner *ngIf="!imageLoaded" class="spinner"></material-spinner>
-    <img (load)="imageLoaded = true" alt="{{model.name}}" src="{{model.image_uri}}" (click)="openProduct()">
+    <img [class.hidden]="!imageLoaded" (load)="imageLoaded = true" alt="{{model.name}}" src="{{model.image_uri}}" (click)="openProduct()">
     <material-button class="blue" clear-size raised (trigger)="addToCart()">
         <material-icon icon="add" size="x-large"></material-icon>
     </material-button>

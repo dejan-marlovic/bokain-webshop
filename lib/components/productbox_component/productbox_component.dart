@@ -16,9 +16,14 @@ import '../../services/cart_service.dart';
       NgIf
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class ProductBoxComponent {
+class ProductBoxComponent implements AfterChanges {
   ProductBoxComponent(this._productCategoryService, this._skinTypeService,
       this.cartService, this.router, this._msg);
+
+  @override
+  void ngAfterChanges() {
+    imageLoaded = false;
+  }
 
   void addToCart() {
     cartService.add(model.id.toString());
@@ -31,7 +36,8 @@ class ProductBoxComponent {
       /// We're dealing with a product category, add it's skin type to the url
       try {
         print(model.skin_type_ids.first);
-        final skinType = _skinTypeService.webshopData[model.skin_type_ids.first];
+        final skinType =
+            _skinTypeService.webshopData[model.skin_type_ids.first];
         return '${_msg.bundle(2)}/${skinType.url_name}';
       } on StateError catch (e) {
         print(e);

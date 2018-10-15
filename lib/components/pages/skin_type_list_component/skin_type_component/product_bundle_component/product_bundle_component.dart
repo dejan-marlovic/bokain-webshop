@@ -9,16 +9,24 @@ import '../../../../productbox_component/productbox_component.dart';
     selector: 'bo-product-bundle',
     templateUrl: 'product_bundle_component.html',
     styleUrls: const ['product_bundle_component.css'],
-    directives: const [FoIconComponent, MaterialButtonComponent, NgFor, ProductBoxComponent],    
+    directives: const [
+      FoIconComponent,
+      MaterialButtonComponent,
+      NgClass,
+      NgFor,
+      ProductBoxComponent
+    ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class ProductBundleComponent implements OnInit {
+class ProductBundleComponent implements AfterChanges {
   ProductBundleComponent(this.cartService, this.languageService,
       this._productService, this.productCategoryService, this.msg);
 
   @override
-  void ngOnInit() {
-    onSelect(small);
+  void ngAfterChanges() {
+    if (small != null) {
+      onSelect(small);
+    }
   }
 
   void onSelect(Product product) {

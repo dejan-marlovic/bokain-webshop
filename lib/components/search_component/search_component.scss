@@ -1,3 +1,9 @@
+@import 'package:angular_components/material_input/mixins';
 :host {
-    display: block;
+  display: block;
+  @include material-input-no-underline();
+  material-auto-suggest-input.white {
+    @include material-input-theme(white);
+    @include input-label-color(white);
+  }
 }
