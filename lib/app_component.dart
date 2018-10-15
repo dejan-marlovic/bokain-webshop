@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:convert' show json;
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
+import 'package:persistent_data/persistent_data.dart' as pd;
 import 'components/footer_component/footer_component.dart';
 import 'components/nav_component/nav_component.dart';
 import 'components/pages/about_us_component/about_us_component.template.dart'
@@ -101,8 +103,10 @@ class AppComponent {
       this.router,
       this.msg) {
     customerService
-        .login(FirestoreService.defaultCustomerId, FirestoreService.defaultCustomerPassword, requireEmailVerified: false)
-        .then(_loadResources);        
+        .login(FirestoreService.defaultCustomerId,
+            FirestoreService.defaultCustomerPassword,
+            requireEmailVerified: false)
+        .then(_loadResources);
 
     router.onNavigationStart.listen((_) {
       html.window.scrollTo(0, 0);
@@ -200,10 +204,9 @@ class AppComponent {
       ];
   }
 
-  Future<void> _loadResources(String user_id) async {    
-    
+  Future<void> _loadResources(String user_id) async {
     await _languageService.setLocale('SV', LanguageContext.webshop);
-    await _settingsService.fetch('1');    
+    await _settingsService.fetch('1');
 
     await productCategoryService.fetchQuery(productCategoryService.collection
         .where('status', '==', 'active')
@@ -211,6 +214,22 @@ class AppComponent {
     await productService.fetchQuery(productService.collection
         .where('status', '==', 'active')
         .orderBy('score', 'desc'));
+
+    pd.load();
+    final products = pd.get('products', permanent: true);
+    if (products != null && products.isNotEmpty) {
+      try {
+        final Map<String, int> productData =
+            json.decode(products).cast<String, int>();
+        for (final product in productData.keys) {
+          for (var i = 0; i < productData[product]; i++) {
+            _cartService.add(product, showPreview: false);
+          }
+        }
+      } on FormatException catch (e) {
+        print(e);
+      }
+    }
 
     _setupRoutes();
 

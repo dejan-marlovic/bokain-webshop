@@ -16,7 +16,7 @@ dependencies:
     path: ../bokain_consultation 
   grid:
     git: https://github.com/afpatmin/grid
-
+  persistent_data: ^0.1.3
   sass_builder: ^2.1.1    
 
 dev_dependencies:

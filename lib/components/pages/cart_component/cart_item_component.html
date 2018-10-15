@@ -1,20 +1,28 @@
-<p>
-    {{product.phrases[languageService.currentShortLocale].name}}
-    <material-button class="alert text-right"
-                     clear-size
-                     dense
+<div class="row">
+  <div class="s9 col align-middle">
+    <h4 class="margin-top-none margin-bottom-none"> {{product.phrases[languageService.currentShortLocale].name}} </h4>
+  </div>
+  <div class="s3 col align-middle text-right">
+    <material-button clear-size
                      raised
+                     dense
+                     [disabled]="cartService.loading"
                      (trigger)="remove()">
-        <material-icon class="color-red"
-                       size="medium"
-                       icon="cancel"></material-icon>
+      <material-icon class="color-alert"
+                     size="medium"
+                     icon="delete"></material-icon>
     </material-button>
-</p>
-<fo-number-input [min]="1"
-                 [max]="10"
-                 [label]="msg.quantity()"
-                 [ngModel]="cartService.productRegistry[product.id]"
-                 (ngModelChange)="onCountChange($event)"></fo-number-input>
-<p class="text-right">
-    {{msg.price() | name}}: {{product.price[cartService.currency]*cartService.productRegistry[product.id]}} {{cartService.currency}}
-</p>
+  </div>
+</div>
+<div class="row">
+  <div class="s6 col align-middle">
+    <fo-number-input [min]="1"
+                     [max]="10"
+                     [disabled]="cartService.loading"
+                     [label]="msg.quantity()"
+                     [ngModel]="cartService.productRegistry[product.id]"
+                     (ngModelChange)="onCountChange($event)"></fo-number-input>
+  </div>
+  <div class="s6 col text-right align-middle">
+    {{product.price[cartService.currency]*cartService.productRegistry[product.id]}} {{cartService.currency}} </div>
+</div>

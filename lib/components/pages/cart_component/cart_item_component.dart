@@ -27,10 +27,15 @@ class CartItemComponent {
 
   void onCountChange(int value) {
     if (value > cartService.productRegistry[product.id]) {
-      cartService.add(product.id.toString());
-    }
-    else {
-      cartService.remove(product.id.toString());
+      final count = value - cartService.productRegistry[product.id];
+      for (var i = 0; i < count; i++) {
+        cartService.add(product.id.toString(), showPreview: false);
+      }
+    } else {
+      final count = cartService.productRegistry[product.id] - value;
+      for (var i = 0; i < count; i++) {
+        cartService.remove(product.id.toString());
+      }
     }
   }
 

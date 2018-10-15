@@ -1,58 +1,64 @@
-<div *ngIf="cartService.productRegistry.isEmpty" class="margin-top-x-large">
-    <div class="row">
-        <div class="m5 s2 col"></div>
-        <div class="m2 s8 col">
-            <img src="gfx/empty_cart.png" alt="{{msg.cart_is_empty()}}">
-        </div>
-        <div class="m5 s2 col"></div>
+<div *ngIf="cartService.productRegistry.isEmpty"
+     class="margin-top-x-large">
+  <div class="row">
+    <div class="m5 s2 col"></div>
+    <div class="m2 s8 col">
+      <img src="gfx/empty_cart.png"
+           alt="{{msg.cart_is_empty()}}">
     </div>
-    <div class="row">
-        <div class="col text-center">
-            <h3>
-                {{msg.cart_is_empty() | name}}!
-            </h3>
-        </div>
+    <div class="m5 s2 col"></div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <h3> {{msg.cart_is_empty() | name}}! </h3>
     </div>
+  </div>
 </div>
-
 <div *ngIf="cartService.productRegistry.isNotEmpty"
      class="row flex-for-large flex-for-medium">
-    <div class="m5 col">
-        <!-- Products -->
-        <div class="row"
-             *ngFor="let productId of cartService.productRegistry.keys">
-            <div class="col">
-                <bo-cart-item [product]="productService.get(productId)">
-                </bo-cart-item>
-            </div>
-        </div>
-
-        <!-- Discount code -->
-        <div class="row">
-            <div class="col">
-                <material-input [label]="msg.discount_code()"
-                                floatingLabel
-                                [(ngModel)]="discountCode"
-                                [displayBottomPanel]="false"></material-input>
-                <material-button raised
-                                 dense>OK</material-button>
-            </div>
-        </div>
+  <div class="m5 col">
+    <!-- Products -->
+    <div class="row">
+      <div class="col">
+        <h2 class="margin-bottom-none">{{msg.your_order() | name}}</h2>
+      </div>
     </div>
-    <!-- Checkout -->
-    <div class="m7 col">
-        <div class="row margin-top-x-large"
-             *ngIf="cartService.klarnaHtml == null">
-            <div class="col text-center">
-                <material-spinner></material-spinner>
-                <p>{{msg.loading()}}...</p>
-            </div>
-        </div>
-        <iframe *ngIf="cartService.klarnaHtml != null"
-                id="klarna"
-                width="100%"
-                height="1000"
-                [src]="cartService.klarnaHtml"
-                frameborder="0"></iframe>
+    <div class="row"
+         *ngFor="let productId of cartService.productRegistry.keys">
+      <div class="col">
+        <bo-cart-item [product]="productService.get(productId)">
+        </bo-cart-item>
+      </div>
     </div>
+    <!-- Discount code -->
+    <div class="row">
+      <div class="col">
+        <material-input [label]="msg.discount_code()"
+                        floatingLabel
+                        [(ngModel)]="discountCode"
+                        [displayBottomPanel]="false"></material-input>
+        <material-button raised
+                         dense>OK</material-button>
+      </div>
+    </div>
+  </div>
+  <!-- Checkout -->
+  <div class="m7 col">
+    <div class="row margin-top-x-large"
+         *ngIf="cartService.klarnaHtml == null">
+      <div class="col text-center">
+        <material-spinner></material-spinner>
+        <p>{{msg.loading()}}...</p>
+      </div>
+    </div>
+    <iframe *ngIf="cartService.klarnaHtml != null"
+            id="klarna"
+            sandbox="allow-scripts allow-same-origin"
+            seamless
+            width="100%"
+            height="1000"
+            [attr.srcDoc]="cartService.klarnaOrder.html_snippet"
+            [src]="cartService.klarnaHtml"
+            frameborder="0"></iframe>
+  </div>
 </div>

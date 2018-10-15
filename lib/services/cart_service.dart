@@ -1,10 +1,31 @@
 import 'dart:async';
+import 'dart:convert' show json;
 import 'package:angular/di.dart';
 import 'package:angular/security.dart';
 import 'package:bokain_models/bokain_models.dart';
+import 'package:persistent_data/persistent_data.dart' as pd;
 
 @Injectable()
 class CartService {
+  final Map<String, int> productRegistry = {};
+
+  bool shipping = true;
+  Product previewProduct;
+  SafeResourceUrl klarnaHtml;
+  CheckoutOrder klarnaOrder;
+  final DomSanitizationService _sanitizationService;
+  final KlarnaCheckoutService _klarnaCheckoutService;
+  final CustomerService _customerService;
+
+  // Key: Product id Value: number of products
+  final SettingsService _settingsService;
+
+  final LanguageService _languageService;
+  final ProductService _productService;
+  final WebshopMessagesService _msg;
+  String currency = 'SEK';
+  Timer previewTimer;
+  bool _loading = false;
   CartService(
       this._klarnaCheckoutService,
       this._customerService,
@@ -13,19 +34,68 @@ class CartService {
       this._settingsService,
       this._sanitizationService,
       this._msg);
+      
+  bool get loading => _loading;
+  int get productCount {
+    var output = 0;
+    for (final count in productRegistry.values) {
+      output += count;
+    }
+    return output;
+  }
 
-  void add(String productId) {
+  void add(String productId, {bool showPreview = true}) {
     productRegistry[productId] ??= 0;
     productRegistry[productId]++;
     evaluateCheckout(_languageService.currentShortLocale);
 
-    previewProduct = _productService.get(productId);
-    previewTimer?.cancel();
-    previewTimer = new Timer(const Duration(milliseconds: 5000), () {
-      previewProduct = null;
-      previewTimer = null;
-    });
-    
+    if (showPreview) {
+      previewProduct = _productService.get(productId);
+      previewTimer?.cancel();
+      previewTimer = new Timer(const Duration(milliseconds: 5000), () {
+        previewProduct = null;
+        previewTimer = null;
+      });
+    }
+  }
+
+  String addCurrency(Map<String, num> price) {
+    if (price == null) return '-';
+    final value = price[currency];
+
+    switch (currency) {
+      case 'EUR':
+        return '€$value';
+        break;
+
+      case 'GBP':
+        return '£$value';
+        break;
+
+      case 'SEK':
+        return '$value kr';
+
+      case 'USD':
+        return '\$$value';
+
+      default:
+        return '$value $currency';
+    }
+  }
+
+  /// Evaluates which (if any) checkout to display, Klarna or Braintree
+  Future<void> evaluateCheckout(String locale) async {
+    klarnaHtml = null;
+
+    pd.set('products', json.encode(productRegistry), permanent: true);
+
+    if (productRegistry.isEmpty) {
+      return;
+    }
+
+    if (locale == 'SV') {
+      await _updateKlarnaCheckout();
+    }
   }
 
   void remove(String productId, {bool removeAll = false}) {
@@ -38,46 +108,8 @@ class CartService {
     evaluateCheckout(_languageService.currentShortLocale);
   }
 
-  /// Evaluates which (if any) checkout to display, Klarna or Braintree
-  Future<void> evaluateCheckout(String locale) async {
-    klarnaHtml = null;
-
-    if (productRegistry.isEmpty) {
-      return;
-    }
-
-    if (locale == 'SV') {
-      await _updateKlarnaCheckout();
-    }
-  }
-
-  String addCurrency(Map<String, num> price) {
-    
-    if (price == null) return '-';
-    final value = price[currency];
-    
-    switch (currency) {
-      case 'EUR':
-      return '€$value';
-      break;
-
-      case 'GBP':
-      return '£$value';
-      break;
-
-      case 'SEK':
-      return '$value kr';
-
-      case 'USD':
-      return '\$$value';
-
-      default:
-      return '$value $currency';
-    }
-  }
-
   Future<void> _updateKlarnaCheckout() async {
-    
+    _loading = true;
     final settings = _settingsService.get('1');
 
     final webshopUrl = settings.webshop_url;
@@ -224,33 +256,12 @@ class CartService {
       klarnaOrder =
           await _klarnaCheckoutService.updateCheckoutOrder(klarnaOrder);
     }
-    
-    final dataUrl = Uri.encodeFull(klarnaOrder.html_snippet).replaceAll('#', '%23');
-    klarnaHtml = _sanitizationService.bypassSecurityTrustResourceUrl('data:text/html;charset=utf-8,$dataUrl');
-  }
 
-  int get productCount {
-    var output = 0;
-    for (final count in productRegistry.values) {
-      output += count;
-    }
-    return output;
-  }
-  
-  // Key: Product id Value: number of products
-  final Map<String, int> productRegistry = {};
+    final dataUrl =
+        Uri.encodeFull(klarnaOrder.html_snippet).replaceAll('#', '%23');
+    klarnaHtml = _sanitizationService.bypassSecurityTrustResourceUrl(
+        'data:text/html;charset=utf-8,$dataUrl');
 
-  bool shipping = true;
-  Product previewProduct;
-  SafeResourceUrl klarnaHtml;
-  CheckoutOrder klarnaOrder;
-  final DomSanitizationService _sanitizationService;
-  final KlarnaCheckoutService _klarnaCheckoutService;
-  final CustomerService _customerService;
-  final SettingsService _settingsService;
-  final LanguageService _languageService;
-  final ProductService _productService;
-  final WebshopMessagesService _msg;
-  String currency = 'SEK';
-  Timer previewTimer;
+    _loading = false;
+  }
 }
