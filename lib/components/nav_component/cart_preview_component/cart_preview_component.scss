@@ -1,12 +1,26 @@
 @import 'package:grid/constants';
 @import '../../../colors.scss';
-
-:host {
-  display: block;
-  //width: 280px;
-  overflow: hidden;
-  background-color: white;
-  padding: $medium;
-
-  @include box-shadow();
+:host {  
+  div#cartPreviewContainer {
+    z-index: 998;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    div#cartContent {
+      position: absolute;
+      top: 40px;
+      right: 0;      
+      overflow: hidden;
+      background-color: white;
+      padding: $medium;
+      width: 450px;
+      max-width: 100vw;
+      color: $colorBlack;
+      h3 {
+        line-height: 1.5rem;
+      }
+      @include box-shadow();
+    }
+  }
 }

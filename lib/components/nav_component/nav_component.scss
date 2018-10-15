@@ -53,6 +53,7 @@ $upperMenuHeight: 40px;
     }
   }
   div.menuLower {
+    z-index: 997;
     padding-top: $upperMenuHeight;
     .flexAligner {
       justify-content: center;

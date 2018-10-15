@@ -1,7 +1,4 @@
-<!--
-<bo-nav-large class="hide-for-small hide-for-medium"></bo-nav-large>
-<bo-nav-small class="hide-for-large"></bo-nav-small>
--->
+<bo-cart-preview *ngIf="cartService.previewProduct != null"></bo-cart-preview>
 
 <!-- Upper Menu -->
 <div class="row expand collapse menuUpper background-color-1">
@@ -50,18 +47,15 @@
           </div>
         </div>
       </div>
-
       <div class="col l4 s2">
         <div class="flexAligner">
           <div class="menuItem hide-for-small hide-for-medium">
             <bo-search popupPosition="below"></bo-search>
           </div>
-          <div class="menuItem clickable cartItem"
+          <div class="menuItem clickable"
                [routerLink]="msg.cart_url()"
                routerLinkActive="activeRoute">
-            <material-icon icon="shopping_cart"
-                           popupSource
-                           #source="popupSource"></material-icon> <span class="productCount color-white background-color-alert-light"
+            <material-icon icon="shopping_cart"></material-icon> <span class="productCount color-white background-color-alert-light"
                   [class.visible]="cartService.productCount > 0">{{cartService.productCount}}</span>
           </div>
         </div>
@@ -112,8 +106,8 @@
     </div>
   </div>
 </div>
-
-<material-drawer temporary
+<material-drawer class="hide-for-medium hide-for-large"
+                 temporary
                  [attr.overlay]="true"
                  [(visible)]="slideOpen">
   <div class="drawerContent">
@@ -156,8 +150,7 @@
         <material-list-item *ngFor="let category of productCategoryService.cachedModels.values"
                             routerLink="{{msg.product(2)}}/{{category.phrases[languageService.currentShortLocale].url_name}}">
           <fo-icon icon="category-{{category.phrases['EN'].url_name}}"
-                   [size]="iconSize"></fo-icon>{{category.phrases[languageService.currentShortLocale].name |
-          name}}
+                   [size]="iconSize"></fo-icon>{{category.phrases[languageService.currentShortLocale].name | name}}
         </material-list-item>
       </div>
       <div group>
@@ -173,14 +166,3 @@
     </material-list>
   </div>
 </material-drawer>
-
-<material-popup [source]="source"
-                [hasBox]="false"
-                [visible]="cartService.previewProduct != null"
-                [enforceSpaceConstraints]="true"
-                [constrainToViewport]="true"                                
-                [preferredPositions]="position">
-  <div class="padding-medium">
-    <bo-cart-preview></bo-cart-preview>
-  </div>
-</material-popup>

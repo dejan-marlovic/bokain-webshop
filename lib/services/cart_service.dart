@@ -19,8 +19,12 @@ class CartService {
     productRegistry[productId]++;
     evaluateCheckout(_languageService.currentShortLocale);
 
-    _previewProduct = _productService.get(productId);
-    new Timer(const Duration(milliseconds: 2000), () => _previewProduct = null);
+    previewProduct = _productService.get(productId);
+    previewTimer?.cancel();
+    previewTimer = new Timer(const Duration(milliseconds: 5000), () {
+      previewProduct = null;
+      previewTimer = null;
+    });
     
   }
 
@@ -232,14 +236,12 @@ class CartService {
     }
     return output;
   }
-
-  Product get previewProduct => _previewProduct;
   
   // Key: Product id Value: number of products
   final Map<String, int> productRegistry = {};
 
   bool shipping = true;
-  Product _previewProduct;
+  Product previewProduct;
   SafeResourceUrl klarnaHtml;
   CheckoutOrder klarnaOrder;
   final DomSanitizationService _sanitizationService;
@@ -250,4 +252,5 @@ class CartService {
   final ProductService _productService;
   final WebshopMessagesService _msg;
   String currency = 'SEK';
+  Timer previewTimer;
 }
