@@ -44,6 +44,9 @@ RoutePath get skinConsultation => RoutePath(
 RoutePath get skinGuide =>
     RoutePath(path: Intl.message('skin-guide', name: 'skin_guide_url'));
 
+RoutePath get skinGuideCategory =>
+    RoutePath(path: "${Intl.message('skin-guide', name: 'skin_guide_url')}/:category_url");
+
 RoutePath get skinGuideArticle =>
     RoutePath(path: "${Intl.message('skin-guide', name: 'skin_guide_url')}/:category_url/:article_url");
 

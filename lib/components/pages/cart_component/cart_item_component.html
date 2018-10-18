@@ -1,8 +1,11 @@
 <div class="row">
-  <div class="s9 col align-middle">
+  <div class="s3 col align-middle">
+    <img [src]="product.image_uri" [alt]="product.phrases[languageService.currentShortLocale].name">
+  </div>
+  <div class="s6 col align-middle">
     <h4 class="margin-top-none margin-bottom-none"> {{product.phrases[languageService.currentShortLocale].name}} </h4>
   </div>
-  <div class="s3 col align-middle text-right">
+  <div class="s3 col text-right">
     <material-button clear-size
                      dense
                      [disabled]="cartService.loading"

@@ -22,11 +22,12 @@ class ArticleCategoryComponent implements OnInit {
         articleService.collection.doc(model.id).collection('articles'));
     _loaded = true;
 
-
-    _changeDetectorRef.markForCheck();    
+    _changeDetectorRef.markForCheck();
   }
 
-  String linkOf(Article article) => '${msg.skin_guide_url()}/${model.id}/${article.id}';
+  String get categoryLink => '${msg.skin_guide_url()}/${model.id}';
+
+  String articleLink(Article article) => '$categoryLink/${article.id}';
 
   bool get loaded => _loaded;
 

@@ -1,3 +1,4 @@
+@import 'package:grid/constants';
 @import 'package:bokain_webshop/colors';
 
 :host {
@@ -8,14 +9,14 @@
     -ms-transform: translateZ(0);
     img {
         @include box-shadow();
-        transition: opacity 0.3s ease;
-        -webkit-transition: opacity 0.3s ease;
-        -moz-transition: opacity 0.3s ease;
-        -o-transition: opacity 0.3s ease;
-        opacity: 0.5;
+        transition: border-color 0.3s ease;
+        -webkit-transition: border-color 0.3s ease;
+        -moz-transition: border-color 0.3s ease;
+        -o-transition: border-color 0.3s ease;        
+        border: $small solid transparent;        
     }
     img.selected {
-        opacity: 1;
+        border-color: $color1;
     }    
     label {
         font-size: 0.9em;

@@ -41,6 +41,8 @@ import 'components/pages/skin_consultation_component/skin_consultation_component
     as consultation_comp;
 import 'components/pages/skin_guide_component/article_component/article_component.template.dart'
     as article_comp;
+import 'components/pages/skin_guide_component/skin_guide_category_component.template.dart'
+    as skin_guide_category_comp;
 import 'components/pages/skin_guide_component/skin_guide_component.template.dart'
     as skin_guide_comp;
 import 'components/pages/skin_test_component/skin_test_component.template.dart'
@@ -157,6 +159,10 @@ class AppComponent {
         RouteDefinition(
             routePath: route_paths.skinGuide,
             component: skin_guide_comp.SkinGuideComponentNgFactory),
+        RouteDefinition(
+            routePath: route_paths.skinGuideCategory,
+            component:
+                skin_guide_category_comp.SkinGuideCategoryComponentNgFactory),
         RouteDefinition(
             routePath: route_paths.skinGuideArticle,
             component: article_comp.ArticleComponentNgFactory),

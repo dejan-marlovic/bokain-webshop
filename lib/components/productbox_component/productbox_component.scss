@@ -2,7 +2,7 @@
 @import 'package:bokain_webshop/colors';
 
 :host {    
-    @include box-shadow();
+    //@include box-shadow();
     display: block;
     margin: $small auto 0 auto;
     //max-width: 85vw;        

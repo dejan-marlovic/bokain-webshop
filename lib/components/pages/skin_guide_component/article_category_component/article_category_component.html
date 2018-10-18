@@ -4,7 +4,8 @@
          [alt]="model.title">
   </div>
   <div class="l10 m9 col align-middle">
-    <h3 class="margin-top-none margin-bottom-none">{{model.title}}</h3>
+    <h3 class="margin-top-none margin-bottom-none"><span class="clickable"
+            [routerLink]="categoryLink">{{model.title}}</span></h3>
     <p class="margin-top-x-small margin-bottom-none">{{model.description}}</p>
   </div>
 </div>
@@ -16,14 +17,14 @@
     </h1>
   </div>
 </div>
-<div class="margin-bottom-large" *ngIf="loaded">
+<div class="margin-bottom-large"
+     *ngIf="loaded">
   <div class="row margin-bottom-small"
        *ngFor="let article of articleService.cachedModels.values">
     <div class="col">
-      <h4 class="clickable margin-top-none margin-bottom-none"> {{article.title}} </h4>
+      <h4 class="margin-top-none margin-bottom-none"><span class="clickable"
+              [routerLink]="articleLink(article)">{{article.title}}</span></h4>
       <p class="margin-top-x-small margin-bottom-x-small"> {{article.description}} </p>
-      <div><span class="clickable"
-              [routerLink]="linkOf(article)">[{{msg.read_more()}}]</span>&nbsp;({{article.duration_minutes}}min)</div>
     </div>
   </div>
 </div>
