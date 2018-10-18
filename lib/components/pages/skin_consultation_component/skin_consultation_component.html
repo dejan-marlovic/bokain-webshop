@@ -18,8 +18,8 @@
                                  flat
                                  (open)="step = 0">
           <div class="row center">
-            <div class="l4 m6 col">
-              <bo-button-cloud-single-select [label]="msg.gender() | name"
+            <div class="l4 m6 col">              
+              <bo-button-cloud-single-select [label]="msg.gender() | name"                                             
                                              [options]="genderOptions"
                                              [(ngModel)]="customer.sex"></bo-button-cloud-single-select>
             </div>
@@ -152,7 +152,7 @@
                 <div class="row">
                   <div class="col">
                     <material-input type="password"
-                                    label="{{msg.password()}}*"
+                                    label="{{msg.choose_password()}}*"
                                     floatingLabel
                                     [disabled]="customerService.loading || consultationService.loading"
                                     [maxCount]="64"

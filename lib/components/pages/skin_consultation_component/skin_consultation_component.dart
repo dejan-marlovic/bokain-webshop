@@ -213,11 +213,11 @@ class SkinConsultationComponent {
   Date _birthdate;
 
   String password = '';
-  bool showResetPasswordButton = false;
+  bool showResetPasswordButton = false; 
   bool loading;
   int step = 0;
 
-  final Map<String, String> genderOptions;
+  final Map<String, String> genderOptions;  
 
   @ViewChild('pictures')
   ConsultationSectionPicturesComponent pictures;
