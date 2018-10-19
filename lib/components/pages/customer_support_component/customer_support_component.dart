@@ -128,7 +128,7 @@ class CustomerSupportComponent implements OnActivate {
         '',
         Validators.compose([
           FoValidators.alphaNumeric,
-          FoValidators.noSpaces,
+          FoValidators.noWhiteSpace,
           Validators.maxLength(32)
         ])),
     'message': new Control('',
