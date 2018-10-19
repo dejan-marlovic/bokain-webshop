@@ -1,40 +1,43 @@
 @import 'package:bokain_webshop/colors';
-
+@import 'package:grid/constants';
 .infoText {
-    width: 300px;
+  width: 300px;
 }
-material-input {    
-    width: 300px !important;
+
+material-input {
+  width: 300px !important;
 }
 
 :host {
-    .col {
-        padding-top: 0;
-        padding-bottom: 0;
+  display: block;
+  margin-top: $x-large;
+  .col {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .flexAligner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  div.menuUpper {
+    div.menuItem {
+      margin: 1rem 0.5rem;
+      text-align: center;
     }
+    .menuItem.activeRoute {
+      color: $color1;
+    }
+  }
+  div.menuLower {
     .flexAligner {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
+      height: 30px;
+      justify-content: center;
+      img {
+        display: inline-block;
+        width: auto;
+        height: 20px;
+      }
     }
-    div.menuUpper {
-        div.menuItem {
-            margin: 1rem 0.5rem;
-            text-align: center;
-        }
-        .menuItem.activeRoute {
-            color: $color1;
-        }
-    }
-    div.menuLower {
-        .flexAligner {
-            height: 30px;
-            justify-content: center;
-            img {
-                display: inline-block;
-                width: auto;
-                height: 20px;
-            }
-        }
-    }
+  }
 }

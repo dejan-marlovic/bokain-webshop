@@ -1,5 +1,4 @@
 <bo-cart-preview *ngIf="cartService.previewProduct != null"></bo-cart-preview>
-
 <!-- Upper Menu -->
 <div class="row expand collapse menuUpper background-color-1">
   <div class="col">
@@ -95,7 +94,7 @@
           </div>
           <div class="menuItem clickable color-2"
                [routerLink]="msg.skin_guide_url()"
-               routerLinkActive="activeRoute">
+               routerLinkSubActive="activeRoute">
             <div class="text-center">
               <fo-icon icon="skin-guide"
                        size="2.5rem"></fo-icon>
@@ -155,7 +154,8 @@
       </div>
       <div group>
         <material-list-item>
-          <bo-search popupPosition="above" [white]="false"></bo-search>
+          <bo-search popupPosition="above"
+                     [white]="false"></bo-search>
         </material-list-item>
         <material-list-item>
           <dropdown-menu [menu]="languageMenuModel"

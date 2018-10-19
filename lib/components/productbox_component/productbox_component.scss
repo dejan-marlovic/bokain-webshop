@@ -1,11 +1,9 @@
 @import 'package:grid/constants';
 @import 'package:bokain_webshop/colors';
 
-:host {    
-    //@include box-shadow();
+:host {        
     display: block;
-    margin: $small auto 0 auto;
-    //max-width: 85vw;        
+    margin: $small auto 0 auto;    
     padding: $medium;
 
     .upper {        

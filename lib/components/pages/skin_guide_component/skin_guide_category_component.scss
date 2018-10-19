@@ -1,0 +1,10 @@
+@import 'package:grid/constants';
+@import 'package:bokain_webshop/colors';
+
+:host {
+  display: block;
+  img {
+    @include box-shadow();
+    border: $small solid transparent;
+  }
+}

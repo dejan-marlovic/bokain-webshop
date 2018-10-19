@@ -55,6 +55,7 @@ import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
 import 'services/config_service.dart';
 import 'services/route_service.dart';
+import 'services/meta_data_service.dart';
 
 @Component(
     selector: 'my-app',
@@ -82,6 +83,7 @@ import 'services/route_service.dart';
       LanguageService,
       KlarnaCheckoutService,
       materialProviders,
+      ClassProvider(MetaDataService),
       OrderService,
       ProductCategoryService,
       ProductService,
@@ -102,6 +104,7 @@ class AppComponent {
       this._languageService,
       this.routeService,
       this._settingsService,
+      this._metaDataService,
       this.router,
       this.msg) {
     customerService
@@ -112,6 +115,9 @@ class AppComponent {
 
     router.onNavigationStart.listen((_) {
       html.window.scrollTo(0, 0);
+      _metaDataService
+        ..description = null
+        ..keywords = null;
     });
   }
 
@@ -253,6 +259,7 @@ class AppComponent {
   final CustomerService customerService;
   final LanguageService _languageService;
   final SettingsService _settingsService;
+  final MetaDataService _metaDataService;
   final Router router;
   final WebshopMessagesService msg;
 

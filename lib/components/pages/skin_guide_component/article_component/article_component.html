@@ -1,13 +1,16 @@
-<ng-container *ngIf="model != null && content != null">
-    <div class="row">
-        <div class="col">
-            <h1>{{model.title | name}}</h1>
-            <img [src]="model.image_url" [alt]="model.title">
-        </div>
+<div *ngIf="model != null && content != null" fade [faded]="!imageLoaded">
+  <div class="row center">
+    <div class="l10 col">
+      <img class="topImage"
+           [src]="model.image_url"
+           [alt]="model.title"
+           (load)="imageLoaded = true" />
+      <h1>{{model.title | name}}</h1>
     </div>
-    <div class="row">
-        <div class="col" [safeInnerHtml]="contentHtml">
-
-        </div>
+  </div>
+  <div class="row center">
+    <div class="l10 col"
+         [safeInnerHtml]="contentHtml">
     </div>
-</ng-container>
+  </div>
+</div>

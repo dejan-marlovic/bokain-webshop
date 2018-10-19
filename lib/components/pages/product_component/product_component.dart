@@ -4,6 +4,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'product_bundle_component/product_bundle_component.dart';
 import 'sub_product_component/sub_product_component.dart';
+import '../../../services/meta_data_service.dart';
 
 @Component(
     selector: 'bo-product',
@@ -11,21 +12,24 @@ import 'sub_product_component/sub_product_component.dart';
     styleUrls: const ['product_component.css'],
     directives: const [NgIf, ProductBundleComponent, SubProductComponent])
 class ProductComponent implements OnActivate {
-  ProductComponent(this.languageService, this.productService);
+  ProductComponent(
+      this.languageService, this.productService, this._metaDataService);
 
   @override
   void onActivate(RouterState previous, RouterState current) {
-    dom.window.scrollTo(0, 0);
-    
     /// Figure out model
     if (current.parameters['url_name'] != null) {
       model = productService.cachedModels.values.firstWhere(
           (p) => _match(p, current.parameters['url_name']),
           orElse: () => null);
-    }
 
-    if (model == null) {
-      
+      if (model != null) {
+        _metaDataService
+          ..description =
+              model.phrases[languageService.currentShortLocale].meta_description
+          ..keywords =
+              model.phrases[languageService.currentShortLocale].meta_keywords;
+      }
     }
   }
 
@@ -39,5 +43,6 @@ class ProductComponent implements OnActivate {
 
   Product model;
   final LanguageService languageService;
+  final MetaDataService _metaDataService;
   final ProductService productService;
 }

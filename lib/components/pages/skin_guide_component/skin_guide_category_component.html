@@ -9,8 +9,29 @@
 </ng-container>
 <ng-container *ngIf="category != null">
   <div class="row">
-    <div class="col">
-      <bo-article-category [model]="category"></bo-article-category>
+    <div class="col text-center">
+      <h1>{{category.title | name}}</h1>
+    </div>
+  </div>
+  <div class="row margin-top-large"
+       fade
+       [faded]="imageLoadStatusRegistry[article.id] != true"
+       *ngFor="let article of articleService.cachedModels.values">
+    <div class="m4 col">
+      <img class="clickable"
+           [routerLink]="articleLink(article)"
+           [src]="article.image_url"
+           [alt]="article.title"
+           (load)="imageLoadStatusRegistry[article.id] = true" />
+    </div>
+    <div class="m8 col">
+      <div class="">
+        <h2 class="margin-top-none clickable"
+            [routerLink]="articleLink(article)"> {{article.title | name}} </h2>
+        <p> {{article.description | name}} </p>
+        <material-button clear-size
+                         [routerLink]="articleLink(article)">{{msg.read_more()}}</material-button>
+      </div>
     </div>
   </div>
 </ng-container>

@@ -15,7 +15,7 @@ import 'article_category_component/article_category_component.dart';
 class SkinGuideComponent {
   SkinGuideComponent(
       this._changeDetectorRef, this.articleCategoryService, this.msg) {
-    _loadResources();
+    _loadResources();    
   }
 
   void _loadResources() async {
