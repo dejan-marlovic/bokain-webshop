@@ -1,12 +1,17 @@
+<div class="row margin-top-medium" *ngIf="checkoutOrder == null || klarnaHtml == null">
+  <div class="col text-center">
+    <material-spinner></material-spinner>
+  </div>
+</div>
 <div class="row"
-     *ngIf="klarnaHtml != null">
+     *ngIf="checkoutOrder != null && klarnaHtml != null">
   <div class="col">
     <iframe id="klarna"
             sandbox="allow-scripts allow-same-origin allow-top-navigation"
             seamless
             width="100%"
             height="1000"
-            [attr.srcDoc]="snippet"
+            [attr.srcDoc]="checkoutOrder.html_snippet"
             [src]="klarnaHtml"
             frameborder="0"></iframe>
   </div>

@@ -7,7 +7,7 @@ import 'package:persistent_data/persistent_data.dart' as pd;
 
 @Injectable()
 class CartService {
-  final Map<String, int> productRegistry = {};
+  Map<String, int> productRegistry = {};
 
   bool shipping = true;
   Product previewProduct;
@@ -137,7 +137,7 @@ class CartService {
         ..city = 'Ankeborg'
         ..country = 'SE'
         ..phone = '+46765260000'
-        ..email = 'test@minoch.com';
+        ..email = 'patrick.minogue@gmail.com';
     } else {
       billingAddress = new KlarnaAddress()
         ..given_name = customer.firstname
@@ -221,9 +221,9 @@ class CartService {
       klarnaOrder ??=
           await _klarnaCheckoutService.createCheckoutOrder(new CheckoutOrder()
             ..order_id = null
-            ..purchase_currency = 'SEK'
-            ..purchase_country = 'SE'
-            ..locale = 'sv-SE'
+            ..purchase_currency = 'sek'
+            ..purchase_country = 'se'
+            ..locale = 'sv-se'            
             ..billing_address = billingAddress
             ..order_amount = totalAmount.round()
             ..order_tax_amount = totalTaxAmount.round()
@@ -233,7 +233,7 @@ class CartService {
             ..merchant_reference1 = ''
             ..merchant_reference2 = ''
             ..merchant_data = ''
-            ..shipping_countries = ['SE']
+            ..shipping_countries = ['se']
             ..options = checkoutOptions
             ..shipping_options = [shippingOption]
             ..gui = new Gui());
