@@ -1,8 +1,13 @@
 <div class="row"
      *ngIf="klarnaHtml != null">
-    <div class="col">
-        <iframe id="klarna"
-                [src]="klarnaHtml"
-                frameborder="0"></iframe>
-    </div>
+  <div class="col">
+    <iframe id="klarna"
+            sandbox="allow-scripts allow-same-origin allow-top-navigation"
+            seamless
+            width="100%"
+            height="1000"
+            [attr.srcDoc]="snippet"
+            [src]="klarnaHtml"
+            frameborder="0"></iframe>
+  </div>
 </div>

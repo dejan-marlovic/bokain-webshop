@@ -30,7 +30,7 @@ class ConfirmationComponent {
         await _klarnaCheckoutService.finalizeCheckoutOrder(klarnaOrderId);
     print(data);
 
-    final snippet =
+    snippet =
         'data:text/html;charset=utf-8,${Uri.encodeFull(checkoutOrder.html_snippet)}';
     klarnaHtml = _sanitizationService.bypassSecurityTrustResourceUrl(snippet);    
   }
@@ -39,6 +39,7 @@ class ConfirmationComponent {
   CheckoutOrder checkoutOrder;
 
   final DomSanitizationService _sanitizationService;
+  String snippet;
   SafeResourceUrl klarnaHtml;
   final KlarnaCheckoutService _klarnaCheckoutService;
   final CartService _cartService;
