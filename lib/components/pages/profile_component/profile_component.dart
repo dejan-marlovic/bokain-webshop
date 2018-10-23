@@ -3,6 +3,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:bokain_consultation/bokain_consultation.dart';
 import 'package:bokain_models/bokain_models.dart';
 import 'package:fo_components/fo_components.dart';
+
 import '../../product_list_component/product_list_component.dart';
 import '../login_component/login_component.dart';
 import 'profile_details_component.dart';
@@ -21,51 +22,89 @@ import 'profile_details_component.dart';
       ProductListComponent,
       ProfileDetailsComponent
     ],
-    providers: const [ConsultationService, ServiceService],
+    providers: const [
+      ConsultationService,
+      SalonService,
+      ServiceService,
+      UserService,
+      UserLogService
+    ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.Default)
-class ProfileComponent implements OnInit {
-  ProfileComponent(this.consultationService, this.customerService,
-      this.productService, this.serviceService, this.msg);
+class ProfileComponent extends OnInit {
+  Customer get customer => customerService.get(currentUserId);
+  Consultation get consultation => customer?.consultation_id == null
+      ? null
+      : consultationService.get(customer.consultation_id);
 
-  @override
-  void ngOnInit() {
-    if (loggedIn) {
-      customerService.fetch(FirestoreService.currentUserId, force: false);
-      consultationService.fetch(customer.consultation_id, force: false);
-    }
-  }
+  final ConsultationService consultationService;
+  final CustomerService customerService;
+  final ProductService productService;
+  final SalonService salonService;
+  final UserService userService;
+  final ServiceService serviceService;
+  final WebshopMessagesService msg;
 
-  void onLogout() async {
-    await customerService.login(FirestoreService.defaultCustomerId,
-        FirestoreService.defaultCustomerPassword);
-  }
+  ProfileComponent(
+      this.consultationService,
+      this.customerService,
+      this.productService,
+      this.salonService,
+      this.serviceService,
+      this.userService,
+      this.msg);
 
   String get currentUserId => FirestoreService.currentUserId;
-  Customer get customer => customerService.get(currentUserId);
 
   Iterable<Product> get favoriteProducts =>
       customer.favorite_product_ids.map(productService.get);
-
-  Service get recommendedService {
-    final consultation = consultationService.get(customer.consultation_id);
-    return (consultation == null)
-        ? null
-        : serviceService.get(consultation.service_id);
-  }
-
-  Consultation get consultation => consultationService.get(customer?.consultation_id);
-
-
 
   bool get loggedIn =>
       FirestoreService.currentFirebaseUser.uid != null &&
       FirestoreService.currentFirebaseUser.uid !=
           FirestoreService.defaultCustomerAuthId;
 
-  final ConsultationService consultationService;
-  final CustomerService customerService;
-  final ProductService productService;
-  final ServiceService serviceService;
-  final WebshopMessagesService msg;
+  Salon get recommendedSalon => consultation?.salon_id == null
+      ? null
+      : salonService.get(consultation.salon_id);
+
+  Service get recommendedService => consultation?.service_id == null
+      ? null
+      : serviceService.get(consultation.service_id);
+
+  User get recommendedUser => consultation?.user_id == null
+      ? null
+      : userService.get(consultation.user_id);
+
+  Future<void> onLogout() async {
+    await customerService.login(FirestoreService.defaultCustomerId,
+        FirestoreService.defaultCustomerPassword);
+  }
+
+  bool showLogin = true;
+
+  @override
+  void ngOnInit() {
+    showLogin = !loggedIn;
+    fetchCustomerData();
+  }
+
+  void onLogin(String id) {
+    showLogin = false;
+    fetchCustomerData();
+  }
+
+  Future<void> fetchCustomerData() async {
+    if (loggedIn) {
+      await customerService.fetch(FirestoreService.currentUserId, force: false);
+      if (customer?.consultation_id != null) {
+        await consultationService.fetch(customer.consultation_id, force: false);
+        if (consultation != null) {
+          await serviceService.fetch(consultation.service_id, force: false);
+          await salonService.fetch(consultation.salon_id, force: false);
+          await userService.fetch(consultation.user_id);
+        }
+      }
+    }
+  }
 }

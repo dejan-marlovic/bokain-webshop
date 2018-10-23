@@ -5,7 +5,7 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:bokain_webshop/app_component.template.dart' as ng;
 import 'main.template.dart' as self;
 
-@GenerateInjector(routerProviders)
+@GenerateInjector(routerProvidersHash)
 final InjectorFactory injector = self.injector$Injector;
 
 void main() {

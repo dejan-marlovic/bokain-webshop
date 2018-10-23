@@ -1,50 +1,69 @@
-<bo-login *ngIf="!loggedIn">
+<bo-login *ngIf="showLogin"
+          (login)="onLogin($event)">
 </bo-login>
 <div *ngIf="loggedIn && customer != null">
-    <div class="row">
-        <div class="col">
-            <fo-tab-panel [hideLabelsOn]="['small']">
-                <fo-tab [label]="msg.detail(2) | name"
-                        icon="my-profile">
-                    <div class="row">
-                        <div class="col text-center">
-                            <h1 class="margin-bottom-small"> {{customer.firstname}} {{customer.lastname}} </h1>
-                            <p class="margin-top-small">
-                                <material-button raised
-                                                 (trigger)="onLogout()"> {{msg.logout()}} </material-button>
-                            </p>
-                        </div>
-                    </div>
-                    <bo-profile-details [customer]="customer"></bo-profile-details>
-                </fo-tab>
-                <fo-tab [label]="msg.chat(1) | name"
-                        icon="chat"
-                        #chat>
-                    <bo-customer-chat *ngIf="chat.active"
-                                      class="margin-top-medium"
-                                      [customerId]="currentUserId"
-                                      [customerPerspective]="true"></bo-customer-chat>
-                </fo-tab>
-                <fo-tab *ngIf="customer.favorite_product_ids.isNotEmpty"
-                        #products
-                        [label]="msg.product(2) | name"
-                        icon="product-category">
-                    <bo-product-list *ngIf="products.active"
-                                     [products]="favoriteProducts"></bo-product-list>
-                </fo-tab>
-                <fo-tab *ngIf="recommendedService != null"
-                        #services
-                        [label]="msg.service(2) | name"
-                        icon="service">
-                    <div *ngIf="services.active">REKOMMENDERADE TJÄNSTER HÄR</div>
-                </fo-tab>
-                <fo-tab *ngIf="consultation?.product_routine_id != null"
-                        #productRoutines
-                        [label]="msg.product_routine(2) | name"
-                        icon="product-routines">
-                    <div *ngIf="productRoutines.active">PRODUKTRUTINER HÄR</div>
-                </fo-tab>
-            </fo-tab-panel>
-        </div>
+  <div class="row">
+    <div class="col">
+      <fo-tab-panel [hideLabelsOn]="['small']">
+        <fo-tab [label]="msg.detail(2) | name"
+                icon="my-profile">
+          <div class="row">
+            <div class="col text-center">
+              <h1 class="margin-bottom-small"> {{customer.firstname}} {{customer.lastname}} </h1>
+              <p class="margin-top-small">
+                <material-button raised
+                                 (trigger)="onLogout()"> {{msg.logout()}} </material-button>
+              </p>
+            </div>
+          </div>
+          <bo-profile-details [customer]="customer"></bo-profile-details>
+        </fo-tab>
+        <fo-tab [label]="msg.chat(1) | name"
+                icon="chat"
+                #chat>
+          <bo-customer-chat *ngIf="chat.active"
+                            class="margin-top-medium"
+                            [customerId]="currentUserId"
+                            [customerPerspective]="true"></bo-customer-chat>
+        </fo-tab>
+        <fo-tab *ngIf="customer.favorite_product_ids.isNotEmpty"
+                #products
+                [label]="msg.product(2) | name"
+                icon="product-category">
+          <bo-product-list *ngIf="products.active"
+                           [products]="favoriteProducts"></bo-product-list>
+        </fo-tab>
+        <fo-tab *ngIf="recommendedService != null && recommendedSalon != null"
+                #services
+                [label]="msg.service(2) | name"
+                icon="service">
+          <ng-container *ngIf="services.active">
+            <div class="row">
+              <div class="col">
+                <h1 class="text-center margin-top-x-large">{{msg.recommended(1) | name}} {{msg.service(1)}}</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="m6 col">
+              </div>
+              <div class="m6 col">
+                <h2 class="margin-bottom-small">{{recommendedService.name}}</h2>
+                <p class="margin-top-small">{{recommendedService.description}}</p>
+                <h3>{{recommendedSalon.name}}</h3>
+                <h3>{{recommendedUser.firstname | name}} {{recommendedUser.lastname | name}}</h3>
+                <h3>{{recommendedService.price}} kr</h3>
+                <material-button raised clear-size> {{msg.pick_time_and_book()}} </material-button>
+              </div>
+            </div>
+          </ng-container>
+        </fo-tab>
+        <fo-tab *ngIf="consultation?.product_routine_id != null"
+                #productRoutines
+                [label]="msg.product_routine(2) | name"
+                icon="product-routines">
+          <div *ngIf="productRoutines.active">PRODUKTRUTINER HÄR</div>
+        </fo-tab>
+      </fo-tab-panel>
     </div>
+  </div>
 </div>

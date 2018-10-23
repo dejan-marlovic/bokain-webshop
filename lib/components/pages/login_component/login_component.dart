@@ -18,10 +18,10 @@ import 'package:fo_components/fo_components.dart';
       NgClass,
       NgIf
     ],
-    providers: const <Object>[FORM_PROVIDERS],
+    providers: const [FORM_PROVIDERS],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.Default)
-class LoginComponent {
+class LoginComponent implements OnDestroy {
   LoginComponent(this.customerService, this.consultationService,
       this.serviceService, this.msg) {
     loginSubtitle = msg.login_subtitle();
@@ -30,16 +30,9 @@ class LoginComponent {
 
   Future<void> onLogin() async {
     try {
-      loginSubtitle = msg.please_wait();
+      loginSubtitle = msg.please_wait();            
       await customerService.login(email, password);
-      final customer = await customerService.fetch(email);
-      if (customer.consultation_id != null) {
-        final consultation =
-            await consultationService.fetch(customer.consultation_id);
-        if (consultation.service_id != null) {
-          await serviceService.fetch(consultation.service_id);
-        }
-      }
+      _onLoginController.add(email);
     } on UserAuthException {
       loginSubtitle = msg.invalid_password();
     }
@@ -63,6 +56,9 @@ class LoginComponent {
     }
   }
 
+  @Output('login')
+  Stream<String> get onLoginOutput => _onLoginController.stream;
+
   String email = '';
   String password = '';
   String loginSubtitle;
@@ -73,6 +69,7 @@ class LoginComponent {
   final ConsultationService consultationService;
   final ServiceService serviceService;
   final WebshopMessagesService msg;
+  final StreamController<String> _onLoginController = new StreamController();
   final ControlGroup loginForm = new ControlGroup({
     'email': new Control(
         '',
@@ -93,4 +90,9 @@ class LoginComponent {
           FoValidators.email
         ]))
   });
+
+  @override
+  void ngOnDestroy() {
+    _onLoginController.close();
+  }
 }
