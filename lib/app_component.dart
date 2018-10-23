@@ -54,8 +54,8 @@ import 'components/pages/skin_type_list_component/skin_type_list_component.templ
 import 'route_paths.dart' as route_paths;
 import 'services/cart_service.dart';
 import 'services/config_service.dart';
-import 'services/route_service.dart';
 import 'services/meta_data_service.dart';
+import 'services/route_service.dart';
 
 @Component(
     selector: 'my-app',

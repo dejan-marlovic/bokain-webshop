@@ -14,7 +14,7 @@ RoutePath get aboutUs =>
 RoutePath get cart => RoutePath(path: Intl.message('cart', name: 'cart_url'));
 
 RoutePath get confirmation =>
-    RoutePath(path: Intl.message('confirmation', name: 'confirmation'));
+    RoutePath(path: 'confirmation');
 
 RoutePath get customerSupport => RoutePath(
     path: Intl.message('customer-support', name: 'customer_support_url'));
