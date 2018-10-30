@@ -1,40 +1,42 @@
+@import 'package:grid/constants';
 @import 'package:angular_components/material_button/mixins';
 @import 'package:bokain_webshop/colors';
-
 // Fo 
 @import 'package:fo_components/mixins';
 @include fo-colors($color1, $color2, $colorAlert);
-
 // Consultation
 @import 'package:bokain_consultation/mixins';
 @include consultationColor1($color1);
 @include consultationColor2($color2);
 @include consultationColorBlack($colorBlack);
-
-
 @mixin colorizeButton($selector, $color) {
-    $raised: $selector + '[raised]';
-    @include button-background-color($raised, $color);
-    @include button-color($raised, white);
-    $not-raised: $selector + ':not([raised])';
-    @include button-color($not-raised, $color);
+  $raised: $selector + '[raised]';
+  @include button-background-color($raised, $color);
+  @include button-color($raised, white);
+  $not-raised: $selector + ':not([raised])';
+  @include button-color($not-raised, $color);
 }
 
 @include colorizeButton("material-button.blue", $color1);
 @include colorizeButton("material-button.alert", $colorAlert);
-
 :host {
-    display: block;    
-
-    div.page {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        main {
-            flex: 1 0 auto;
-        }
-        header, footer {
-            flex: none;
-        }
+  display: block;
+  div.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    main {
+      margin-top: $medium;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      @media screen and (max-width: $medium-width-threshold - 1) {
+        margin-top: $x-large;
+      }
     }
+    header,
+    footer {
+      flex: none;
+    }
+  }
 }

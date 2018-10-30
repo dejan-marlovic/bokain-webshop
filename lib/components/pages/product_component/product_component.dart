@@ -1,10 +1,9 @@
-import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:bokain_models/bokain_models.dart';
+import '../../../services/meta_data_service.dart';
 import 'product_bundle_component/product_bundle_component.dart';
 import 'sub_product_component/sub_product_component.dart';
-import '../../../services/meta_data_service.dart';
 
 @Component(
     selector: 'bo-product',

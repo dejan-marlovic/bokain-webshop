@@ -9,10 +9,12 @@
     -ms-transform: translateZ(0);
     img {
         @include box-shadow();
-        transition: border-color 0.3s ease;
-        -webkit-transition: border-color 0.3s ease;
-        -moz-transition: border-color 0.3s ease;
-        -o-transition: border-color 0.3s ease;        
+        
+        transition: border-color 0.3s ease-in;
+        -webkit-transition: border-color 0.3s ease-in;
+        -moz-transition: border-color 0.3s ease-in;
+        -o-transition: border-color 0.3s ease-in;        
+        
         border: $small solid transparent;        
     }
     img.selected {

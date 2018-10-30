@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular/security.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:bokain_consultation/bokain_consultation.dart';
 import 'package:bokain_models/bokain_models.dart';
@@ -18,6 +19,7 @@ import 'profile_details_component.dart';
       FoTabPanelComponent,
       LoginComponent,
       MaterialButtonComponent,
+      MaterialSpinnerComponent,
       NgIf,
       ProductListComponent,
       ProfileDetailsComponent
@@ -41,8 +43,10 @@ class ProfileComponent extends OnInit {
   final CustomerService customerService;
   final ProductService productService;
   final SalonService salonService;
+  final SkinTypeService skinTypeService;
   final UserService userService;
   final ServiceService serviceService;
+  final DomSanitizationService _sanitizer;
   final WebshopMessagesService msg;
 
   ProfileComponent(
@@ -51,17 +55,17 @@ class ProfileComponent extends OnInit {
       this.productService,
       this.salonService,
       this.serviceService,
+      this.skinTypeService,
       this.userService,
+      this._sanitizer,
       this.msg);
 
   String get currentUserId => FirestoreService.currentUserId;
 
-/*
-  Iterable<Product> get favoriteProducts =>
-      consultation.product_ids.map(productService.get);
-*/
+  List<Product> recommendedProducts;
+  SafeResourceUrl routinesInfoUrl;
 
-  List<Product> recommendedProducts = [];
+  bool loaded = false;
 
   bool get loggedIn =>
       FirestoreService.currentFirebaseUser.uid != null &&
@@ -99,6 +103,9 @@ class ProfileComponent extends OnInit {
   }
 
   Future<void> fetchCustomerData() async {
+    loaded = false;
+    recommendedProducts = null;
+    routinesInfoUrl = null;
     if (loggedIn) {
       await customerService.fetch(FirestoreService.currentUserId, force: false);
       if (customer?.consultation_id != null) {
@@ -107,8 +114,21 @@ class ProfileComponent extends OnInit {
           await serviceService.fetch(consultation.service_id, force: false);
           await salonService.fetch(consultation.salon_id, force: false);
           await userService.fetch(consultation.user_id);
+          recommendedProducts = [];
+          for (final p in consultation.product_ids) {
+            recommendedProducts.add(productService.get(p));
+          }
+          for (final p in consultation.addon_product_ids) {
+            recommendedProducts.add(productService.get(p));
+          }
+          final skinType = skinTypeService.get(consultation.skin_type_id);
+          if (skinType != null) {
+            routinesInfoUrl =
+                _sanitizer.bypassSecurityTrustResourceUrl(skinType.routines_info_url);
+          }
         }
       }
+      loaded = true;
     }
   }
 }
