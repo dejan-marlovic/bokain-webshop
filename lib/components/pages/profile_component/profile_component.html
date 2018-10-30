@@ -26,12 +26,12 @@
                             [customerId]="currentUserId"
                             [customerPerspective]="true"></bo-customer-chat>
         </fo-tab>
-        <fo-tab *ngIf="customer.favorite_product_ids.isNotEmpty"
+        <fo-tab *ngIf="false"
                 #products
                 [label]="msg.product(2) | name"
                 icon="product-category">
           <bo-product-list *ngIf="products.active"
-                           [products]="favoriteProducts"></bo-product-list>
+                           [products]="recommendedProducts"></bo-product-list>
         </fo-tab>
         <fo-tab *ngIf="recommendedService != null && recommendedSalon != null"
                 #services

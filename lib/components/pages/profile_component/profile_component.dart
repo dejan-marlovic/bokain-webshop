@@ -56,8 +56,12 @@ class ProfileComponent extends OnInit {
 
   String get currentUserId => FirestoreService.currentUserId;
 
+/*
   Iterable<Product> get favoriteProducts =>
-      customer.favorite_product_ids.map(productService.get);
+      consultation.product_ids.map(productService.get);
+*/
+
+  List<Product> recommendedProducts = [];
 
   bool get loggedIn =>
       FirestoreService.currentFirebaseUser.uid != null &&
