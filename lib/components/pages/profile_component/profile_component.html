@@ -41,10 +41,11 @@
             <div class="row">
               <div class="col">
                 <h1 class="text-center margin-top-x-large">{{msg.recommended(1) | name}} {{msg.service(1)}}</h1>
-              </div>
+              </div> 
             </div>
             <div class="row">
               <div class="m6 col">
+                <img [src]="recommendedService.image_uri" [alt]="recommendedService.name">
               </div>
               <div class="m6 col">
                 <h2 class="margin-bottom-small">{{recommendedService.name}}</h2>
