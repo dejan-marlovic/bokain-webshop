@@ -16,7 +16,7 @@ class ResultBarComponent implements OnInit {
   final WebshopMessagesService msg;
 
   void ngOnInit() {
-    visibleProgress = skinType.imageProgress.isEmpty ? [] : [skinType.imageProgress.first];
+    visibleProgress = [skinType.imageProgress.first];
   }
 
   void showMore() {
@@ -24,7 +24,7 @@ class ResultBarComponent implements OnInit {
     visibleProgress = new List.from(visibleProgress);
   }
 
-  List<List<String>> visibleProgress = [];
+  List<String> visibleProgress = [];
 
   @Input()
   SkinType skinType;

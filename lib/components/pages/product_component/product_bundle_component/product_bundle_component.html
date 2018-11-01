@@ -94,7 +94,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="model.skin_type_ids.isNotEmpty"
+<div *ngIf="model.skin_type_ids.isNotEmpty && skinTypeService.webshopData[model.skin_type_ids.first].imageProgress.isNotEmpty"
      class="background-color-2-x-light margin-top-large padding-top-medium padding-bottom-medium">
   <bo-result-bar [skinType]="skinTypeService.webshopData[model.skin_type_ids.first]"></bo-result-bar>
 </div>

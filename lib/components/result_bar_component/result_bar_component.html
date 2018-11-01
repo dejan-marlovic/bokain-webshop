@@ -6,18 +6,10 @@
 </div>
 <div class="row collapse"
      *ngFor="let progress of visibleProgress">
-  <div class="s4 col text-center">
-    <img [src]="progress[0]"
+  <div class="col">
+    <img [src]="progress"
          [alt]="msg.results()">
-  </div>
-  <div class="s4 col text-center">
-    <img [src]="progress[1]"
-         [alt]="msg.results()">
-  </div>
-  <div class="s4 col text-center">
-    <img [src]="progress[2]"
-         [alt]="msg.results()">
-  </div>
+  </div>  
 </div>
 <div class="row"
      *ngIf="visibleProgress.length < skinType.imageProgress.length">

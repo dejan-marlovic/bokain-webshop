@@ -20,7 +20,7 @@
     </div>
 
 
-    <div class="background-color-2-x-light margin-top-large">
+    <div class="background-color-2-x-light margin-top-large" *ngIf="model.imageProgress.isNotEmpty">
         <div class="row">
             <div class="col">
                 <bo-result-bar [skinType]="model"></bo-result-bar>
